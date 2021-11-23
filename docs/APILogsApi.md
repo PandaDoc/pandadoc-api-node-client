@@ -50,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](README.md#apiKey), [oauth2](README.md#oauth2)
+[apiKey](../README.md#apikey), [oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](README.md#apiKey), [oauth2](README.md#oauth2)
+[apiKey](../README.md#apiKey), [oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
