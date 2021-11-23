@@ -47,34 +47,34 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*APILogsApi* | [**detailsApiLog**](APILogsApi.md#detailsapilog) | **GET** /public/v1/logs/{id} | Details API Log
-*APILogsApi* | [**listApiLogs**](APILogsApi.md#listapilogs) | **GET** /public/v1/logs | List API Log
-*ContentLibraryItemsApi* | [**detailsContentLibraryItem**](ContentLibraryItemsApi.md#detailscontentlibraryitem) | **GET** /public/v1/content-library-items/{id}/details | Details Content Library Item
-*ContentLibraryItemsApi* | [**listContentLibraryItems**](ContentLibraryItemsApi.md#listcontentlibraryitems) | **GET** /public/v1/content-library-items | List Content Library Item
-*DocumentsApi* | [**deleteDocument**](DocumentsApi.md#deletedocument) | **DELETE** /public/v1/documents/{id} | Delete document by id
-*DocumentsApi* | [**documentCreate**](DocumentsApi.md#documentcreate) | **POST** /public/v1/documents | Create document
-*DocumentsApi* | [**documentCreateLink**](DocumentsApi.md#documentcreatelink) | **POST** /public/v1/documents/{id}/session | Create a Document Link
-*DocumentsApi* | [**documentDetails**](DocumentsApi.md#documentdetails) | **GET** /public/v1/documents/{id}/details | Document details
-*DocumentsApi* | [**documentList**](DocumentsApi.md#documentlist) | **GET** /public/v1/documents | List documents
-*DocumentsApi* | [**documentStatus**](DocumentsApi.md#documentstatus) | **GET** /public/v1/documents/{id} | Document status
-*DocumentsApi* | [**downloadDocument**](DocumentsApi.md#downloaddocument) | **GET** /public/v1/documents/{id}/download | Document download
-*DocumentsApi* | [**downloadProtectedDocument**](DocumentsApi.md#downloadprotecteddocument) | **GET** /public/v1/documents/{id}/download-protected | Download document protected
-*DocumentsApi* | [**linkedObjectDelete**](DocumentsApi.md#linkedobjectdelete) | **DELETE** /public/v1/documents/{id}/linked-objects/{linked_object_id} | Delete Linked Object
-*DocumentsApi* | [**linkedObjectList**](DocumentsApi.md#linkedobjectlist) | **GET** /public/v1/documents/{id}/linked-objects | List Linked Objects
-*DocumentsApi* | [**linkedObjectsCreate**](DocumentsApi.md#linkedobjectscreate) | **POST** /public/v1/documents/{id}/linked-objects | Create Linked Object
-*DocumentsApi* | [**sendDocument**](DocumentsApi.md#senddocument) | **POST** /public/v1/documents/{id}/send | Send Document
-*FoldersAPIApi* | [**createDocumentFolder**](FoldersAPIApi.md#createdocumentfolder) | **POST** /public/v1/documents/folders | Create Documents Folder
-*FoldersAPIApi* | [**createTemplateFolder**](FoldersAPIApi.md#createtemplatefolder) | **POST** /public/v1/templates/folders | Create Templates Folder
-*FoldersAPIApi* | [**listDocumentFolders**](FoldersAPIApi.md#listdocumentfolders) | **GET** /public/v1/documents/folders | List Documents Folders
-*FoldersAPIApi* | [**listTemplateFolders**](FoldersAPIApi.md#listtemplatefolders) | **GET** /public/v1/templates/folders | List Templates Folders
-*FoldersAPIApi* | [**renameDocumentFolder**](FoldersAPIApi.md#renamedocumentfolder) | **PUT** /public/v1/documents/folders/{id} | Rename Documents Folder
-*FoldersAPIApi* | [**renameTemplateFolder**](FoldersAPIApi.md#renametemplatefolder) | **PUT** /public/v1/templates/folders/{id} | Rename Templates Folder
-*FormsApi* | [**listForm**](FormsApi.md#listform) | **GET** /public/v1/forms | Forms
-*OAuth20AuthenticationApi* | [**accessToken**](OAuth20AuthenticationApi.md#accesstoken) | **POST** /oauth2/access_token | Create/Refresh Access Token
-*TemplatesApi* | [**deleteTemplate**](TemplatesApi.md#deletetemplate) | **DELETE** /public/v1/templates/{id} | Delete Template
-*TemplatesApi* | [**detailsTemaplate**](TemplatesApi.md#detailstemaplate) | **GET** /public/v1/templates/{id}/details | Details Template
-*TemplatesApi* | [**listTemplates**](TemplatesApi.md#listtemplates) | **GET** /public/v1/templates | List Templates
+*APILogsApi* | [**detailsApiLog**](docs/APILogsApi.md#detailsApiLog) | **GET** /public/v1/logs/{id} | Details API Log
+*APILogsApi* | [**listApiLogs**](docs/APILogsApi.md#listApiLogs) | **GET** /public/v1/logs | List API Log
+*ContentLibraryItemsApi* | [**detailsContentLibraryItem**](docs/ContentLibraryItemsApi.md#detailscontentlibraryitem) | **GET** /public/v1/content-library-items/{id}/details | Details Content Library Item
+*ContentLibraryItemsApi* | [**listContentLibraryItems**](docs/ContentLibraryItemsApi.md#listcontentlibraryitems) | **GET** /public/v1/content-library-items | List Content Library Item
+*DocumentsApi* | [**deleteDocument**](docs/DocumentsApi.md#deletedocument) | **DELETE** /public/v1/documents/{id} | Delete document by id
+*DocumentsApi* | [**documentCreate**](docs/DocumentsApi.md#documentcreate) | **POST** /public/v1/documents | Create document
+*DocumentsApi* | [**documentCreateLink**](docs/DocumentsApi.md#documentcreatelink) | **POST** /public/v1/documents/{id}/session | Create a Document Link
+*DocumentsApi* | [**documentDetails**](docs/DocumentsApi.md#documentdetails) | **GET** /public/v1/documents/{id}/details | Document details
+*DocumentsApi* | [**documentList**](docs/DocumentsApi.md#documentlist) | **GET** /public/v1/documents | List documents
+*DocumentsApi* | [**documentStatus**](docs/DocumentsApi.md#documentstatus) | **GET** /public/v1/documents/{id} | Document status
+*DocumentsApi* | [**downloadDocument**](docs/DocumentsApi.md#downloaddocument) | **GET** /public/v1/documents/{id}/download | Document download
+*DocumentsApi* | [**downloadProtectedDocument**](docs/DocumentsApi.md#downloadprotecteddocument) | **GET** /public/v1/documents/{id}/download-protected | Download document protected
+*DocumentsApi* | [**linkedObjectDelete**](docs/DocumentsApi.md#linkedobjectdelete) | **DELETE** /public/v1/documents/{id}/linked-objects/{linked_object_id} | Delete Linked Object
+*DocumentsApi* | [**linkedObjectList**](docs/DocumentsApi.md#linkedobjectlist) | **GET** /public/v1/documents/{id}/linked-objects | List Linked Objects
+*DocumentsApi* | [**linkedObjectsCreate**](docs/DocumentsApi.md#linkedobjectscreate) | **POST** /public/v1/documents/{id}/linked-objects | Create Linked Object
+*DocumentsApi* | [**sendDocument**](docs/DocumentsApi.md#senddocument) | **POST** /public/v1/documents/{id}/send | Send Document
+*FoldersAPIApi* | [**createDocumentFolder**](docs/FoldersAPIApi.md#createdocumentfolder) | **POST** /public/v1/documents/folders | Create Documents Folder
+*FoldersAPIApi* | [**createTemplateFolder**](docs/FoldersAPIApi.md#createtemplatefolder) | **POST** /public/v1/templates/folders | Create Templates Folder
+*FoldersAPIApi* | [**listDocumentFolders**](docs/FoldersAPIApi.md#listdocumentfolders) | **GET** /public/v1/documents/folders | List Documents Folders
+*FoldersAPIApi* | [**listTemplateFolders**](docs/FoldersAPIApi.md#listtemplatefolders) | **GET** /public/v1/templates/folders | List Templates Folders
+*FoldersAPIApi* | [**renameDocumentFolder**](docs/FoldersAPIApi.md#renamedocumentfolder) | **PUT** /public/v1/documents/folders/{id} | Rename Documents Folder
+*FoldersAPIApi* | [**renameTemplateFolder**](docs/FoldersAPIApi.md#renametemplatefolder) | **PUT** /public/v1/templates/folders/{id} | Rename Templates Folder
+*FormsApi* | [**listForm**](docs/FormsApi.md#listform) | **GET** /public/v1/forms | Forms
+*OAuth20AuthenticationApi* | [**accessToken**](docs/OAuth20AuthenticationApi.md#accesstoken) | **POST** /oauth2/access_token | Create/Refresh Access Token
+*TemplatesApi* | [**deleteTemplate**](docs/TemplatesApi.md#deletetemplate) | **DELETE** /public/v1/templates/{id} | Delete Template
+*TemplatesApi* | [**detailsTemaplate**](docs/TemplatesApi.md#detailstemaplate) | **GET** /public/v1/templates/{id}/details | Details Template
+*TemplatesApi* | [**listTemplates**](docs/TemplatesApi.md#listtemplates) | **GET** /public/v1/templates | List Templates
 
 
 ## License
-SDK is licensed under the following [License](MIT).
+SDK is licensed under the following [License](LICENSE).
