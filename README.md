@@ -38,6 +38,19 @@ apiInstance.listTemplates({ deleted: false, tag: ["doe-inc-proposals"] }).then((
 }).catch((error) => console.error(error));
 ```
 
+## Authorization
+### apiKey
+- **Type**: API key
+- **API key parameter name**: Authorization
+- **Location**: HTTP header
+
+### oauth2
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: https://app.pandadoc.com/oauth2/authorize
+- **Scopes**:
+ - **read+write**: default
+
 ## Examples
 - [Create and send document from a template](examples/createDocumentFromPandadocTemplateAndSend.ts)
 - [Create and send document from the pdf url](examples/createDocumentFromPdfUrlAndSend.ts)
