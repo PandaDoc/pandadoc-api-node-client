@@ -5,7 +5,7 @@ const API_KEY = "YOUR_API_KEY";
 // or uncomment this if you want to setup with oauth2
 // const OAUTH2_KEY = "YOUR_OAUTH_KEY";
 const MAX_RETRIES_COUNT = 5;
-// you should have an `API Sample Document from PandaDoc Template`
+// you should have an `Full API Sample Document from PandaDoc Template`
 // onboarding template in your workspace just place its ID here
 const TEMPLATE_UUID = "YOUR_API_SAMPLE_TEMPLATE_ID";
 // you should have a several onboarding CLIs in your workspace
@@ -14,7 +14,7 @@ const CONTENT_LIBRARY_ITEM_ID = "YOUR_CLI_ID";
 
 const pricingTables: Array<pd_api.PricingTableRequest> = [
   {
-    name: "Pricing Table",
+    name: "Pricing Table 1",
     options: {
       currency: "USD",
       discount: {
@@ -76,7 +76,7 @@ const pricingTables: Array<pd_api.PricingTableRequest> = [
   },
 ];
 
-const inlineObj: pd_api.InlineObject = {
+const documentCreateRequest: pd_api.DocumentCreateRequest = {
   name: "API Sample Document from PandaDoc Template",
   templateUuid: TEMPLATE_UUID,
   // specify a folder uuid if you want to document to be created
@@ -127,12 +127,11 @@ const inlineObj: pd_api.InlineObject = {
 
 async function documentCreateFromPandadocTemplate(
   apiInstance: pd_api.DocumentsApi,
-  inlineObj: pd_api.InlineObject
+  requestObj: pd_api.DocumentCreateRequest
 ): Promise<pd_api.DocumentCreateResponse> {
   try {
     let response = await apiInstance.documentCreate({
-      editorVer: "ev2",
-      inlineObject: inlineObj,
+      documentCreateRequest: requestObj,
     });
     console.log("Document was successfully uploaded: %o", response);
     return response;
@@ -193,7 +192,7 @@ async function documentSend(
 
   try {
     let response = await apiInstance.sendDocument({
-      id: document.id,
+      id: String(document.id),
       documentSendRequest: {
         silent: false,
         subject: "Sent via Node SDK",
@@ -224,7 +223,7 @@ async function runExample() {
 
   let createdDocument = await documentCreateFromPandadocTemplate(
     apiInstance,
-    inlineObj
+    documentCreateRequest
   );
   await documentSend(apiInstance, createdDocument);
 }

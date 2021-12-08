@@ -1,10 +1,15 @@
 export * from './APILogDetailsResponse';
 export * from './APILogListResponse';
 export * from './APILogListResponseResults';
+export * from './ContactCreateRequest';
+export * from './ContactDetailsResponse';
+export * from './ContactUpdateRequest';
 export * from './ContentLibraryItemListResponse';
 export * from './ContentLibraryItemListResponseResults';
 export * from './ContentLibraryItemResponse';
 export * from './ContentLibraryItemResponseCreatedBy';
+export * from './DocumentAttachmentResponse';
+export * from './DocumentAttachmentResponseCreatedBy';
 export * from './DocumentCreateByPdfRequest';
 export * from './DocumentCreateByPdfRequestRecipients';
 export * from './DocumentCreateByTemplateRequest';
@@ -12,8 +17,14 @@ export * from './DocumentCreateByTemplateRequestContentLibraryItems';
 export * from './DocumentCreateByTemplateRequestContentPlaceholders';
 export * from './DocumentCreateByTemplateRequestImages';
 export * from './DocumentCreateByTemplateRequestRecipients';
+export * from './DocumentCreateByTemplateRequestTokens';
 export * from './DocumentCreateLinkRequest';
 export * from './DocumentCreateLinkResponse';
+export * from './DocumentCreateRequest';
+export * from './DocumentCreateRequestContentLibraryItems';
+export * from './DocumentCreateRequestContentPlaceholders';
+export * from './DocumentCreateRequestImages';
+export * from './DocumentCreateRequestRecipients';
 export * from './DocumentCreateResponse';
 export * from './DocumentDetailsResponse';
 export * from './DocumentDetailsResponseCreatedBy';
@@ -26,8 +37,11 @@ export * from './DocumentListResponseResults';
 export * from './DocumentOrderingFieldsEnum';
 export * from './DocumentSendRequest';
 export * from './DocumentSendResponse';
+export * from './DocumentStatusChangeRequest';
 export * from './DocumentStatusEnum';
 export * from './DocumentStatusResponse';
+export * from './DocumentTransferAllOwnershipRequest';
+export * from './DocumentTransferOwnershipRequest';
 export * from './DocumentsFolderCreateRequest';
 export * from './DocumentsFolderCreateResponse';
 export * from './DocumentsFolderListResponse';
@@ -36,10 +50,10 @@ export * from './DocumentsFolderRenameRequest';
 export * from './DocumentsFolderRenameResponse';
 export * from './FormListResponse';
 export * from './FormListResponseResults';
-export * from './InlineObject';
 export * from './LinkedObjectCreateRequest';
 export * from './LinkedObjectCreateResponse';
 export * from './LinkedObjectListResponse';
+export * from './MemberDetailsResponse';
 export * from './OAuth2AccessTokenResponse';
 export * from './PricingTableRequest';
 export * from './PricingTableRequestData';
@@ -57,11 +71,6 @@ export * from './PricingTablesResponseItems';
 export * from './PricingTablesResponseOptions';
 export * from './PricingTablesResponseSummary';
 export * from './PricingTablesResponseTables';
-export * from './PublicV1DocumentsContentLibraryItems';
-export * from './PublicV1DocumentsContentPlaceholders';
-export * from './PublicV1DocumentsImages';
-export * from './PublicV1DocumentsRecipients';
-export * from './PublicV1DocumentsTokens';
 export * from './TemplateDetailsResponse';
 export * from './TemplateDetailsResponseAssignedTo';
 export * from './TemplateDetailsResponseContentPlaceholders';
@@ -82,10 +91,15 @@ export * from './TemplatesFolderRenameResponse';
 import { APILogDetailsResponse } from './APILogDetailsResponse';
 import { APILogListResponse } from './APILogListResponse';
 import { APILogListResponseResults } from './APILogListResponseResults';
+import { ContactCreateRequest } from './ContactCreateRequest';
+import { ContactDetailsResponse } from './ContactDetailsResponse';
+import { ContactUpdateRequest } from './ContactUpdateRequest';
 import { ContentLibraryItemListResponse } from './ContentLibraryItemListResponse';
 import { ContentLibraryItemListResponseResults } from './ContentLibraryItemListResponseResults';
 import { ContentLibraryItemResponse } from './ContentLibraryItemResponse';
 import { ContentLibraryItemResponseCreatedBy } from './ContentLibraryItemResponseCreatedBy';
+import { DocumentAttachmentResponse } from './DocumentAttachmentResponse';
+import { DocumentAttachmentResponseCreatedBy } from './DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from './DocumentCreateByPdfRequest';
 import { DocumentCreateByPdfRequestRecipients } from './DocumentCreateByPdfRequestRecipients';
 import { DocumentCreateByTemplateRequest } from './DocumentCreateByTemplateRequest';
@@ -93,8 +107,14 @@ import { DocumentCreateByTemplateRequestContentLibraryItems } from './DocumentCr
 import { DocumentCreateByTemplateRequestContentPlaceholders } from './DocumentCreateByTemplateRequestContentPlaceholders';
 import { DocumentCreateByTemplateRequestImages } from './DocumentCreateByTemplateRequestImages';
 import { DocumentCreateByTemplateRequestRecipients } from './DocumentCreateByTemplateRequestRecipients';
+import { DocumentCreateByTemplateRequestTokens } from './DocumentCreateByTemplateRequestTokens';
 import { DocumentCreateLinkRequest } from './DocumentCreateLinkRequest';
 import { DocumentCreateLinkResponse } from './DocumentCreateLinkResponse';
+import { DocumentCreateRequest } from './DocumentCreateRequest';
+import { DocumentCreateRequestContentLibraryItems } from './DocumentCreateRequestContentLibraryItems';
+import { DocumentCreateRequestContentPlaceholders } from './DocumentCreateRequestContentPlaceholders';
+import { DocumentCreateRequestImages } from './DocumentCreateRequestImages';
+import { DocumentCreateRequestRecipients } from './DocumentCreateRequestRecipients';
 import { DocumentCreateResponse } from './DocumentCreateResponse';
 import { DocumentDetailsResponse } from './DocumentDetailsResponse';
 import { DocumentDetailsResponseCreatedBy } from './DocumentDetailsResponseCreatedBy';
@@ -107,8 +127,11 @@ import { DocumentListResponseResults } from './DocumentListResponseResults';
 import { DocumentOrderingFieldsEnum } from './DocumentOrderingFieldsEnum';
 import { DocumentSendRequest } from './DocumentSendRequest';
 import { DocumentSendResponse } from './DocumentSendResponse';
+import { DocumentStatusChangeRequest } from './DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from './DocumentStatusEnum';
 import { DocumentStatusResponse } from './DocumentStatusResponse';
+import { DocumentTransferAllOwnershipRequest } from './DocumentTransferAllOwnershipRequest';
+import { DocumentTransferOwnershipRequest } from './DocumentTransferOwnershipRequest';
 import { DocumentsFolderCreateRequest } from './DocumentsFolderCreateRequest';
 import { DocumentsFolderCreateResponse } from './DocumentsFolderCreateResponse';
 import { DocumentsFolderListResponse } from './DocumentsFolderListResponse';
@@ -117,10 +140,10 @@ import { DocumentsFolderRenameRequest } from './DocumentsFolderRenameRequest';
 import { DocumentsFolderRenameResponse } from './DocumentsFolderRenameResponse';
 import { FormListResponse } from './FormListResponse';
 import { FormListResponseResults } from './FormListResponseResults';
-import { InlineObject } from './InlineObject';
 import { LinkedObjectCreateRequest } from './LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from './LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from './LinkedObjectListResponse';
+import { MemberDetailsResponse } from './MemberDetailsResponse';
 import { OAuth2AccessTokenResponse } from './OAuth2AccessTokenResponse';
 import { PricingTableRequest } from './PricingTableRequest';
 import { PricingTableRequestData } from './PricingTableRequestData';
@@ -138,11 +161,6 @@ import { PricingTablesResponseItems } from './PricingTablesResponseItems';
 import { PricingTablesResponseOptions } from './PricingTablesResponseOptions';
 import { PricingTablesResponseSummary } from './PricingTablesResponseSummary';
 import { PricingTablesResponseTables } from './PricingTablesResponseTables';
-import { PublicV1DocumentsContentLibraryItems } from './PublicV1DocumentsContentLibraryItems';
-import { PublicV1DocumentsContentPlaceholders } from './PublicV1DocumentsContentPlaceholders';
-import { PublicV1DocumentsImages } from './PublicV1DocumentsImages';
-import { PublicV1DocumentsRecipients } from './PublicV1DocumentsRecipients';
-import { PublicV1DocumentsTokens } from './PublicV1DocumentsTokens';
 import { TemplateDetailsResponse } from './TemplateDetailsResponse';
 import { TemplateDetailsResponseAssignedTo } from './TemplateDetailsResponseAssignedTo';
 import { TemplateDetailsResponseContentPlaceholders } from './TemplateDetailsResponseContentPlaceholders';
@@ -191,10 +209,15 @@ let typeMap: {[index: string]: any} = {
     "APILogDetailsResponse": APILogDetailsResponse,
     "APILogListResponse": APILogListResponse,
     "APILogListResponseResults": APILogListResponseResults,
+    "ContactCreateRequest": ContactCreateRequest,
+    "ContactDetailsResponse": ContactDetailsResponse,
+    "ContactUpdateRequest": ContactUpdateRequest,
     "ContentLibraryItemListResponse": ContentLibraryItemListResponse,
     "ContentLibraryItemListResponseResults": ContentLibraryItemListResponseResults,
     "ContentLibraryItemResponse": ContentLibraryItemResponse,
     "ContentLibraryItemResponseCreatedBy": ContentLibraryItemResponseCreatedBy,
+    "DocumentAttachmentResponse": DocumentAttachmentResponse,
+    "DocumentAttachmentResponseCreatedBy": DocumentAttachmentResponseCreatedBy,
     "DocumentCreateByPdfRequest": DocumentCreateByPdfRequest,
     "DocumentCreateByPdfRequestRecipients": DocumentCreateByPdfRequestRecipients,
     "DocumentCreateByTemplateRequest": DocumentCreateByTemplateRequest,
@@ -202,8 +225,14 @@ let typeMap: {[index: string]: any} = {
     "DocumentCreateByTemplateRequestContentPlaceholders": DocumentCreateByTemplateRequestContentPlaceholders,
     "DocumentCreateByTemplateRequestImages": DocumentCreateByTemplateRequestImages,
     "DocumentCreateByTemplateRequestRecipients": DocumentCreateByTemplateRequestRecipients,
+    "DocumentCreateByTemplateRequestTokens": DocumentCreateByTemplateRequestTokens,
     "DocumentCreateLinkRequest": DocumentCreateLinkRequest,
     "DocumentCreateLinkResponse": DocumentCreateLinkResponse,
+    "DocumentCreateRequest": DocumentCreateRequest,
+    "DocumentCreateRequestContentLibraryItems": DocumentCreateRequestContentLibraryItems,
+    "DocumentCreateRequestContentPlaceholders": DocumentCreateRequestContentPlaceholders,
+    "DocumentCreateRequestImages": DocumentCreateRequestImages,
+    "DocumentCreateRequestRecipients": DocumentCreateRequestRecipients,
     "DocumentCreateResponse": DocumentCreateResponse,
     "DocumentDetailsResponse": DocumentDetailsResponse,
     "DocumentDetailsResponseCreatedBy": DocumentDetailsResponseCreatedBy,
@@ -215,7 +244,10 @@ let typeMap: {[index: string]: any} = {
     "DocumentListResponseResults": DocumentListResponseResults,
     "DocumentSendRequest": DocumentSendRequest,
     "DocumentSendResponse": DocumentSendResponse,
+    "DocumentStatusChangeRequest": DocumentStatusChangeRequest,
     "DocumentStatusResponse": DocumentStatusResponse,
+    "DocumentTransferAllOwnershipRequest": DocumentTransferAllOwnershipRequest,
+    "DocumentTransferOwnershipRequest": DocumentTransferOwnershipRequest,
     "DocumentsFolderCreateRequest": DocumentsFolderCreateRequest,
     "DocumentsFolderCreateResponse": DocumentsFolderCreateResponse,
     "DocumentsFolderListResponse": DocumentsFolderListResponse,
@@ -224,10 +256,10 @@ let typeMap: {[index: string]: any} = {
     "DocumentsFolderRenameResponse": DocumentsFolderRenameResponse,
     "FormListResponse": FormListResponse,
     "FormListResponseResults": FormListResponseResults,
-    "InlineObject": InlineObject,
     "LinkedObjectCreateRequest": LinkedObjectCreateRequest,
     "LinkedObjectCreateResponse": LinkedObjectCreateResponse,
     "LinkedObjectListResponse": LinkedObjectListResponse,
+    "MemberDetailsResponse": MemberDetailsResponse,
     "OAuth2AccessTokenResponse": OAuth2AccessTokenResponse,
     "PricingTableRequest": PricingTableRequest,
     "PricingTableRequestData": PricingTableRequestData,
@@ -245,11 +277,6 @@ let typeMap: {[index: string]: any} = {
     "PricingTablesResponseOptions": PricingTablesResponseOptions,
     "PricingTablesResponseSummary": PricingTablesResponseSummary,
     "PricingTablesResponseTables": PricingTablesResponseTables,
-    "PublicV1DocumentsContentLibraryItems": PublicV1DocumentsContentLibraryItems,
-    "PublicV1DocumentsContentPlaceholders": PublicV1DocumentsContentPlaceholders,
-    "PublicV1DocumentsImages": PublicV1DocumentsImages,
-    "PublicV1DocumentsRecipients": PublicV1DocumentsRecipients,
-    "PublicV1DocumentsTokens": PublicV1DocumentsTokens,
     "TemplateDetailsResponse": TemplateDetailsResponse,
     "TemplateDetailsResponseAssignedTo": TemplateDetailsResponseAssignedTo,
     "TemplateDetailsResponseContentPlaceholders": TemplateDetailsResponseContentPlaceholders,

@@ -6,10 +6,15 @@ import {mergeMap, map} from  '../rxjsStub';
 import { APILogDetailsResponse } from '../models/APILogDetailsResponse';
 import { APILogListResponse } from '../models/APILogListResponse';
 import { APILogListResponseResults } from '../models/APILogListResponseResults';
+import { ContactCreateRequest } from '../models/ContactCreateRequest';
+import { ContactDetailsResponse } from '../models/ContactDetailsResponse';
+import { ContactUpdateRequest } from '../models/ContactUpdateRequest';
 import { ContentLibraryItemListResponse } from '../models/ContentLibraryItemListResponse';
 import { ContentLibraryItemListResponseResults } from '../models/ContentLibraryItemListResponseResults';
 import { ContentLibraryItemResponse } from '../models/ContentLibraryItemResponse';
 import { ContentLibraryItemResponseCreatedBy } from '../models/ContentLibraryItemResponseCreatedBy';
+import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
+import { DocumentAttachmentResponseCreatedBy } from '../models/DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from '../models/DocumentCreateByPdfRequest';
 import { DocumentCreateByPdfRequestRecipients } from '../models/DocumentCreateByPdfRequestRecipients';
 import { DocumentCreateByTemplateRequest } from '../models/DocumentCreateByTemplateRequest';
@@ -17,8 +22,14 @@ import { DocumentCreateByTemplateRequestContentLibraryItems } from '../models/Do
 import { DocumentCreateByTemplateRequestContentPlaceholders } from '../models/DocumentCreateByTemplateRequestContentPlaceholders';
 import { DocumentCreateByTemplateRequestImages } from '../models/DocumentCreateByTemplateRequestImages';
 import { DocumentCreateByTemplateRequestRecipients } from '../models/DocumentCreateByTemplateRequestRecipients';
+import { DocumentCreateByTemplateRequestTokens } from '../models/DocumentCreateByTemplateRequestTokens';
 import { DocumentCreateLinkRequest } from '../models/DocumentCreateLinkRequest';
 import { DocumentCreateLinkResponse } from '../models/DocumentCreateLinkResponse';
+import { DocumentCreateRequest } from '../models/DocumentCreateRequest';
+import { DocumentCreateRequestContentLibraryItems } from '../models/DocumentCreateRequestContentLibraryItems';
+import { DocumentCreateRequestContentPlaceholders } from '../models/DocumentCreateRequestContentPlaceholders';
+import { DocumentCreateRequestImages } from '../models/DocumentCreateRequestImages';
+import { DocumentCreateRequestRecipients } from '../models/DocumentCreateRequestRecipients';
 import { DocumentCreateResponse } from '../models/DocumentCreateResponse';
 import { DocumentDetailsResponse } from '../models/DocumentDetailsResponse';
 import { DocumentDetailsResponseCreatedBy } from '../models/DocumentDetailsResponseCreatedBy';
@@ -31,8 +42,11 @@ import { DocumentListResponseResults } from '../models/DocumentListResponseResul
 import { DocumentOrderingFieldsEnum } from '../models/DocumentOrderingFieldsEnum';
 import { DocumentSendRequest } from '../models/DocumentSendRequest';
 import { DocumentSendResponse } from '../models/DocumentSendResponse';
+import { DocumentStatusChangeRequest } from '../models/DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
 import { DocumentStatusResponse } from '../models/DocumentStatusResponse';
+import { DocumentTransferAllOwnershipRequest } from '../models/DocumentTransferAllOwnershipRequest';
+import { DocumentTransferOwnershipRequest } from '../models/DocumentTransferOwnershipRequest';
 import { DocumentsFolderCreateRequest } from '../models/DocumentsFolderCreateRequest';
 import { DocumentsFolderCreateResponse } from '../models/DocumentsFolderCreateResponse';
 import { DocumentsFolderListResponse } from '../models/DocumentsFolderListResponse';
@@ -41,10 +55,10 @@ import { DocumentsFolderRenameRequest } from '../models/DocumentsFolderRenameReq
 import { DocumentsFolderRenameResponse } from '../models/DocumentsFolderRenameResponse';
 import { FormListResponse } from '../models/FormListResponse';
 import { FormListResponseResults } from '../models/FormListResponseResults';
-import { InlineObject } from '../models/InlineObject';
 import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
+import { MemberDetailsResponse } from '../models/MemberDetailsResponse';
 import { OAuth2AccessTokenResponse } from '../models/OAuth2AccessTokenResponse';
 import { PricingTableRequest } from '../models/PricingTableRequest';
 import { PricingTableRequestData } from '../models/PricingTableRequestData';
@@ -62,11 +76,6 @@ import { PricingTablesResponseItems } from '../models/PricingTablesResponseItems
 import { PricingTablesResponseOptions } from '../models/PricingTablesResponseOptions';
 import { PricingTablesResponseSummary } from '../models/PricingTablesResponseSummary';
 import { PricingTablesResponseTables } from '../models/PricingTablesResponseTables';
-import { PublicV1DocumentsContentLibraryItems } from '../models/PublicV1DocumentsContentLibraryItems';
-import { PublicV1DocumentsContentPlaceholders } from '../models/PublicV1DocumentsContentPlaceholders';
-import { PublicV1DocumentsImages } from '../models/PublicV1DocumentsImages';
-import { PublicV1DocumentsRecipients } from '../models/PublicV1DocumentsRecipients';
-import { PublicV1DocumentsTokens } from '../models/PublicV1DocumentsTokens';
 import { TemplateDetailsResponse } from '../models/TemplateDetailsResponse';
 import { TemplateDetailsResponseAssignedTo } from '../models/TemplateDetailsResponseAssignedTo';
 import { TemplateDetailsResponseContentPlaceholders } from '../models/TemplateDetailsResponseContentPlaceholders';
@@ -157,6 +166,139 @@ export class ObservableAPILogsApi {
 
 }
 
+import { ContactsApiRequestFactory, ContactsApiResponseProcessor} from "../apis/ContactsApi";
+export class ObservableContactsApi {
+    private requestFactory: ContactsApiRequestFactory;
+    private responseProcessor: ContactsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: ContactsApiRequestFactory,
+        responseProcessor?: ContactsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new ContactsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new ContactsApiResponseProcessor();
+    }
+
+    /**
+     * Create contact
+     * @param contactCreateRequest 
+     */
+    public contactCreate(contactCreateRequest: ContactCreateRequest, _options?: Configuration): Observable<ContactDetailsResponse> {
+        const requestContextPromise = this.requestFactory.contactCreate(contactCreateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactCreate(rsp)));
+            }));
+    }
+
+    /**
+     * Delete contact by id
+     * @param id Contact id.
+     */
+    public contactDelete(id: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.contactDelete(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactDelete(rsp)));
+            }));
+    }
+
+    /**
+     * Get contact details by id
+     * @param id Contact id.
+     */
+    public contactDetails(id: string, _options?: Configuration): Observable<ContactDetailsResponse> {
+        const requestContextPromise = this.requestFactory.contactDetails(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactDetails(rsp)));
+            }));
+    }
+
+    /**
+     * List contacts
+     */
+    public contactList(_options?: Configuration): Observable<Array<ContactDetailsResponse>> {
+        const requestContextPromise = this.requestFactory.contactList(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactList(rsp)));
+            }));
+    }
+
+    /**
+     * Update contact by id
+     * @param id Contact id.
+     * @param contactUpdateRequest 
+     */
+    public contactUpdate(id: string, contactUpdateRequest: ContactUpdateRequest, _options?: Configuration): Observable<ContactDetailsResponse> {
+        const requestContextPromise = this.requestFactory.contactUpdate(id, contactUpdateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactUpdate(rsp)));
+            }));
+    }
+
+}
+
 import { ContentLibraryItemsApiRequestFactory, ContentLibraryItemsApiResponseProcessor} from "../apis/ContentLibraryItemsApi";
 export class ObservableContentLibraryItemsApi {
     private requestFactory: ContentLibraryItemsApiRequestFactory;
@@ -229,6 +371,150 @@ export class ObservableContentLibraryItemsApi {
 
 }
 
+import { DocumentAttachmentsApiRequestFactory, DocumentAttachmentsApiResponseProcessor} from "../apis/DocumentAttachmentsApi";
+export class ObservableDocumentAttachmentsApi {
+    private requestFactory: DocumentAttachmentsApiRequestFactory;
+    private responseProcessor: DocumentAttachmentsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DocumentAttachmentsApiRequestFactory,
+        responseProcessor?: DocumentAttachmentsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new DocumentAttachmentsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new DocumentAttachmentsApiResponseProcessor();
+    }
+
+    /**
+     * Creates an attachment for a particular document
+     * Document Attachment Create
+     * @param id Document UUID
+     * @param file Binary file to be attached to a document
+     * @param source URL link to the file to be attached to a document
+     * @param name Optional name to set for uploaded file
+     */
+    public documentAttachmentCreate(id: string, file?: HttpFile, source?: string, name?: string, _options?: Configuration): Observable<DocumentAttachmentResponse> {
+        const requestContextPromise = this.requestFactory.documentAttachmentCreate(id, file, source, name, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentCreate(rsp)));
+            }));
+    }
+
+    /**
+     * Deletes specific document's attachment
+     * Document Attachment Delete
+     * @param id Document UUID
+     * @param attachmentId Attachment UUID
+     */
+    public documentAttachmentDelete(id: string, attachmentId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.documentAttachmentDelete(id, attachmentId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentDelete(rsp)));
+            }));
+    }
+
+    /**
+     * Returns details of the specific document's attachment
+     * Document Attachment Details
+     * @param id Document UUID
+     * @param attachmentId Attachment UUID
+     */
+    public documentAttachmentDetails(id: string, attachmentId: string, _options?: Configuration): Observable<DocumentAttachmentResponse> {
+        const requestContextPromise = this.requestFactory.documentAttachmentDetails(id, attachmentId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentDetails(rsp)));
+            }));
+    }
+
+    /**
+     * Returns document attachment file for download
+     * Document Attachment Download
+     * @param id Document UUID
+     * @param attachmentId Attachment UUID
+     */
+    public documentAttachmentDownload(id: string, attachmentId: string, _options?: Configuration): Observable<HttpFile> {
+        const requestContextPromise = this.requestFactory.documentAttachmentDownload(id, attachmentId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentDownload(rsp)));
+            }));
+    }
+
+    /**
+     * Return list of objects attached to particular document
+     * Document Attachment List
+     * @param id Document UUID
+     */
+    public documentAttachmentsList(id: string, _options?: Configuration): Observable<Array<DocumentAttachmentResponse>> {
+        const requestContextPromise = this.requestFactory.documentAttachmentsList(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentsList(rsp)));
+            }));
+    }
+
+}
+
 import { DocumentsApiRequestFactory, DocumentsApiResponseProcessor} from "../apis/DocumentsApi";
 export class ObservableDocumentsApi {
     private requestFactory: DocumentsApiRequestFactory;
@@ -270,11 +556,11 @@ export class ObservableDocumentsApi {
 
     /**
      * Create document
+     * @param documentCreateRequest Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
      * @param editorVer Set this parameter as &#x60;ev1&#x60; if you want to create a document from PDF with Classic Editor when both editors are enabled for the workspace.
-     * @param inlineObject 
      */
-    public documentCreate(editorVer?: string, inlineObject?: InlineObject, _options?: Configuration): Observable<DocumentCreateResponse> {
-        const requestContextPromise = this.requestFactory.documentCreate(editorVer, inlineObject, _options);
+    public documentCreate(documentCreateRequest: DocumentCreateRequest, editorVer?: string, _options?: Configuration): Observable<DocumentCreateResponse> {
+        const requestContextPromise = this.requestFactory.documentCreate(documentCreateRequest, editorVer, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -343,6 +629,7 @@ export class ObservableDocumentsApi {
      * List documents
      * @param completedFrom Return results where the &#x60;date_completed&#x60; field (ISO 8601) is greater than or equal to this value.
      * @param completedTo Return results where the &#x60;date_completed&#x60; field (ISO 8601) is less than or equal to this value.
+     * @param contactId Returns results where &#39;contact_id&#39; is present in document as recipient or approver
      * @param count Specify how many document results to return. Default is 50 documents, maximum is 100 documents.
      * @param createdFrom Return results where the &#x60;date_created&#x60; field (ISO 8601) is greater than or equal to this value.
      * @param createdTo Return results where the &#x60;date_created&#x60; field (ISO 8601) is less than this value.
@@ -350,6 +637,7 @@ export class ObservableDocumentsApi {
      * @param id 
      * @param folderUuid The UUID of the folder where the documents are stored.
      * @param formId Specify the form used for documents creation. This parameter can&#39;t be used with template_id.
+     * @param membershipId Returns results where &#39;membership_id&#39; is present in document as owner (should be member uuid)
      * @param metadata Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
      * @param modifiedFrom Return results where the &#x60;date_modified&#x60; field (iso-8601) is greater than or equal to this value.
      * @param modifiedTo Return results where the &#x60;date_modified&#x60; field (iso-8601) is less than this value.
@@ -361,8 +649,8 @@ export class ObservableDocumentsApi {
      * @param tag Search tag. Filter by document tag.
      * @param templateId Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
      */
-    public documentList(completedFrom?: string, completedTo?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusEnum, statusNe?: DocumentStatusEnum, tag?: string, templateId?: string, _options?: Configuration): Observable<DocumentListResponse> {
-        const requestContextPromise = this.requestFactory.documentList(completedFrom, completedTo, count, createdFrom, createdTo, deleted, id, folderUuid, formId, metadata, modifiedFrom, modifiedTo, orderBy, page, q, status, statusNe, tag, templateId, _options);
+    public documentList(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusEnum, statusNe?: DocumentStatusEnum, tag?: string, templateId?: string, _options?: Configuration): Observable<DocumentListResponse> {
+        const requestContextPromise = this.requestFactory.documentList(completedFrom, completedTo, contactId, count, createdFrom, createdTo, deleted, id, folderUuid, formId, membershipId, metadata, modifiedFrom, modifiedTo, orderBy, page, q, status, statusNe, tag, templateId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -404,9 +692,33 @@ export class ObservableDocumentsApi {
     }
 
     /**
+     * Document status change
+     * @param id Specify document ID.
+     * @param documentStatusChangeRequest 
+     */
+    public documentStatusChange(id: string, documentStatusChangeRequest: DocumentStatusChangeRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.documentStatusChange(id, documentStatusChangeRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentStatusChange(rsp)));
+            }));
+    }
+
+    /**
      * Document download
      * @param id Specify document ID.
-     * @param watermarkColor HEX code (for example &#x60;#RRGGBB&#x60;).
+     * @param watermarkColor HEX code (for example &#x60;#FF5733&#x60;).
      * @param watermarkFontSize Font size of the watermark.
      * @param watermarkOpacity In range 0.0-1.0
      * @param watermarkText Specify watermark text.
@@ -530,7 +842,7 @@ export class ObservableDocumentsApi {
      * @param id Document ID
      * @param documentSendRequest 
      */
-    public sendDocument(id: string, documentSendRequest?: DocumentSendRequest, _options?: Configuration): Observable<DocumentSendResponse> {
+    public sendDocument(id: string, documentSendRequest: DocumentSendRequest, _options?: Configuration): Observable<DocumentSendResponse> {
         const requestContextPromise = this.requestFactory.sendDocument(id, documentSendRequest, _options);
 
         // build promise chain
@@ -546,6 +858,53 @@ export class ObservableDocumentsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.sendDocument(rsp)));
+            }));
+    }
+
+    /**
+     * Transfer all documents ownership
+     * @param documentTransferAllOwnershipRequest 
+     */
+    public transferAllDocumentsOwnership(documentTransferAllOwnershipRequest: DocumentTransferAllOwnershipRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.transferAllDocumentsOwnership(documentTransferAllOwnershipRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.transferAllDocumentsOwnership(rsp)));
+            }));
+    }
+
+    /**
+     * Update document ownership
+     * @param id Specify document ID.
+     * @param documentTransferOwnershipRequest 
+     */
+    public transferDocumentOwnership(id: string, documentTransferOwnershipRequest: DocumentTransferOwnershipRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.transferDocumentOwnership(id, documentTransferOwnershipRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.transferDocumentOwnership(rsp)));
             }));
     }
 
@@ -572,7 +931,7 @@ export class ObservableFoldersAPIApi {
      * Create Documents Folder
      * @param documentsFolderCreateRequest 
      */
-    public createDocumentFolder(documentsFolderCreateRequest?: DocumentsFolderCreateRequest, _options?: Configuration): Observable<DocumentsFolderCreateResponse> {
+    public createDocumentFolder(documentsFolderCreateRequest: DocumentsFolderCreateRequest, _options?: Configuration): Observable<DocumentsFolderCreateResponse> {
         const requestContextPromise = this.requestFactory.createDocumentFolder(documentsFolderCreateRequest, _options);
 
         // build promise chain
@@ -596,7 +955,7 @@ export class ObservableFoldersAPIApi {
      * Create Templates Folder
      * @param templatesFolderCreateRequest 
      */
-    public createTemplateFolder(templatesFolderCreateRequest?: TemplatesFolderCreateRequest, _options?: Configuration): Observable<TemplatesFolderCreateResponse> {
+    public createTemplateFolder(templatesFolderCreateRequest: TemplatesFolderCreateRequest, _options?: Configuration): Observable<TemplatesFolderCreateResponse> {
         const requestContextPromise = this.requestFactory.createTemplateFolder(templatesFolderCreateRequest, _options);
 
         // build promise chain
@@ -673,7 +1032,7 @@ export class ObservableFoldersAPIApi {
      * @param id The UUID of the folder that you are renaming.
      * @param documentsFolderRenameRequest 
      */
-    public renameDocumentFolder(id: string, documentsFolderRenameRequest?: DocumentsFolderRenameRequest, _options?: Configuration): Observable<DocumentsFolderRenameResponse> {
+    public renameDocumentFolder(id: string, documentsFolderRenameRequest: DocumentsFolderRenameRequest, _options?: Configuration): Observable<DocumentsFolderRenameResponse> {
         const requestContextPromise = this.requestFactory.renameDocumentFolder(id, documentsFolderRenameRequest, _options);
 
         // build promise chain
@@ -698,7 +1057,7 @@ export class ObservableFoldersAPIApi {
      * @param id The UUID of the folder which you are renaming.
      * @param templatesFolderRenameRequest 
      */
-    public renameTemplateFolder(id: string, templatesFolderRenameRequest?: TemplatesFolderRenameRequest, _options?: Configuration): Observable<TemplatesFolderRenameResponse> {
+    public renameTemplateFolder(id: string, templatesFolderRenameRequest: TemplatesFolderRenameRequest, _options?: Configuration): Observable<TemplatesFolderRenameResponse> {
         const requestContextPromise = this.requestFactory.renameTemplateFolder(id, templatesFolderRenameRequest, _options);
 
         // build promise chain
@@ -761,6 +1120,94 @@ export class ObservableFormsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listForm(rsp)));
+            }));
+    }
+
+}
+
+import { MembersApiRequestFactory, MembersApiResponseProcessor} from "../apis/MembersApi";
+export class ObservableMembersApi {
+    private requestFactory: MembersApiRequestFactory;
+    private responseProcessor: MembersApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: MembersApiRequestFactory,
+        responseProcessor?: MembersApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new MembersApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new MembersApiResponseProcessor();
+    }
+
+    /**
+     * A method to define to whom credentials belong
+     * Current member details
+     */
+    public currentMemberDetails(_options?: Configuration): Observable<MemberDetailsResponse> {
+        const requestContextPromise = this.requestFactory.currentMemberDetails(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.currentMemberDetails(rsp)));
+            }));
+    }
+
+    /**
+     * A method to retrieve a member's details by id
+     * Member details
+     * @param id Membership id
+     */
+    public memberDetails(id: string, _options?: Configuration): Observable<MemberDetailsResponse> {
+        const requestContextPromise = this.requestFactory.memberDetails(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.memberDetails(rsp)));
+            }));
+    }
+
+    /**
+     * Retrieve all members details of the workspace
+     * List members
+     */
+    public memberList(_options?: Configuration): Observable<Array<MemberDetailsResponse>> {
+        const requestContextPromise = this.requestFactory.memberList(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.memberList(rsp)));
             }));
     }
 

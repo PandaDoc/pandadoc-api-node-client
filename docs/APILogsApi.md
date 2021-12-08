@@ -28,7 +28,7 @@ const apiInstance = new pd_api.APILogsApi(configuration);
 
 const body:pd_api.APILogsApiDetailsApiLogRequest = {
   // string | Log event id.
-  id: "id_example",
+  id: "AXp2jrHMK2MKv_lRqmQ",
 };
 
 apiInstance.detailsApiLog(body).then((data) => {
@@ -50,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apikey), [oauth2](../README.md#oauth2)
+[apiKey](../README.md#apiKey), [oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -88,23 +88,19 @@ const apiInstance = new pd_api.APILogsApi(configuration);
 
 const body:pd_api.APILogsApiListApiLogsRequest = {
   // string | Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \"-90d\" (for past 90 days). (optional)
-  since: "since_example",
+  since: "-7d",
   // string | Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \"-10d\" (for past 10 days) or a special \"now\" value. (optional)
-  to: "to_example",
+  to: "now",
   // number | The amount of items on each page. (optional)
-  count: 1,
+  count: 10,
   // number | Page number of the results returned. (optional)
   page: 1,
   // Array<100 | 200 | 300 | 400 | 500> | Returns only the predefined status codes. Allows 1xx, 2xx, 3xx, 4xx, and 5xx. (optional)
-  statuses: [
-    100,
-  ],
+  statuses: [400,500],
   // Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'> | Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE. (optional)
-  methods: [
-    "GET",
-  ],
+  methods: ["GET","POST"],
   // string | Returns the results containing a string. (optional)
-  search: "search_example",
+  search: "documents/hryJY9mqYZHjQCYQuSjRQg/send",
   // 'PRODUCTION' | 'SANDBOX' | Returns logs for production/sandbox. (optional)
   environmentType: "PRODUCTION",
 };

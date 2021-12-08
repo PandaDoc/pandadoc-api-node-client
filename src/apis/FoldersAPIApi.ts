@@ -30,8 +30,13 @@ export class FoldersAPIApiRequestFactory extends BaseAPIRequestFactory {
      * Create Documents Folder
      * @param documentsFolderCreateRequest 
      */
-    public async createDocumentFolder(documentsFolderCreateRequest?: DocumentsFolderCreateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createDocumentFolder(documentsFolderCreateRequest: DocumentsFolderCreateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'documentsFolderCreateRequest' is not null or undefined
+        if (documentsFolderCreateRequest === null || documentsFolderCreateRequest === undefined) {
+            throw new RequiredError("FoldersAPIApi", "createDocumentFolder", "documentsFolderCreateRequest");
+        }
 
 
         // Path Params
@@ -73,8 +78,13 @@ export class FoldersAPIApiRequestFactory extends BaseAPIRequestFactory {
      * Create Templates Folder
      * @param templatesFolderCreateRequest 
      */
-    public async createTemplateFolder(templatesFolderCreateRequest?: TemplatesFolderCreateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createTemplateFolder(templatesFolderCreateRequest: TemplatesFolderCreateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
+        // verify required parameter 'templatesFolderCreateRequest' is not null or undefined
+        if (templatesFolderCreateRequest === null || templatesFolderCreateRequest === undefined) {
+            throw new RequiredError("FoldersAPIApi", "createTemplateFolder", "templatesFolderCreateRequest");
+        }
 
 
         // Path Params
@@ -219,7 +229,7 @@ export class FoldersAPIApiRequestFactory extends BaseAPIRequestFactory {
      * @param id The UUID of the folder that you are renaming.
      * @param documentsFolderRenameRequest 
      */
-    public async renameDocumentFolder(id: string, documentsFolderRenameRequest?: DocumentsFolderRenameRequest, _options?: Configuration): Promise<RequestContext> {
+    public async renameDocumentFolder(id: string, documentsFolderRenameRequest: DocumentsFolderRenameRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -227,6 +237,11 @@ export class FoldersAPIApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("FoldersAPIApi", "renameDocumentFolder", "id");
         }
 
+
+        // verify required parameter 'documentsFolderRenameRequest' is not null or undefined
+        if (documentsFolderRenameRequest === null || documentsFolderRenameRequest === undefined) {
+            throw new RequiredError("FoldersAPIApi", "renameDocumentFolder", "documentsFolderRenameRequest");
+        }
 
 
         // Path Params
@@ -270,7 +285,7 @@ export class FoldersAPIApiRequestFactory extends BaseAPIRequestFactory {
      * @param id The UUID of the folder which you are renaming.
      * @param templatesFolderRenameRequest 
      */
-    public async renameTemplateFolder(id: string, templatesFolderRenameRequest?: TemplatesFolderRenameRequest, _options?: Configuration): Promise<RequestContext> {
+    public async renameTemplateFolder(id: string, templatesFolderRenameRequest: TemplatesFolderRenameRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
@@ -278,6 +293,11 @@ export class FoldersAPIApiRequestFactory extends BaseAPIRequestFactory {
             throw new RequiredError("FoldersAPIApi", "renameTemplateFolder", "id");
         }
 
+
+        // verify required parameter 'templatesFolderRenameRequest' is not null or undefined
+        if (templatesFolderRenameRequest === null || templatesFolderRenameRequest === undefined) {
+            throw new RequiredError("FoldersAPIApi", "renameTemplateFolder", "templatesFolderRenameRequest");
+        }
 
 
         // Path Params

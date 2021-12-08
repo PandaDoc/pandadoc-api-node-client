@@ -28,7 +28,7 @@ const apiInstance = new pd_api.ContentLibraryItemsApi(configuration);
 
 const body:pd_api.ContentLibraryItemsApiDetailsContentLibraryItemRequest = {
   // string | Content Library Item ID
-  id: "id_example",
+  id: "UXdP7Lnbvvr4WEb2wzM2hc",
 };
 
 apiInstance.detailsContentLibraryItem(body).then((data) => {
@@ -89,19 +89,19 @@ const apiInstance = new pd_api.ContentLibraryItemsApi(configuration);
 
 const body:pd_api.ContentLibraryItemsApiListContentLibraryItemsRequest = {
   // string | Search query. Filter by content library item name. (optional)
-  q: "name",
+  q: "Sample Pricing Table",
   // string | Specify content library item ID. (optional)
-  id: "id_example",
+  id: "UXdP7Lnbvvr4WEb2wzM2hc",
   // boolean | Returns only the deleted content library items. (optional)
   deleted: true,
   // string | The UUID of the folder where the content library items are stored. (optional)
-  folderUuid: "folder_uuid_example",
+  folderUuid: "S6xX7saJfA44mtJxGWd95L",
   // number | Specify how many content library items to return. Default is 50 content library items, maximum is 100 content library items. (optional)
-  count: 1,
+  count: 10,
   // number | Specify which page of the dataset to return. (optional)
   page: 1,
   // string | Search tag. Filter by content library item tag. (optional)
-  tag: "tag_example",
+  tag: "pricing_tables",
 };
 
 apiInstance.listContentLibraryItems(body).then((data) => {

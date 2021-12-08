@@ -8,7 +8,7 @@ const MAX_RETRIES_COUNT = 5;
 
 const PDF_URL =
   "https://cdn2.hubspot.net/hubfs/2127247/public-templates/SamplePandaDocPdf_FieldTags.pdf";
-const inlineObj: pd_api.InlineObject = {
+const documentCreateRequest: pd_api.DocumentCreateRequest = {
   name: "Sample Document from PDF with Field Tags",
   url: PDF_URL,
   tags: ["tag_1", "tag_2"],
@@ -37,12 +37,11 @@ const inlineObj: pd_api.InlineObject = {
 
 async function documentCreateFromPdfUrl(
   apiInstance: pd_api.DocumentsApi,
-  inlineObj: pd_api.InlineObject
+  requestObj: pd_api.DocumentCreateRequest
 ): Promise<pd_api.DocumentCreateResponse> {
   try {
     let response = await apiInstance.documentCreate({
-      editorVer: "ev2",
-      inlineObject: inlineObj,
+      documentCreateRequest: requestObj,
     });
     console.log("Document was successfully uploaded: %o", response);
     return response;
@@ -129,7 +128,7 @@ async function runExample() {
   });
   const apiInstance = new pd_api.DocumentsApi(cfg);
 
-  let createdDocument = await documentCreateFromPdfUrl(apiInstance, inlineObj);
+  let createdDocument = await documentCreateFromPdfUrl(apiInstance, documentCreateRequest);
   await documentSend(apiInstance, createdDocument);
 }
 

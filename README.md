@@ -60,22 +60,35 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*APILogsApi* | [**detailsApiLog**](docs/APILogsApi.md#detailsApiLog) | **GET** /public/v1/logs/{id} | Details API Log
-*APILogsApi* | [**listApiLogs**](docs/APILogsApi.md#listApiLogs) | **GET** /public/v1/logs | List API Log
+*APILogsApi* | [**detailsApiLog**](docs/APILogsApi.md#detailsapilog) | **GET** /public/v1/logs/{id} | Details API Log
+*APILogsApi* | [**listApiLogs**](docs/APILogsApi.md#listapilogs) | **GET** /public/v1/logs | List API Log
+*ContactsApi* | [**contactCreate**](docs/ContactsApi.md#contactcreate) | **POST** /public/v1/contacts | Create contact
+*ContactsApi* | [**contactDelete**](docs/ContactsApi.md#contactdelete) | **DELETE** /public/v1/contacts/{id} | Delete contact by id
+*ContactsApi* | [**contactDetails**](docs/ContactsApi.md#contactdetails) | **GET** /public/v1/contacts/{id} | Get contact details by id
+*ContactsApi* | [**contactList**](docs/ContactsApi.md#contactlist) | **GET** /public/v1/contacts | List contacts
+*ContactsApi* | [**contactUpdate**](docs/ContactsApi.md#contactupdate) | **PATCH** /public/v1/contacts/{id} | Update contact by id
 *ContentLibraryItemsApi* | [**detailsContentLibraryItem**](docs/ContentLibraryItemsApi.md#detailscontentlibraryitem) | **GET** /public/v1/content-library-items/{id}/details | Details Content Library Item
 *ContentLibraryItemsApi* | [**listContentLibraryItems**](docs/ContentLibraryItemsApi.md#listcontentlibraryitems) | **GET** /public/v1/content-library-items | List Content Library Item
+*DocumentAttachmentsApi* | [**documentAttachmentCreate**](docs/DocumentAttachmentsApi.md#documentattachmentcreate) | **POST** /public/v1/documents/{id}/attachments | Document Attachment Create
+*DocumentAttachmentsApi* | [**documentAttachmentDelete**](docs/DocumentAttachmentsApi.md#documentattachmentdelete) | **DELETE** /public/v1/documents/{id}/attachments/{attachment_id} | Document Attachment Delete
+*DocumentAttachmentsApi* | [**documentAttachmentDetails**](docs/DocumentAttachmentsApi.md#documentattachmentdetails) | **GET** /public/v1/documents/{id}/attachments/{attachment_id} | Document Attachment Details
+*DocumentAttachmentsApi* | [**documentAttachmentDownload**](docs/DocumentAttachmentsApi.md#documentattachmentdownload) | **GET** /public/v1/documents/{id}/attachments/{attachment_id}/download | Document Attachment Download
+*DocumentAttachmentsApi* | [**documentAttachmentsList**](docs/DocumentAttachmentsApi.md#documentattachmentslist) | **GET** /public/v1/documents/{id}/attachments | Document Attachment List
 *DocumentsApi* | [**deleteDocument**](docs/DocumentsApi.md#deletedocument) | **DELETE** /public/v1/documents/{id} | Delete document by id
 *DocumentsApi* | [**documentCreate**](docs/DocumentsApi.md#documentcreate) | **POST** /public/v1/documents | Create document
 *DocumentsApi* | [**documentCreateLink**](docs/DocumentsApi.md#documentcreatelink) | **POST** /public/v1/documents/{id}/session | Create a Document Link
 *DocumentsApi* | [**documentDetails**](docs/DocumentsApi.md#documentdetails) | **GET** /public/v1/documents/{id}/details | Document details
 *DocumentsApi* | [**documentList**](docs/DocumentsApi.md#documentlist) | **GET** /public/v1/documents | List documents
 *DocumentsApi* | [**documentStatus**](docs/DocumentsApi.md#documentstatus) | **GET** /public/v1/documents/{id} | Document status
+*DocumentsApi* | [**documentStatusChange**](docs/DocumentsApi.md#documentstatuschange) | **PATCH** /public/v1/documents/{id}/status | Document status change
 *DocumentsApi* | [**downloadDocument**](docs/DocumentsApi.md#downloaddocument) | **GET** /public/v1/documents/{id}/download | Document download
 *DocumentsApi* | [**downloadProtectedDocument**](docs/DocumentsApi.md#downloadprotecteddocument) | **GET** /public/v1/documents/{id}/download-protected | Download document protected
 *DocumentsApi* | [**linkedObjectDelete**](docs/DocumentsApi.md#linkedobjectdelete) | **DELETE** /public/v1/documents/{id}/linked-objects/{linked_object_id} | Delete Linked Object
 *DocumentsApi* | [**linkedObjectList**](docs/DocumentsApi.md#linkedobjectlist) | **GET** /public/v1/documents/{id}/linked-objects | List Linked Objects
 *DocumentsApi* | [**linkedObjectsCreate**](docs/DocumentsApi.md#linkedobjectscreate) | **POST** /public/v1/documents/{id}/linked-objects | Create Linked Object
 *DocumentsApi* | [**sendDocument**](docs/DocumentsApi.md#senddocument) | **POST** /public/v1/documents/{id}/send | Send Document
+*DocumentsApi* | [**transferAllDocumentsOwnership**](docs/DocumentsApi.md#transferalldocumentsownership) | **PATCH** /public/v1/documents/ownership | Transfer all documents ownership
+*DocumentsApi* | [**transferDocumentOwnership**](docs/DocumentsApi.md#transferdocumentownership) | **PATCH** /public/v1/documents/{id}/ownership | Update document ownership
 *FoldersAPIApi* | [**createDocumentFolder**](docs/FoldersAPIApi.md#createdocumentfolder) | **POST** /public/v1/documents/folders | Create Documents Folder
 *FoldersAPIApi* | [**createTemplateFolder**](docs/FoldersAPIApi.md#createtemplatefolder) | **POST** /public/v1/templates/folders | Create Templates Folder
 *FoldersAPIApi* | [**listDocumentFolders**](docs/FoldersAPIApi.md#listdocumentfolders) | **GET** /public/v1/documents/folders | List Documents Folders
@@ -83,6 +96,9 @@ Class | Method | HTTP request | Description
 *FoldersAPIApi* | [**renameDocumentFolder**](docs/FoldersAPIApi.md#renamedocumentfolder) | **PUT** /public/v1/documents/folders/{id} | Rename Documents Folder
 *FoldersAPIApi* | [**renameTemplateFolder**](docs/FoldersAPIApi.md#renametemplatefolder) | **PUT** /public/v1/templates/folders/{id} | Rename Templates Folder
 *FormsApi* | [**listForm**](docs/FormsApi.md#listform) | **GET** /public/v1/forms | Forms
+*MembersApi* | [**currentMemberDetails**](docs/MembersApi.md#currentmemberdetails) | **GET** /public/v1/members/current | Current member details
+*MembersApi* | [**memberDetails**](docs/MembersApi.md#memberdetails) | **GET** /public/v1/members/{id} | Member details
+*MembersApi* | [**memberList**](docs/MembersApi.md#memberlist) | **GET** /public/v1/members | List members
 *OAuth20AuthenticationApi* | [**accessToken**](docs/OAuth20AuthenticationApi.md#accesstoken) | **POST** /oauth2/access_token | Create/Refresh Access Token
 *TemplatesApi* | [**deleteTemplate**](docs/TemplatesApi.md#deletetemplate) | **DELETE** /public/v1/templates/{id} | Delete Template
 *TemplatesApi* | [**detailsTemaplate**](docs/TemplatesApi.md#detailstemaplate) | **GET** /public/v1/templates/{id}/details | Details Template
