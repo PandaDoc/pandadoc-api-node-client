@@ -5,10 +5,15 @@ import { Configuration} from '../configuration'
 import { APILogDetailsResponse } from '../models/APILogDetailsResponse';
 import { APILogListResponse } from '../models/APILogListResponse';
 import { APILogListResponseResults } from '../models/APILogListResponseResults';
+import { ContactCreateRequest } from '../models/ContactCreateRequest';
+import { ContactDetailsResponse } from '../models/ContactDetailsResponse';
+import { ContactUpdateRequest } from '../models/ContactUpdateRequest';
 import { ContentLibraryItemListResponse } from '../models/ContentLibraryItemListResponse';
 import { ContentLibraryItemListResponseResults } from '../models/ContentLibraryItemListResponseResults';
 import { ContentLibraryItemResponse } from '../models/ContentLibraryItemResponse';
 import { ContentLibraryItemResponseCreatedBy } from '../models/ContentLibraryItemResponseCreatedBy';
+import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
+import { DocumentAttachmentResponseCreatedBy } from '../models/DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from '../models/DocumentCreateByPdfRequest';
 import { DocumentCreateByPdfRequestRecipients } from '../models/DocumentCreateByPdfRequestRecipients';
 import { DocumentCreateByTemplateRequest } from '../models/DocumentCreateByTemplateRequest';
@@ -16,8 +21,14 @@ import { DocumentCreateByTemplateRequestContentLibraryItems } from '../models/Do
 import { DocumentCreateByTemplateRequestContentPlaceholders } from '../models/DocumentCreateByTemplateRequestContentPlaceholders';
 import { DocumentCreateByTemplateRequestImages } from '../models/DocumentCreateByTemplateRequestImages';
 import { DocumentCreateByTemplateRequestRecipients } from '../models/DocumentCreateByTemplateRequestRecipients';
+import { DocumentCreateByTemplateRequestTokens } from '../models/DocumentCreateByTemplateRequestTokens';
 import { DocumentCreateLinkRequest } from '../models/DocumentCreateLinkRequest';
 import { DocumentCreateLinkResponse } from '../models/DocumentCreateLinkResponse';
+import { DocumentCreateRequest } from '../models/DocumentCreateRequest';
+import { DocumentCreateRequestContentLibraryItems } from '../models/DocumentCreateRequestContentLibraryItems';
+import { DocumentCreateRequestContentPlaceholders } from '../models/DocumentCreateRequestContentPlaceholders';
+import { DocumentCreateRequestImages } from '../models/DocumentCreateRequestImages';
+import { DocumentCreateRequestRecipients } from '../models/DocumentCreateRequestRecipients';
 import { DocumentCreateResponse } from '../models/DocumentCreateResponse';
 import { DocumentDetailsResponse } from '../models/DocumentDetailsResponse';
 import { DocumentDetailsResponseCreatedBy } from '../models/DocumentDetailsResponseCreatedBy';
@@ -30,8 +41,11 @@ import { DocumentListResponseResults } from '../models/DocumentListResponseResul
 import { DocumentOrderingFieldsEnum } from '../models/DocumentOrderingFieldsEnum';
 import { DocumentSendRequest } from '../models/DocumentSendRequest';
 import { DocumentSendResponse } from '../models/DocumentSendResponse';
+import { DocumentStatusChangeRequest } from '../models/DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
 import { DocumentStatusResponse } from '../models/DocumentStatusResponse';
+import { DocumentTransferAllOwnershipRequest } from '../models/DocumentTransferAllOwnershipRequest';
+import { DocumentTransferOwnershipRequest } from '../models/DocumentTransferOwnershipRequest';
 import { DocumentsFolderCreateRequest } from '../models/DocumentsFolderCreateRequest';
 import { DocumentsFolderCreateResponse } from '../models/DocumentsFolderCreateResponse';
 import { DocumentsFolderListResponse } from '../models/DocumentsFolderListResponse';
@@ -40,10 +54,10 @@ import { DocumentsFolderRenameRequest } from '../models/DocumentsFolderRenameReq
 import { DocumentsFolderRenameResponse } from '../models/DocumentsFolderRenameResponse';
 import { FormListResponse } from '../models/FormListResponse';
 import { FormListResponseResults } from '../models/FormListResponseResults';
-import { InlineObject } from '../models/InlineObject';
 import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
+import { MemberDetailsResponse } from '../models/MemberDetailsResponse';
 import { OAuth2AccessTokenResponse } from '../models/OAuth2AccessTokenResponse';
 import { PricingTableRequest } from '../models/PricingTableRequest';
 import { PricingTableRequestData } from '../models/PricingTableRequestData';
@@ -61,11 +75,6 @@ import { PricingTablesResponseItems } from '../models/PricingTablesResponseItems
 import { PricingTablesResponseOptions } from '../models/PricingTablesResponseOptions';
 import { PricingTablesResponseSummary } from '../models/PricingTablesResponseSummary';
 import { PricingTablesResponseTables } from '../models/PricingTablesResponseTables';
-import { PublicV1DocumentsContentLibraryItems } from '../models/PublicV1DocumentsContentLibraryItems';
-import { PublicV1DocumentsContentPlaceholders } from '../models/PublicV1DocumentsContentPlaceholders';
-import { PublicV1DocumentsImages } from '../models/PublicV1DocumentsImages';
-import { PublicV1DocumentsRecipients } from '../models/PublicV1DocumentsRecipients';
-import { PublicV1DocumentsTokens } from '../models/PublicV1DocumentsTokens';
 import { TemplateDetailsResponse } from '../models/TemplateDetailsResponse';
 import { TemplateDetailsResponseAssignedTo } from '../models/TemplateDetailsResponseAssignedTo';
 import { TemplateDetailsResponseContentPlaceholders } from '../models/TemplateDetailsResponseContentPlaceholders';
@@ -173,6 +182,103 @@ export class ObjectAPILogsApi {
 
 }
 
+import { ObservableContactsApi } from "./ObservableAPI";
+import { ContactsApiRequestFactory, ContactsApiResponseProcessor} from "../apis/ContactsApi";
+
+export interface ContactsApiContactCreateRequest {
+    /**
+     * 
+     * @type ContactCreateRequest
+     * @memberof ContactsApicontactCreate
+     */
+    contactCreateRequest: ContactCreateRequest
+}
+
+export interface ContactsApiContactDeleteRequest {
+    /**
+     * Contact id.
+     * @type string
+     * @memberof ContactsApicontactDelete
+     */
+    id: string
+}
+
+export interface ContactsApiContactDetailsRequest {
+    /**
+     * Contact id.
+     * @type string
+     * @memberof ContactsApicontactDetails
+     */
+    id: string
+}
+
+export interface ContactsApiContactListRequest {
+}
+
+export interface ContactsApiContactUpdateRequest {
+    /**
+     * Contact id.
+     * @type string
+     * @memberof ContactsApicontactUpdate
+     */
+    id: string
+    /**
+     * 
+     * @type ContactUpdateRequest
+     * @memberof ContactsApicontactUpdate
+     */
+    contactUpdateRequest: ContactUpdateRequest
+}
+
+export class ObjectContactsApi {
+    private api: ObservableContactsApi
+
+    public constructor(configuration: Configuration, requestFactory?: ContactsApiRequestFactory, responseProcessor?: ContactsApiResponseProcessor) {
+        this.api = new ObservableContactsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create contact
+     * @param param the request object
+     */
+    public contactCreate(param: ContactsApiContactCreateRequest, options?: Configuration): Promise<ContactDetailsResponse> {
+        return this.api.contactCreate(param.contactCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Delete contact by id
+     * @param param the request object
+     */
+    public contactDelete(param: ContactsApiContactDeleteRequest, options?: Configuration): Promise<void> {
+        return this.api.contactDelete(param.id,  options).toPromise();
+    }
+
+    /**
+     * Get contact details by id
+     * @param param the request object
+     */
+    public contactDetails(param: ContactsApiContactDetailsRequest, options?: Configuration): Promise<ContactDetailsResponse> {
+        return this.api.contactDetails(param.id,  options).toPromise();
+    }
+
+    /**
+     * List contacts
+     * @param param the request object
+     */
+    public contactList(param: ContactsApiContactListRequest, options?: Configuration): Promise<Array<ContactDetailsResponse>> {
+        return this.api.contactList( options).toPromise();
+    }
+
+    /**
+     * Update contact by id
+     * @param param the request object
+     */
+    public contactUpdate(param: ContactsApiContactUpdateRequest, options?: Configuration): Promise<ContactDetailsResponse> {
+        return this.api.contactUpdate(param.id, param.contactUpdateRequest,  options).toPromise();
+    }
+
+}
+
 import { ObservableContentLibraryItemsApi } from "./ObservableAPI";
 import { ContentLibraryItemsApiRequestFactory, ContentLibraryItemsApiResponseProcessor} from "../apis/ContentLibraryItemsApi";
 
@@ -257,6 +363,144 @@ export class ObjectContentLibraryItemsApi {
 
 }
 
+import { ObservableDocumentAttachmentsApi } from "./ObservableAPI";
+import { DocumentAttachmentsApiRequestFactory, DocumentAttachmentsApiResponseProcessor} from "../apis/DocumentAttachmentsApi";
+
+export interface DocumentAttachmentsApiDocumentAttachmentCreateRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentCreate
+     */
+    id: string
+    /**
+     * Binary file to be attached to a document
+     * @type HttpFile
+     * @memberof DocumentAttachmentsApidocumentAttachmentCreate
+     */
+    file?: HttpFile
+    /**
+     * URL link to the file to be attached to a document
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentCreate
+     */
+    source?: string
+    /**
+     * Optional name to set for uploaded file
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentCreate
+     */
+    name?: string
+}
+
+export interface DocumentAttachmentsApiDocumentAttachmentDeleteRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentDelete
+     */
+    id: string
+    /**
+     * Attachment UUID
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentDelete
+     */
+    attachmentId: string
+}
+
+export interface DocumentAttachmentsApiDocumentAttachmentDetailsRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentDetails
+     */
+    id: string
+    /**
+     * Attachment UUID
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentDetails
+     */
+    attachmentId: string
+}
+
+export interface DocumentAttachmentsApiDocumentAttachmentDownloadRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentDownload
+     */
+    id: string
+    /**
+     * Attachment UUID
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentDownload
+     */
+    attachmentId: string
+}
+
+export interface DocumentAttachmentsApiDocumentAttachmentsListRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentAttachmentsApidocumentAttachmentsList
+     */
+    id: string
+}
+
+export class ObjectDocumentAttachmentsApi {
+    private api: ObservableDocumentAttachmentsApi
+
+    public constructor(configuration: Configuration, requestFactory?: DocumentAttachmentsApiRequestFactory, responseProcessor?: DocumentAttachmentsApiResponseProcessor) {
+        this.api = new ObservableDocumentAttachmentsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Creates an attachment for a particular document
+     * Document Attachment Create
+     * @param param the request object
+     */
+    public documentAttachmentCreate(param: DocumentAttachmentsApiDocumentAttachmentCreateRequest, options?: Configuration): Promise<DocumentAttachmentResponse> {
+        return this.api.documentAttachmentCreate(param.id, param.file, param.source, param.name,  options).toPromise();
+    }
+
+    /**
+     * Deletes specific document's attachment
+     * Document Attachment Delete
+     * @param param the request object
+     */
+    public documentAttachmentDelete(param: DocumentAttachmentsApiDocumentAttachmentDeleteRequest, options?: Configuration): Promise<void> {
+        return this.api.documentAttachmentDelete(param.id, param.attachmentId,  options).toPromise();
+    }
+
+    /**
+     * Returns details of the specific document's attachment
+     * Document Attachment Details
+     * @param param the request object
+     */
+    public documentAttachmentDetails(param: DocumentAttachmentsApiDocumentAttachmentDetailsRequest, options?: Configuration): Promise<DocumentAttachmentResponse> {
+        return this.api.documentAttachmentDetails(param.id, param.attachmentId,  options).toPromise();
+    }
+
+    /**
+     * Returns document attachment file for download
+     * Document Attachment Download
+     * @param param the request object
+     */
+    public documentAttachmentDownload(param: DocumentAttachmentsApiDocumentAttachmentDownloadRequest, options?: Configuration): Promise<HttpFile> {
+        return this.api.documentAttachmentDownload(param.id, param.attachmentId,  options).toPromise();
+    }
+
+    /**
+     * Return list of objects attached to particular document
+     * Document Attachment List
+     * @param param the request object
+     */
+    public documentAttachmentsList(param: DocumentAttachmentsApiDocumentAttachmentsListRequest, options?: Configuration): Promise<Array<DocumentAttachmentResponse>> {
+        return this.api.documentAttachmentsList(param.id,  options).toPromise();
+    }
+
+}
+
 import { ObservableDocumentsApi } from "./ObservableAPI";
 import { DocumentsApiRequestFactory, DocumentsApiResponseProcessor} from "../apis/DocumentsApi";
 
@@ -271,17 +515,17 @@ export interface DocumentsApiDeleteDocumentRequest {
 
 export interface DocumentsApiDocumentCreateRequest {
     /**
+     * Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
+     * @type DocumentCreateRequest
+     * @memberof DocumentsApidocumentCreate
+     */
+    documentCreateRequest: DocumentCreateRequest
+    /**
      * Set this parameter as &#x60;ev1&#x60; if you want to create a document from PDF with Classic Editor when both editors are enabled for the workspace.
      * @type string
      * @memberof DocumentsApidocumentCreate
      */
     editorVer?: string
-    /**
-     * 
-     * @type InlineObject
-     * @memberof DocumentsApidocumentCreate
-     */
-    inlineObject?: InlineObject
 }
 
 export interface DocumentsApiDocumentCreateLinkRequest {
@@ -321,6 +565,12 @@ export interface DocumentsApiDocumentListRequest {
      * @memberof DocumentsApidocumentList
      */
     completedTo?: string
+    /**
+     * Returns results where &#39;contact_id&#39; is present in document as recipient or approver
+     * @type string
+     * @memberof DocumentsApidocumentList
+     */
+    contactId?: string
     /**
      * Specify how many document results to return. Default is 50 documents, maximum is 100 documents.
      * @type number
@@ -363,6 +613,12 @@ export interface DocumentsApiDocumentListRequest {
      * @memberof DocumentsApidocumentList
      */
     formId?: string
+    /**
+     * Returns results where &#39;membership_id&#39; is present in document as owner (should be member uuid)
+     * @type string
+     * @memberof DocumentsApidocumentList
+     */
+    membershipId?: string
     /**
      * Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
      * @type string
@@ -434,6 +690,21 @@ export interface DocumentsApiDocumentStatusRequest {
     id: string
 }
 
+export interface DocumentsApiDocumentStatusChangeRequest {
+    /**
+     * Specify document ID.
+     * @type string
+     * @memberof DocumentsApidocumentStatusChange
+     */
+    id: string
+    /**
+     * 
+     * @type DocumentStatusChangeRequest
+     * @memberof DocumentsApidocumentStatusChange
+     */
+    documentStatusChangeRequest: DocumentStatusChangeRequest
+}
+
 export interface DocumentsApiDownloadDocumentRequest {
     /**
      * Specify document ID.
@@ -442,7 +713,7 @@ export interface DocumentsApiDownloadDocumentRequest {
      */
     id: string
     /**
-     * HEX code (for example &#x60;#RRGGBB&#x60;).
+     * HEX code (for example &#x60;#FF5733&#x60;).
      * @type string
      * @memberof DocumentsApidownloadDocument
      */
@@ -527,7 +798,31 @@ export interface DocumentsApiSendDocumentRequest {
      * @type DocumentSendRequest
      * @memberof DocumentsApisendDocument
      */
-    documentSendRequest?: DocumentSendRequest
+    documentSendRequest: DocumentSendRequest
+}
+
+export interface DocumentsApiTransferAllDocumentsOwnershipRequest {
+    /**
+     * 
+     * @type DocumentTransferAllOwnershipRequest
+     * @memberof DocumentsApitransferAllDocumentsOwnership
+     */
+    documentTransferAllOwnershipRequest: DocumentTransferAllOwnershipRequest
+}
+
+export interface DocumentsApiTransferDocumentOwnershipRequest {
+    /**
+     * Specify document ID.
+     * @type string
+     * @memberof DocumentsApitransferDocumentOwnership
+     */
+    id: string
+    /**
+     * 
+     * @type DocumentTransferOwnershipRequest
+     * @memberof DocumentsApitransferDocumentOwnership
+     */
+    documentTransferOwnershipRequest: DocumentTransferOwnershipRequest
 }
 
 export class ObjectDocumentsApi {
@@ -550,7 +845,7 @@ export class ObjectDocumentsApi {
      * @param param the request object
      */
     public documentCreate(param: DocumentsApiDocumentCreateRequest, options?: Configuration): Promise<DocumentCreateResponse> {
-        return this.api.documentCreate(param.editorVer, param.inlineObject,  options).toPromise();
+        return this.api.documentCreate(param.documentCreateRequest, param.editorVer,  options).toPromise();
     }
 
     /**
@@ -574,7 +869,7 @@ export class ObjectDocumentsApi {
      * @param param the request object
      */
     public documentList(param: DocumentsApiDocumentListRequest, options?: Configuration): Promise<DocumentListResponse> {
-        return this.api.documentList(param.completedFrom, param.completedTo, param.count, param.createdFrom, param.createdTo, param.deleted, param.id, param.folderUuid, param.formId, param.metadata, param.modifiedFrom, param.modifiedTo, param.orderBy, param.page, param.q, param.status, param.statusNe, param.tag, param.templateId,  options).toPromise();
+        return this.api.documentList(param.completedFrom, param.completedTo, param.contactId, param.count, param.createdFrom, param.createdTo, param.deleted, param.id, param.folderUuid, param.formId, param.membershipId, param.metadata, param.modifiedFrom, param.modifiedTo, param.orderBy, param.page, param.q, param.status, param.statusNe, param.tag, param.templateId,  options).toPromise();
     }
 
     /**
@@ -583,6 +878,14 @@ export class ObjectDocumentsApi {
      */
     public documentStatus(param: DocumentsApiDocumentStatusRequest, options?: Configuration): Promise<DocumentStatusResponse> {
         return this.api.documentStatus(param.id,  options).toPromise();
+    }
+
+    /**
+     * Document status change
+     * @param param the request object
+     */
+    public documentStatusChange(param: DocumentsApiDocumentStatusChangeRequest, options?: Configuration): Promise<void> {
+        return this.api.documentStatusChange(param.id, param.documentStatusChangeRequest,  options).toPromise();
     }
 
     /**
@@ -634,6 +937,22 @@ export class ObjectDocumentsApi {
         return this.api.sendDocument(param.id, param.documentSendRequest,  options).toPromise();
     }
 
+    /**
+     * Transfer all documents ownership
+     * @param param the request object
+     */
+    public transferAllDocumentsOwnership(param: DocumentsApiTransferAllDocumentsOwnershipRequest, options?: Configuration): Promise<void> {
+        return this.api.transferAllDocumentsOwnership(param.documentTransferAllOwnershipRequest,  options).toPromise();
+    }
+
+    /**
+     * Update document ownership
+     * @param param the request object
+     */
+    public transferDocumentOwnership(param: DocumentsApiTransferDocumentOwnershipRequest, options?: Configuration): Promise<void> {
+        return this.api.transferDocumentOwnership(param.id, param.documentTransferOwnershipRequest,  options).toPromise();
+    }
+
 }
 
 import { ObservableFoldersAPIApi } from "./ObservableAPI";
@@ -645,7 +964,7 @@ export interface FoldersAPIApiCreateDocumentFolderRequest {
      * @type DocumentsFolderCreateRequest
      * @memberof FoldersAPIApicreateDocumentFolder
      */
-    documentsFolderCreateRequest?: DocumentsFolderCreateRequest
+    documentsFolderCreateRequest: DocumentsFolderCreateRequest
 }
 
 export interface FoldersAPIApiCreateTemplateFolderRequest {
@@ -654,7 +973,7 @@ export interface FoldersAPIApiCreateTemplateFolderRequest {
      * @type TemplatesFolderCreateRequest
      * @memberof FoldersAPIApicreateTemplateFolder
      */
-    templatesFolderCreateRequest?: TemplatesFolderCreateRequest
+    templatesFolderCreateRequest: TemplatesFolderCreateRequest
 }
 
 export interface FoldersAPIApiListDocumentFoldersRequest {
@@ -711,7 +1030,7 @@ export interface FoldersAPIApiRenameDocumentFolderRequest {
      * @type DocumentsFolderRenameRequest
      * @memberof FoldersAPIApirenameDocumentFolder
      */
-    documentsFolderRenameRequest?: DocumentsFolderRenameRequest
+    documentsFolderRenameRequest: DocumentsFolderRenameRequest
 }
 
 export interface FoldersAPIApiRenameTemplateFolderRequest {
@@ -726,7 +1045,7 @@ export interface FoldersAPIApiRenameTemplateFolderRequest {
      * @type TemplatesFolderRenameRequest
      * @memberof FoldersAPIApirenameTemplateFolder
      */
-    templatesFolderRenameRequest?: TemplatesFolderRenameRequest
+    templatesFolderRenameRequest: TemplatesFolderRenameRequest
 }
 
 export class ObjectFoldersAPIApi {
@@ -848,6 +1167,60 @@ export class ObjectFormsApi {
      */
     public listForm(param: FormsApiListFormRequest, options?: Configuration): Promise<FormListResponse> {
         return this.api.listForm(param.count, param.page, param.status, param.orderBy, param.asc, param.name,  options).toPromise();
+    }
+
+}
+
+import { ObservableMembersApi } from "./ObservableAPI";
+import { MembersApiRequestFactory, MembersApiResponseProcessor} from "../apis/MembersApi";
+
+export interface MembersApiCurrentMemberDetailsRequest {
+}
+
+export interface MembersApiMemberDetailsRequest {
+    /**
+     * Membership id
+     * @type string
+     * @memberof MembersApimemberDetails
+     */
+    id: string
+}
+
+export interface MembersApiMemberListRequest {
+}
+
+export class ObjectMembersApi {
+    private api: ObservableMembersApi
+
+    public constructor(configuration: Configuration, requestFactory?: MembersApiRequestFactory, responseProcessor?: MembersApiResponseProcessor) {
+        this.api = new ObservableMembersApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * A method to define to whom credentials belong
+     * Current member details
+     * @param param the request object
+     */
+    public currentMemberDetails(param: MembersApiCurrentMemberDetailsRequest, options?: Configuration): Promise<MemberDetailsResponse> {
+        return this.api.currentMemberDetails( options).toPromise();
+    }
+
+    /**
+     * A method to retrieve a member's details by id
+     * Member details
+     * @param param the request object
+     */
+    public memberDetails(param: MembersApiMemberDetailsRequest, options?: Configuration): Promise<MemberDetailsResponse> {
+        return this.api.memberDetails(param.id,  options).toPromise();
+    }
+
+    /**
+     * Retrieve all members details of the workspace
+     * List members
+     * @param param the request object
+     */
+    public memberList(param: MembersApiMemberListRequest, options?: Configuration): Promise<Array<MemberDetailsResponse>> {
+        return this.api.memberList( options).toPromise();
     }
 
 }

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **createDocumentFolder**
-> DocumentsFolderCreateResponse createDocumentFolder()
+> DocumentsFolderCreateResponse createDocumentFolder(documentsFolderCreateRequest)
 
 Create a new folder to store your documents.
 
@@ -31,7 +31,7 @@ const configuration = pd_api.createConfiguration(
 const apiInstance = new pd_api.FoldersAPIApi(configuration);
 
 const body:pd_api.FoldersAPIApiCreateDocumentFolderRequest = {
-  // DocumentsFolderCreateRequest (optional)
+  // DocumentsFolderCreateRequest
   documentsFolderCreateRequest: {
     name: "A new document folder",
     parentUuid: "Nq8htXxFssmhRxAPSP4SBP",
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **createTemplateFolder**
-> TemplatesFolderCreateResponse createTemplateFolder()
+> TemplatesFolderCreateResponse createTemplateFolder(templatesFolderCreateRequest)
 
 Create a new folder to store your templates.
 
@@ -94,7 +94,7 @@ const configuration = pd_api.createConfiguration(
 const apiInstance = new pd_api.FoldersAPIApi(configuration);
 
 const body:pd_api.FoldersAPIApiCreateTemplateFolderRequest = {
-  // TemplatesFolderCreateRequest (optional)
+  // TemplatesFolderCreateRequest
   templatesFolderCreateRequest: {
     name: "A new template folder",
     parentUuid: "Nq8htXxFssmhRxAPSP4SBP",
@@ -158,9 +158,9 @@ const apiInstance = new pd_api.FoldersAPIApi(configuration);
 
 const body:pd_api.FoldersAPIApiListDocumentFoldersRequest = {
   // string | The UUID of the folder containing folders. To list the folders located in the root folder, remove this parameter in the request. (optional)
-  parentUuid: "parent_uuid_example",
+  parentUuid: "Nq8htXxFssmhRxAPSP4SBP",
   // number | Optionally, specify how many folders to return. Default is 50 folders, maximum is 100 folders. (optional)
-  count: 1,
+  count: 10,
   // number | Optionally, specify which page of the dataset to return. (optional)
   page: 1,
 };
@@ -224,9 +224,9 @@ const apiInstance = new pd_api.FoldersAPIApi(configuration);
 
 const body:pd_api.FoldersAPIApiListTemplateFoldersRequest = {
   // string | The UUID of the folder containing folders. To list the folders located in the root folder, remove this parameter in the request. (optional)
-  parentUuid: "parent_uuid_example",
+  parentUuid: "Nq8htXxFssmhRxAPSP4SBP",
   // number | Optionally, specify how many folders to return. Default is 50 folders, maximum is 100 folders. (optional)
-  count: 1,
+  count: 10,
   // number | Optionally, specify which page of the dataset to return. (optional)
   page: 1,
 };
@@ -271,7 +271,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **renameDocumentFolder**
-> DocumentsFolderRenameResponse renameDocumentFolder()
+> DocumentsFolderRenameResponse renameDocumentFolder(documentsFolderRenameRequest)
 
 Rename Documents Folder.
 
@@ -290,8 +290,8 @@ const apiInstance = new pd_api.FoldersAPIApi(configuration);
 
 const body:pd_api.FoldersAPIApiRenameDocumentFolderRequest = {
   // string | The UUID of the folder that you are renaming.
-  id: "id_example",
-  // DocumentsFolderRenameRequest (optional)
+  id: "Nq8htXxFssmhRxAPSP4SBP",
+  // DocumentsFolderRenameRequest
   documentsFolderRenameRequest: {
     name: "Another document folder",
   },
@@ -337,7 +337,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
 
 # **renameTemplateFolder**
-> TemplatesFolderRenameResponse renameTemplateFolder()
+> TemplatesFolderRenameResponse renameTemplateFolder(templatesFolderRenameRequest)
 
 Rename a templates folder.
 
@@ -356,8 +356,8 @@ const apiInstance = new pd_api.FoldersAPIApi(configuration);
 
 const body:pd_api.FoldersAPIApiRenameTemplateFolderRequest = {
   // string | The UUID of the folder which you are renaming.
-  id: "id_example",
-  // TemplatesFolderRenameRequest (optional)
+  id: "Nq8htXxFssmhRxAPSP4SBP",
+  // TemplatesFolderRenameRequest
   templatesFolderRenameRequest: {
     name: "Another template folder",
   },

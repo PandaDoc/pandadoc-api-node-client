@@ -29,7 +29,7 @@ const apiInstance = new pd_api.TemplatesApi(configuration);
 
 const body:pd_api.TemplatesApiDeleteTemplateRequest = {
   // string | Template ID
-  id: "id_example",
+  id: "EE8yUNg5HztqVAuH85He8V",
 };
 
 apiInstance.deleteTemplate(body).then((data) => {
@@ -91,7 +91,7 @@ const apiInstance = new pd_api.TemplatesApi(configuration);
 
 const body:pd_api.TemplatesApiDetailsTemaplateRequest = {
   // string | Template ID
-  id: "id_example",
+  id: "EE8yUNg5HztqVAuH85He8V",
 };
 
 apiInstance.detailsTemaplate(body).then((data) => {
@@ -152,19 +152,19 @@ const apiInstance = new pd_api.TemplatesApi(configuration);
 
 const body:pd_api.TemplatesApiListTemplatesRequest = {
   // string | Optional search query. Filter by template name. (optional)
-  q: "q_example",
+  q: "Sample onboarding template",
   // boolean | Returns only the shared templates. (optional)
   shared: true,
   // boolean | Optional. Returns only the deleted templates. (optional)
   deleted: true,
   // number | Optionally, specify how many templates to return. Default is 50 templates, maximum is 100 templates. (optional)
-  count: 1,
+  count: 10,
   // number | Optionally, specify which page of the dataset to return. (optional)
   page: 1,
   // string | Optionally, specify template ID. (optional)
-  id: "id_example",
+  id: "e9LxBesSL73AeZMzeYdfvV",
   // string | UUID of the folder where the templates are stored. (optional)
-  folderUuid: "folder_uuid_example",
+  folderUuid: "xDKHoJ8DkwhiTQSUzNveCJ",
   // Array<string> | Optional search tag. Filter by template tag. (optional)
   tag: [
     "tag_example",

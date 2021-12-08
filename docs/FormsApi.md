@@ -27,7 +27,7 @@ const apiInstance = new pd_api.FormsApi(configuration);
 
 const body:pd_api.FormsApiListFormRequest = {
   // number | Optionally, specify how many forms to return. Default is 50 forms, maximum is 100 forms. (optional)
-  count: 1,
+  count: 10,
   // number | Optionally, specify which page of the dataset to return. (optional)
   page: 1,
   // Array<'draft' | 'active' | 'disabled'> | Optionally, specify which status of the forms dataset to return. (optional)
@@ -39,7 +39,7 @@ const body:pd_api.FormsApiListFormRequest = {
   // boolean | Optionally, specify sorting the result-set in ascending or descending order. (optional)
   asc: true,
   // string | Specify the form name. (optional)
-  name: "name_example",
+  name: "New Form",
 };
 
 apiInstance.listForm(body).then((data) => {
