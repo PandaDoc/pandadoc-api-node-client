@@ -47,7 +47,9 @@ export type RequestBody = undefined | string | FormData | URLSearchParams;
  * Represents an HTTP request context
  */
 export class RequestContext {
-    private headers: { [key: string]: string } = {};
+    private headers: { [key: string]: string } = {
+        "User-Agent": "pandadoc_node_client/1.1.0",
+    };
     private body: RequestBody = undefined;
     private url: URLParse;
 
