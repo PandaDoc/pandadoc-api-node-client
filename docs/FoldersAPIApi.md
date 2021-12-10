@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **createTemplateFolder**
 > TemplatesFolderCreateResponse createTemplateFolder(templatesFolderCreateRequest)
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listDocumentFolders**
 > DocumentsFolderListResponse listDocumentFolders()
@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listTemplateFolders**
 > TemplatesFolderListResponse listTemplateFolders()
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **renameDocumentFolder**
 > DocumentsFolderRenameResponse renameDocumentFolder(documentsFolderRenameRequest)
@@ -334,7 +334,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **renameTemplateFolder**
 > TemplatesFolderRenameResponse renameTemplateFolder(templatesFolderRenameRequest)
@@ -400,5 +400,5 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

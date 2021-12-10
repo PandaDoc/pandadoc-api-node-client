@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 **204** | No content |  -  |
 **404** | Not found |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentCreate**
 > DocumentCreateResponse documentCreate(documentCreateRequest)
@@ -310,7 +310,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentCreateLink**
 > DocumentCreateLinkResponse documentCreateLink(documentCreateLinkRequest)
@@ -377,7 +377,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentDetails**
 > DocumentDetailsResponse documentDetails()
@@ -437,7 +437,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentList**
 > DocumentListResponse documentList()
@@ -557,7 +557,7 @@ Name | Type | Description  | Notes
 **403** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentStatus**
 > DocumentStatusResponse documentStatus()
@@ -617,7 +617,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentStatusChange**
 > void documentStatusChange(documentStatusChangeRequest)
@@ -684,7 +684,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **downloadDocument**
 > HttpFile downloadDocument()
@@ -757,7 +757,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **downloadProtectedDocument**
 > HttpFile downloadProtectedDocument()
@@ -818,7 +818,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **linkedObjectDelete**
 > void linkedObjectDelete()
@@ -881,7 +881,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **linkedObjectList**
 > LinkedObjectListResponse linkedObjectList()
@@ -941,7 +941,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **linkedObjectsCreate**
 > LinkedObjectCreateResponse linkedObjectsCreate(linkedObjectCreateRequest)
@@ -1009,7 +1009,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **sendDocument**
 > DocumentSendResponse sendDocument(documentSendRequest)
@@ -1076,7 +1076,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **transferAllDocumentsOwnership**
 > void transferAllDocumentsOwnership(documentTransferAllOwnershipRequest)
@@ -1139,7 +1139,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **transferDocumentOwnership**
 > void transferDocumentOwnership(documentTransferOwnershipRequest)
@@ -1204,5 +1204,5 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

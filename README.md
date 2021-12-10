@@ -8,16 +8,14 @@ PandaDoc SDK spans a broad range of functionality to help you build incredible d
 Node >= 12
 
 ## Installation
-#### npm install
-If the package is hosted on a repository, you can install directly using:
+From package manager:
+```sh
+npm install pandadoc-node-client
+```
+
+Or directly from the repository:
 ```sh
 npm install git+https://github.com/PandaDoc/pandadoc-api-node-client.git
-```
-(you may need to run `npm` with root permission: `sudo npm install git+https://github.com/PandaDoc/pandadoc-api-node-client.git`)
-
-Then import the package:
-```typescript
-import * as pd_client from "pandadoc-node-client";
 ```
 
 ## Getting Started
@@ -52,8 +50,8 @@ apiInstance.listTemplates({ deleted: false, tag: ["doe-inc-proposals"] }).then((
  - **read+write**: default
 
 ## Examples
-- [Create and send document from a template](examples/createDocumentFromPandadocTemplateAndSend.ts)
-- [Create and send document from the pdf url](examples/createDocumentFromPdfUrlAndSend.ts)
+- [Create and send document from a template](https://github.com/PandaDoc/pandadoc-api-node-client/blob/main/examples/createDocumentFromPandadocTemplateAndSend.ts)
+- [Create and send document from the pdf url](https://github.com/PandaDoc/pandadoc-api-node-client/blob/main/examples/createDocumentFromPdfUrlAndSend.ts)
 
 ### Documentation for API Endpoints
 All URIs are relative to *https://api.pandadoc.com*
@@ -106,4 +104,4 @@ Class | Method | HTTP request | Description
 
 
 ## License
-SDK is licensed under the following [License](LICENSE).
+SDK is licensed under the [MIT License](https://github.com/PandaDoc/pandadoc-api-node-client/blob/main/LICENSE).

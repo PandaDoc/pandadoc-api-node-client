@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listContentLibraryItems**
 > ContentLibraryItemListResponse listContentLibraryItems()
@@ -145,5 +145,5 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,59 +4,52 @@ import * as pd_api from "pandadoc-node-client";
 const API_KEY = "YOUR_API_KEY";
 // or uncomment this if you want to setup with oauth2
 // const OAUTH2_KEY = "YOUR_OAUTH_KEY";
-const MAX_RETRIES_COUNT = 5;
-
+const MAX_CHECK_RETRIES = 5;
 const PDF_URL =
   "https://cdn2.hubspot.net/hubfs/2127247/public-templates/SamplePandaDocPdf_FieldTags.pdf";
-const documentCreateRequest: pd_api.DocumentCreateRequest = {
-  name: "Sample Document from PDF with Field Tags",
-  url: PDF_URL,
-  tags: ["tag_1", "tag_2"],
-  recipients: [
-    {
-      email: "josh@example.com",
-      firstName: "Josh",
-      lastName: "Ron",
-      role: "user",
-      signingOrder: 1,
-    },
-    {
-      email: "john@example.com",
-      firstName: "John",
-      lastName: "Doe",
-      signingOrder: 2,
-    },
-  ],
-  fields: {
-    name: { value: "John", role: "user" },
-    like: { value: true, role: "user" },
-  },
-  metadata: { "salesforce.opportunity_id": "123456", my_favorite_pet: "Panda" },
-  parseFormFields: false,
-};
 
-async function documentCreateFromPdfUrl(
-  apiInstance: pd_api.DocumentsApi,
-  requestObj: pd_api.DocumentCreateRequest
+async function createDocumentFromPdfUrl(
+  apiInstance: pd_api.DocumentsApi
 ): Promise<pd_api.DocumentCreateResponse> {
-  try {
-    let response = await apiInstance.documentCreate({
-      documentCreateRequest: requestObj,
-    });
-    console.log("Document was successfully uploaded: %o", response);
-    return response;
-  } catch (e) {
-    if (e instanceof pd_api.ApiException) {
-      console.log("Exception when calling DocumentsApi->documentCreate:");
-    }
-    throw e;
-  }
+  const documentCreateRequest: pd_api.DocumentCreateRequest = {
+    name: "Sample Document from PDF with Field Tags",
+    url: PDF_URL,
+    tags: ["tag_1", "tag_2"],
+    recipients: [
+      {
+        email: "josh@example.com",
+        firstName: "Josh",
+        lastName: "Ron",
+        role: "user",
+        signingOrder: 1,
+      },
+      {
+        email: "john@example.com",
+        firstName: "John",
+        lastName: "Doe",
+        signingOrder: 2,
+      },
+    ],
+    fields: {
+      name: { value: "John", role: "user" },
+      like: { value: true, role: "user" },
+    },
+    metadata: {
+      "salesforce.opportunity_id": "123456",
+      my_favorite_pet: "Panda",
+    },
+    parseFormFields: false,
+  };
+
+  return await apiInstance.documentCreate({
+    documentCreateRequest: documentCreateRequest,
+  });
 }
 
-async function documentSend(
+async function ensureDocumentCreated(
   apiInstance: pd_api.DocumentsApi,
   document: pd_api.DocumentCreateResponse
-): Promise<pd_api.DocumentSendResponse> {
+): Promise<void> {
   /*
     Document creation is non-blocking (asynchronous) operation.
 
@@ -72,54 +65,41 @@ async function documentSend(
     Attempting to use a newly created document before PandaDoc servers
     process it will result in a '404 document not found' response.
      */
-  let retries = MAX_RETRIES_COUNT;
-  let status = document.status;
 
-  while (status === "document.uploaded" && retries > 0) {
+  let retries = 0;
+
+  while (retries < MAX_CHECK_RETRIES) {
     await new Promise((r) => setTimeout(r, 2000));
-    try {
-      let response = await apiInstance.documentStatus({
-        id: String(document.id),
-      });
-      status = response.status;
+    retries++;
 
-      if (status === "document.uploaded") {
-        console.log("The document is not created yet, will retry.");
-      }
-    } catch (e) {
-      if (e instanceof pd_api.ApiException) {
-        console.log("Exception when calling DocumentsApi->documentStatus:", e);
-        console.log(`${retries} retries remaining`);
-      } else {
-        throw e;
-      }
-    }
-    retries--;
-  }
-
-  try {
-    let response = await apiInstance.sendDocument({
+    let response = await apiInstance.documentStatus({
       id: String(document.id),
-      documentSendRequest: {
-        silent: false,
-        subject: "Sent via Node SDK",
-        message: "This document was sent via Node SDK example",
-      },
     });
-    console.log("Document was successfully sent: %o", response);
-    return response;
-  } catch (e) {
-    if (e instanceof pd_api.ApiException) {
-      console.log("Exception when calling DocumentsApi->sendDocument:");
+    if (response.status === "document.draft") {
+      return;
     }
-    throw e;
   }
+
+  throw Error("Document was not sent");
 }
 
-async function runExample() {
+async function sendDocument(
+  apiInstance: pd_api.DocumentsApi,
+  document: pd_api.DocumentCreateResponse
+): Promise<void> {
+  await apiInstance.sendDocument({
+    id: String(document.id),
+    documentSendRequest: {
+      silent: false,
+      subject: "Sent via Node SDK",
+      message: "This document was sent via Node SDK example",
+    },
+  });
+}
+
+async function runExample(): Promise<void> {
   let cfg = pd_api.createConfiguration({
     authMethods: { apiKey: `API-Key ${API_KEY}` }, // or authMethods: {oauth2: `Bearer ${OAUTH2_KEY}`}
-
     baseServer: new pd_api.ServerConfiguration(
       // Defining the host is optional and defaults to https://api.pandadoc.com
       "https://api.pandadoc.com",
@@ -128,10 +108,21 @@ async function runExample() {
   });
   const apiInstance = new pd_api.DocumentsApi(cfg);
 
-  let createdDocument = await documentCreateFromPdfUrl(apiInstance, documentCreateRequest);
-  await documentSend(apiInstance, createdDocument);
+  try {
+    let createdDocument = await createDocumentFromPdfUrl(apiInstance);
+    console.log("Document was successfully uploaded: %o", createdDocument);
+    await ensureDocumentCreated(apiInstance, createdDocument);
+    await sendDocument(apiInstance, createdDocument);
+    console.log(
+      "Document was successfully created and sent to the recipients!"
+    );
+  } catch (e) {
+    if (e instanceof pd_api.ApiException) {
+      console.log(e.message);
+    } else {
+      throw e;
+    }
+  }
 }
 
-runExample().then(() =>
-  console.log("Document was successfully created and sent to the recipients!")
-);
+runExample();

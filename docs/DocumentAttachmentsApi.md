@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentAttachmentDelete**
 > void documentAttachmentDelete()
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentAttachmentDetails**
 > DocumentAttachmentResponse documentAttachmentDetails()
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentAttachmentDownload**
 > HttpFile documentAttachmentDownload()
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **documentAttachmentsList**
 > Array<DocumentAttachmentResponse> documentAttachmentsList()
@@ -328,5 +328,5 @@ Name | Type | Description  | Notes
 **404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
