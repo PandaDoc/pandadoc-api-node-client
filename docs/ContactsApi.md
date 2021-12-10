@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **contactDelete**
 > void contactDelete()
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 **403** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **contactDetails**
 > ContactDetailsResponse contactDetails()
@@ -199,7 +199,7 @@ Name | Type | Description  | Notes
 **403** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **contactList**
 > Array<ContactDetailsResponse> contactList()
@@ -253,7 +253,7 @@ This endpoint does not need any parameter.
 **403** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **contactUpdate**
 > ContactDetailsResponse contactUpdate(contactUpdateRequest)
@@ -326,5 +326,5 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
-[[Back to top]](#) [[Back to API list]](README.md#documentation-for-api-endpoints) [[Back to Model list]](README.md#documentation-for-models) [[Back to README]](README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
