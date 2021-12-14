@@ -60,12 +60,12 @@ export class TemplatesApiRequestFactory extends BaseAPIRequestFactory {
      * Details Template
      * @param id Template ID
      */
-    public async detailsTemaplate(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async detailsTemplate(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("TemplatesApi", "detailsTemaplate", "id");
+            throw new RequiredError("TemplatesApi", "detailsTemplate", "id");
         }
 
 
@@ -247,10 +247,10 @@ export class TemplatesApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to detailsTemaplate
+     * @params response Response returned by the server for a request to detailsTemplate
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detailsTemaplate(response: ResponseContext): Promise<TemplateDetailsResponse > {
+     public async detailsTemplate(response: ResponseContext): Promise<TemplateDetailsResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: TemplateDetailsResponse = ObjectSerializer.deserialize(

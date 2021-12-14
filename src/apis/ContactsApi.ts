@@ -22,12 +22,12 @@ export class ContactsApiRequestFactory extends BaseAPIRequestFactory {
      * Create contact
      * @param contactCreateRequest 
      */
-    public async contactCreate(contactCreateRequest: ContactCreateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async createContact(contactCreateRequest: ContactCreateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'contactCreateRequest' is not null or undefined
         if (contactCreateRequest === null || contactCreateRequest === undefined) {
-            throw new RequiredError("ContactsApi", "contactCreate", "contactCreateRequest");
+            throw new RequiredError("ContactsApi", "createContact", "contactCreateRequest");
         }
 
 
@@ -69,12 +69,12 @@ export class ContactsApiRequestFactory extends BaseAPIRequestFactory {
      * Delete contact by id
      * @param id Contact id.
      */
-    public async contactDelete(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async deleteContact(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("ContactsApi", "contactDelete", "id");
+            throw new RequiredError("ContactsApi", "deleteContact", "id");
         }
 
 
@@ -106,12 +106,12 @@ export class ContactsApiRequestFactory extends BaseAPIRequestFactory {
      * Get contact details by id
      * @param id Contact id.
      */
-    public async contactDetails(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async detailsContact(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("ContactsApi", "contactDetails", "id");
+            throw new RequiredError("ContactsApi", "detailsContact", "id");
         }
 
 
@@ -142,7 +142,7 @@ export class ContactsApiRequestFactory extends BaseAPIRequestFactory {
     /**
      * List contacts
      */
-    public async contactList(_options?: Configuration): Promise<RequestContext> {
+    public async listContacts(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // Path Params
@@ -173,18 +173,18 @@ export class ContactsApiRequestFactory extends BaseAPIRequestFactory {
      * @param id Contact id.
      * @param contactUpdateRequest 
      */
-    public async contactUpdate(id: string, contactUpdateRequest: ContactUpdateRequest, _options?: Configuration): Promise<RequestContext> {
+    public async updateContact(id: string, contactUpdateRequest: ContactUpdateRequest, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("ContactsApi", "contactUpdate", "id");
+            throw new RequiredError("ContactsApi", "updateContact", "id");
         }
 
 
         // verify required parameter 'contactUpdateRequest' is not null or undefined
         if (contactUpdateRequest === null || contactUpdateRequest === undefined) {
-            throw new RequiredError("ContactsApi", "contactUpdate", "contactUpdateRequest");
+            throw new RequiredError("ContactsApi", "updateContact", "contactUpdateRequest");
         }
 
 
@@ -231,10 +231,10 @@ export class ContactsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to contactCreate
+     * @params response Response returned by the server for a request to createContact
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async contactCreate(response: ResponseContext): Promise<ContactDetailsResponse > {
+     public async createContact(response: ResponseContext): Promise<ContactDetailsResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: ContactDetailsResponse = ObjectSerializer.deserialize(
@@ -281,10 +281,10 @@ export class ContactsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to contactDelete
+     * @params response Response returned by the server for a request to deleteContact
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async contactDelete(response: ResponseContext): Promise<void > {
+     public async deleteContact(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -334,10 +334,10 @@ export class ContactsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to contactDetails
+     * @params response Response returned by the server for a request to detailsContact
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async contactDetails(response: ResponseContext): Promise<ContactDetailsResponse > {
+     public async detailsContact(response: ResponseContext): Promise<ContactDetailsResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ContactDetailsResponse = ObjectSerializer.deserialize(
@@ -391,10 +391,10 @@ export class ContactsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to contactList
+     * @params response Response returned by the server for a request to listContacts
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async contactList(response: ResponseContext): Promise<Array<ContactDetailsResponse> > {
+     public async listContacts(response: ResponseContext): Promise<Array<ContactDetailsResponse> > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Array<ContactDetailsResponse> = ObjectSerializer.deserialize(
@@ -448,10 +448,10 @@ export class ContactsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to contactUpdate
+     * @params response Response returned by the server for a request to updateContact
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async contactUpdate(response: ResponseContext): Promise<ContactDetailsResponse > {
+     public async updateContact(response: ResponseContext): Promise<ContactDetailsResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: ContactDetailsResponse = ObjectSerializer.deserialize(

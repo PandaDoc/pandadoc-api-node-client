@@ -24,12 +24,12 @@ export class DocumentAttachmentsApiRequestFactory extends BaseAPIRequestFactory 
      * @param source URL link to the file to be attached to a document
      * @param name Optional name to set for uploaded file
      */
-    public async documentAttachmentCreate(id: string, file?: HttpFile, source?: string, name?: string, _options?: Configuration): Promise<RequestContext> {
+    public async createDocumentAttachment(id: string, file?: HttpFile, source?: string, name?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("DocumentAttachmentsApi", "documentAttachmentCreate", "id");
+            throw new RequiredError("DocumentAttachmentsApi", "createDocumentAttachment", "id");
         }
 
 
@@ -101,18 +101,18 @@ export class DocumentAttachmentsApiRequestFactory extends BaseAPIRequestFactory 
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public async documentAttachmentDelete(id: string, attachmentId: string, _options?: Configuration): Promise<RequestContext> {
+    public async deleteDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("DocumentAttachmentsApi", "documentAttachmentDelete", "id");
+            throw new RequiredError("DocumentAttachmentsApi", "deleteDocumentAttachment", "id");
         }
 
 
         // verify required parameter 'attachmentId' is not null or undefined
         if (attachmentId === null || attachmentId === undefined) {
-            throw new RequiredError("DocumentAttachmentsApi", "documentAttachmentDelete", "attachmentId");
+            throw new RequiredError("DocumentAttachmentsApi", "deleteDocumentAttachment", "attachmentId");
         }
 
 
@@ -147,18 +147,18 @@ export class DocumentAttachmentsApiRequestFactory extends BaseAPIRequestFactory 
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public async documentAttachmentDetails(id: string, attachmentId: string, _options?: Configuration): Promise<RequestContext> {
+    public async detailsDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("DocumentAttachmentsApi", "documentAttachmentDetails", "id");
+            throw new RequiredError("DocumentAttachmentsApi", "detailsDocumentAttachment", "id");
         }
 
 
         // verify required parameter 'attachmentId' is not null or undefined
         if (attachmentId === null || attachmentId === undefined) {
-            throw new RequiredError("DocumentAttachmentsApi", "documentAttachmentDetails", "attachmentId");
+            throw new RequiredError("DocumentAttachmentsApi", "detailsDocumentAttachment", "attachmentId");
         }
 
 
@@ -193,18 +193,18 @@ export class DocumentAttachmentsApiRequestFactory extends BaseAPIRequestFactory 
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public async documentAttachmentDownload(id: string, attachmentId: string, _options?: Configuration): Promise<RequestContext> {
+    public async downloadDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("DocumentAttachmentsApi", "documentAttachmentDownload", "id");
+            throw new RequiredError("DocumentAttachmentsApi", "downloadDocumentAttachment", "id");
         }
 
 
         // verify required parameter 'attachmentId' is not null or undefined
         if (attachmentId === null || attachmentId === undefined) {
-            throw new RequiredError("DocumentAttachmentsApi", "documentAttachmentDownload", "attachmentId");
+            throw new RequiredError("DocumentAttachmentsApi", "downloadDocumentAttachment", "attachmentId");
         }
 
 
@@ -238,12 +238,12 @@ export class DocumentAttachmentsApiRequestFactory extends BaseAPIRequestFactory 
      * Document Attachment List
      * @param id Document UUID
      */
-    public async documentAttachmentsList(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async listDocumentAttachments(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("DocumentAttachmentsApi", "documentAttachmentsList", "id");
+            throw new RequiredError("DocumentAttachmentsApi", "listDocumentAttachments", "id");
         }
 
 
@@ -279,10 +279,10 @@ export class DocumentAttachmentsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to documentAttachmentCreate
+     * @params response Response returned by the server for a request to createDocumentAttachment
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async documentAttachmentCreate(response: ResponseContext): Promise<DocumentAttachmentResponse > {
+     public async createDocumentAttachment(response: ResponseContext): Promise<DocumentAttachmentResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: DocumentAttachmentResponse = ObjectSerializer.deserialize(
@@ -336,10 +336,10 @@ export class DocumentAttachmentsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to documentAttachmentDelete
+     * @params response Response returned by the server for a request to deleteDocumentAttachment
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async documentAttachmentDelete(response: ResponseContext): Promise<void > {
+     public async deleteDocumentAttachment(response: ResponseContext): Promise<void > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
             return;
@@ -382,10 +382,10 @@ export class DocumentAttachmentsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to documentAttachmentDetails
+     * @params response Response returned by the server for a request to detailsDocumentAttachment
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async documentAttachmentDetails(response: ResponseContext): Promise<DocumentAttachmentResponse > {
+     public async detailsDocumentAttachment(response: ResponseContext): Promise<DocumentAttachmentResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: DocumentAttachmentResponse = ObjectSerializer.deserialize(
@@ -432,10 +432,10 @@ export class DocumentAttachmentsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to documentAttachmentDownload
+     * @params response Response returned by the server for a request to downloadDocumentAttachment
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async documentAttachmentDownload(response: ResponseContext): Promise<HttpFile > {
+     public async downloadDocumentAttachment(response: ResponseContext): Promise<HttpFile > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: HttpFile = await response.getBodyAsFile() as any as HttpFile;
@@ -479,10 +479,10 @@ export class DocumentAttachmentsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to documentAttachmentsList
+     * @params response Response returned by the server for a request to listDocumentAttachments
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async documentAttachmentsList(response: ResponseContext): Promise<Array<DocumentAttachmentResponse> > {
+     public async listDocumentAttachments(response: ResponseContext): Promise<Array<DocumentAttachmentResponse> > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Array<DocumentAttachmentResponse> = ObjectSerializer.deserialize(

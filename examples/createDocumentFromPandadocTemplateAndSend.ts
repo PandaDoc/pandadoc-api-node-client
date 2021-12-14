@@ -21,19 +21,16 @@ async function createDocumentFromPandadocTemplate(
       options: {
         currency: "USD",
         discount: {
-          isGlobal: true,
           type: "absolute",
           name: "Global Discount",
           value: 2.26,
         },
         taxFirst: {
-          isGlobal: true,
           type: "percent",
           name: "Tax First",
           value: 2.26,
         },
         taxSecond: {
-          isGlobal: true,
           type: "percent",
           name: "Tax Second",
           value: 2.26,
@@ -128,7 +125,7 @@ async function createDocumentFromPandadocTemplate(
     parseFormFields: false,
   };
 
-  return await apiInstance.documentCreate({
+  return await apiInstance.createDocument({
     documentCreateRequest: documentCreateRequest,
   });
 }
@@ -160,7 +157,7 @@ async function ensureDocumentCreated(
     await new Promise((r) => setTimeout(r, 2000));
     retries++;
 
-    let response = await apiInstance.documentStatus({
+    let response = await apiInstance.statusDocument({
       id: String(document.id),
     });
     if (response.status === "document.draft") {
@@ -175,7 +172,7 @@ async function documentSend(
   apiInstance: pd_api.DocumentsApi,
   document: pd_api.DocumentCreateResponse
 ): Promise<void> {
-  return await apiInstance.sendDocument({
+  await apiInstance.sendDocument({
     id: String(document.id),
     documentSendRequest: {
       silent: false,

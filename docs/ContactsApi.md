@@ -4,15 +4,15 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**contactCreate**](ContactsApi.md#contactCreate) | **POST** /public/v1/contacts | Create contact
-[**contactDelete**](ContactsApi.md#contactDelete) | **DELETE** /public/v1/contacts/{id} | Delete contact by id
-[**contactDetails**](ContactsApi.md#contactDetails) | **GET** /public/v1/contacts/{id} | Get contact details by id
-[**contactList**](ContactsApi.md#contactList) | **GET** /public/v1/contacts | List contacts
-[**contactUpdate**](ContactsApi.md#contactUpdate) | **PATCH** /public/v1/contacts/{id} | Update contact by id
+[**createContact**](ContactsApi.md#createContact) | **POST** /public/v1/contacts | Create contact
+[**deleteContact**](ContactsApi.md#deleteContact) | **DELETE** /public/v1/contacts/{id} | Delete contact by id
+[**detailsContact**](ContactsApi.md#detailsContact) | **GET** /public/v1/contacts/{id} | Get contact details by id
+[**listContacts**](ContactsApi.md#listContacts) | **GET** /public/v1/contacts | List contacts
+[**updateContact**](ContactsApi.md#updateContact) | **PATCH** /public/v1/contacts/{id} | Update contact by id
 
 
-# **contactCreate**
-> ContactDetailsResponse contactCreate(contactCreateRequest)
+# **createContact**
+> ContactDetailsResponse createContact(contactCreateRequest)
 
 
 ### Example
@@ -28,7 +28,7 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.ContactsApi(configuration);
 
-const body:pd_api.ContactsApiContactCreateRequest = {
+const body:pd_api.ContactsApiCreateContactRequest = {
   // ContactCreateRequest
   contactCreateRequest: {
     email: "user01@pandadoc.com",
@@ -44,7 +44,7 @@ const body:pd_api.ContactsApiContactCreateRequest = {
   },
 };
 
-apiInstance.contactCreate(body).then((data) => {
+apiInstance.createContact(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -81,8 +81,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **contactDelete**
-> void contactDelete()
+# **deleteContact**
+> void deleteContact()
 
 
 ### Example
@@ -98,12 +98,12 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.ContactsApi(configuration);
 
-const body:pd_api.ContactsApiContactDeleteRequest = {
+const body:pd_api.ContactsApiDeleteContactRequest = {
   // string | Contact id.
   id: "SyoufNkJiHRn24LpuJ7RXb",
 };
 
-apiInstance.contactDelete(body).then((data) => {
+apiInstance.deleteContact(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -141,8 +141,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **contactDetails**
-> ContactDetailsResponse contactDetails()
+# **detailsContact**
+> ContactDetailsResponse detailsContact()
 
 
 ### Example
@@ -158,12 +158,12 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.ContactsApi(configuration);
 
-const body:pd_api.ContactsApiContactDetailsRequest = {
+const body:pd_api.ContactsApiDetailsContactRequest = {
   // string | Contact id.
   id: "SyoufNkJiHRn24LpuJ7RXb",
 };
 
-apiInstance.contactDetails(body).then((data) => {
+apiInstance.detailsContact(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -201,8 +201,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **contactList**
-> Array<ContactDetailsResponse> contactList()
+# **listContacts**
+> Array<ContactDetailsResponse> listContacts()
 
 
 ### Example
@@ -220,7 +220,7 @@ const apiInstance = new pd_api.ContactsApi(configuration);
 
 let body:any = {};
 
-apiInstance.contactList(body).then((data) => {
+apiInstance.listContacts(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -255,8 +255,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **contactUpdate**
-> ContactDetailsResponse contactUpdate(contactUpdateRequest)
+# **updateContact**
+> ContactDetailsResponse updateContact(contactUpdateRequest)
 
 
 ### Example
@@ -272,7 +272,7 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.ContactsApi(configuration);
 
-const body:pd_api.ContactsApiContactUpdateRequest = {
+const body:pd_api.ContactsApiUpdateContactRequest = {
   // string | Contact id.
   id: "SyoufNkJiHRn24LpuJ7RXb",
   // ContactUpdateRequest
@@ -290,7 +290,7 @@ const body:pd_api.ContactsApiContactUpdateRequest = {
   },
 };
 
-apiInstance.contactUpdate(body).then((data) => {
+apiInstance.updateContact(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```

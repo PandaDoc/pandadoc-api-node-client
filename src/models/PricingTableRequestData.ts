@@ -11,11 +11,11 @@ import { PricingTableRequestDataDiscount } from './PricingTableRequestDataDiscou
 import { HttpFile } from '../http/http';
 
 export class PricingTableRequestData {
-    'name'?: string;
+    'name': string;
     'description'?: string;
-    'price'?: number;
+    'price': number;
     'cost'?: number;
-    'qty'?: number;
+    'qty': number;
     'sku'?: string;
     'discount'?: PricingTableRequestDataDiscount;
     'taxFirst'?: PricingTableRequestDataDiscount;

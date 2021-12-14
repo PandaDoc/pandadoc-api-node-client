@@ -22,12 +22,12 @@ export class APILogsApiRequestFactory extends BaseAPIRequestFactory {
      * Details API Log
      * @param id Log event id.
      */
-    public async detailsApiLog(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async detailsLog(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("APILogsApi", "detailsApiLog", "id");
+            throw new RequiredError("APILogsApi", "detailsLog", "id");
         }
 
 
@@ -67,7 +67,7 @@ export class APILogsApiRequestFactory extends BaseAPIRequestFactory {
      * @param search Returns the results containing a string.
      * @param environmentType Returns logs for production/sandbox.
      */
-    public async listApiLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<100 | 200 | 300 | 400 | 500>, methods?: Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>, search?: string, environmentType?: 'PRODUCTION' | 'SANDBOX', _options?: Configuration): Promise<RequestContext> {
+    public async listLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<100 | 200 | 300 | 400 | 500>, methods?: Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>, search?: string, environmentType?: 'PRODUCTION' | 'SANDBOX', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -149,10 +149,10 @@ export class APILogsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to detailsApiLog
+     * @params response Response returned by the server for a request to detailsLog
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detailsApiLog(response: ResponseContext): Promise<APILogDetailsResponse > {
+     public async detailsLog(response: ResponseContext): Promise<APILogDetailsResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: APILogDetailsResponse = ObjectSerializer.deserialize(
@@ -199,10 +199,10 @@ export class APILogsApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to listApiLogs
+     * @params response Response returned by the server for a request to listLogs
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listApiLogs(response: ResponseContext): Promise<APILogListResponse > {
+     public async listLogs(response: ResponseContext): Promise<APILogListResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: APILogListResponse = ObjectSerializer.deserialize(

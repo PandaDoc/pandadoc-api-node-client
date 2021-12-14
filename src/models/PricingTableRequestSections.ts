@@ -11,7 +11,7 @@ import { PricingTableRequestRows } from './PricingTableRequestRows';
 import { HttpFile } from '../http/http';
 
 export class PricingTableRequestSections {
-    'title'?: string;
+    'title': string;
     '_default'?: boolean;
     'multichoiceEnabled'?: boolean;
     'rows'?: Array<PricingTableRequestRows>;

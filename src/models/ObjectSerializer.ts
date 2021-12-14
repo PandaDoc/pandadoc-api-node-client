@@ -11,7 +11,6 @@ export * from './ContentLibraryItemResponseCreatedBy';
 export * from './DocumentAttachmentResponse';
 export * from './DocumentAttachmentResponseCreatedBy';
 export * from './DocumentCreateByPdfRequest';
-export * from './DocumentCreateByPdfRequestRecipients';
 export * from './DocumentCreateByTemplateRequest';
 export * from './DocumentCreateByTemplateRequestContentLibraryItems';
 export * from './DocumentCreateByTemplateRequestContentPlaceholders';
@@ -101,7 +100,6 @@ import { ContentLibraryItemResponseCreatedBy } from './ContentLibraryItemRespons
 import { DocumentAttachmentResponse } from './DocumentAttachmentResponse';
 import { DocumentAttachmentResponseCreatedBy } from './DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from './DocumentCreateByPdfRequest';
-import { DocumentCreateByPdfRequestRecipients } from './DocumentCreateByPdfRequestRecipients';
 import { DocumentCreateByTemplateRequest } from './DocumentCreateByTemplateRequest';
 import { DocumentCreateByTemplateRequestContentLibraryItems } from './DocumentCreateByTemplateRequestContentLibraryItems';
 import { DocumentCreateByTemplateRequestContentPlaceholders } from './DocumentCreateByTemplateRequestContentPlaceholders';
@@ -150,9 +148,9 @@ import { PricingTableRequestData } from './PricingTableRequestData';
 import { PricingTableRequestDataDiscount } from './PricingTableRequestDataDiscount';
 import { PricingTableRequestOptions } from './PricingTableRequestOptions';
 import { PricingTableRequestOptions1 } from './PricingTableRequestOptions1';
-import { PricingTableRequestOptionsDiscount , PricingTableRequestOptionsDiscountTypeEnum     } from './PricingTableRequestOptionsDiscount';
-import { PricingTableRequestOptionsTaxFirst , PricingTableRequestOptionsTaxFirstTypeEnum     } from './PricingTableRequestOptionsTaxFirst';
-import { PricingTableRequestOptionsTaxSecond , PricingTableRequestOptionsTaxSecondTypeEnum     } from './PricingTableRequestOptionsTaxSecond';
+import { PricingTableRequestOptionsDiscount, PricingTableRequestOptionsDiscountTypeEnum     } from './PricingTableRequestOptionsDiscount';
+import { PricingTableRequestOptionsTaxFirst, PricingTableRequestOptionsTaxFirstTypeEnum     } from './PricingTableRequestOptionsTaxFirst';
+import { PricingTableRequestOptionsTaxSecond, PricingTableRequestOptionsTaxSecondTypeEnum     } from './PricingTableRequestOptionsTaxSecond';
 import { PricingTableRequestRows } from './PricingTableRequestRows';
 import { PricingTableRequestSections } from './PricingTableRequestSections';
 import { PricingTablesResponse } from './PricingTablesResponse';
@@ -219,7 +217,6 @@ let typeMap: {[index: string]: any} = {
     "DocumentAttachmentResponse": DocumentAttachmentResponse,
     "DocumentAttachmentResponseCreatedBy": DocumentAttachmentResponseCreatedBy,
     "DocumentCreateByPdfRequest": DocumentCreateByPdfRequest,
-    "DocumentCreateByPdfRequestRecipients": DocumentCreateByPdfRequestRecipients,
     "DocumentCreateByTemplateRequest": DocumentCreateByTemplateRequest,
     "DocumentCreateByTemplateRequestContentLibraryItems": DocumentCreateByTemplateRequestContentLibraryItems,
     "DocumentCreateByTemplateRequestContentPlaceholders": DocumentCreateByTemplateRequestContentPlaceholders,

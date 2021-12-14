@@ -4,12 +4,12 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**detailsApiLog**](APILogsApi.md#detailsApiLog) | **GET** /public/v1/logs/{id} | Details API Log
-[**listApiLogs**](APILogsApi.md#listApiLogs) | **GET** /public/v1/logs | List API Log
+[**detailsLog**](APILogsApi.md#detailsLog) | **GET** /public/v1/logs/{id} | Details API Log
+[**listLogs**](APILogsApi.md#listLogs) | **GET** /public/v1/logs | List API Log
 
 
-# **detailsApiLog**
-> APILogDetailsResponse detailsApiLog()
+# **detailsLog**
+> APILogDetailsResponse detailsLog()
 
 Returns details of the specific API log event.
 
@@ -26,12 +26,12 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.APILogsApi(configuration);
 
-const body:pd_api.APILogsApiDetailsApiLogRequest = {
+const body:pd_api.APILogsApiDetailsLogRequest = {
   // string | Log event id.
   id: "AXp2jrHMK2MKv_lRqmQ",
 };
 
-apiInstance.detailsApiLog(body).then((data) => {
+apiInstance.detailsLog(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -68,8 +68,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **listApiLogs**
-> APILogListResponse listApiLogs()
+# **listLogs**
+> APILogListResponse listLogs()
 
 Get the list of all logs within the selected workspace. Optionally filter by date, page, and `#` of items per page.
 
@@ -86,7 +86,7 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.APILogsApi(configuration);
 
-const body:pd_api.APILogsApiListApiLogsRequest = {
+const body:pd_api.APILogsApiListLogsRequest = {
   // string | Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \"-90d\" (for past 90 days). (optional)
   since: "-7d",
   // string | Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \"-10d\" (for past 10 days) or a special \"now\" value. (optional)
@@ -105,7 +105,7 @@ const body:pd_api.APILogsApiListApiLogsRequest = {
   environmentType: "PRODUCTION",
 };
 
-apiInstance.listApiLogs(body).then((data) => {
+apiInstance.listLogs(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```

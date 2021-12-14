@@ -20,7 +20,7 @@ export class MembersApiRequestFactory extends BaseAPIRequestFactory {
      * A method to define to whom credentials belong
      * Current member details
      */
-    public async currentMemberDetails(_options?: Configuration): Promise<RequestContext> {
+    public async detailsCurrentMember(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // Path Params
@@ -51,12 +51,12 @@ export class MembersApiRequestFactory extends BaseAPIRequestFactory {
      * Member details
      * @param id Membership id
      */
-    public async memberDetails(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async detailsMember(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new RequiredError("MembersApi", "memberDetails", "id");
+            throw new RequiredError("MembersApi", "detailsMember", "id");
         }
 
 
@@ -88,7 +88,7 @@ export class MembersApiRequestFactory extends BaseAPIRequestFactory {
      * Retrieve all members details of the workspace
      * List members
      */
-    public async memberList(_options?: Configuration): Promise<RequestContext> {
+    public async listMembers(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // Path Params
@@ -122,10 +122,10 @@ export class MembersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to currentMemberDetails
+     * @params response Response returned by the server for a request to detailsCurrentMember
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async currentMemberDetails(response: ResponseContext): Promise<MemberDetailsResponse > {
+     public async detailsCurrentMember(response: ResponseContext): Promise<MemberDetailsResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: MemberDetailsResponse = ObjectSerializer.deserialize(
@@ -179,10 +179,10 @@ export class MembersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to memberDetails
+     * @params response Response returned by the server for a request to detailsMember
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async memberDetails(response: ResponseContext): Promise<MemberDetailsResponse > {
+     public async detailsMember(response: ResponseContext): Promise<MemberDetailsResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: MemberDetailsResponse = ObjectSerializer.deserialize(
@@ -236,10 +236,10 @@ export class MembersApiResponseProcessor {
      * Unwraps the actual response sent by the server from the response context and deserializes the response content
      * to the expected objects
      *
-     * @params response Response returned by the server for a request to memberList
+     * @params response Response returned by the server for a request to listMembers
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async memberList(response: ResponseContext): Promise<Array<MemberDetailsResponse> > {
+     public async listMembers(response: ResponseContext): Promise<Array<MemberDetailsResponse> > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: Array<MemberDetailsResponse> = ObjectSerializer.deserialize(

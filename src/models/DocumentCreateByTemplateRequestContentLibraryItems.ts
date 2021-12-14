@@ -7,16 +7,31 @@
  * Do not edit the class manually.
  */
 
+import { DocumentCreateByTemplateRequestRecipients } from './DocumentCreateByTemplateRequestRecipients';
 import { PricingTableRequest } from './PricingTableRequest';
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateByTemplateRequestContentLibraryItems {
+    'id': string;
+    'fields'?: any;
     'pricingTables'?: Array<PricingTableRequest>;
-    'id'?: string;
+    'recipients'?: Array<DocumentCreateByTemplateRequestRecipients>;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "fields",
+            "baseName": "fields",
+            "type": "any",
+            "format": ""
+        },
         {
             "name": "pricingTables",
             "baseName": "pricing_tables",
@@ -24,9 +39,9 @@ export class DocumentCreateByTemplateRequestContentLibraryItems {
             "format": ""
         },
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "recipients",
+            "baseName": "recipients",
+            "type": "Array<DocumentCreateByTemplateRequestRecipients>",
             "format": ""
         }    ];
 

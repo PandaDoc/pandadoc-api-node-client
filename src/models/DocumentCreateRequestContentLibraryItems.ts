@@ -7,6 +7,7 @@
  * Do not edit the class manually.
  */
 
+import { DocumentCreateByTemplateRequestRecipients } from './DocumentCreateByTemplateRequestRecipients';
 import { PricingTableRequest } from './PricingTableRequest';
 import { HttpFile } from '../http/http';
 
@@ -14,10 +15,10 @@ export class DocumentCreateRequestContentLibraryItems {
     /**
     * Content library item id
     */
-    'id'?: string;
+    'id': string;
     'pricingTables'?: Array<PricingTableRequest>;
     'fields'?: any;
-    'recipients'?: Array<any>;
+    'recipients'?: Array<DocumentCreateByTemplateRequestRecipients>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -43,7 +44,7 @@ export class DocumentCreateRequestContentLibraryItems {
         {
             "name": "recipients",
             "baseName": "recipients",
-            "type": "Array<any>",
+            "type": "Array<DocumentCreateByTemplateRequestRecipients>",
             "format": ""
         }    ];
 

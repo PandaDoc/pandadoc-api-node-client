@@ -4,15 +4,15 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**documentAttachmentCreate**](DocumentAttachmentsApi.md#documentAttachmentCreate) | **POST** /public/v1/documents/{id}/attachments | Document Attachment Create
-[**documentAttachmentDelete**](DocumentAttachmentsApi.md#documentAttachmentDelete) | **DELETE** /public/v1/documents/{id}/attachments/{attachment_id} | Document Attachment Delete
-[**documentAttachmentDetails**](DocumentAttachmentsApi.md#documentAttachmentDetails) | **GET** /public/v1/documents/{id}/attachments/{attachment_id} | Document Attachment Details
-[**documentAttachmentDownload**](DocumentAttachmentsApi.md#documentAttachmentDownload) | **GET** /public/v1/documents/{id}/attachments/{attachment_id}/download | Document Attachment Download
-[**documentAttachmentsList**](DocumentAttachmentsApi.md#documentAttachmentsList) | **GET** /public/v1/documents/{id}/attachments | Document Attachment List
+[**createDocumentAttachment**](DocumentAttachmentsApi.md#createDocumentAttachment) | **POST** /public/v1/documents/{id}/attachments | Document Attachment Create
+[**deleteDocumentAttachment**](DocumentAttachmentsApi.md#deleteDocumentAttachment) | **DELETE** /public/v1/documents/{id}/attachments/{attachment_id} | Document Attachment Delete
+[**detailsDocumentAttachment**](DocumentAttachmentsApi.md#detailsDocumentAttachment) | **GET** /public/v1/documents/{id}/attachments/{attachment_id} | Document Attachment Details
+[**downloadDocumentAttachment**](DocumentAttachmentsApi.md#downloadDocumentAttachment) | **GET** /public/v1/documents/{id}/attachments/{attachment_id}/download | Document Attachment Download
+[**listDocumentAttachments**](DocumentAttachmentsApi.md#listDocumentAttachments) | **GET** /public/v1/documents/{id}/attachments | Document Attachment List
 
 
-# **documentAttachmentCreate**
-> DocumentAttachmentResponse documentAttachmentCreate()
+# **createDocumentAttachment**
+> DocumentAttachmentResponse createDocumentAttachment()
 
 Creates an attachment for a particular document
 
@@ -29,7 +29,7 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.DocumentAttachmentsApi(configuration);
 
-const body:pd_api.DocumentAttachmentsApiDocumentAttachmentCreateRequest = {
+const body:pd_api.DocumentAttachmentsApiCreateDocumentAttachmentRequest = {
   // string | Document UUID
   id: "BhVzRcxH9Z2LgfPPGXFUBa",
   // HttpFile | Binary file to be attached to a document (optional)
@@ -40,7 +40,7 @@ const body:pd_api.DocumentAttachmentsApiDocumentAttachmentCreateRequest = {
   name: "Additional agreement",
 };
 
-apiInstance.documentAttachmentCreate(body).then((data) => {
+apiInstance.createDocumentAttachment(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -81,8 +81,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **documentAttachmentDelete**
-> void documentAttachmentDelete()
+# **deleteDocumentAttachment**
+> void deleteDocumentAttachment()
 
 Deletes specific document's attachment
 
@@ -99,14 +99,14 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.DocumentAttachmentsApi(configuration);
 
-const body:pd_api.DocumentAttachmentsApiDocumentAttachmentDeleteRequest = {
+const body:pd_api.DocumentAttachmentsApiDeleteDocumentAttachmentRequest = {
   // string | Document UUID
   id: "BhVzRcxH9Z2LgfPPGXFUBa",
   // string | Attachment UUID
   attachmentId: "89ce2f49-10fb-4e9b-b5f3-e28be2a5c042",
 };
 
-apiInstance.documentAttachmentDelete(body).then((data) => {
+apiInstance.deleteDocumentAttachment(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -144,8 +144,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **documentAttachmentDetails**
-> DocumentAttachmentResponse documentAttachmentDetails()
+# **detailsDocumentAttachment**
+> DocumentAttachmentResponse detailsDocumentAttachment()
 
 Returns details of the specific document's attachment
 
@@ -162,14 +162,14 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.DocumentAttachmentsApi(configuration);
 
-const body:pd_api.DocumentAttachmentsApiDocumentAttachmentDetailsRequest = {
+const body:pd_api.DocumentAttachmentsApiDetailsDocumentAttachmentRequest = {
   // string | Document UUID
   id: "BhVzRcxH9Z2LgfPPGXFUBa",
   // string | Attachment UUID
   attachmentId: "89ce2f49-10fb-4e9b-b5f3-e28be2a5c042",
 };
 
-apiInstance.documentAttachmentDetails(body).then((data) => {
+apiInstance.detailsDocumentAttachment(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -207,8 +207,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **documentAttachmentDownload**
-> HttpFile documentAttachmentDownload()
+# **downloadDocumentAttachment**
+> HttpFile downloadDocumentAttachment()
 
 Returns document attachment file for download
 
@@ -225,14 +225,14 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.DocumentAttachmentsApi(configuration);
 
-const body:pd_api.DocumentAttachmentsApiDocumentAttachmentDownloadRequest = {
+const body:pd_api.DocumentAttachmentsApiDownloadDocumentAttachmentRequest = {
   // string | Document UUID
   id: "BhVzRcxH9Z2LgfPPGXFUBa",
   // string | Attachment UUID
   attachmentId: "89ce2f49-10fb-4e9b-b5f3-e28be2a5c042",
 };
 
-apiInstance.documentAttachmentDownload(body).then((data) => {
+apiInstance.downloadDocumentAttachment(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -270,8 +270,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **documentAttachmentsList**
-> Array<DocumentAttachmentResponse> documentAttachmentsList()
+# **listDocumentAttachments**
+> Array<DocumentAttachmentResponse> listDocumentAttachments()
 
 Return list of objects attached to particular document
 
@@ -288,12 +288,12 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.DocumentAttachmentsApi(configuration);
 
-const body:pd_api.DocumentAttachmentsApiDocumentAttachmentsListRequest = {
+const body:pd_api.DocumentAttachmentsApiListDocumentAttachmentsRequest = {
   // string | Document UUID
   id: "BhVzRcxH9Z2LgfPPGXFUBa",
 };
 
-apiInstance.documentAttachmentsList(body).then((data) => {
+apiInstance.listDocumentAttachments(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```

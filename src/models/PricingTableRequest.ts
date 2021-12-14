@@ -12,7 +12,7 @@ import { PricingTableRequestSections } from './PricingTableRequestSections';
 import { HttpFile } from '../http/http';
 
 export class PricingTableRequest {
-    'name'?: string;
+    'name': string;
     /**
     * When set to true all field names in data rows must be passed as external names defined in the template.
     */
