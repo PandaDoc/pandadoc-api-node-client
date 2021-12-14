@@ -7,7 +7,7 @@
  * Do not edit the class manually.
  */
 
-import { DocumentCreateByPdfRequestRecipients } from './DocumentCreateByPdfRequestRecipients';
+import { DocumentCreateByTemplateRequestRecipients } from './DocumentCreateByTemplateRequestRecipients';
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateByPdfRequest {
@@ -16,13 +16,13 @@ export class DocumentCreateByPdfRequest {
     */
     'url': string;
     /**
-    * The list of recipients you're sending the document to. Every object must contain the `email` parameter. The `role`, `first_name` and `last_name` parameters are optional. If the `role` parameter is passed, a person is assigned all fields matching their corresponding role. If a role was not passed, a person receives a read-only link to view the document. If the `first_name` and `last_name` are not passed, the system does this 1. Creates a new contact, if none exists with the given `email`; or 2. Gets the existing contact with the given `email` that already exists.
+    * The list of recipients you're sending the document to. Every object must contain the email parameter. The `role`, `first_name` and `last_name` parameters are optional. If the `role` parameter passed, a person is assigned all fields matching their corresponding role. If not passed, a person will receive a read-only link to view the document. If the `first_name` and `last_name` not passed the system 1. creates a new contact, if none exists with the given `email`; or 2. gets the existing contact with the given `email` that already exists.
     */
-    'recipients': Array<DocumentCreateByPdfRequestRecipients>;
+    'recipients': Array<DocumentCreateByTemplateRequestRecipients>;
     /**
     * Set this parameter as `true` if you create a document from a PDF with form fields and as `false` if you upload a PDF with field tags.
     */
-    'parseFormFields': boolean;
+    'parseFormFields'?: boolean;
     'name'?: string;
     /**
     * Mark your document with one or several tags.
@@ -49,7 +49,7 @@ export class DocumentCreateByPdfRequest {
         {
             "name": "recipients",
             "baseName": "recipients",
-            "type": "Array<DocumentCreateByPdfRequestRecipients>",
+            "type": "Array<DocumentCreateByTemplateRequestRecipients>",
             "format": ""
         },
         {

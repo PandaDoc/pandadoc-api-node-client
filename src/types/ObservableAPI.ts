@@ -16,7 +16,6 @@ import { ContentLibraryItemResponseCreatedBy } from '../models/ContentLibraryIte
 import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
 import { DocumentAttachmentResponseCreatedBy } from '../models/DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from '../models/DocumentCreateByPdfRequest';
-import { DocumentCreateByPdfRequestRecipients } from '../models/DocumentCreateByPdfRequestRecipients';
 import { DocumentCreateByTemplateRequest } from '../models/DocumentCreateByTemplateRequest';
 import { DocumentCreateByTemplateRequestContentLibraryItems } from '../models/DocumentCreateByTemplateRequestContentLibraryItems';
 import { DocumentCreateByTemplateRequestContentPlaceholders } from '../models/DocumentCreateByTemplateRequestContentPlaceholders';
@@ -114,8 +113,8 @@ export class ObservableAPILogsApi {
      * Details API Log
      * @param id Log event id.
      */
-    public detailsApiLog(id: string, _options?: Configuration): Observable<APILogDetailsResponse> {
-        const requestContextPromise = this.requestFactory.detailsApiLog(id, _options);
+    public detailsLog(id: string, _options?: Configuration): Observable<APILogDetailsResponse> {
+        const requestContextPromise = this.requestFactory.detailsLog(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -129,7 +128,7 @@ export class ObservableAPILogsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsApiLog(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsLog(rsp)));
             }));
     }
 
@@ -145,8 +144,8 @@ export class ObservableAPILogsApi {
      * @param search Returns the results containing a string.
      * @param environmentType Returns logs for production/sandbox.
      */
-    public listApiLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<100 | 200 | 300 | 400 | 500>, methods?: Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>, search?: string, environmentType?: 'PRODUCTION' | 'SANDBOX', _options?: Configuration): Observable<APILogListResponse> {
-        const requestContextPromise = this.requestFactory.listApiLogs(since, to, count, page, statuses, methods, search, environmentType, _options);
+    public listLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<100 | 200 | 300 | 400 | 500>, methods?: Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>, search?: string, environmentType?: 'PRODUCTION' | 'SANDBOX', _options?: Configuration): Observable<APILogListResponse> {
+        const requestContextPromise = this.requestFactory.listLogs(since, to, count, page, statuses, methods, search, environmentType, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -160,7 +159,7 @@ export class ObservableAPILogsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listApiLogs(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listLogs(rsp)));
             }));
     }
 
@@ -186,8 +185,8 @@ export class ObservableContactsApi {
      * Create contact
      * @param contactCreateRequest 
      */
-    public contactCreate(contactCreateRequest: ContactCreateRequest, _options?: Configuration): Observable<ContactDetailsResponse> {
-        const requestContextPromise = this.requestFactory.contactCreate(contactCreateRequest, _options);
+    public createContact(contactCreateRequest: ContactCreateRequest, _options?: Configuration): Observable<ContactDetailsResponse> {
+        const requestContextPromise = this.requestFactory.createContact(contactCreateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -201,7 +200,7 @@ export class ObservableContactsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactCreate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createContact(rsp)));
             }));
     }
 
@@ -209,8 +208,8 @@ export class ObservableContactsApi {
      * Delete contact by id
      * @param id Contact id.
      */
-    public contactDelete(id: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.contactDelete(id, _options);
+    public deleteContact(id: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteContact(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -224,7 +223,7 @@ export class ObservableContactsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactDelete(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteContact(rsp)));
             }));
     }
 
@@ -232,8 +231,8 @@ export class ObservableContactsApi {
      * Get contact details by id
      * @param id Contact id.
      */
-    public contactDetails(id: string, _options?: Configuration): Observable<ContactDetailsResponse> {
-        const requestContextPromise = this.requestFactory.contactDetails(id, _options);
+    public detailsContact(id: string, _options?: Configuration): Observable<ContactDetailsResponse> {
+        const requestContextPromise = this.requestFactory.detailsContact(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -247,15 +246,15 @@ export class ObservableContactsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactDetails(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsContact(rsp)));
             }));
     }
 
     /**
      * List contacts
      */
-    public contactList(_options?: Configuration): Observable<Array<ContactDetailsResponse>> {
-        const requestContextPromise = this.requestFactory.contactList(_options);
+    public listContacts(_options?: Configuration): Observable<Array<ContactDetailsResponse>> {
+        const requestContextPromise = this.requestFactory.listContacts(_options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -269,7 +268,7 @@ export class ObservableContactsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactList(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listContacts(rsp)));
             }));
     }
 
@@ -278,8 +277,8 @@ export class ObservableContactsApi {
      * @param id Contact id.
      * @param contactUpdateRequest 
      */
-    public contactUpdate(id: string, contactUpdateRequest: ContactUpdateRequest, _options?: Configuration): Observable<ContactDetailsResponse> {
-        const requestContextPromise = this.requestFactory.contactUpdate(id, contactUpdateRequest, _options);
+    public updateContact(id: string, contactUpdateRequest: ContactUpdateRequest, _options?: Configuration): Observable<ContactDetailsResponse> {
+        const requestContextPromise = this.requestFactory.updateContact(id, contactUpdateRequest, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -293,7 +292,7 @@ export class ObservableContactsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.contactUpdate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateContact(rsp)));
             }));
     }
 
@@ -395,8 +394,8 @@ export class ObservableDocumentAttachmentsApi {
      * @param source URL link to the file to be attached to a document
      * @param name Optional name to set for uploaded file
      */
-    public documentAttachmentCreate(id: string, file?: HttpFile, source?: string, name?: string, _options?: Configuration): Observable<DocumentAttachmentResponse> {
-        const requestContextPromise = this.requestFactory.documentAttachmentCreate(id, file, source, name, _options);
+    public createDocumentAttachment(id: string, file?: HttpFile, source?: string, name?: string, _options?: Configuration): Observable<DocumentAttachmentResponse> {
+        const requestContextPromise = this.requestFactory.createDocumentAttachment(id, file, source, name, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -410,7 +409,7 @@ export class ObservableDocumentAttachmentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentCreate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDocumentAttachment(rsp)));
             }));
     }
 
@@ -420,8 +419,8 @@ export class ObservableDocumentAttachmentsApi {
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public documentAttachmentDelete(id: string, attachmentId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.documentAttachmentDelete(id, attachmentId, _options);
+    public deleteDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteDocumentAttachment(id, attachmentId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -435,7 +434,7 @@ export class ObservableDocumentAttachmentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentDelete(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteDocumentAttachment(rsp)));
             }));
     }
 
@@ -445,8 +444,8 @@ export class ObservableDocumentAttachmentsApi {
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public documentAttachmentDetails(id: string, attachmentId: string, _options?: Configuration): Observable<DocumentAttachmentResponse> {
-        const requestContextPromise = this.requestFactory.documentAttachmentDetails(id, attachmentId, _options);
+    public detailsDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Observable<DocumentAttachmentResponse> {
+        const requestContextPromise = this.requestFactory.detailsDocumentAttachment(id, attachmentId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -460,7 +459,7 @@ export class ObservableDocumentAttachmentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentDetails(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsDocumentAttachment(rsp)));
             }));
     }
 
@@ -470,8 +469,8 @@ export class ObservableDocumentAttachmentsApi {
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public documentAttachmentDownload(id: string, attachmentId: string, _options?: Configuration): Observable<HttpFile> {
-        const requestContextPromise = this.requestFactory.documentAttachmentDownload(id, attachmentId, _options);
+    public downloadDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Observable<HttpFile> {
+        const requestContextPromise = this.requestFactory.downloadDocumentAttachment(id, attachmentId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -485,7 +484,7 @@ export class ObservableDocumentAttachmentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentDownload(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.downloadDocumentAttachment(rsp)));
             }));
     }
 
@@ -494,8 +493,8 @@ export class ObservableDocumentAttachmentsApi {
      * Document Attachment List
      * @param id Document UUID
      */
-    public documentAttachmentsList(id: string, _options?: Configuration): Observable<Array<DocumentAttachmentResponse>> {
-        const requestContextPromise = this.requestFactory.documentAttachmentsList(id, _options);
+    public listDocumentAttachments(id: string, _options?: Configuration): Observable<Array<DocumentAttachmentResponse>> {
+        const requestContextPromise = this.requestFactory.listDocumentAttachments(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -509,7 +508,7 @@ export class ObservableDocumentAttachmentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentAttachmentsList(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listDocumentAttachments(rsp)));
             }));
     }
 
@@ -529,6 +528,102 @@ export class ObservableDocumentsApi {
         this.configuration = configuration;
         this.requestFactory = requestFactory || new DocumentsApiRequestFactory(configuration);
         this.responseProcessor = responseProcessor || new DocumentsApiResponseProcessor();
+    }
+
+    /**
+     * Document status change
+     * @param id Specify document ID.
+     * @param documentStatusChangeRequest 
+     */
+    public changeDocumentStatus(id: string, documentStatusChangeRequest: DocumentStatusChangeRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.changeDocumentStatus(id, documentStatusChangeRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.changeDocumentStatus(rsp)));
+            }));
+    }
+
+    /**
+     * Create document
+     * @param documentCreateRequest Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
+     * @param editorVer Set this parameter as &#x60;ev1&#x60; if you want to create a document from PDF with Classic Editor when both editors are enabled for the workspace.
+     */
+    public createDocument(documentCreateRequest: DocumentCreateRequest, editorVer?: string, _options?: Configuration): Observable<DocumentCreateResponse> {
+        const requestContextPromise = this.requestFactory.createDocument(documentCreateRequest, editorVer, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDocument(rsp)));
+            }));
+    }
+
+    /**
+     * Create a Document Link
+     * @param id Document ID
+     * @param documentCreateLinkRequest 
+     */
+    public createDocumentLink(id: string, documentCreateLinkRequest: DocumentCreateLinkRequest, _options?: Configuration): Observable<DocumentCreateLinkResponse> {
+        const requestContextPromise = this.requestFactory.createDocumentLink(id, documentCreateLinkRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createDocumentLink(rsp)));
+            }));
+    }
+
+    /**
+     * Create Linked Object
+     * @param id Specify document ID.
+     * @param linkedObjectCreateRequest 
+     */
+    public createLinkedObject(id: string, linkedObjectCreateRequest: LinkedObjectCreateRequest, _options?: Configuration): Observable<LinkedObjectCreateResponse> {
+        const requestContextPromise = this.requestFactory.createLinkedObject(id, linkedObjectCreateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createLinkedObject(rsp)));
+            }));
     }
 
     /**
@@ -555,12 +650,12 @@ export class ObservableDocumentsApi {
     }
 
     /**
-     * Create document
-     * @param documentCreateRequest Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
-     * @param editorVer Set this parameter as &#x60;ev1&#x60; if you want to create a document from PDF with Classic Editor when both editors are enabled for the workspace.
+     * Delete Linked Object
+     * @param id Specify document ID.
+     * @param linkedObjectId Specify linked object ID.
      */
-    public documentCreate(documentCreateRequest: DocumentCreateRequest, editorVer?: string, _options?: Configuration): Observable<DocumentCreateResponse> {
-        const requestContextPromise = this.requestFactory.documentCreate(documentCreateRequest, editorVer, _options);
+    public deleteLinkedObject(id: string, linkedObjectId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteLinkedObject(id, linkedObjectId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -574,31 +669,7 @@ export class ObservableDocumentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentCreate(rsp)));
-            }));
-    }
-
-    /**
-     * Create a Document Link
-     * @param id Document ID
-     * @param documentCreateLinkRequest 
-     */
-    public documentCreateLink(id: string, documentCreateLinkRequest: DocumentCreateLinkRequest, _options?: Configuration): Observable<DocumentCreateLinkResponse> {
-        const requestContextPromise = this.requestFactory.documentCreateLink(id, documentCreateLinkRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentCreateLink(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteLinkedObject(rsp)));
             }));
     }
 
@@ -606,8 +677,8 @@ export class ObservableDocumentsApi {
      * Document details
      * @param id Document ID
      */
-    public documentDetails(id: string, _options?: Configuration): Observable<DocumentDetailsResponse> {
-        const requestContextPromise = this.requestFactory.documentDetails(id, _options);
+    public detailsDocument(id: string, _options?: Configuration): Observable<DocumentDetailsResponse> {
+        const requestContextPromise = this.requestFactory.detailsDocument(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -621,97 +692,7 @@ export class ObservableDocumentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentDetails(rsp)));
-            }));
-    }
-
-    /**
-     * List documents
-     * @param completedFrom Return results where the &#x60;date_completed&#x60; field (ISO 8601) is greater than or equal to this value.
-     * @param completedTo Return results where the &#x60;date_completed&#x60; field (ISO 8601) is less than or equal to this value.
-     * @param contactId Returns results where &#39;contact_id&#39; is present in document as recipient or approver
-     * @param count Specify how many document results to return. Default is 50 documents, maximum is 100 documents.
-     * @param createdFrom Return results where the &#x60;date_created&#x60; field (ISO 8601) is greater than or equal to this value.
-     * @param createdTo Return results where the &#x60;date_created&#x60; field (ISO 8601) is less than this value.
-     * @param deleted Returns only the deleted documents.
-     * @param id 
-     * @param folderUuid The UUID of the folder where the documents are stored.
-     * @param formId Specify the form used for documents creation. This parameter can&#39;t be used with template_id.
-     * @param membershipId Returns results where &#39;membership_id&#39; is present in document as owner (should be member uuid)
-     * @param metadata Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
-     * @param modifiedFrom Return results where the &#x60;date_modified&#x60; field (iso-8601) is greater than or equal to this value.
-     * @param modifiedTo Return results where the &#x60;date_modified&#x60; field (iso-8601) is less than this value.
-     * @param orderBy Specify the order of documents to return. Use &#x60;value&#x60; (for example, &#x60;date_created&#x60;) for ASC and &#x60;-value&#x60; (for example, &#x60;-date_created&#x60;) for DESC.
-     * @param page Specify which page of the dataset to return.
-     * @param q Search query. Filter by document reference number (this token is stored on the template level) or name.
-     * @param status Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
-     * @param statusNe Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
-     * @param tag Search tag. Filter by document tag.
-     * @param templateId Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
-     */
-    public documentList(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusEnum, statusNe?: DocumentStatusEnum, tag?: string, templateId?: string, _options?: Configuration): Observable<DocumentListResponse> {
-        const requestContextPromise = this.requestFactory.documentList(completedFrom, completedTo, contactId, count, createdFrom, createdTo, deleted, id, folderUuid, formId, membershipId, metadata, modifiedFrom, modifiedTo, orderBy, page, q, status, statusNe, tag, templateId, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentList(rsp)));
-            }));
-    }
-
-    /**
-     * Document status
-     * @param id Specify document ID.
-     */
-    public documentStatus(id: string, _options?: Configuration): Observable<DocumentStatusResponse> {
-        const requestContextPromise = this.requestFactory.documentStatus(id, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentStatus(rsp)));
-            }));
-    }
-
-    /**
-     * Document status change
-     * @param id Specify document ID.
-     * @param documentStatusChangeRequest 
-     */
-    public documentStatusChange(id: string, documentStatusChangeRequest: DocumentStatusChangeRequest, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.documentStatusChange(id, documentStatusChangeRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentStatusChange(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsDocument(rsp)));
             }));
     }
 
@@ -767,12 +748,31 @@ export class ObservableDocumentsApi {
     }
 
     /**
-     * Delete Linked Object
-     * @param id Specify document ID.
-     * @param linkedObjectId Specify linked object ID.
+     * List documents
+     * @param completedFrom Return results where the &#x60;date_completed&#x60; field (ISO 8601) is greater than or equal to this value.
+     * @param completedTo Return results where the &#x60;date_completed&#x60; field (ISO 8601) is less than or equal to this value.
+     * @param contactId Returns results where &#39;contact_id&#39; is present in document as recipient or approver
+     * @param count Specify how many document results to return. Default is 50 documents, maximum is 100 documents.
+     * @param createdFrom Return results where the &#x60;date_created&#x60; field (ISO 8601) is greater than or equal to this value.
+     * @param createdTo Return results where the &#x60;date_created&#x60; field (ISO 8601) is less than this value.
+     * @param deleted Returns only the deleted documents.
+     * @param id 
+     * @param folderUuid The UUID of the folder where the documents are stored.
+     * @param formId Specify the form used for documents creation. This parameter can&#39;t be used with template_id.
+     * @param membershipId Returns results where &#39;membership_id&#39; is present in document as owner (should be member uuid)
+     * @param metadata Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
+     * @param modifiedFrom Return results where the &#x60;date_modified&#x60; field (iso-8601) is greater than or equal to this value.
+     * @param modifiedTo Return results where the &#x60;date_modified&#x60; field (iso-8601) is less than this value.
+     * @param orderBy Specify the order of documents to return. Use &#x60;value&#x60; (for example, &#x60;date_created&#x60;) for ASC and &#x60;-value&#x60; (for example, &#x60;-date_created&#x60;) for DESC.
+     * @param page Specify which page of the dataset to return.
+     * @param q Search query. Filter by document reference number (this token is stored on the template level) or name.
+     * @param status Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
+     * @param statusNe Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
+     * @param tag Search tag. Filter by document tag.
+     * @param templateId Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
      */
-    public linkedObjectDelete(id: string, linkedObjectId: string, _options?: Configuration): Observable<void> {
-        const requestContextPromise = this.requestFactory.linkedObjectDelete(id, linkedObjectId, _options);
+    public listDocuments(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusEnum, statusNe?: DocumentStatusEnum, tag?: string, templateId?: string, _options?: Configuration): Observable<DocumentListResponse> {
+        const requestContextPromise = this.requestFactory.listDocuments(completedFrom, completedTo, contactId, count, createdFrom, createdTo, deleted, id, folderUuid, formId, membershipId, metadata, modifiedFrom, modifiedTo, orderBy, page, q, status, statusNe, tag, templateId, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -786,7 +786,7 @@ export class ObservableDocumentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.linkedObjectDelete(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listDocuments(rsp)));
             }));
     }
 
@@ -794,8 +794,8 @@ export class ObservableDocumentsApi {
      * List Linked Objects
      * @param id Specify document ID.
      */
-    public linkedObjectList(id: string, _options?: Configuration): Observable<LinkedObjectListResponse> {
-        const requestContextPromise = this.requestFactory.linkedObjectList(id, _options);
+    public listLinkedObjects(id: string, _options?: Configuration): Observable<LinkedObjectListResponse> {
+        const requestContextPromise = this.requestFactory.listLinkedObjects(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -809,31 +809,7 @@ export class ObservableDocumentsApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.linkedObjectList(rsp)));
-            }));
-    }
-
-    /**
-     * Create Linked Object
-     * @param id Specify document ID.
-     * @param linkedObjectCreateRequest 
-     */
-    public linkedObjectsCreate(id: string, linkedObjectCreateRequest: LinkedObjectCreateRequest, _options?: Configuration): Observable<LinkedObjectCreateResponse> {
-        const requestContextPromise = this.requestFactory.linkedObjectsCreate(id, linkedObjectCreateRequest, _options);
-
-        // build promise chain
-        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
-        for (let middleware of this.configuration.middleware) {
-            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
-        }
-
-        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
-            pipe(mergeMap((response: ResponseContext) => {
-                let middlewarePostObservable = of(response);
-                for (let middleware of this.configuration.middleware) {
-                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
-                }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.linkedObjectsCreate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listLinkedObjects(rsp)));
             }));
     }
 
@@ -858,6 +834,29 @@ export class ObservableDocumentsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.sendDocument(rsp)));
+            }));
+    }
+
+    /**
+     * Document status
+     * @param id Specify document ID.
+     */
+    public statusDocument(id: string, _options?: Configuration): Observable<DocumentStatusResponse> {
+        const requestContextPromise = this.requestFactory.statusDocument(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.statusDocument(rsp)));
             }));
     }
 
@@ -1145,8 +1144,8 @@ export class ObservableMembersApi {
      * A method to define to whom credentials belong
      * Current member details
      */
-    public currentMemberDetails(_options?: Configuration): Observable<MemberDetailsResponse> {
-        const requestContextPromise = this.requestFactory.currentMemberDetails(_options);
+    public detailsCurrentMember(_options?: Configuration): Observable<MemberDetailsResponse> {
+        const requestContextPromise = this.requestFactory.detailsCurrentMember(_options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1160,7 +1159,7 @@ export class ObservableMembersApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.currentMemberDetails(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsCurrentMember(rsp)));
             }));
     }
 
@@ -1169,8 +1168,8 @@ export class ObservableMembersApi {
      * Member details
      * @param id Membership id
      */
-    public memberDetails(id: string, _options?: Configuration): Observable<MemberDetailsResponse> {
-        const requestContextPromise = this.requestFactory.memberDetails(id, _options);
+    public detailsMember(id: string, _options?: Configuration): Observable<MemberDetailsResponse> {
+        const requestContextPromise = this.requestFactory.detailsMember(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1184,7 +1183,7 @@ export class ObservableMembersApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.memberDetails(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsMember(rsp)));
             }));
     }
 
@@ -1192,8 +1191,8 @@ export class ObservableMembersApi {
      * Retrieve all members details of the workspace
      * List members
      */
-    public memberList(_options?: Configuration): Observable<Array<MemberDetailsResponse>> {
-        const requestContextPromise = this.requestFactory.memberList(_options);
+    public listMembers(_options?: Configuration): Observable<Array<MemberDetailsResponse>> {
+        const requestContextPromise = this.requestFactory.listMembers(_options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1207,7 +1206,7 @@ export class ObservableMembersApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.memberList(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listMembers(rsp)));
             }));
     }
 
@@ -1304,8 +1303,8 @@ export class ObservableTemplatesApi {
      * Details Template
      * @param id Template ID
      */
-    public detailsTemaplate(id: string, _options?: Configuration): Observable<TemplateDetailsResponse> {
-        const requestContextPromise = this.requestFactory.detailsTemaplate(id, _options);
+    public detailsTemplate(id: string, _options?: Configuration): Observable<TemplateDetailsResponse> {
+        const requestContextPromise = this.requestFactory.detailsTemplate(id, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -1319,7 +1318,7 @@ export class ObservableTemplatesApi {
                 for (let middleware of this.configuration.middleware) {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
-                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsTemaplate(rsp)));
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsTemplate(rsp)));
             }));
     }
 

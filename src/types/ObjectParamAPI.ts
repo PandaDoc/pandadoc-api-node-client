@@ -15,7 +15,6 @@ import { ContentLibraryItemResponseCreatedBy } from '../models/ContentLibraryIte
 import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
 import { DocumentAttachmentResponseCreatedBy } from '../models/DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from '../models/DocumentCreateByPdfRequest';
-import { DocumentCreateByPdfRequestRecipients } from '../models/DocumentCreateByPdfRequestRecipients';
 import { DocumentCreateByTemplateRequest } from '../models/DocumentCreateByTemplateRequest';
 import { DocumentCreateByTemplateRequestContentLibraryItems } from '../models/DocumentCreateByTemplateRequestContentLibraryItems';
 import { DocumentCreateByTemplateRequestContentPlaceholders } from '../models/DocumentCreateByTemplateRequestContentPlaceholders';
@@ -95,62 +94,62 @@ import { TemplatesFolderRenameResponse } from '../models/TemplatesFolderRenameRe
 import { ObservableAPILogsApi } from "./ObservableAPI";
 import { APILogsApiRequestFactory, APILogsApiResponseProcessor} from "../apis/APILogsApi";
 
-export interface APILogsApiDetailsApiLogRequest {
+export interface APILogsApiDetailsLogRequest {
     /**
      * Log event id.
      * @type string
-     * @memberof APILogsApidetailsApiLog
+     * @memberof APILogsApidetailsLog
      */
     id: string
 }
 
-export interface APILogsApiListApiLogsRequest {
+export interface APILogsApiListLogsRequest {
     /**
      * Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
      * @type string
-     * @memberof APILogsApilistApiLogs
+     * @memberof APILogsApilistLogs
      */
     since?: string
     /**
      * Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
      * @type string
-     * @memberof APILogsApilistApiLogs
+     * @memberof APILogsApilistLogs
      */
     to?: string
     /**
      * The amount of items on each page.
      * @type number
-     * @memberof APILogsApilistApiLogs
+     * @memberof APILogsApilistLogs
      */
     count?: number
     /**
      * Page number of the results returned.
      * @type number
-     * @memberof APILogsApilistApiLogs
+     * @memberof APILogsApilistLogs
      */
     page?: number
     /**
      * Returns only the predefined status codes. Allows 1xx, 2xx, 3xx, 4xx, and 5xx.
      * @type Array&lt;100 | 200 | 300 | 400 | 500&gt;
-     * @memberof APILogsApilistApiLogs
+     * @memberof APILogsApilistLogs
      */
     statuses?: Array<100 | 200 | 300 | 400 | 500>
     /**
      * Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE.
      * @type Array&lt;&#39;GET&#39; | &#39;POST&#39; | &#39;PUT&#39; | &#39;PATCH&#39; | &#39;DELETE&#39;&gt;
-     * @memberof APILogsApilistApiLogs
+     * @memberof APILogsApilistLogs
      */
     methods?: Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>
     /**
      * Returns the results containing a string.
      * @type string
-     * @memberof APILogsApilistApiLogs
+     * @memberof APILogsApilistLogs
      */
     search?: string
     /**
      * Returns logs for production/sandbox.
      * @type &#39;PRODUCTION&#39; | &#39;SANDBOX&#39;
-     * @memberof APILogsApilistApiLogs
+     * @memberof APILogsApilistLogs
      */
     environmentType?: 'PRODUCTION' | 'SANDBOX'
 }
@@ -167,8 +166,8 @@ export class ObjectAPILogsApi {
      * Details API Log
      * @param param the request object
      */
-    public detailsApiLog(param: APILogsApiDetailsApiLogRequest, options?: Configuration): Promise<APILogDetailsResponse> {
-        return this.api.detailsApiLog(param.id,  options).toPromise();
+    public detailsLog(param: APILogsApiDetailsLogRequest, options?: Configuration): Promise<APILogDetailsResponse> {
+        return this.api.detailsLog(param.id,  options).toPromise();
     }
 
     /**
@@ -176,8 +175,8 @@ export class ObjectAPILogsApi {
      * List API Log
      * @param param the request object
      */
-    public listApiLogs(param: APILogsApiListApiLogsRequest, options?: Configuration): Promise<APILogListResponse> {
-        return this.api.listApiLogs(param.since, param.to, param.count, param.page, param.statuses, param.methods, param.search, param.environmentType,  options).toPromise();
+    public listLogs(param: APILogsApiListLogsRequest, options?: Configuration): Promise<APILogListResponse> {
+        return this.api.listLogs(param.since, param.to, param.count, param.page, param.statuses, param.methods, param.search, param.environmentType,  options).toPromise();
     }
 
 }
@@ -185,47 +184,47 @@ export class ObjectAPILogsApi {
 import { ObservableContactsApi } from "./ObservableAPI";
 import { ContactsApiRequestFactory, ContactsApiResponseProcessor} from "../apis/ContactsApi";
 
-export interface ContactsApiContactCreateRequest {
+export interface ContactsApiCreateContactRequest {
     /**
      * 
      * @type ContactCreateRequest
-     * @memberof ContactsApicontactCreate
+     * @memberof ContactsApicreateContact
      */
     contactCreateRequest: ContactCreateRequest
 }
 
-export interface ContactsApiContactDeleteRequest {
+export interface ContactsApiDeleteContactRequest {
     /**
      * Contact id.
      * @type string
-     * @memberof ContactsApicontactDelete
+     * @memberof ContactsApideleteContact
      */
     id: string
 }
 
-export interface ContactsApiContactDetailsRequest {
+export interface ContactsApiDetailsContactRequest {
     /**
      * Contact id.
      * @type string
-     * @memberof ContactsApicontactDetails
+     * @memberof ContactsApidetailsContact
      */
     id: string
 }
 
-export interface ContactsApiContactListRequest {
+export interface ContactsApiListContactsRequest {
 }
 
-export interface ContactsApiContactUpdateRequest {
+export interface ContactsApiUpdateContactRequest {
     /**
      * Contact id.
      * @type string
-     * @memberof ContactsApicontactUpdate
+     * @memberof ContactsApiupdateContact
      */
     id: string
     /**
      * 
      * @type ContactUpdateRequest
-     * @memberof ContactsApicontactUpdate
+     * @memberof ContactsApiupdateContact
      */
     contactUpdateRequest: ContactUpdateRequest
 }
@@ -241,40 +240,40 @@ export class ObjectContactsApi {
      * Create contact
      * @param param the request object
      */
-    public contactCreate(param: ContactsApiContactCreateRequest, options?: Configuration): Promise<ContactDetailsResponse> {
-        return this.api.contactCreate(param.contactCreateRequest,  options).toPromise();
+    public createContact(param: ContactsApiCreateContactRequest, options?: Configuration): Promise<ContactDetailsResponse> {
+        return this.api.createContact(param.contactCreateRequest,  options).toPromise();
     }
 
     /**
      * Delete contact by id
      * @param param the request object
      */
-    public contactDelete(param: ContactsApiContactDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api.contactDelete(param.id,  options).toPromise();
+    public deleteContact(param: ContactsApiDeleteContactRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteContact(param.id,  options).toPromise();
     }
 
     /**
      * Get contact details by id
      * @param param the request object
      */
-    public contactDetails(param: ContactsApiContactDetailsRequest, options?: Configuration): Promise<ContactDetailsResponse> {
-        return this.api.contactDetails(param.id,  options).toPromise();
+    public detailsContact(param: ContactsApiDetailsContactRequest, options?: Configuration): Promise<ContactDetailsResponse> {
+        return this.api.detailsContact(param.id,  options).toPromise();
     }
 
     /**
      * List contacts
      * @param param the request object
      */
-    public contactList(param: ContactsApiContactListRequest, options?: Configuration): Promise<Array<ContactDetailsResponse>> {
-        return this.api.contactList( options).toPromise();
+    public listContacts(param: ContactsApiListContactsRequest, options?: Configuration): Promise<Array<ContactDetailsResponse>> {
+        return this.api.listContacts( options).toPromise();
     }
 
     /**
      * Update contact by id
      * @param param the request object
      */
-    public contactUpdate(param: ContactsApiContactUpdateRequest, options?: Configuration): Promise<ContactDetailsResponse> {
-        return this.api.contactUpdate(param.id, param.contactUpdateRequest,  options).toPromise();
+    public updateContact(param: ContactsApiUpdateContactRequest, options?: Configuration): Promise<ContactDetailsResponse> {
+        return this.api.updateContact(param.id, param.contactUpdateRequest,  options).toPromise();
     }
 
 }
@@ -366,83 +365,83 @@ export class ObjectContentLibraryItemsApi {
 import { ObservableDocumentAttachmentsApi } from "./ObservableAPI";
 import { DocumentAttachmentsApiRequestFactory, DocumentAttachmentsApiResponseProcessor} from "../apis/DocumentAttachmentsApi";
 
-export interface DocumentAttachmentsApiDocumentAttachmentCreateRequest {
+export interface DocumentAttachmentsApiCreateDocumentAttachmentRequest {
     /**
      * Document UUID
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentCreate
+     * @memberof DocumentAttachmentsApicreateDocumentAttachment
      */
     id: string
     /**
      * Binary file to be attached to a document
      * @type HttpFile
-     * @memberof DocumentAttachmentsApidocumentAttachmentCreate
+     * @memberof DocumentAttachmentsApicreateDocumentAttachment
      */
     file?: HttpFile
     /**
      * URL link to the file to be attached to a document
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentCreate
+     * @memberof DocumentAttachmentsApicreateDocumentAttachment
      */
     source?: string
     /**
      * Optional name to set for uploaded file
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentCreate
+     * @memberof DocumentAttachmentsApicreateDocumentAttachment
      */
     name?: string
 }
 
-export interface DocumentAttachmentsApiDocumentAttachmentDeleteRequest {
+export interface DocumentAttachmentsApiDeleteDocumentAttachmentRequest {
     /**
      * Document UUID
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentDelete
+     * @memberof DocumentAttachmentsApideleteDocumentAttachment
      */
     id: string
     /**
      * Attachment UUID
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentDelete
+     * @memberof DocumentAttachmentsApideleteDocumentAttachment
      */
     attachmentId: string
 }
 
-export interface DocumentAttachmentsApiDocumentAttachmentDetailsRequest {
+export interface DocumentAttachmentsApiDetailsDocumentAttachmentRequest {
     /**
      * Document UUID
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentDetails
+     * @memberof DocumentAttachmentsApidetailsDocumentAttachment
      */
     id: string
     /**
      * Attachment UUID
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentDetails
+     * @memberof DocumentAttachmentsApidetailsDocumentAttachment
      */
     attachmentId: string
 }
 
-export interface DocumentAttachmentsApiDocumentAttachmentDownloadRequest {
+export interface DocumentAttachmentsApiDownloadDocumentAttachmentRequest {
     /**
      * Document UUID
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentDownload
+     * @memberof DocumentAttachmentsApidownloadDocumentAttachment
      */
     id: string
     /**
      * Attachment UUID
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentDownload
+     * @memberof DocumentAttachmentsApidownloadDocumentAttachment
      */
     attachmentId: string
 }
 
-export interface DocumentAttachmentsApiDocumentAttachmentsListRequest {
+export interface DocumentAttachmentsApiListDocumentAttachmentsRequest {
     /**
      * Document UUID
      * @type string
-     * @memberof DocumentAttachmentsApidocumentAttachmentsList
+     * @memberof DocumentAttachmentsApilistDocumentAttachments
      */
     id: string
 }
@@ -459,8 +458,8 @@ export class ObjectDocumentAttachmentsApi {
      * Document Attachment Create
      * @param param the request object
      */
-    public documentAttachmentCreate(param: DocumentAttachmentsApiDocumentAttachmentCreateRequest, options?: Configuration): Promise<DocumentAttachmentResponse> {
-        return this.api.documentAttachmentCreate(param.id, param.file, param.source, param.name,  options).toPromise();
+    public createDocumentAttachment(param: DocumentAttachmentsApiCreateDocumentAttachmentRequest, options?: Configuration): Promise<DocumentAttachmentResponse> {
+        return this.api.createDocumentAttachment(param.id, param.file, param.source, param.name,  options).toPromise();
     }
 
     /**
@@ -468,8 +467,8 @@ export class ObjectDocumentAttachmentsApi {
      * Document Attachment Delete
      * @param param the request object
      */
-    public documentAttachmentDelete(param: DocumentAttachmentsApiDocumentAttachmentDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api.documentAttachmentDelete(param.id, param.attachmentId,  options).toPromise();
+    public deleteDocumentAttachment(param: DocumentAttachmentsApiDeleteDocumentAttachmentRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteDocumentAttachment(param.id, param.attachmentId,  options).toPromise();
     }
 
     /**
@@ -477,8 +476,8 @@ export class ObjectDocumentAttachmentsApi {
      * Document Attachment Details
      * @param param the request object
      */
-    public documentAttachmentDetails(param: DocumentAttachmentsApiDocumentAttachmentDetailsRequest, options?: Configuration): Promise<DocumentAttachmentResponse> {
-        return this.api.documentAttachmentDetails(param.id, param.attachmentId,  options).toPromise();
+    public detailsDocumentAttachment(param: DocumentAttachmentsApiDetailsDocumentAttachmentRequest, options?: Configuration): Promise<DocumentAttachmentResponse> {
+        return this.api.detailsDocumentAttachment(param.id, param.attachmentId,  options).toPromise();
     }
 
     /**
@@ -486,8 +485,8 @@ export class ObjectDocumentAttachmentsApi {
      * Document Attachment Download
      * @param param the request object
      */
-    public documentAttachmentDownload(param: DocumentAttachmentsApiDocumentAttachmentDownloadRequest, options?: Configuration): Promise<HttpFile> {
-        return this.api.documentAttachmentDownload(param.id, param.attachmentId,  options).toPromise();
+    public downloadDocumentAttachment(param: DocumentAttachmentsApiDownloadDocumentAttachmentRequest, options?: Configuration): Promise<HttpFile> {
+        return this.api.downloadDocumentAttachment(param.id, param.attachmentId,  options).toPromise();
     }
 
     /**
@@ -495,14 +494,74 @@ export class ObjectDocumentAttachmentsApi {
      * Document Attachment List
      * @param param the request object
      */
-    public documentAttachmentsList(param: DocumentAttachmentsApiDocumentAttachmentsListRequest, options?: Configuration): Promise<Array<DocumentAttachmentResponse>> {
-        return this.api.documentAttachmentsList(param.id,  options).toPromise();
+    public listDocumentAttachments(param: DocumentAttachmentsApiListDocumentAttachmentsRequest, options?: Configuration): Promise<Array<DocumentAttachmentResponse>> {
+        return this.api.listDocumentAttachments(param.id,  options).toPromise();
     }
 
 }
 
 import { ObservableDocumentsApi } from "./ObservableAPI";
 import { DocumentsApiRequestFactory, DocumentsApiResponseProcessor} from "../apis/DocumentsApi";
+
+export interface DocumentsApiChangeDocumentStatusRequest {
+    /**
+     * Specify document ID.
+     * @type string
+     * @memberof DocumentsApichangeDocumentStatus
+     */
+    id: string
+    /**
+     * 
+     * @type DocumentStatusChangeRequest
+     * @memberof DocumentsApichangeDocumentStatus
+     */
+    documentStatusChangeRequest: DocumentStatusChangeRequest
+}
+
+export interface DocumentsApiCreateDocumentRequest {
+    /**
+     * Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
+     * @type DocumentCreateRequest
+     * @memberof DocumentsApicreateDocument
+     */
+    documentCreateRequest: DocumentCreateRequest
+    /**
+     * Set this parameter as &#x60;ev1&#x60; if you want to create a document from PDF with Classic Editor when both editors are enabled for the workspace.
+     * @type string
+     * @memberof DocumentsApicreateDocument
+     */
+    editorVer?: string
+}
+
+export interface DocumentsApiCreateDocumentLinkRequest {
+    /**
+     * Document ID
+     * @type string
+     * @memberof DocumentsApicreateDocumentLink
+     */
+    id: string
+    /**
+     * 
+     * @type DocumentCreateLinkRequest
+     * @memberof DocumentsApicreateDocumentLink
+     */
+    documentCreateLinkRequest: DocumentCreateLinkRequest
+}
+
+export interface DocumentsApiCreateLinkedObjectRequest {
+    /**
+     * Specify document ID.
+     * @type string
+     * @memberof DocumentsApicreateLinkedObject
+     */
+    id: string
+    /**
+     * 
+     * @type LinkedObjectCreateRequest
+     * @memberof DocumentsApicreateLinkedObject
+     */
+    linkedObjectCreateRequest: LinkedObjectCreateRequest
+}
 
 export interface DocumentsApiDeleteDocumentRequest {
     /**
@@ -513,196 +572,28 @@ export interface DocumentsApiDeleteDocumentRequest {
     id: string
 }
 
-export interface DocumentsApiDocumentCreateRequest {
-    /**
-     * Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
-     * @type DocumentCreateRequest
-     * @memberof DocumentsApidocumentCreate
-     */
-    documentCreateRequest: DocumentCreateRequest
-    /**
-     * Set this parameter as &#x60;ev1&#x60; if you want to create a document from PDF with Classic Editor when both editors are enabled for the workspace.
-     * @type string
-     * @memberof DocumentsApidocumentCreate
-     */
-    editorVer?: string
-}
-
-export interface DocumentsApiDocumentCreateLinkRequest {
-    /**
-     * Document ID
-     * @type string
-     * @memberof DocumentsApidocumentCreateLink
-     */
-    id: string
-    /**
-     * 
-     * @type DocumentCreateLinkRequest
-     * @memberof DocumentsApidocumentCreateLink
-     */
-    documentCreateLinkRequest: DocumentCreateLinkRequest
-}
-
-export interface DocumentsApiDocumentDetailsRequest {
-    /**
-     * Document ID
-     * @type string
-     * @memberof DocumentsApidocumentDetails
-     */
-    id: string
-}
-
-export interface DocumentsApiDocumentListRequest {
-    /**
-     * Return results where the &#x60;date_completed&#x60; field (ISO 8601) is greater than or equal to this value.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    completedFrom?: string
-    /**
-     * Return results where the &#x60;date_completed&#x60; field (ISO 8601) is less than or equal to this value.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    completedTo?: string
-    /**
-     * Returns results where &#39;contact_id&#39; is present in document as recipient or approver
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    contactId?: string
-    /**
-     * Specify how many document results to return. Default is 50 documents, maximum is 100 documents.
-     * @type number
-     * @memberof DocumentsApidocumentList
-     */
-    count?: number
-    /**
-     * Return results where the &#x60;date_created&#x60; field (ISO 8601) is greater than or equal to this value.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    createdFrom?: string
-    /**
-     * Return results where the &#x60;date_created&#x60; field (ISO 8601) is less than this value.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    createdTo?: string
-    /**
-     * Returns only the deleted documents.
-     * @type boolean
-     * @memberof DocumentsApidocumentList
-     */
-    deleted?: boolean
-    /**
-     * 
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    id?: string
-    /**
-     * The UUID of the folder where the documents are stored.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    folderUuid?: string
-    /**
-     * Specify the form used for documents creation. This parameter can&#39;t be used with template_id.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    formId?: string
-    /**
-     * Returns results where &#39;membership_id&#39; is present in document as owner (should be member uuid)
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    membershipId?: string
-    /**
-     * Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    metadata?: string
-    /**
-     * Return results where the &#x60;date_modified&#x60; field (iso-8601) is greater than or equal to this value.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    modifiedFrom?: string
-    /**
-     * Return results where the &#x60;date_modified&#x60; field (iso-8601) is less than this value.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    modifiedTo?: string
-    /**
-     * Specify the order of documents to return. Use &#x60;value&#x60; (for example, &#x60;date_created&#x60;) for ASC and &#x60;-value&#x60; (for example, &#x60;-date_created&#x60;) for DESC.
-     * @type DocumentOrderingFieldsEnum
-     * @memberof DocumentsApidocumentList
-     */
-    orderBy?: DocumentOrderingFieldsEnum
-    /**
-     * Specify which page of the dataset to return.
-     * @type number
-     * @memberof DocumentsApidocumentList
-     */
-    page?: number
-    /**
-     * Search query. Filter by document reference number (this token is stored on the template level) or name.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    q?: string
-    /**
-     * Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
-     * @type DocumentStatusEnum
-     * @memberof DocumentsApidocumentList
-     */
-    status?: DocumentStatusEnum
-    /**
-     * Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
-     * @type DocumentStatusEnum
-     * @memberof DocumentsApidocumentList
-     */
-    statusNe?: DocumentStatusEnum
-    /**
-     * Search tag. Filter by document tag.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    tag?: string
-    /**
-     * Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
-     * @type string
-     * @memberof DocumentsApidocumentList
-     */
-    templateId?: string
-}
-
-export interface DocumentsApiDocumentStatusRequest {
+export interface DocumentsApiDeleteLinkedObjectRequest {
     /**
      * Specify document ID.
      * @type string
-     * @memberof DocumentsApidocumentStatus
+     * @memberof DocumentsApideleteLinkedObject
      */
     id: string
+    /**
+     * Specify linked object ID.
+     * @type string
+     * @memberof DocumentsApideleteLinkedObject
+     */
+    linkedObjectId: string
 }
 
-export interface DocumentsApiDocumentStatusChangeRequest {
+export interface DocumentsApiDetailsDocumentRequest {
     /**
-     * Specify document ID.
+     * Document ID
      * @type string
-     * @memberof DocumentsApidocumentStatusChange
+     * @memberof DocumentsApidetailsDocument
      */
     id: string
-    /**
-     * 
-     * @type DocumentStatusChangeRequest
-     * @memberof DocumentsApidocumentStatusChange
-     */
-    documentStatusChangeRequest: DocumentStatusChangeRequest
 }
 
 export interface DocumentsApiDownloadDocumentRequest {
@@ -747,43 +638,142 @@ export interface DocumentsApiDownloadProtectedDocumentRequest {
     id: string
 }
 
-export interface DocumentsApiLinkedObjectDeleteRequest {
+export interface DocumentsApiListDocumentsRequest {
     /**
-     * Specify document ID.
+     * Return results where the &#x60;date_completed&#x60; field (ISO 8601) is greater than or equal to this value.
      * @type string
-     * @memberof DocumentsApilinkedObjectDelete
+     * @memberof DocumentsApilistDocuments
      */
-    id: string
+    completedFrom?: string
     /**
-     * Specify linked object ID.
+     * Return results where the &#x60;date_completed&#x60; field (ISO 8601) is less than or equal to this value.
      * @type string
-     * @memberof DocumentsApilinkedObjectDelete
+     * @memberof DocumentsApilistDocuments
      */
-    linkedObjectId: string
-}
-
-export interface DocumentsApiLinkedObjectListRequest {
+    completedTo?: string
     /**
-     * Specify document ID.
+     * Returns results where &#39;contact_id&#39; is present in document as recipient or approver
      * @type string
-     * @memberof DocumentsApilinkedObjectList
+     * @memberof DocumentsApilistDocuments
      */
-    id: string
-}
-
-export interface DocumentsApiLinkedObjectsCreateRequest {
+    contactId?: string
     /**
-     * Specify document ID.
-     * @type string
-     * @memberof DocumentsApilinkedObjectsCreate
+     * Specify how many document results to return. Default is 50 documents, maximum is 100 documents.
+     * @type number
+     * @memberof DocumentsApilistDocuments
      */
-    id: string
+    count?: number
+    /**
+     * Return results where the &#x60;date_created&#x60; field (ISO 8601) is greater than or equal to this value.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    createdFrom?: string
+    /**
+     * Return results where the &#x60;date_created&#x60; field (ISO 8601) is less than this value.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    createdTo?: string
+    /**
+     * Returns only the deleted documents.
+     * @type boolean
+     * @memberof DocumentsApilistDocuments
+     */
+    deleted?: boolean
     /**
      * 
-     * @type LinkedObjectCreateRequest
-     * @memberof DocumentsApilinkedObjectsCreate
+     * @type string
+     * @memberof DocumentsApilistDocuments
      */
-    linkedObjectCreateRequest: LinkedObjectCreateRequest
+    id?: string
+    /**
+     * The UUID of the folder where the documents are stored.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    folderUuid?: string
+    /**
+     * Specify the form used for documents creation. This parameter can&#39;t be used with template_id.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    formId?: string
+    /**
+     * Returns results where &#39;membership_id&#39; is present in document as owner (should be member uuid)
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    membershipId?: string
+    /**
+     * Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    metadata?: string
+    /**
+     * Return results where the &#x60;date_modified&#x60; field (iso-8601) is greater than or equal to this value.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    modifiedFrom?: string
+    /**
+     * Return results where the &#x60;date_modified&#x60; field (iso-8601) is less than this value.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    modifiedTo?: string
+    /**
+     * Specify the order of documents to return. Use &#x60;value&#x60; (for example, &#x60;date_created&#x60;) for ASC and &#x60;-value&#x60; (for example, &#x60;-date_created&#x60;) for DESC.
+     * @type DocumentOrderingFieldsEnum
+     * @memberof DocumentsApilistDocuments
+     */
+    orderBy?: DocumentOrderingFieldsEnum
+    /**
+     * Specify which page of the dataset to return.
+     * @type number
+     * @memberof DocumentsApilistDocuments
+     */
+    page?: number
+    /**
+     * Search query. Filter by document reference number (this token is stored on the template level) or name.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    q?: string
+    /**
+     * Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
+     * @type DocumentStatusEnum
+     * @memberof DocumentsApilistDocuments
+     */
+    status?: DocumentStatusEnum
+    /**
+     * Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
+     * @type DocumentStatusEnum
+     * @memberof DocumentsApilistDocuments
+     */
+    statusNe?: DocumentStatusEnum
+    /**
+     * Search tag. Filter by document tag.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    tag?: string
+    /**
+     * Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
+     * @type string
+     * @memberof DocumentsApilistDocuments
+     */
+    templateId?: string
+}
+
+export interface DocumentsApiListLinkedObjectsRequest {
+    /**
+     * Specify document ID.
+     * @type string
+     * @memberof DocumentsApilistLinkedObjects
+     */
+    id: string
 }
 
 export interface DocumentsApiSendDocumentRequest {
@@ -799,6 +789,15 @@ export interface DocumentsApiSendDocumentRequest {
      * @memberof DocumentsApisendDocument
      */
     documentSendRequest: DocumentSendRequest
+}
+
+export interface DocumentsApiStatusDocumentRequest {
+    /**
+     * Specify document ID.
+     * @type string
+     * @memberof DocumentsApistatusDocument
+     */
+    id: string
 }
 
 export interface DocumentsApiTransferAllDocumentsOwnershipRequest {
@@ -833,6 +832,38 @@ export class ObjectDocumentsApi {
     }
 
     /**
+     * Document status change
+     * @param param the request object
+     */
+    public changeDocumentStatus(param: DocumentsApiChangeDocumentStatusRequest, options?: Configuration): Promise<void> {
+        return this.api.changeDocumentStatus(param.id, param.documentStatusChangeRequest,  options).toPromise();
+    }
+
+    /**
+     * Create document
+     * @param param the request object
+     */
+    public createDocument(param: DocumentsApiCreateDocumentRequest, options?: Configuration): Promise<DocumentCreateResponse> {
+        return this.api.createDocument(param.documentCreateRequest, param.editorVer,  options).toPromise();
+    }
+
+    /**
+     * Create a Document Link
+     * @param param the request object
+     */
+    public createDocumentLink(param: DocumentsApiCreateDocumentLinkRequest, options?: Configuration): Promise<DocumentCreateLinkResponse> {
+        return this.api.createDocumentLink(param.id, param.documentCreateLinkRequest,  options).toPromise();
+    }
+
+    /**
+     * Create Linked Object
+     * @param param the request object
+     */
+    public createLinkedObject(param: DocumentsApiCreateLinkedObjectRequest, options?: Configuration): Promise<LinkedObjectCreateResponse> {
+        return this.api.createLinkedObject(param.id, param.linkedObjectCreateRequest,  options).toPromise();
+    }
+
+    /**
      * Delete document by id
      * @param param the request object
      */
@@ -841,51 +872,19 @@ export class ObjectDocumentsApi {
     }
 
     /**
-     * Create document
+     * Delete Linked Object
      * @param param the request object
      */
-    public documentCreate(param: DocumentsApiDocumentCreateRequest, options?: Configuration): Promise<DocumentCreateResponse> {
-        return this.api.documentCreate(param.documentCreateRequest, param.editorVer,  options).toPromise();
-    }
-
-    /**
-     * Create a Document Link
-     * @param param the request object
-     */
-    public documentCreateLink(param: DocumentsApiDocumentCreateLinkRequest, options?: Configuration): Promise<DocumentCreateLinkResponse> {
-        return this.api.documentCreateLink(param.id, param.documentCreateLinkRequest,  options).toPromise();
+    public deleteLinkedObject(param: DocumentsApiDeleteLinkedObjectRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteLinkedObject(param.id, param.linkedObjectId,  options).toPromise();
     }
 
     /**
      * Document details
      * @param param the request object
      */
-    public documentDetails(param: DocumentsApiDocumentDetailsRequest, options?: Configuration): Promise<DocumentDetailsResponse> {
-        return this.api.documentDetails(param.id,  options).toPromise();
-    }
-
-    /**
-     * List documents
-     * @param param the request object
-     */
-    public documentList(param: DocumentsApiDocumentListRequest, options?: Configuration): Promise<DocumentListResponse> {
-        return this.api.documentList(param.completedFrom, param.completedTo, param.contactId, param.count, param.createdFrom, param.createdTo, param.deleted, param.id, param.folderUuid, param.formId, param.membershipId, param.metadata, param.modifiedFrom, param.modifiedTo, param.orderBy, param.page, param.q, param.status, param.statusNe, param.tag, param.templateId,  options).toPromise();
-    }
-
-    /**
-     * Document status
-     * @param param the request object
-     */
-    public documentStatus(param: DocumentsApiDocumentStatusRequest, options?: Configuration): Promise<DocumentStatusResponse> {
-        return this.api.documentStatus(param.id,  options).toPromise();
-    }
-
-    /**
-     * Document status change
-     * @param param the request object
-     */
-    public documentStatusChange(param: DocumentsApiDocumentStatusChangeRequest, options?: Configuration): Promise<void> {
-        return this.api.documentStatusChange(param.id, param.documentStatusChangeRequest,  options).toPromise();
+    public detailsDocument(param: DocumentsApiDetailsDocumentRequest, options?: Configuration): Promise<DocumentDetailsResponse> {
+        return this.api.detailsDocument(param.id,  options).toPromise();
     }
 
     /**
@@ -906,27 +905,19 @@ export class ObjectDocumentsApi {
     }
 
     /**
-     * Delete Linked Object
+     * List documents
      * @param param the request object
      */
-    public linkedObjectDelete(param: DocumentsApiLinkedObjectDeleteRequest, options?: Configuration): Promise<void> {
-        return this.api.linkedObjectDelete(param.id, param.linkedObjectId,  options).toPromise();
+    public listDocuments(param: DocumentsApiListDocumentsRequest, options?: Configuration): Promise<DocumentListResponse> {
+        return this.api.listDocuments(param.completedFrom, param.completedTo, param.contactId, param.count, param.createdFrom, param.createdTo, param.deleted, param.id, param.folderUuid, param.formId, param.membershipId, param.metadata, param.modifiedFrom, param.modifiedTo, param.orderBy, param.page, param.q, param.status, param.statusNe, param.tag, param.templateId,  options).toPromise();
     }
 
     /**
      * List Linked Objects
      * @param param the request object
      */
-    public linkedObjectList(param: DocumentsApiLinkedObjectListRequest, options?: Configuration): Promise<LinkedObjectListResponse> {
-        return this.api.linkedObjectList(param.id,  options).toPromise();
-    }
-
-    /**
-     * Create Linked Object
-     * @param param the request object
-     */
-    public linkedObjectsCreate(param: DocumentsApiLinkedObjectsCreateRequest, options?: Configuration): Promise<LinkedObjectCreateResponse> {
-        return this.api.linkedObjectsCreate(param.id, param.linkedObjectCreateRequest,  options).toPromise();
+    public listLinkedObjects(param: DocumentsApiListLinkedObjectsRequest, options?: Configuration): Promise<LinkedObjectListResponse> {
+        return this.api.listLinkedObjects(param.id,  options).toPromise();
     }
 
     /**
@@ -935,6 +926,14 @@ export class ObjectDocumentsApi {
      */
     public sendDocument(param: DocumentsApiSendDocumentRequest, options?: Configuration): Promise<DocumentSendResponse> {
         return this.api.sendDocument(param.id, param.documentSendRequest,  options).toPromise();
+    }
+
+    /**
+     * Document status
+     * @param param the request object
+     */
+    public statusDocument(param: DocumentsApiStatusDocumentRequest, options?: Configuration): Promise<DocumentStatusResponse> {
+        return this.api.statusDocument(param.id,  options).toPromise();
     }
 
     /**
@@ -1174,19 +1173,19 @@ export class ObjectFormsApi {
 import { ObservableMembersApi } from "./ObservableAPI";
 import { MembersApiRequestFactory, MembersApiResponseProcessor} from "../apis/MembersApi";
 
-export interface MembersApiCurrentMemberDetailsRequest {
+export interface MembersApiDetailsCurrentMemberRequest {
 }
 
-export interface MembersApiMemberDetailsRequest {
+export interface MembersApiDetailsMemberRequest {
     /**
      * Membership id
      * @type string
-     * @memberof MembersApimemberDetails
+     * @memberof MembersApidetailsMember
      */
     id: string
 }
 
-export interface MembersApiMemberListRequest {
+export interface MembersApiListMembersRequest {
 }
 
 export class ObjectMembersApi {
@@ -1201,8 +1200,8 @@ export class ObjectMembersApi {
      * Current member details
      * @param param the request object
      */
-    public currentMemberDetails(param: MembersApiCurrentMemberDetailsRequest, options?: Configuration): Promise<MemberDetailsResponse> {
-        return this.api.currentMemberDetails( options).toPromise();
+    public detailsCurrentMember(param: MembersApiDetailsCurrentMemberRequest, options?: Configuration): Promise<MemberDetailsResponse> {
+        return this.api.detailsCurrentMember( options).toPromise();
     }
 
     /**
@@ -1210,8 +1209,8 @@ export class ObjectMembersApi {
      * Member details
      * @param param the request object
      */
-    public memberDetails(param: MembersApiMemberDetailsRequest, options?: Configuration): Promise<MemberDetailsResponse> {
-        return this.api.memberDetails(param.id,  options).toPromise();
+    public detailsMember(param: MembersApiDetailsMemberRequest, options?: Configuration): Promise<MemberDetailsResponse> {
+        return this.api.detailsMember(param.id,  options).toPromise();
     }
 
     /**
@@ -1219,8 +1218,8 @@ export class ObjectMembersApi {
      * List members
      * @param param the request object
      */
-    public memberList(param: MembersApiMemberListRequest, options?: Configuration): Promise<Array<MemberDetailsResponse>> {
-        return this.api.memberList( options).toPromise();
+    public listMembers(param: MembersApiListMembersRequest, options?: Configuration): Promise<Array<MemberDetailsResponse>> {
+        return this.api.listMembers( options).toPromise();
     }
 
 }
@@ -1296,11 +1295,11 @@ export interface TemplatesApiDeleteTemplateRequest {
     id: string
 }
 
-export interface TemplatesApiDetailsTemaplateRequest {
+export interface TemplatesApiDetailsTemplateRequest {
     /**
      * Template ID
      * @type string
-     * @memberof TemplatesApidetailsTemaplate
+     * @memberof TemplatesApidetailsTemplate
      */
     id: string
 }
@@ -1377,8 +1376,8 @@ export class ObjectTemplatesApi {
      * Details Template
      * @param param the request object
      */
-    public detailsTemaplate(param: TemplatesApiDetailsTemaplateRequest, options?: Configuration): Promise<TemplateDetailsResponse> {
-        return this.api.detailsTemaplate(param.id,  options).toPromise();
+    public detailsTemplate(param: TemplatesApiDetailsTemplateRequest, options?: Configuration): Promise<TemplateDetailsResponse> {
+        return this.api.detailsTemplate(param.id,  options).toPromise();
     }
 
     /**

@@ -10,8 +10,8 @@
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateByTemplateRequestImages {
-    'urls'?: Array<string>;
-    'name'?: string;
+    'urls': Array<string>;
+    'name': string;
 
     static readonly discriminator: string | undefined = undefined;
 

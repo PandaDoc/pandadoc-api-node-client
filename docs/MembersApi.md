@@ -4,13 +4,13 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**currentMemberDetails**](MembersApi.md#currentMemberDetails) | **GET** /public/v1/members/current | Current member details
-[**memberDetails**](MembersApi.md#memberDetails) | **GET** /public/v1/members/{id} | Member details
-[**memberList**](MembersApi.md#memberList) | **GET** /public/v1/members | List members
+[**detailsCurrentMember**](MembersApi.md#detailsCurrentMember) | **GET** /public/v1/members/current | Current member details
+[**detailsMember**](MembersApi.md#detailsMember) | **GET** /public/v1/members/{id} | Member details
+[**listMembers**](MembersApi.md#listMembers) | **GET** /public/v1/members | List members
 
 
-# **currentMemberDetails**
-> MemberDetailsResponse currentMemberDetails()
+# **detailsCurrentMember**
+> MemberDetailsResponse detailsCurrentMember()
 
 A method to define to whom credentials belong
 
@@ -29,7 +29,7 @@ const apiInstance = new pd_api.MembersApi(configuration);
 
 let body:any = {};
 
-apiInstance.currentMemberDetails(body).then((data) => {
+apiInstance.detailsCurrentMember(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -64,8 +64,8 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **memberDetails**
-> MemberDetailsResponse memberDetails()
+# **detailsMember**
+> MemberDetailsResponse detailsMember()
 
 A method to retrieve a member's details by id
 
@@ -82,12 +82,12 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.MembersApi(configuration);
 
-const body:pd_api.MembersApiMemberDetailsRequest = {
+const body:pd_api.MembersApiDetailsMemberRequest = {
   // string | Membership id
   id: "radQBiBkU7MBk59NSgaGf5",
 };
 
-apiInstance.memberDetails(body).then((data) => {
+apiInstance.detailsMember(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```
@@ -125,8 +125,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **memberList**
-> Array<MemberDetailsResponse> memberList()
+# **listMembers**
+> Array<MemberDetailsResponse> listMembers()
 
 Retrieve all members details of the workspace
 
@@ -145,7 +145,7 @@ const apiInstance = new pd_api.MembersApi(configuration);
 
 let body:any = {};
 
-apiInstance.memberList(body).then((data) => {
+apiInstance.listMembers(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```

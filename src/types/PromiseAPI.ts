@@ -15,7 +15,6 @@ import { ContentLibraryItemResponseCreatedBy } from '../models/ContentLibraryIte
 import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
 import { DocumentAttachmentResponseCreatedBy } from '../models/DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from '../models/DocumentCreateByPdfRequest';
-import { DocumentCreateByPdfRequestRecipients } from '../models/DocumentCreateByPdfRequestRecipients';
 import { DocumentCreateByTemplateRequest } from '../models/DocumentCreateByTemplateRequest';
 import { DocumentCreateByTemplateRequestContentLibraryItems } from '../models/DocumentCreateByTemplateRequestContentLibraryItems';
 import { DocumentCreateByTemplateRequestContentPlaceholders } from '../models/DocumentCreateByTemplateRequestContentPlaceholders';
@@ -110,8 +109,8 @@ export class PromiseAPILogsApi {
      * Details API Log
      * @param id Log event id.
      */
-    public detailsApiLog(id: string, _options?: Configuration): Promise<APILogDetailsResponse> {
-        const result = this.api.detailsApiLog(id, _options);
+    public detailsLog(id: string, _options?: Configuration): Promise<APILogDetailsResponse> {
+        const result = this.api.detailsLog(id, _options);
         return result.toPromise();
     }
 
@@ -127,8 +126,8 @@ export class PromiseAPILogsApi {
      * @param search Returns the results containing a string.
      * @param environmentType Returns logs for production/sandbox.
      */
-    public listApiLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<100 | 200 | 300 | 400 | 500>, methods?: Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>, search?: string, environmentType?: 'PRODUCTION' | 'SANDBOX', _options?: Configuration): Promise<APILogListResponse> {
-        const result = this.api.listApiLogs(since, to, count, page, statuses, methods, search, environmentType, _options);
+    public listLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<100 | 200 | 300 | 400 | 500>, methods?: Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>, search?: string, environmentType?: 'PRODUCTION' | 'SANDBOX', _options?: Configuration): Promise<APILogListResponse> {
+        const result = this.api.listLogs(since, to, count, page, statuses, methods, search, environmentType, _options);
         return result.toPromise();
     }
 
@@ -155,8 +154,8 @@ export class PromiseContactsApi {
      * Create contact
      * @param contactCreateRequest 
      */
-    public contactCreate(contactCreateRequest: ContactCreateRequest, _options?: Configuration): Promise<ContactDetailsResponse> {
-        const result = this.api.contactCreate(contactCreateRequest, _options);
+    public createContact(contactCreateRequest: ContactCreateRequest, _options?: Configuration): Promise<ContactDetailsResponse> {
+        const result = this.api.createContact(contactCreateRequest, _options);
         return result.toPromise();
     }
 
@@ -164,8 +163,8 @@ export class PromiseContactsApi {
      * Delete contact by id
      * @param id Contact id.
      */
-    public contactDelete(id: string, _options?: Configuration): Promise<void> {
-        const result = this.api.contactDelete(id, _options);
+    public deleteContact(id: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteContact(id, _options);
         return result.toPromise();
     }
 
@@ -173,16 +172,16 @@ export class PromiseContactsApi {
      * Get contact details by id
      * @param id Contact id.
      */
-    public contactDetails(id: string, _options?: Configuration): Promise<ContactDetailsResponse> {
-        const result = this.api.contactDetails(id, _options);
+    public detailsContact(id: string, _options?: Configuration): Promise<ContactDetailsResponse> {
+        const result = this.api.detailsContact(id, _options);
         return result.toPromise();
     }
 
     /**
      * List contacts
      */
-    public contactList(_options?: Configuration): Promise<Array<ContactDetailsResponse>> {
-        const result = this.api.contactList(_options);
+    public listContacts(_options?: Configuration): Promise<Array<ContactDetailsResponse>> {
+        const result = this.api.listContacts(_options);
         return result.toPromise();
     }
 
@@ -191,8 +190,8 @@ export class PromiseContactsApi {
      * @param id Contact id.
      * @param contactUpdateRequest 
      */
-    public contactUpdate(id: string, contactUpdateRequest: ContactUpdateRequest, _options?: Configuration): Promise<ContactDetailsResponse> {
-        const result = this.api.contactUpdate(id, contactUpdateRequest, _options);
+    public updateContact(id: string, contactUpdateRequest: ContactUpdateRequest, _options?: Configuration): Promise<ContactDetailsResponse> {
+        const result = this.api.updateContact(id, contactUpdateRequest, _options);
         return result.toPromise();
     }
 
@@ -268,8 +267,8 @@ export class PromiseDocumentAttachmentsApi {
      * @param source URL link to the file to be attached to a document
      * @param name Optional name to set for uploaded file
      */
-    public documentAttachmentCreate(id: string, file?: HttpFile, source?: string, name?: string, _options?: Configuration): Promise<DocumentAttachmentResponse> {
-        const result = this.api.documentAttachmentCreate(id, file, source, name, _options);
+    public createDocumentAttachment(id: string, file?: HttpFile, source?: string, name?: string, _options?: Configuration): Promise<DocumentAttachmentResponse> {
+        const result = this.api.createDocumentAttachment(id, file, source, name, _options);
         return result.toPromise();
     }
 
@@ -279,8 +278,8 @@ export class PromiseDocumentAttachmentsApi {
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public documentAttachmentDelete(id: string, attachmentId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.documentAttachmentDelete(id, attachmentId, _options);
+    public deleteDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteDocumentAttachment(id, attachmentId, _options);
         return result.toPromise();
     }
 
@@ -290,8 +289,8 @@ export class PromiseDocumentAttachmentsApi {
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public documentAttachmentDetails(id: string, attachmentId: string, _options?: Configuration): Promise<DocumentAttachmentResponse> {
-        const result = this.api.documentAttachmentDetails(id, attachmentId, _options);
+    public detailsDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Promise<DocumentAttachmentResponse> {
+        const result = this.api.detailsDocumentAttachment(id, attachmentId, _options);
         return result.toPromise();
     }
 
@@ -301,8 +300,8 @@ export class PromiseDocumentAttachmentsApi {
      * @param id Document UUID
      * @param attachmentId Attachment UUID
      */
-    public documentAttachmentDownload(id: string, attachmentId: string, _options?: Configuration): Promise<HttpFile> {
-        const result = this.api.documentAttachmentDownload(id, attachmentId, _options);
+    public downloadDocumentAttachment(id: string, attachmentId: string, _options?: Configuration): Promise<HttpFile> {
+        const result = this.api.downloadDocumentAttachment(id, attachmentId, _options);
         return result.toPromise();
     }
 
@@ -311,8 +310,8 @@ export class PromiseDocumentAttachmentsApi {
      * Document Attachment List
      * @param id Document UUID
      */
-    public documentAttachmentsList(id: string, _options?: Configuration): Promise<Array<DocumentAttachmentResponse>> {
-        const result = this.api.documentAttachmentsList(id, _options);
+    public listDocumentAttachments(id: string, _options?: Configuration): Promise<Array<DocumentAttachmentResponse>> {
+        const result = this.api.listDocumentAttachments(id, _options);
         return result.toPromise();
     }
 
@@ -336,6 +335,46 @@ export class PromiseDocumentsApi {
     }
 
     /**
+     * Document status change
+     * @param id Specify document ID.
+     * @param documentStatusChangeRequest 
+     */
+    public changeDocumentStatus(id: string, documentStatusChangeRequest: DocumentStatusChangeRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.changeDocumentStatus(id, documentStatusChangeRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create document
+     * @param documentCreateRequest Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
+     * @param editorVer Set this parameter as &#x60;ev1&#x60; if you want to create a document from PDF with Classic Editor when both editors are enabled for the workspace.
+     */
+    public createDocument(documentCreateRequest: DocumentCreateRequest, editorVer?: string, _options?: Configuration): Promise<DocumentCreateResponse> {
+        const result = this.api.createDocument(documentCreateRequest, editorVer, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create a Document Link
+     * @param id Document ID
+     * @param documentCreateLinkRequest 
+     */
+    public createDocumentLink(id: string, documentCreateLinkRequest: DocumentCreateLinkRequest, _options?: Configuration): Promise<DocumentCreateLinkResponse> {
+        const result = this.api.createDocumentLink(id, documentCreateLinkRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create Linked Object
+     * @param id Specify document ID.
+     * @param linkedObjectCreateRequest 
+     */
+    public createLinkedObject(id: string, linkedObjectCreateRequest: LinkedObjectCreateRequest, _options?: Configuration): Promise<LinkedObjectCreateResponse> {
+        const result = this.api.createLinkedObject(id, linkedObjectCreateRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Delete document by id
      * @param id Document ID
      */
@@ -345,22 +384,12 @@ export class PromiseDocumentsApi {
     }
 
     /**
-     * Create document
-     * @param documentCreateRequest Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
-     * @param editorVer Set this parameter as &#x60;ev1&#x60; if you want to create a document from PDF with Classic Editor when both editors are enabled for the workspace.
+     * Delete Linked Object
+     * @param id Specify document ID.
+     * @param linkedObjectId Specify linked object ID.
      */
-    public documentCreate(documentCreateRequest: DocumentCreateRequest, editorVer?: string, _options?: Configuration): Promise<DocumentCreateResponse> {
-        const result = this.api.documentCreate(documentCreateRequest, editorVer, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create a Document Link
-     * @param id Document ID
-     * @param documentCreateLinkRequest 
-     */
-    public documentCreateLink(id: string, documentCreateLinkRequest: DocumentCreateLinkRequest, _options?: Configuration): Promise<DocumentCreateLinkResponse> {
-        const result = this.api.documentCreateLink(id, documentCreateLinkRequest, _options);
+    public deleteLinkedObject(id: string, linkedObjectId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteLinkedObject(id, linkedObjectId, _options);
         return result.toPromise();
     }
 
@@ -368,56 +397,8 @@ export class PromiseDocumentsApi {
      * Document details
      * @param id Document ID
      */
-    public documentDetails(id: string, _options?: Configuration): Promise<DocumentDetailsResponse> {
-        const result = this.api.documentDetails(id, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * List documents
-     * @param completedFrom Return results where the &#x60;date_completed&#x60; field (ISO 8601) is greater than or equal to this value.
-     * @param completedTo Return results where the &#x60;date_completed&#x60; field (ISO 8601) is less than or equal to this value.
-     * @param contactId Returns results where &#39;contact_id&#39; is present in document as recipient or approver
-     * @param count Specify how many document results to return. Default is 50 documents, maximum is 100 documents.
-     * @param createdFrom Return results where the &#x60;date_created&#x60; field (ISO 8601) is greater than or equal to this value.
-     * @param createdTo Return results where the &#x60;date_created&#x60; field (ISO 8601) is less than this value.
-     * @param deleted Returns only the deleted documents.
-     * @param id 
-     * @param folderUuid The UUID of the folder where the documents are stored.
-     * @param formId Specify the form used for documents creation. This parameter can&#39;t be used with template_id.
-     * @param membershipId Returns results where &#39;membership_id&#39; is present in document as owner (should be member uuid)
-     * @param metadata Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
-     * @param modifiedFrom Return results where the &#x60;date_modified&#x60; field (iso-8601) is greater than or equal to this value.
-     * @param modifiedTo Return results where the &#x60;date_modified&#x60; field (iso-8601) is less than this value.
-     * @param orderBy Specify the order of documents to return. Use &#x60;value&#x60; (for example, &#x60;date_created&#x60;) for ASC and &#x60;-value&#x60; (for example, &#x60;-date_created&#x60;) for DESC.
-     * @param page Specify which page of the dataset to return.
-     * @param q Search query. Filter by document reference number (this token is stored on the template level) or name.
-     * @param status Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
-     * @param statusNe Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
-     * @param tag Search tag. Filter by document tag.
-     * @param templateId Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
-     */
-    public documentList(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusEnum, statusNe?: DocumentStatusEnum, tag?: string, templateId?: string, _options?: Configuration): Promise<DocumentListResponse> {
-        const result = this.api.documentList(completedFrom, completedTo, contactId, count, createdFrom, createdTo, deleted, id, folderUuid, formId, membershipId, metadata, modifiedFrom, modifiedTo, orderBy, page, q, status, statusNe, tag, templateId, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Document status
-     * @param id Specify document ID.
-     */
-    public documentStatus(id: string, _options?: Configuration): Promise<DocumentStatusResponse> {
-        const result = this.api.documentStatus(id, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Document status change
-     * @param id Specify document ID.
-     * @param documentStatusChangeRequest 
-     */
-    public documentStatusChange(id: string, documentStatusChangeRequest: DocumentStatusChangeRequest, _options?: Configuration): Promise<void> {
-        const result = this.api.documentStatusChange(id, documentStatusChangeRequest, _options);
+    public detailsDocument(id: string, _options?: Configuration): Promise<DocumentDetailsResponse> {
+        const result = this.api.detailsDocument(id, _options);
         return result.toPromise();
     }
 
@@ -445,12 +426,31 @@ export class PromiseDocumentsApi {
     }
 
     /**
-     * Delete Linked Object
-     * @param id Specify document ID.
-     * @param linkedObjectId Specify linked object ID.
+     * List documents
+     * @param completedFrom Return results where the &#x60;date_completed&#x60; field (ISO 8601) is greater than or equal to this value.
+     * @param completedTo Return results where the &#x60;date_completed&#x60; field (ISO 8601) is less than or equal to this value.
+     * @param contactId Returns results where &#39;contact_id&#39; is present in document as recipient or approver
+     * @param count Specify how many document results to return. Default is 50 documents, maximum is 100 documents.
+     * @param createdFrom Return results where the &#x60;date_created&#x60; field (ISO 8601) is greater than or equal to this value.
+     * @param createdTo Return results where the &#x60;date_created&#x60; field (ISO 8601) is less than this value.
+     * @param deleted Returns only the deleted documents.
+     * @param id 
+     * @param folderUuid The UUID of the folder where the documents are stored.
+     * @param formId Specify the form used for documents creation. This parameter can&#39;t be used with template_id.
+     * @param membershipId Returns results where &#39;membership_id&#39; is present in document as owner (should be member uuid)
+     * @param metadata Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
+     * @param modifiedFrom Return results where the &#x60;date_modified&#x60; field (iso-8601) is greater than or equal to this value.
+     * @param modifiedTo Return results where the &#x60;date_modified&#x60; field (iso-8601) is less than this value.
+     * @param orderBy Specify the order of documents to return. Use &#x60;value&#x60; (for example, &#x60;date_created&#x60;) for ASC and &#x60;-value&#x60; (for example, &#x60;-date_created&#x60;) for DESC.
+     * @param page Specify which page of the dataset to return.
+     * @param q Search query. Filter by document reference number (this token is stored on the template level) or name.
+     * @param status Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
+     * @param statusNe Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
+     * @param tag Search tag. Filter by document tag.
+     * @param templateId Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
      */
-    public linkedObjectDelete(id: string, linkedObjectId: string, _options?: Configuration): Promise<void> {
-        const result = this.api.linkedObjectDelete(id, linkedObjectId, _options);
+    public listDocuments(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusEnum, statusNe?: DocumentStatusEnum, tag?: string, templateId?: string, _options?: Configuration): Promise<DocumentListResponse> {
+        const result = this.api.listDocuments(completedFrom, completedTo, contactId, count, createdFrom, createdTo, deleted, id, folderUuid, formId, membershipId, metadata, modifiedFrom, modifiedTo, orderBy, page, q, status, statusNe, tag, templateId, _options);
         return result.toPromise();
     }
 
@@ -458,18 +458,8 @@ export class PromiseDocumentsApi {
      * List Linked Objects
      * @param id Specify document ID.
      */
-    public linkedObjectList(id: string, _options?: Configuration): Promise<LinkedObjectListResponse> {
-        const result = this.api.linkedObjectList(id, _options);
-        return result.toPromise();
-    }
-
-    /**
-     * Create Linked Object
-     * @param id Specify document ID.
-     * @param linkedObjectCreateRequest 
-     */
-    public linkedObjectsCreate(id: string, linkedObjectCreateRequest: LinkedObjectCreateRequest, _options?: Configuration): Promise<LinkedObjectCreateResponse> {
-        const result = this.api.linkedObjectsCreate(id, linkedObjectCreateRequest, _options);
+    public listLinkedObjects(id: string, _options?: Configuration): Promise<LinkedObjectListResponse> {
+        const result = this.api.listLinkedObjects(id, _options);
         return result.toPromise();
     }
 
@@ -480,6 +470,15 @@ export class PromiseDocumentsApi {
      */
     public sendDocument(id: string, documentSendRequest: DocumentSendRequest, _options?: Configuration): Promise<DocumentSendResponse> {
         const result = this.api.sendDocument(id, documentSendRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Document status
+     * @param id Specify document ID.
+     */
+    public statusDocument(id: string, _options?: Configuration): Promise<DocumentStatusResponse> {
+        const result = this.api.statusDocument(id, _options);
         return result.toPromise();
     }
 
@@ -644,8 +643,8 @@ export class PromiseMembersApi {
      * A method to define to whom credentials belong
      * Current member details
      */
-    public currentMemberDetails(_options?: Configuration): Promise<MemberDetailsResponse> {
-        const result = this.api.currentMemberDetails(_options);
+    public detailsCurrentMember(_options?: Configuration): Promise<MemberDetailsResponse> {
+        const result = this.api.detailsCurrentMember(_options);
         return result.toPromise();
     }
 
@@ -654,8 +653,8 @@ export class PromiseMembersApi {
      * Member details
      * @param id Membership id
      */
-    public memberDetails(id: string, _options?: Configuration): Promise<MemberDetailsResponse> {
-        const result = this.api.memberDetails(id, _options);
+    public detailsMember(id: string, _options?: Configuration): Promise<MemberDetailsResponse> {
+        const result = this.api.detailsMember(id, _options);
         return result.toPromise();
     }
 
@@ -663,8 +662,8 @@ export class PromiseMembersApi {
      * Retrieve all members details of the workspace
      * List members
      */
-    public memberList(_options?: Configuration): Promise<Array<MemberDetailsResponse>> {
-        const result = this.api.memberList(_options);
+    public listMembers(_options?: Configuration): Promise<Array<MemberDetailsResponse>> {
+        const result = this.api.listMembers(_options);
         return result.toPromise();
     }
 
@@ -735,8 +734,8 @@ export class PromiseTemplatesApi {
      * Details Template
      * @param id Template ID
      */
-    public detailsTemaplate(id: string, _options?: Configuration): Promise<TemplateDetailsResponse> {
-        const result = this.api.detailsTemaplate(id, _options);
+    public detailsTemplate(id: string, _options?: Configuration): Promise<TemplateDetailsResponse> {
+        const result = this.api.detailsTemplate(id, _options);
         return result.toPromise();
     }
 

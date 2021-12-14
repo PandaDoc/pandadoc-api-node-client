@@ -41,7 +41,7 @@ async function createDocumentFromPdfUrl(
     parseFormFields: false,
   };
 
-  return await apiInstance.documentCreate({
+  return await apiInstance.createDocument({
     documentCreateRequest: documentCreateRequest,
   });
 }
@@ -72,7 +72,7 @@ async function ensureDocumentCreated(
     await new Promise((r) => setTimeout(r, 2000));
     retries++;
 
-    let response = await apiInstance.documentStatus({
+    let response = await apiInstance.statusDocument({
       id: String(document.id),
     });
     if (response.status === "document.draft") {

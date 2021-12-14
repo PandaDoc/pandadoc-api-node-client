@@ -10,20 +10,13 @@
 import { HttpFile } from '../http/http';
 
 export class PricingTableRequestOptionsDiscount {
-    'isGlobal'?: boolean;
-    'type'?: PricingTableRequestOptionsDiscountTypeEnum;
-    'name'?: string;
-    'value'?: number;
+    'type': PricingTableRequestOptionsDiscountTypeEnum;
+    'name': string;
+    'value': number;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "isGlobal",
-            "baseName": "is_global",
-            "type": "boolean",
-            "format": ""
-        },
         {
             "name": "type",
             "baseName": "type",

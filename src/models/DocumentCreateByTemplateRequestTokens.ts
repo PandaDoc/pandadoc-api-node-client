@@ -10,8 +10,8 @@
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateByTemplateRequestTokens {
-    'name'?: string;
-    'value'?: string;
+    'name': string;
+    'value': string;
 
     static readonly discriminator: string | undefined = undefined;
 

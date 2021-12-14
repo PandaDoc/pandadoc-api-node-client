@@ -27,7 +27,7 @@ export class DocumentCreateByTemplateRequest {
     /**
     * The list of recipients you're sending the document to. Every object must contain the email parameter. The `role`, `first_name` and `last_name` parameters are optional. If the `role` parameter passed, a person is assigned all fields matching their corresponding role. If not passed, a person will receive a read-only link to view the document. If the `first_name` and `last_name` not passed the system 1. creates a new contact, if none exists with the given `email`; or 2. gets the existing contact with the given `email` that already exists.
     */
-    'recipients'?: Array<DocumentCreateByTemplateRequestRecipients>;
+    'recipients': Array<DocumentCreateByTemplateRequestRecipients>;
     /**
     * You can pass a list of tokens/values to pre-fill tokens used in a template. Name is a token name in a template. Value is a real value you would like to replace a token with.
     */

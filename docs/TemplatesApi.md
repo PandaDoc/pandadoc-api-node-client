@@ -5,7 +5,7 @@ All URIs are relative to *https://api.pandadoc.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**deleteTemplate**](TemplatesApi.md#deleteTemplate) | **DELETE** /public/v1/templates/{id} | Delete Template
-[**detailsTemaplate**](TemplatesApi.md#detailsTemaplate) | **GET** /public/v1/templates/{id}/details | Details Template
+[**detailsTemplate**](TemplatesApi.md#detailsTemplate) | **GET** /public/v1/templates/{id}/details | Details Template
 [**listTemplates**](TemplatesApi.md#listTemplates) | **GET** /public/v1/templates | List Templates
 
 
@@ -71,8 +71,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
-# **detailsTemaplate**
-> TemplateDetailsResponse detailsTemaplate()
+# **detailsTemplate**
+> TemplateDetailsResponse detailsTemplate()
 
 Return detailed data about a template.
 
@@ -89,12 +89,12 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.TemplatesApi(configuration);
 
-const body:pd_api.TemplatesApiDetailsTemaplateRequest = {
+const body:pd_api.TemplatesApiDetailsTemplateRequest = {
   // string | Template ID
   id: "EE8yUNg5HztqVAuH85He8V",
 };
 
-apiInstance.detailsTemaplate(body).then((data) => {
+apiInstance.detailsTemplate(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
 }).catch((error) => console.error(error));
 ```

@@ -10,7 +10,7 @@
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateByTemplateRequestRecipients {
-    'email'?: string;
+    'email': string;
     'firstName'?: string;
     'lastName'?: string;
     'role'?: string;

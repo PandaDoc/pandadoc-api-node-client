@@ -12,7 +12,7 @@ import { HttpFile } from '../http/http';
 
 export class DocumentCreateByTemplateRequestContentPlaceholders {
     'contentLibraryItems'?: Array<DocumentCreateByTemplateRequestContentLibraryItems>;
-    'blockId'?: string;
+    'blockId': string;
 
     static readonly discriminator: string | undefined = undefined;
 
