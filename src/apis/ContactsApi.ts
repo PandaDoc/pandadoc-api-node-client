@@ -11,6 +11,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 
 import { ContactCreateRequest } from '../models/ContactCreateRequest';
 import { ContactDetailsResponse } from '../models/ContactDetailsResponse';
+import { ContactListResponse } from '../models/ContactListResponse';
 import { ContactUpdateRequest } from '../models/ContactUpdateRequest';
 
 /**
@@ -394,13 +395,13 @@ export class ContactsApiResponseProcessor {
      * @params response Response returned by the server for a request to listContacts
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listContacts(response: ResponseContext): Promise<Array<ContactDetailsResponse> > {
+     public async listContacts(response: ResponseContext): Promise<ContactListResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: Array<ContactDetailsResponse> = ObjectSerializer.deserialize(
+            const body: ContactListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "Array<ContactDetailsResponse>", ""
-            ) as Array<ContactDetailsResponse>;
+                "ContactListResponse", ""
+            ) as ContactListResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -434,10 +435,10 @@ export class ContactsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: Array<ContactDetailsResponse> = ObjectSerializer.deserialize(
+            const body: ContactListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "Array<ContactDetailsResponse>", ""
-            ) as Array<ContactDetailsResponse>;
+                "ContactListResponse", ""
+            ) as ContactListResponse;
             return body;
         }
 
