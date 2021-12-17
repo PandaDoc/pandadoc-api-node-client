@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listMembers**
-> Array<MemberDetailsResponse> listMembers()
+> MemberListResponse listMembers()
 
 Retrieve all members details of the workspace
 
@@ -157,7 +157,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**Array<MemberDetailsResponse>**
+**MemberListResponse**
 
 ### Authorization
 

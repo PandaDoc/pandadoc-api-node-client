@@ -10,6 +10,7 @@ import {canConsumeForm, isCodeInRange} from '../util';
 
 
 import { MemberDetailsResponse } from '../models/MemberDetailsResponse';
+import { MemberListResponse } from '../models/MemberListResponse';
 
 /**
  * no description
@@ -239,13 +240,13 @@ export class MembersApiResponseProcessor {
      * @params response Response returned by the server for a request to listMembers
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listMembers(response: ResponseContext): Promise<Array<MemberDetailsResponse> > {
+     public async listMembers(response: ResponseContext): Promise<MemberListResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: Array<MemberDetailsResponse> = ObjectSerializer.deserialize(
+            const body: MemberListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "Array<MemberDetailsResponse>", ""
-            ) as Array<MemberDetailsResponse>;
+                "MemberListResponse", ""
+            ) as MemberListResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -279,10 +280,10 @@ export class MembersApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: Array<MemberDetailsResponse> = ObjectSerializer.deserialize(
+            const body: MemberListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "Array<MemberDetailsResponse>", ""
-            ) as Array<MemberDetailsResponse>;
+                "MemberListResponse", ""
+            ) as MemberListResponse;
             return body;
         }
 

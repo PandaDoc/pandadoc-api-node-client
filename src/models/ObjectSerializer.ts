@@ -3,6 +3,7 @@ export * from './APILogListResponse';
 export * from './APILogListResponseResults';
 export * from './ContactCreateRequest';
 export * from './ContactDetailsResponse';
+export * from './ContactListResponse';
 export * from './ContactUpdateRequest';
 export * from './ContentLibraryItemListResponse';
 export * from './ContentLibraryItemListResponseResults';
@@ -53,6 +54,7 @@ export * from './LinkedObjectCreateRequest';
 export * from './LinkedObjectCreateResponse';
 export * from './LinkedObjectListResponse';
 export * from './MemberDetailsResponse';
+export * from './MemberListResponse';
 export * from './OAuth2AccessTokenResponse';
 export * from './PricingTableRequest';
 export * from './PricingTableRequestData';
@@ -92,6 +94,7 @@ import { APILogListResponse } from './APILogListResponse';
 import { APILogListResponseResults } from './APILogListResponseResults';
 import { ContactCreateRequest } from './ContactCreateRequest';
 import { ContactDetailsResponse } from './ContactDetailsResponse';
+import { ContactListResponse } from './ContactListResponse';
 import { ContactUpdateRequest } from './ContactUpdateRequest';
 import { ContentLibraryItemListResponse } from './ContentLibraryItemListResponse';
 import { ContentLibraryItemListResponseResults } from './ContentLibraryItemListResponseResults';
@@ -142,6 +145,7 @@ import { LinkedObjectCreateRequest } from './LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from './LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from './LinkedObjectListResponse';
 import { MemberDetailsResponse } from './MemberDetailsResponse';
+import { MemberListResponse } from './MemberListResponse';
 import { OAuth2AccessTokenResponse } from './OAuth2AccessTokenResponse';
 import { PricingTableRequest } from './PricingTableRequest';
 import { PricingTableRequestData } from './PricingTableRequestData';
@@ -209,6 +213,7 @@ let typeMap: {[index: string]: any} = {
     "APILogListResponseResults": APILogListResponseResults,
     "ContactCreateRequest": ContactCreateRequest,
     "ContactDetailsResponse": ContactDetailsResponse,
+    "ContactListResponse": ContactListResponse,
     "ContactUpdateRequest": ContactUpdateRequest,
     "ContentLibraryItemListResponse": ContentLibraryItemListResponse,
     "ContentLibraryItemListResponseResults": ContentLibraryItemListResponseResults,
@@ -257,6 +262,7 @@ let typeMap: {[index: string]: any} = {
     "LinkedObjectCreateResponse": LinkedObjectCreateResponse,
     "LinkedObjectListResponse": LinkedObjectListResponse,
     "MemberDetailsResponse": MemberDetailsResponse,
+    "MemberListResponse": MemberListResponse,
     "OAuth2AccessTokenResponse": OAuth2AccessTokenResponse,
     "PricingTableRequest": PricingTableRequest,
     "PricingTableRequestData": PricingTableRequestData,
