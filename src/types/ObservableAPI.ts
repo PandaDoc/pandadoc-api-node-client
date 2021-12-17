@@ -8,6 +8,7 @@ import { APILogListResponse } from '../models/APILogListResponse';
 import { APILogListResponseResults } from '../models/APILogListResponseResults';
 import { ContactCreateRequest } from '../models/ContactCreateRequest';
 import { ContactDetailsResponse } from '../models/ContactDetailsResponse';
+import { ContactListResponse } from '../models/ContactListResponse';
 import { ContactUpdateRequest } from '../models/ContactUpdateRequest';
 import { ContentLibraryItemListResponse } from '../models/ContentLibraryItemListResponse';
 import { ContentLibraryItemListResponseResults } from '../models/ContentLibraryItemListResponseResults';
@@ -58,6 +59,7 @@ import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
 import { MemberDetailsResponse } from '../models/MemberDetailsResponse';
+import { MemberListResponse } from '../models/MemberListResponse';
 import { OAuth2AccessTokenResponse } from '../models/OAuth2AccessTokenResponse';
 import { PricingTableRequest } from '../models/PricingTableRequest';
 import { PricingTableRequestData } from '../models/PricingTableRequestData';
@@ -253,7 +255,7 @@ export class ObservableContactsApi {
     /**
      * List contacts
      */
-    public listContacts(_options?: Configuration): Observable<Array<ContactDetailsResponse>> {
+    public listContacts(_options?: Configuration): Observable<ContactListResponse> {
         const requestContextPromise = this.requestFactory.listContacts(_options);
 
         // build promise chain
@@ -1191,7 +1193,7 @@ export class ObservableMembersApi {
      * Retrieve all members details of the workspace
      * List members
      */
-    public listMembers(_options?: Configuration): Observable<Array<MemberDetailsResponse>> {
+    public listMembers(_options?: Configuration): Observable<MemberListResponse> {
         const requestContextPromise = this.requestFactory.listMembers(_options);
 
         // build promise chain

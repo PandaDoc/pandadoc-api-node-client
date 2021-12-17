@@ -202,7 +202,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **listContacts**
-> Array<ContactDetailsResponse> listContacts()
+> ContactListResponse listContacts()
 
 
 ### Example
@@ -232,7 +232,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**Array<ContactDetailsResponse>**
+**ContactListResponse**
 
 ### Authorization
 

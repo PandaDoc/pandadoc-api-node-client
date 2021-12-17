@@ -7,6 +7,7 @@ import { APILogListResponse } from '../models/APILogListResponse';
 import { APILogListResponseResults } from '../models/APILogListResponseResults';
 import { ContactCreateRequest } from '../models/ContactCreateRequest';
 import { ContactDetailsResponse } from '../models/ContactDetailsResponse';
+import { ContactListResponse } from '../models/ContactListResponse';
 import { ContactUpdateRequest } from '../models/ContactUpdateRequest';
 import { ContentLibraryItemListResponse } from '../models/ContentLibraryItemListResponse';
 import { ContentLibraryItemListResponseResults } from '../models/ContentLibraryItemListResponseResults';
@@ -57,6 +58,7 @@ import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
 import { MemberDetailsResponse } from '../models/MemberDetailsResponse';
+import { MemberListResponse } from '../models/MemberListResponse';
 import { OAuth2AccessTokenResponse } from '../models/OAuth2AccessTokenResponse';
 import { PricingTableRequest } from '../models/PricingTableRequest';
 import { PricingTableRequestData } from '../models/PricingTableRequestData';
@@ -264,7 +266,7 @@ export class ObjectContactsApi {
      * List contacts
      * @param param the request object
      */
-    public listContacts(param: ContactsApiListContactsRequest, options?: Configuration): Promise<Array<ContactDetailsResponse>> {
+    public listContacts(param: ContactsApiListContactsRequest, options?: Configuration): Promise<ContactListResponse> {
         return this.api.listContacts( options).toPromise();
     }
 
@@ -1218,7 +1220,7 @@ export class ObjectMembersApi {
      * List members
      * @param param the request object
      */
-    public listMembers(param: MembersApiListMembersRequest, options?: Configuration): Promise<Array<MemberDetailsResponse>> {
+    public listMembers(param: MembersApiListMembersRequest, options?: Configuration): Promise<MemberListResponse> {
         return this.api.listMembers( options).toPromise();
     }
 
