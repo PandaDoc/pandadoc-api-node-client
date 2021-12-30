@@ -10,7 +10,6 @@
 import { ContentLibraryItemResponseCreatedBy } from './ContentLibraryItemResponseCreatedBy';
 import { PricingTablesResponse } from './PricingTablesResponse';
 import { TemplateDetailsResponseContentPlaceholders } from './TemplateDetailsResponseContentPlaceholders';
-import { TemplateDetailsResponseFields } from './TemplateDetailsResponseFields';
 import { TemplateDetailsResponseImages } from './TemplateDetailsResponseImages';
 import { TemplateDetailsResponseRoles } from './TemplateDetailsResponseRoles';
 import { TemplateDetailsResponseTokens } from './TemplateDetailsResponseTokens';
@@ -24,7 +23,7 @@ export class TemplateDetailsResponse {
     'createdBy'?: ContentLibraryItemResponseCreatedBy;
     'metadata'?: any;
     'tokens'?: Array<TemplateDetailsResponseTokens>;
-    'fields'?: Array<TemplateDetailsResponseFields>;
+    'fields'?: Array<any>;
     'pricing'?: PricingTablesResponse;
     'tags'?: Array<string>;
     'roles'?: Array<TemplateDetailsResponseRoles>;
@@ -80,7 +79,7 @@ export class TemplateDetailsResponse {
         {
             "name": "fields",
             "baseName": "fields",
-            "type": "Array<TemplateDetailsResponseFields>",
+            "type": "Array<any>",
             "format": ""
         },
         {

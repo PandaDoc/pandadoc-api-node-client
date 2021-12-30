@@ -1404,14 +1404,14 @@ export class DocumentsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            throw new ApiException<any>(401, "Bad Request", body, response.headers);
+            throw new ApiException<any>(401, "Authentication error", body, response.headers);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "any", ""
             ) as any;
-            throw new ApiException<any>(403, "Authentication error", body, response.headers);
+            throw new ApiException<any>(403, "Permission error", body, response.headers);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(

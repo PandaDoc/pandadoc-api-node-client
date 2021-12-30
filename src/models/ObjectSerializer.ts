@@ -57,13 +57,15 @@ export * from './MemberDetailsResponse';
 export * from './MemberListResponse';
 export * from './OAuth2AccessTokenResponse';
 export * from './PricingTableRequest';
-export * from './PricingTableRequestData';
-export * from './PricingTableRequestDataDiscount';
 export * from './PricingTableRequestOptions';
-export * from './PricingTableRequestOptions1';
 export * from './PricingTableRequestOptionsDiscount';
 export * from './PricingTableRequestOptionsTaxFirst';
 export * from './PricingTableRequestOptionsTaxSecond';
+export * from './PricingTableRequestRowData';
+export * from './PricingTableRequestRowDataDiscount';
+export * from './PricingTableRequestRowDataTaxFirst';
+export * from './PricingTableRequestRowDataTaxSecond';
+export * from './PricingTableRequestRowOptions';
 export * from './PricingTableRequestRows';
 export * from './PricingTableRequestSections';
 export * from './PricingTablesResponse';
@@ -73,9 +75,7 @@ export * from './PricingTablesResponseOptions';
 export * from './PricingTablesResponseSummary';
 export * from './PricingTablesResponseTables';
 export * from './TemplateDetailsResponse';
-export * from './TemplateDetailsResponseAssignedTo';
 export * from './TemplateDetailsResponseContentPlaceholders';
-export * from './TemplateDetailsResponseFields';
 export * from './TemplateDetailsResponseImages';
 export * from './TemplateDetailsResponsePreassignedPerson';
 export * from './TemplateDetailsResponseRoles';
@@ -148,13 +148,15 @@ import { MemberDetailsResponse } from './MemberDetailsResponse';
 import { MemberListResponse } from './MemberListResponse';
 import { OAuth2AccessTokenResponse } from './OAuth2AccessTokenResponse';
 import { PricingTableRequest } from './PricingTableRequest';
-import { PricingTableRequestData } from './PricingTableRequestData';
-import { PricingTableRequestDataDiscount } from './PricingTableRequestDataDiscount';
 import { PricingTableRequestOptions } from './PricingTableRequestOptions';
-import { PricingTableRequestOptions1 } from './PricingTableRequestOptions1';
 import { PricingTableRequestOptionsDiscount, PricingTableRequestOptionsDiscountTypeEnum     } from './PricingTableRequestOptionsDiscount';
 import { PricingTableRequestOptionsTaxFirst, PricingTableRequestOptionsTaxFirstTypeEnum     } from './PricingTableRequestOptionsTaxFirst';
 import { PricingTableRequestOptionsTaxSecond, PricingTableRequestOptionsTaxSecondTypeEnum     } from './PricingTableRequestOptionsTaxSecond';
+import { PricingTableRequestRowData } from './PricingTableRequestRowData';
+import { PricingTableRequestRowDataDiscount } from './PricingTableRequestRowDataDiscount';
+import { PricingTableRequestRowDataTaxFirst } from './PricingTableRequestRowDataTaxFirst';
+import { PricingTableRequestRowDataTaxSecond } from './PricingTableRequestRowDataTaxSecond';
+import { PricingTableRequestRowOptions } from './PricingTableRequestRowOptions';
 import { PricingTableRequestRows } from './PricingTableRequestRows';
 import { PricingTableRequestSections } from './PricingTableRequestSections';
 import { PricingTablesResponse } from './PricingTablesResponse';
@@ -164,9 +166,7 @@ import { PricingTablesResponseOptions } from './PricingTablesResponseOptions';
 import { PricingTablesResponseSummary } from './PricingTablesResponseSummary';
 import { PricingTablesResponseTables } from './PricingTablesResponseTables';
 import { TemplateDetailsResponse } from './TemplateDetailsResponse';
-import { TemplateDetailsResponseAssignedTo } from './TemplateDetailsResponseAssignedTo';
 import { TemplateDetailsResponseContentPlaceholders } from './TemplateDetailsResponseContentPlaceholders';
-import { TemplateDetailsResponseFields } from './TemplateDetailsResponseFields';
 import { TemplateDetailsResponseImages } from './TemplateDetailsResponseImages';
 import { TemplateDetailsResponsePreassignedPerson } from './TemplateDetailsResponsePreassignedPerson';
 import { TemplateDetailsResponseRoles } from './TemplateDetailsResponseRoles';
@@ -265,13 +265,15 @@ let typeMap: {[index: string]: any} = {
     "MemberListResponse": MemberListResponse,
     "OAuth2AccessTokenResponse": OAuth2AccessTokenResponse,
     "PricingTableRequest": PricingTableRequest,
-    "PricingTableRequestData": PricingTableRequestData,
-    "PricingTableRequestDataDiscount": PricingTableRequestDataDiscount,
     "PricingTableRequestOptions": PricingTableRequestOptions,
-    "PricingTableRequestOptions1": PricingTableRequestOptions1,
     "PricingTableRequestOptionsDiscount": PricingTableRequestOptionsDiscount,
     "PricingTableRequestOptionsTaxFirst": PricingTableRequestOptionsTaxFirst,
     "PricingTableRequestOptionsTaxSecond": PricingTableRequestOptionsTaxSecond,
+    "PricingTableRequestRowData": PricingTableRequestRowData,
+    "PricingTableRequestRowDataDiscount": PricingTableRequestRowDataDiscount,
+    "PricingTableRequestRowDataTaxFirst": PricingTableRequestRowDataTaxFirst,
+    "PricingTableRequestRowDataTaxSecond": PricingTableRequestRowDataTaxSecond,
+    "PricingTableRequestRowOptions": PricingTableRequestRowOptions,
     "PricingTableRequestRows": PricingTableRequestRows,
     "PricingTableRequestSections": PricingTableRequestSections,
     "PricingTablesResponse": PricingTablesResponse,
@@ -281,9 +283,7 @@ let typeMap: {[index: string]: any} = {
     "PricingTablesResponseSummary": PricingTablesResponseSummary,
     "PricingTablesResponseTables": PricingTablesResponseTables,
     "TemplateDetailsResponse": TemplateDetailsResponse,
-    "TemplateDetailsResponseAssignedTo": TemplateDetailsResponseAssignedTo,
     "TemplateDetailsResponseContentPlaceholders": TemplateDetailsResponseContentPlaceholders,
-    "TemplateDetailsResponseFields": TemplateDetailsResponseFields,
     "TemplateDetailsResponseImages": TemplateDetailsResponseImages,
     "TemplateDetailsResponsePreassignedPerson": TemplateDetailsResponsePreassignedPerson,
     "TemplateDetailsResponseRoles": TemplateDetailsResponseRoles,

@@ -7,19 +7,21 @@
  * Do not edit the class manually.
  */
 
-import { PricingTableRequestDataDiscount } from './PricingTableRequestDataDiscount';
+import { PricingTableRequestRowDataDiscount } from './PricingTableRequestRowDataDiscount';
+import { PricingTableRequestRowDataTaxFirst } from './PricingTableRequestRowDataTaxFirst';
+import { PricingTableRequestRowDataTaxSecond } from './PricingTableRequestRowDataTaxSecond';
 import { HttpFile } from '../http/http';
 
-export class PricingTableRequestData {
+export class PricingTableRequestRowData {
     'name': string;
     'description'?: string;
     'price': number;
     'cost'?: number;
     'qty': number;
     'sku'?: string;
-    'discount'?: PricingTableRequestDataDiscount;
-    'taxFirst'?: PricingTableRequestDataDiscount;
-    'taxSecond'?: PricingTableRequestDataDiscount;
+    'discount'?: PricingTableRequestRowDataDiscount;
+    'taxFirst'?: PricingTableRequestRowDataTaxFirst;
+    'taxSecond'?: PricingTableRequestRowDataTaxSecond;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -63,24 +65,24 @@ export class PricingTableRequestData {
         {
             "name": "discount",
             "baseName": "discount",
-            "type": "PricingTableRequestDataDiscount",
+            "type": "PricingTableRequestRowDataDiscount",
             "format": ""
         },
         {
             "name": "taxFirst",
             "baseName": "tax_first",
-            "type": "PricingTableRequestDataDiscount",
+            "type": "PricingTableRequestRowDataTaxFirst",
             "format": ""
         },
         {
             "name": "taxSecond",
             "baseName": "tax_second",
-            "type": "PricingTableRequestDataDiscount",
+            "type": "PricingTableRequestRowDataTaxSecond",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTableRequestData.attributeTypeMap;
+        return PricingTableRequestRowData.attributeTypeMap;
     }
 
     public constructor() {
