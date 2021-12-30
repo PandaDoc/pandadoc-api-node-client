@@ -7,13 +7,13 @@
  * Do not edit the class manually.
  */
 
-import { PricingTableRequestData } from './PricingTableRequestData';
-import { PricingTableRequestOptions1 } from './PricingTableRequestOptions1';
+import { PricingTableRequestRowData } from './PricingTableRequestRowData';
+import { PricingTableRequestRowOptions } from './PricingTableRequestRowOptions';
 import { HttpFile } from '../http/http';
 
 export class PricingTableRequestRows {
-    'options'?: PricingTableRequestOptions1;
-    'data'?: PricingTableRequestData;
+    'options'?: PricingTableRequestRowOptions;
+    'data'?: PricingTableRequestRowData;
     'customFields'?: any;
 
     static readonly discriminator: string | undefined = undefined;
@@ -22,13 +22,13 @@ export class PricingTableRequestRows {
         {
             "name": "options",
             "baseName": "options",
-            "type": "PricingTableRequestOptions1",
+            "type": "PricingTableRequestRowOptions",
             "format": ""
         },
         {
             "name": "data",
             "baseName": "data",
-            "type": "PricingTableRequestData",
+            "type": "PricingTableRequestRowData",
             "format": ""
         },
         {

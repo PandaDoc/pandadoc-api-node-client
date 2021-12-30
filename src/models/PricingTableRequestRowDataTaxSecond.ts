@@ -9,7 +9,7 @@
 
 import { HttpFile } from '../http/http';
 
-export class PricingTableRequestDataDiscount {
+export class PricingTableRequestRowDataTaxSecond {
     'value'?: number;
     'type'?: string;
 
@@ -30,7 +30,7 @@ export class PricingTableRequestDataDiscount {
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTableRequestDataDiscount.attributeTypeMap;
+        return PricingTableRequestRowDataTaxSecond.attributeTypeMap;
     }
 
     public constructor() {

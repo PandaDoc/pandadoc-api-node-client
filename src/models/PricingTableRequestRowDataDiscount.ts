@@ -9,35 +9,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class PricingTableRequestOptions1 {
-    'qtyEditable'?: boolean;
-    'optionalSelected'?: boolean;
-    'optional'?: boolean;
+export class PricingTableRequestRowDataDiscount {
+    'value'?: number;
+    'type'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "qtyEditable",
-            "baseName": "qty_editable",
-            "type": "boolean",
+            "name": "value",
+            "baseName": "value",
+            "type": "number",
             "format": ""
         },
         {
-            "name": "optionalSelected",
-            "baseName": "optional_selected",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "optional",
-            "baseName": "optional",
-            "type": "boolean",
+            "name": "type",
+            "baseName": "type",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTableRequestOptions1.attributeTypeMap;
+        return PricingTableRequestRowDataDiscount.attributeTypeMap;
     }
 
     public constructor() {

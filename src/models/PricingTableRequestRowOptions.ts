@@ -9,42 +9,35 @@
 
 import { HttpFile } from '../http/http';
 
-export class TemplateDetailsResponseAssignedTo {
-    'id'?: string;
-    'name'?: string;
-    'preassignedPerson'?: any;
-    'type'?: string;
+export class PricingTableRequestRowOptions {
+    'qtyEditable'?: boolean;
+    'optionalSelected'?: boolean;
+    'optional'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
+            "name": "qtyEditable",
+            "baseName": "qty_editable",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "name",
-            "baseName": "name",
-            "type": "string",
+            "name": "optionalSelected",
+            "baseName": "optional_selected",
+            "type": "boolean",
             "format": ""
         },
         {
-            "name": "preassignedPerson",
-            "baseName": "preassigned_person",
-            "type": "any",
-            "format": ""
-        },
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string",
+            "name": "optional",
+            "baseName": "optional",
+            "type": "boolean",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TemplateDetailsResponseAssignedTo.attributeTypeMap;
+        return PricingTableRequestRowOptions.attributeTypeMap;
     }
 
     public constructor() {
