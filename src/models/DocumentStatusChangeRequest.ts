@@ -7,11 +7,11 @@
  * Do not edit the class manually.
  */
 
-import { DocumentStatusEnum } from './DocumentStatusEnum';
+import { DocumentStatusRequestEnum } from './DocumentStatusRequestEnum';
 import { HttpFile } from '../http/http';
 
 export class DocumentStatusChangeRequest {
-    'status': DocumentStatusEnum;
+    'status': DocumentStatusRequestEnum;
     /**
     * Provide “private notes” regarding the manual status change.
     */
@@ -27,7 +27,7 @@ export class DocumentStatusChangeRequest {
         {
             "name": "status",
             "baseName": "status",
-            "type": "DocumentStatusEnum",
+            "type": "DocumentStatusRequestEnum",
             "format": ""
         },
         {

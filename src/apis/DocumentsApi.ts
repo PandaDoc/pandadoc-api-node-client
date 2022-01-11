@@ -19,7 +19,7 @@ import { DocumentOrderingFieldsEnum } from '../models/DocumentOrderingFieldsEnum
 import { DocumentSendRequest } from '../models/DocumentSendRequest';
 import { DocumentSendResponse } from '../models/DocumentSendResponse';
 import { DocumentStatusChangeRequest } from '../models/DocumentStatusChangeRequest';
-import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
+import { DocumentStatusRequestEnum } from '../models/DocumentStatusRequestEnum';
 import { DocumentStatusResponse } from '../models/DocumentStatusResponse';
 import { DocumentTransferAllOwnershipRequest } from '../models/DocumentTransferAllOwnershipRequest';
 import { DocumentTransferOwnershipRequest } from '../models/DocumentTransferOwnershipRequest';
@@ -501,7 +501,7 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param tag Search tag. Filter by document tag.
      * @param templateId Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
      */
-    public async listDocuments(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusEnum, statusNe?: DocumentStatusEnum, tag?: string, templateId?: string, _options?: Configuration): Promise<RequestContext> {
+    public async listDocuments(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusRequestEnum, statusNe?: DocumentStatusRequestEnum, tag?: string, templateId?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -619,12 +619,12 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (status !== undefined) {
-            requestContext.setQueryParam("status", ObjectSerializer.serialize(status, "DocumentStatusEnum", ""));
+            requestContext.setQueryParam("status", ObjectSerializer.serialize(status, "DocumentStatusRequestEnum", ""));
         }
 
         // Query Params
         if (statusNe !== undefined) {
-            requestContext.setQueryParam("status__ne", ObjectSerializer.serialize(statusNe, "DocumentStatusEnum", ""));
+            requestContext.setQueryParam("status__ne", ObjectSerializer.serialize(statusNe, "DocumentStatusRequestEnum", ""));
         }
 
         // Query Params

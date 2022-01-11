@@ -19,6 +19,7 @@ export class DocumentDetailsResponseRecipients {
     'firstName'?: string;
     'email'?: string;
     'hasCompleted'?: boolean;
+    'sharedLink'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -75,6 +76,12 @@ export class DocumentDetailsResponseRecipients {
             "name": "hasCompleted",
             "baseName": "has_completed",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "sharedLink",
+            "baseName": "shared_link",
+            "type": "string",
             "format": ""
         }    ];
 

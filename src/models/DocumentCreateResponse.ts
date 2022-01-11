@@ -7,12 +7,13 @@
  * Do not edit the class manually.
  */
 
+import { DocumentStatusEnum } from './DocumentStatusEnum';
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateResponse {
     'id'?: string;
     'name'?: string;
-    'status'?: string;
+    'status'?: DocumentStatusEnum;
     'dateCreated'?: string;
     'dateModified'?: string;
     'expirationDate'?: string;
@@ -36,7 +37,7 @@ export class DocumentCreateResponse {
         {
             "name": "status",
             "baseName": "status",
-            "type": "string",
+            "type": "DocumentStatusEnum",
             "format": ""
         },
         {
