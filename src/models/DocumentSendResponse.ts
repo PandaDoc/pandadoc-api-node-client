@@ -18,6 +18,7 @@ export class DocumentSendResponse {
     'expirationDate'?: string;
     'version'?: string;
     'uuid'?: string;
+    'sharedLink'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -67,6 +68,12 @@ export class DocumentSendResponse {
         {
             "name": "uuid",
             "baseName": "uuid",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "sharedLink",
+            "baseName": "shared_link",
             "type": "string",
             "format": ""
         }    ];

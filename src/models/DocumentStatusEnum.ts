@@ -9,4 +9,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type DocumentStatusEnum = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" ;
+export type DocumentStatusEnum = "document.draft" | "document.sent" | "document.completed" | "document.uploaded" | "document.error" | "document.viewed" | "document.waiting_approval" | "document.approved" | "document.rejected" | "document.waiting_pay" | "document.paid" | "document.voided" | "document.declined" ;

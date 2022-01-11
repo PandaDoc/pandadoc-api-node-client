@@ -39,6 +39,7 @@ export * from './DocumentSendRequest';
 export * from './DocumentSendResponse';
 export * from './DocumentStatusChangeRequest';
 export * from './DocumentStatusEnum';
+export * from './DocumentStatusRequestEnum';
 export * from './DocumentStatusResponse';
 export * from './DocumentTransferAllOwnershipRequest';
 export * from './DocumentTransferOwnershipRequest';
@@ -130,6 +131,7 @@ import { DocumentSendRequest } from './DocumentSendRequest';
 import { DocumentSendResponse } from './DocumentSendResponse';
 import { DocumentStatusChangeRequest } from './DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from './DocumentStatusEnum';
+import { DocumentStatusRequestEnum } from './DocumentStatusRequestEnum';
 import { DocumentStatusResponse } from './DocumentStatusResponse';
 import { DocumentTransferAllOwnershipRequest } from './DocumentTransferAllOwnershipRequest';
 import { DocumentTransferOwnershipRequest } from './DocumentTransferOwnershipRequest';
@@ -202,6 +204,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 let enumsMap: Set<string> = new Set<string>([
     "DocumentOrderingFieldsEnum",
     "DocumentStatusEnum",
+    "DocumentStatusRequestEnum",
     "PricingTableRequestOptionsDiscountTypeEnum",
     "PricingTableRequestOptionsTaxFirstTypeEnum",
     "PricingTableRequestOptionsTaxSecondTypeEnum",

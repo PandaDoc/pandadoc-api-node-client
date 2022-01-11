@@ -43,6 +43,7 @@ import { DocumentSendRequest } from '../models/DocumentSendRequest';
 import { DocumentSendResponse } from '../models/DocumentSendResponse';
 import { DocumentStatusChangeRequest } from '../models/DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
+import { DocumentStatusRequestEnum } from '../models/DocumentStatusRequestEnum';
 import { DocumentStatusResponse } from '../models/DocumentStatusResponse';
 import { DocumentTransferAllOwnershipRequest } from '../models/DocumentTransferAllOwnershipRequest';
 import { DocumentTransferOwnershipRequest } from '../models/DocumentTransferOwnershipRequest';
@@ -745,16 +746,16 @@ export interface DocumentsApiListDocumentsRequest {
     q?: string
     /**
      * Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
-     * @type DocumentStatusEnum
+     * @type DocumentStatusRequestEnum
      * @memberof DocumentsApilistDocuments
      */
-    status?: DocumentStatusEnum
+    status?: DocumentStatusRequestEnum
     /**
      * Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
-     * @type DocumentStatusEnum
+     * @type DocumentStatusRequestEnum
      * @memberof DocumentsApilistDocuments
      */
-    statusNe?: DocumentStatusEnum
+    statusNe?: DocumentStatusRequestEnum
     /**
      * Search tag. Filter by document tag.
      * @type string
