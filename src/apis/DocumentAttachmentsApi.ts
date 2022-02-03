@@ -408,6 +408,13 @@ export class DocumentAttachmentsApiResponseProcessor {
             ) as any;
             throw new ApiException<any>(404, "Not found", body, response.headers);
         }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: any = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "any", ""
+            ) as any;
+            throw new ApiException<any>(409, "Conflict", body, response.headers);
+        }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
@@ -454,6 +461,13 @@ export class DocumentAttachmentsApiResponseProcessor {
                 "any", "binary"
             ) as any;
             throw new ApiException<any>(404, "Not found", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: any = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "any", "binary"
+            ) as any;
+            throw new ApiException<any>(409, "Conflict", body, response.headers);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(
@@ -504,6 +518,13 @@ export class DocumentAttachmentsApiResponseProcessor {
                 "any", ""
             ) as any;
             throw new ApiException<any>(404, "Not found", body, response.headers);
+        }
+        if (isCodeInRange("409", response.httpStatusCode)) {
+            const body: any = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "any", ""
+            ) as any;
+            throw new ApiException<any>(409, "Conflict", body, response.headers);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(

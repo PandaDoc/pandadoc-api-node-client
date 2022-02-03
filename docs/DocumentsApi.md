@@ -84,6 +84,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
@@ -573,6 +574,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
@@ -633,6 +635,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
@@ -706,6 +709,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
@@ -767,6 +771,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
@@ -947,6 +952,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
@@ -1014,6 +1020,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
@@ -1202,6 +1209,7 @@ Name | Type | Description  | Notes
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

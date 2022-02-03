@@ -26,6 +26,7 @@ export * from './DocumentCreateRequestContentPlaceholders';
 export * from './DocumentCreateRequestImages';
 export * from './DocumentCreateRequestRecipients';
 export * from './DocumentCreateResponse';
+export * from './DocumentCreateResponseLinks';
 export * from './DocumentDetailsResponse';
 export * from './DocumentDetailsResponseCreatedBy';
 export * from './DocumentDetailsResponseGrandTotal';
@@ -118,6 +119,7 @@ import { DocumentCreateRequestContentPlaceholders } from './DocumentCreateReques
 import { DocumentCreateRequestImages } from './DocumentCreateRequestImages';
 import { DocumentCreateRequestRecipients } from './DocumentCreateRequestRecipients';
 import { DocumentCreateResponse } from './DocumentCreateResponse';
+import { DocumentCreateResponseLinks } from './DocumentCreateResponseLinks';
 import { DocumentDetailsResponse } from './DocumentDetailsResponse';
 import { DocumentDetailsResponseCreatedBy } from './DocumentDetailsResponseCreatedBy';
 import { DocumentDetailsResponseGrandTotal } from './DocumentDetailsResponseGrandTotal';
@@ -239,6 +241,7 @@ let typeMap: {[index: string]: any} = {
     "DocumentCreateRequestImages": DocumentCreateRequestImages,
     "DocumentCreateRequestRecipients": DocumentCreateRequestRecipients,
     "DocumentCreateResponse": DocumentCreateResponse,
+    "DocumentCreateResponseLinks": DocumentCreateResponseLinks,
     "DocumentDetailsResponse": DocumentDetailsResponse,
     "DocumentDetailsResponseCreatedBy": DocumentDetailsResponseCreatedBy,
     "DocumentDetailsResponseGrandTotal": DocumentDetailsResponseGrandTotal,

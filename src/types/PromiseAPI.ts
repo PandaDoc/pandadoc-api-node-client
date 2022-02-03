@@ -30,6 +30,7 @@ import { DocumentCreateRequestContentPlaceholders } from '../models/DocumentCrea
 import { DocumentCreateRequestImages } from '../models/DocumentCreateRequestImages';
 import { DocumentCreateRequestRecipients } from '../models/DocumentCreateRequestRecipients';
 import { DocumentCreateResponse } from '../models/DocumentCreateResponse';
+import { DocumentCreateResponseLinks } from '../models/DocumentCreateResponseLinks';
 import { DocumentDetailsResponse } from '../models/DocumentDetailsResponse';
 import { DocumentDetailsResponseCreatedBy } from '../models/DocumentDetailsResponseCreatedBy';
 import { DocumentDetailsResponseGrandTotal } from '../models/DocumentDetailsResponseGrandTotal';

@@ -7,6 +7,7 @@
  * Do not edit the class manually.
  */
 
+import { DocumentCreateResponseLinks } from './DocumentCreateResponseLinks';
 import { DocumentStatusEnum } from './DocumentStatusEnum';
 import { HttpFile } from '../http/http';
 
@@ -18,6 +19,8 @@ export class DocumentCreateResponse {
     'dateModified'?: string;
     'expirationDate'?: string;
     'uuid'?: string;
+    'links'?: Array<DocumentCreateResponseLinks>;
+    'infoMessage'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -61,6 +64,18 @@ export class DocumentCreateResponse {
         {
             "name": "uuid",
             "baseName": "uuid",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "links",
+            "baseName": "links",
+            "type": "Array<DocumentCreateResponseLinks>",
+            "format": ""
+        },
+        {
+            "name": "infoMessage",
+            "baseName": "info_message",
             "type": "string",
             "format": ""
         }    ];
