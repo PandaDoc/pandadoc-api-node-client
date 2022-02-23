@@ -179,7 +179,7 @@ export class ObjectAPILogsApi {
      * List API Log
      * @param param the request object
      */
-    public listLogs(param: APILogsApiListLogsRequest, options?: Configuration): Promise<APILogListResponse> {
+    public listLogs(param: APILogsApiListLogsRequest = {}, options?: Configuration): Promise<APILogListResponse> {
         return this.api.listLogs(param.since, param.to, param.count, param.page, param.statuses, param.methods, param.search, param.environmentType,  options).toPromise();
     }
 
@@ -268,7 +268,7 @@ export class ObjectContactsApi {
      * List contacts
      * @param param the request object
      */
-    public listContacts(param: ContactsApiListContactsRequest, options?: Configuration): Promise<ContactListResponse> {
+    public listContacts(param: ContactsApiListContactsRequest = {}, options?: Configuration): Promise<ContactListResponse> {
         return this.api.listContacts( options).toPromise();
     }
 
@@ -360,7 +360,7 @@ export class ObjectContentLibraryItemsApi {
      * List Content Library Item
      * @param param the request object
      */
-    public listContentLibraryItems(param: ContentLibraryItemsApiListContentLibraryItemsRequest, options?: Configuration): Promise<ContentLibraryItemListResponse> {
+    public listContentLibraryItems(param: ContentLibraryItemsApiListContentLibraryItemsRequest = {}, options?: Configuration): Promise<ContentLibraryItemListResponse> {
         return this.api.listContentLibraryItems(param.q, param.id, param.deleted, param.folderUuid, param.count, param.page, param.tag,  options).toPromise();
     }
 
@@ -524,7 +524,7 @@ export interface DocumentsApiChangeDocumentStatusRequest {
 
 export interface DocumentsApiCreateDocumentRequest {
     /**
-     * Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](#/schemas/DocumentCreateByTemplateRequest) and [by pdf](#/schemas/DocumentCreateByPdfRequest) 
+     * Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](/schemas/DocumentCreateByTemplateRequest) and [by pdf](/schemas/DocumentCreateByPdfRequest) 
      * @type DocumentCreateRequest
      * @memberof DocumentsApicreateDocument
      */
@@ -746,13 +746,13 @@ export interface DocumentsApiListDocumentsRequest {
      */
     q?: string
     /**
-     * Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
+     * Specify the status of documents to return.   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined   * 13: document.external_review 
      * @type DocumentStatusRequestEnum
      * @memberof DocumentsApilistDocuments
      */
     status?: DocumentStatusRequestEnum
     /**
-     * Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined 
+     * Specify the status of documents to return (exclude).   * 0: document.draft   * 1: document.sent   * 2: document.completed   * 3: document.uploaded   * 4: document.error   * 5: document.viewed   * 6: document.waiting_approval   * 7: document.approved   * 8: document.rejected   * 9: document.waiting_pay   * 10: document.paid   * 11: document.voided   * 12: document.declined   * 13: document.external_review 
      * @type DocumentStatusRequestEnum
      * @memberof DocumentsApilistDocuments
      */
@@ -912,7 +912,7 @@ export class ObjectDocumentsApi {
      * List documents
      * @param param the request object
      */
-    public listDocuments(param: DocumentsApiListDocumentsRequest, options?: Configuration): Promise<DocumentListResponse> {
+    public listDocuments(param: DocumentsApiListDocumentsRequest = {}, options?: Configuration): Promise<DocumentListResponse> {
         return this.api.listDocuments(param.completedFrom, param.completedTo, param.contactId, param.count, param.createdFrom, param.createdTo, param.deleted, param.id, param.folderUuid, param.formId, param.membershipId, param.metadata, param.modifiedFrom, param.modifiedTo, param.orderBy, param.page, param.q, param.status, param.statusNe, param.tag, param.templateId,  options).toPromise();
     }
 
@@ -1081,7 +1081,7 @@ export class ObjectFoldersAPIApi {
      * List Documents Folders
      * @param param the request object
      */
-    public listDocumentFolders(param: FoldersAPIApiListDocumentFoldersRequest, options?: Configuration): Promise<DocumentsFolderListResponse> {
+    public listDocumentFolders(param: FoldersAPIApiListDocumentFoldersRequest = {}, options?: Configuration): Promise<DocumentsFolderListResponse> {
         return this.api.listDocumentFolders(param.parentUuid, param.count, param.page,  options).toPromise();
     }
 
@@ -1090,7 +1090,7 @@ export class ObjectFoldersAPIApi {
      * List Templates Folders
      * @param param the request object
      */
-    public listTemplateFolders(param: FoldersAPIApiListTemplateFoldersRequest, options?: Configuration): Promise<TemplatesFolderListResponse> {
+    public listTemplateFolders(param: FoldersAPIApiListTemplateFoldersRequest = {}, options?: Configuration): Promise<TemplatesFolderListResponse> {
         return this.api.listTemplateFolders(param.parentUuid, param.count, param.page,  options).toPromise();
     }
 
@@ -1168,7 +1168,7 @@ export class ObjectFormsApi {
      * Forms
      * @param param the request object
      */
-    public listForm(param: FormsApiListFormRequest, options?: Configuration): Promise<FormListResponse> {
+    public listForm(param: FormsApiListFormRequest = {}, options?: Configuration): Promise<FormListResponse> {
         return this.api.listForm(param.count, param.page, param.status, param.orderBy, param.asc, param.name,  options).toPromise();
     }
 
@@ -1204,7 +1204,7 @@ export class ObjectMembersApi {
      * Current member details
      * @param param the request object
      */
-    public detailsCurrentMember(param: MembersApiDetailsCurrentMemberRequest, options?: Configuration): Promise<MemberDetailsResponse> {
+    public detailsCurrentMember(param: MembersApiDetailsCurrentMemberRequest = {}, options?: Configuration): Promise<MemberDetailsResponse> {
         return this.api.detailsCurrentMember( options).toPromise();
     }
 
@@ -1222,7 +1222,7 @@ export class ObjectMembersApi {
      * List members
      * @param param the request object
      */
-    public listMembers(param: MembersApiListMembersRequest, options?: Configuration): Promise<MemberListResponse> {
+    public listMembers(param: MembersApiListMembersRequest = {}, options?: Configuration): Promise<MemberListResponse> {
         return this.api.listMembers( options).toPromise();
     }
 
@@ -1281,7 +1281,7 @@ export class ObjectOAuth20AuthenticationApi {
      * Create/Refresh Access Token
      * @param param the request object
      */
-    public accessToken(param: OAuth20AuthenticationApiAccessTokenRequest, options?: Configuration): Promise<OAuth2AccessTokenResponse> {
+    public accessToken(param: OAuth20AuthenticationApiAccessTokenRequest = {}, options?: Configuration): Promise<OAuth2AccessTokenResponse> {
         return this.api.accessToken(param.grantType, param.clientId, param.clientSecret, param.code, param.scope, param.refreshToken,  options).toPromise();
     }
 
@@ -1389,7 +1389,7 @@ export class ObjectTemplatesApi {
      * List Templates
      * @param param the request object
      */
-    public listTemplates(param: TemplatesApiListTemplatesRequest, options?: Configuration): Promise<TemplateListResponse> {
+    public listTemplates(param: TemplatesApiListTemplatesRequest = {}, options?: Configuration): Promise<TemplateListResponse> {
         return this.api.listTemplates(param.q, param.shared, param.deleted, param.count, param.page, param.id, param.folderUuid, param.tag,  options).toPromise();
     }
 
