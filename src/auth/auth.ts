@@ -66,6 +66,7 @@ export class Oauth2Authentication implements SecurityAuthentication {
 
 
 export type AuthMethods = {
+    "default"?: SecurityAuthentication,
     "apiKey"?: SecurityAuthentication,
     "oauth2"?: SecurityAuthentication
 }
@@ -76,6 +77,7 @@ export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
 export type OAuth2Configuration = { accessToken: string };
 
 export type AuthMethodsConfiguration = {
+    "default"?: SecurityAuthentication,
     "apiKey"?: ApiKeyConfiguration,
     "oauth2"?: OAuth2Configuration
 }
@@ -90,6 +92,7 @@ export function configureAuthMethods(config: AuthMethodsConfiguration | undefine
     if (!config) {
         return authMethods;
     }
+    authMethods["default"] = config["default"]
 
     if (config["apiKey"]) {
         authMethods["apiKey"] = new ApiKeyAuthentication(

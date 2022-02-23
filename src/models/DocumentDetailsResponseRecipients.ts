@@ -12,6 +12,7 @@ import { HttpFile } from '../http/http';
 export class DocumentDetailsResponseRecipients {
     'recipientType'?: string;
     'role'?: string;
+    'roles'?: Array<string>;
     'lastName'?: string;
     'signingOrder'?: any;
     'id'?: string;
@@ -34,6 +35,12 @@ export class DocumentDetailsResponseRecipients {
             "name": "role",
             "baseName": "role",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "roles",
+            "baseName": "roles",
+            "type": "Array<string>",
             "format": ""
         },
         {
