@@ -2,7 +2,9 @@ wwwroot/*.js
 node_modules
 typings
 dist
+.DS_Store
 
 .idea
 .vscode
 .history
+.npmrc
