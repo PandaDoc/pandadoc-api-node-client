@@ -28,6 +28,10 @@ export class DocumentCreateRequest {
     */
     'folderUuid'?: string;
     /**
+    * You can set an owner of a document as an `email` or `membership_id`
+    */
+    'owner'?: { [key: string]: string; };
+    /**
     * The list of recipients you're sending the document to. Every object must contain the `email` parameter. The `role`, `first_name` and `last_name` parameters are optional. If the `role` parameter is passed, a person is assigned all fields matching their corresponding role. If a role was not passed, a person receives a read-only link to view the document. If the `first_name` and `last_name` are not passed, the system does this 1. Creates a new contact, if none exists with the given `email`; or 2. Gets the existing contact with the given `email` that already exists.
     */
     'recipients'?: Array<DocumentCreateRequestRecipients>;
@@ -87,6 +91,12 @@ export class DocumentCreateRequest {
             "name": "folderUuid",
             "baseName": "folder_uuid",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "owner",
+            "baseName": "owner",
+            "type": "{ [key: string]: string; }",
             "format": ""
         },
         {

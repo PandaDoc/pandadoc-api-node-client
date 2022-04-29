@@ -59,14 +59,6 @@ export * from './MemberDetailsResponse';
 export * from './MemberListResponse';
 export * from './OAuth2AccessTokenResponse';
 export * from './PricingTableRequest';
-export * from './PricingTableRequestOptions';
-export * from './PricingTableRequestOptionsDiscount';
-export * from './PricingTableRequestOptionsTaxFirst';
-export * from './PricingTableRequestOptionsTaxSecond';
-export * from './PricingTableRequestRowData';
-export * from './PricingTableRequestRowDataDiscount';
-export * from './PricingTableRequestRowDataTaxFirst';
-export * from './PricingTableRequestRowDataTaxSecond';
 export * from './PricingTableRequestRowOptions';
 export * from './PricingTableRequestRows';
 export * from './PricingTableRequestSections';
@@ -152,14 +144,6 @@ import { MemberDetailsResponse } from './MemberDetailsResponse';
 import { MemberListResponse } from './MemberListResponse';
 import { OAuth2AccessTokenResponse } from './OAuth2AccessTokenResponse';
 import { PricingTableRequest } from './PricingTableRequest';
-import { PricingTableRequestOptions } from './PricingTableRequestOptions';
-import { PricingTableRequestOptionsDiscount, PricingTableRequestOptionsDiscountTypeEnum     } from './PricingTableRequestOptionsDiscount';
-import { PricingTableRequestOptionsTaxFirst, PricingTableRequestOptionsTaxFirstTypeEnum     } from './PricingTableRequestOptionsTaxFirst';
-import { PricingTableRequestOptionsTaxSecond, PricingTableRequestOptionsTaxSecondTypeEnum     } from './PricingTableRequestOptionsTaxSecond';
-import { PricingTableRequestRowData } from './PricingTableRequestRowData';
-import { PricingTableRequestRowDataDiscount } from './PricingTableRequestRowDataDiscount';
-import { PricingTableRequestRowDataTaxFirst } from './PricingTableRequestRowDataTaxFirst';
-import { PricingTableRequestRowDataTaxSecond } from './PricingTableRequestRowDataTaxSecond';
 import { PricingTableRequestRowOptions } from './PricingTableRequestRowOptions';
 import { PricingTableRequestRows } from './PricingTableRequestRows';
 import { PricingTableRequestSections } from './PricingTableRequestSections';
@@ -207,9 +191,6 @@ let enumsMap: Set<string> = new Set<string>([
     "DocumentOrderingFieldsEnum",
     "DocumentStatusEnum",
     "DocumentStatusRequestEnum",
-    "PricingTableRequestOptionsDiscountTypeEnum",
-    "PricingTableRequestOptionsTaxFirstTypeEnum",
-    "PricingTableRequestOptionsTaxSecondTypeEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -271,14 +252,6 @@ let typeMap: {[index: string]: any} = {
     "MemberListResponse": MemberListResponse,
     "OAuth2AccessTokenResponse": OAuth2AccessTokenResponse,
     "PricingTableRequest": PricingTableRequest,
-    "PricingTableRequestOptions": PricingTableRequestOptions,
-    "PricingTableRequestOptionsDiscount": PricingTableRequestOptionsDiscount,
-    "PricingTableRequestOptionsTaxFirst": PricingTableRequestOptionsTaxFirst,
-    "PricingTableRequestOptionsTaxSecond": PricingTableRequestOptionsTaxSecond,
-    "PricingTableRequestRowData": PricingTableRequestRowData,
-    "PricingTableRequestRowDataDiscount": PricingTableRequestRowDataDiscount,
-    "PricingTableRequestRowDataTaxFirst": PricingTableRequestRowDataTaxFirst,
-    "PricingTableRequestRowDataTaxSecond": PricingTableRequestRowDataTaxSecond,
     "PricingTableRequestRowOptions": PricingTableRequestRowOptions,
     "PricingTableRequestRows": PricingTableRequestRows,
     "PricingTableRequestSections": PricingTableRequestSections,

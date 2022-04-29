@@ -112,6 +112,9 @@ const body:pd_api.DocumentsApiCreateDocumentRequest = {
     name: "API Sample Document from PandaDoc Template",
     templateUuid: "hryJY9mqYZHjQCYQuSjRQg",
     folderUuid: "QMDSzwabfFzTgjW4kUijqQ",
+    owner: {
+      "key": "key_example",
+    },
     recipients: [
       {
         email: "josh@example.com",
@@ -140,24 +143,7 @@ const body:pd_api.DocumentsApiCreateDocumentRequest = {
       {
         name: "Pricing Table 1",
         dataMerge: true,
-        options: {
-          currency: "USD",
-          discount: {
-            type: "absolute",
-            name: "Global Discount",
-            value: 2.26,
-          },
-          taxFirst: {
-            type: "percent",
-            name: "Tax First",
-            value: 2.26,
-          },
-          taxSecond: {
-            type: "percent",
-            name: "Tax Second",
-            value: 2.26,
-          },
-        },
+        options: {},
         sections: [
           {
             title: "Sample Section",
@@ -170,26 +156,7 @@ const body:pd_api.DocumentsApiCreateDocumentRequest = {
                   optionalSelected: true,
                   optional: true,
                 },
-                data: {
-                  name: "Toy Panda",
-                  description: "Fluffy!",
-                  price: 10,
-                  cost: 8.5,
-                  qty: 3,
-                  sku: "toy_panda",
-                  discount: {
-                    value: 7.5,
-                    type: "percent",
-                  },
-                  taxFirst: {
-                    value: 7.5,
-                    type: "percent",
-                  },
-                  taxSecond: {
-                    value: 7.5,
-                    type: "percent",
-                  },
-                },
+                data: {},
                 customFields: {},
               },
             ],
@@ -207,24 +174,7 @@ const body:pd_api.DocumentsApiCreateDocumentRequest = {
               {
                 name: "Pricing Table 1",
                 dataMerge: true,
-                options: {
-                  currency: "USD",
-                  discount: {
-                    type: "absolute",
-                    name: "Global Discount",
-                    value: 2.26,
-                  },
-                  taxFirst: {
-                    type: "percent",
-                    name: "Tax First",
-                    value: 2.26,
-                  },
-                  taxSecond: {
-                    type: "percent",
-                    name: "Tax Second",
-                    value: 2.26,
-                  },
-                },
+                options: {},
                 sections: [
                   {
                     title: "Sample Section",
@@ -237,26 +187,7 @@ const body:pd_api.DocumentsApiCreateDocumentRequest = {
                           optionalSelected: true,
                           optional: true,
                         },
-                        data: {
-                          name: "Toy Panda",
-                          description: "Fluffy!",
-                          price: 10,
-                          cost: 8.5,
-                          qty: 3,
-                          sku: "toy_panda",
-                          discount: {
-                            value: 7.5,
-                            type: "percent",
-                          },
-                          taxFirst: {
-                            value: 7.5,
-                            type: "percent",
-                          },
-                          taxSecond: {
-                            value: 7.5,
-                            type: "percent",
-                          },
-                        },
+                        data: {},
                         customFields: {},
                       },
                     ],

@@ -7,7 +7,6 @@
  * Do not edit the class manually.
  */
 
-import { PricingTableRequestOptions } from './PricingTableRequestOptions';
 import { PricingTableRequestSections } from './PricingTableRequestSections';
 import { HttpFile } from '../http/http';
 
@@ -17,7 +16,7 @@ export class PricingTableRequest {
     * When set to true all field names in data rows must be passed as external names defined in the template.
     */
     'dataMerge'?: boolean;
-    'options'?: PricingTableRequestOptions;
+    'options'?: any;
     'sections'?: Array<PricingTableRequestSections>;
 
     static readonly discriminator: string | undefined = undefined;
@@ -38,7 +37,7 @@ export class PricingTableRequest {
         {
             "name": "options",
             "baseName": "options",
-            "type": "PricingTableRequestOptions",
+            "type": "any",
             "format": ""
         },
         {

@@ -18,21 +18,16 @@ async function createDocumentFromPandadocTemplate(
   const pricingTables: Array<pd_api.PricingTableRequest> = [
     {
       name: "Pricing Table 1",
+      dataMerge: true,
       options: {
-        currency: "USD",
-        discount: {
+        Discount: {
           type: "absolute",
           name: "Global Discount",
           value: 2.26,
         },
-        taxFirst: {
+        Tax: {
           type: "percent",
           name: "Tax First",
-          value: 2.26,
-        },
-        taxSecond: {
-          type: "percent",
-          name: "Tax Second",
           value: 2.26,
         },
       },
@@ -49,24 +44,20 @@ async function createDocumentFromPandadocTemplate(
                 optional: true,
               },
               data: {
-                name: "Toy Panda",
-                description: "Fluffy!",
-                price: 10,
-                cost: 8.5,
-                qty: 3,
-                sku: "toy_panda",
-                discount: {
-                  value: 7.5,
-                  type: "percent",
+                "Name": "Toy Panda",
+                "Description": "Fluffy",
+                "Price": 10,
+                "Cost": 8.5,
+                "QTY": 3,
+                "SKU": "toy_panda",
+                "Discount": {
+                  "value": 10,
+                  "type": "percent"
                 },
-                taxFirst: {
-                  value: 7.5,
-                  type: "percent",
-                },
-                taxSecond: {
-                  value: 7.5,
-                  type: "percent",
-                },
+                "Tax": {
+                  "value": 10,
+                  "type": "percent"
+                }
               },
               customFields: {},
             },
