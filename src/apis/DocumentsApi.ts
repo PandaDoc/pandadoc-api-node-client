@@ -547,7 +547,7 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param tag Search tag. Filter by document tag.
      * @param templateId Specify the template used for documents creation. Parameter can&#39;t be used with form_id.
      */
-    public async listDocuments(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: string, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusRequestEnum, statusNe?: DocumentStatusRequestEnum, tag?: string, templateId?: string, _options?: Configuration): Promise<RequestContext> {
+    public async listDocuments(completedFrom?: string, completedTo?: string, contactId?: string, count?: number, createdFrom?: string, createdTo?: string, deleted?: boolean, id?: string, folderUuid?: string, formId?: string, membershipId?: string, metadata?: Array<string>, modifiedFrom?: string, modifiedTo?: string, orderBy?: DocumentOrderingFieldsEnum, page?: number, q?: string, status?: DocumentStatusRequestEnum, statusNe?: DocumentStatusRequestEnum, tag?: string, templateId?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -635,7 +635,7 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (metadata !== undefined) {
-            requestContext.setQueryParam("metadata", ObjectSerializer.serialize(metadata, "string", ""));
+            requestContext.setQueryParam("metadata", ObjectSerializer.serialize(metadata, "Array<string>", ""));
         }
 
         // Query Params

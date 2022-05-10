@@ -50,7 +50,7 @@ export type RequestBody = undefined | string | FormData | URLSearchParams;
  */
 export class RequestContext {
     private headers: { [key: string]: string } = {
-        "User-Agent": "pandadoc_node_client/5.0.0",
+        "User-Agent": "pandadoc_node_client/5.0.1",
     };
     private body: RequestBody = undefined;
     private url: URLParse;
@@ -66,12 +66,48 @@ export class RequestContext {
         this.url = new URLParse(url, true);
     }
 
+    public queryStringify(query: any, prefix: string = '') {
+        function encodeInput(input: any) {
+            try {
+                return encodeURIComponent(input);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        const pairs: any[] = [];
+
+        if ('string' !== typeof prefix) prefix = '?';
+
+        Object.keys(query).forEach((key) => {
+            let value = query[key];
+
+            //
+            // Edge cases where we actually want to encode the value to an empty
+            // string instead of the stringified value.
+            //
+            if (!value && (value === null || value === undefined || isNaN(value))) {
+                value = '';
+            }
+
+            if (Array.isArray(value)) {
+                value.forEach(subValue => {
+                    pairs.push(encodeInput(key) + '=' + encodeInput(subValue));
+                });
+                return;
+            }
+            pairs.push(encodeInput(key) + '=' + encodeInput(value));
+        });
+
+        return pairs.length ? prefix + pairs.join('&') : '';
+    }
+
     /*
      * Returns the url set in the constructor including the query string
      *
      */
     public getUrl(): string {
-        return this.url.toString();
+        return this.url.toString(this.queryStringify);
     }
 
     /**
