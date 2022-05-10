@@ -703,10 +703,10 @@ export interface DocumentsApiListDocumentsRequest {
     membershipId?: string
     /**
      * Specify metadata to filter by in the format of &#x60;metadata_{metadata-key}&#x3D;{metadata-value}&#x60; such as &#x60;metadata_opportunity_id&#x3D;2181432&#x60;. The &#x60;metadata_&#x60; prefix is always required.
-     * @type string
+     * @type Array&lt;string&gt;
      * @memberof DocumentsApilistDocuments
      */
-    metadata?: string
+    metadata?: Array<string>
     /**
      * Return results where the &#x60;date_modified&#x60; field (iso-8601) is greater than or equal to this value.
      * @type string
