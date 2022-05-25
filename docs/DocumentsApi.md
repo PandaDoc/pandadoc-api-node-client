@@ -599,6 +599,8 @@ const body:pd_api.DocumentsApiDownloadDocumentRequest = {
   watermarkOpacity: 0.5,
   // string | Specify watermark text. (optional)
   watermarkText: "John Doe inc.",
+  // boolean | Set as `true` if you want to receive a zip file with all documents in separate when document transaction contains more than 1. (optional)
+  separateFiles: true,
 };
 
 apiInstance.downloadDocument(body).then((data) => {
@@ -616,6 +618,7 @@ Name | Type | Description  | Notes
  **watermarkFontSize** | [**number**] | Font size of the watermark. | (optional) defaults to undefined
  **watermarkOpacity** | [**number**] | In range 0.0-1.0 | (optional) defaults to undefined
  **watermarkText** | [**string**] | Specify watermark text. | (optional) defaults to undefined
+ **separateFiles** | [**boolean**] | Set as &#x60;true&#x60; if you want to receive a zip file with all documents in separate when document transaction contains more than 1. | (optional) defaults to undefined
 
 
 ### Return type
@@ -666,6 +669,8 @@ const apiInstance = new pd_api.DocumentsApi(configuration);
 const body:pd_api.DocumentsApiDownloadProtectedDocumentRequest = {
   // string | Specify document ID.
   id: "Mebvyy3NGsGBnY2rPLkH84",
+  // boolean | Set as `true` if you want to receive a zip file with all documents in separate when document transaction contains more than 1. (optional)
+  separateFiles: true,
 };
 
 apiInstance.downloadProtectedDocument(body).then((data) => {
@@ -679,6 +684,7 @@ apiInstance.downloadProtectedDocument(body).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | [**string**] | Specify document ID. | defaults to undefined
+ **separateFiles** | [**boolean**] | Set as &#x60;true&#x60; if you want to receive a zip file with all documents in separate when document transaction contains more than 1. | (optional) defaults to undefined
 
 
 ### Return type

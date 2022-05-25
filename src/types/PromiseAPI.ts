@@ -405,9 +405,10 @@ export class PromiseDocumentsApi {
      * @param watermarkFontSize Font size of the watermark.
      * @param watermarkOpacity In range 0.0-1.0
      * @param watermarkText Specify watermark text.
+     * @param separateFiles Set as &#x60;true&#x60; if you want to receive a zip file with all documents in separate when document transaction contains more than 1.
      */
-    public downloadDocument(id: string, watermarkColor?: string, watermarkFontSize?: number, watermarkOpacity?: number, watermarkText?: string, _options?: Configuration): Promise<HttpFile> {
-        const result = this.api.downloadDocument(id, watermarkColor, watermarkFontSize, watermarkOpacity, watermarkText, _options);
+    public downloadDocument(id: string, watermarkColor?: string, watermarkFontSize?: number, watermarkOpacity?: number, watermarkText?: string, separateFiles?: boolean, _options?: Configuration): Promise<HttpFile> {
+        const result = this.api.downloadDocument(id, watermarkColor, watermarkFontSize, watermarkOpacity, watermarkText, separateFiles, _options);
         return result.toPromise();
     }
 
@@ -415,9 +416,10 @@ export class PromiseDocumentsApi {
      * Download a signed PDF of a completed document
      * Download document protected
      * @param id Specify document ID.
+     * @param separateFiles Set as &#x60;true&#x60; if you want to receive a zip file with all documents in separate when document transaction contains more than 1.
      */
-    public downloadProtectedDocument(id: string, _options?: Configuration): Promise<HttpFile> {
-        const result = this.api.downloadProtectedDocument(id, _options);
+    public downloadProtectedDocument(id: string, separateFiles?: boolean, _options?: Configuration): Promise<HttpFile> {
+        const result = this.api.downloadProtectedDocument(id, separateFiles, _options);
         return result.toPromise();
     }
 

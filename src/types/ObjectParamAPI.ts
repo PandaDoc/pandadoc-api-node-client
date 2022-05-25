@@ -623,6 +623,12 @@ export interface DocumentsApiDownloadDocumentRequest {
      * @memberof DocumentsApidownloadDocument
      */
     watermarkText?: string
+    /**
+     * Set as &#x60;true&#x60; if you want to receive a zip file with all documents in separate when document transaction contains more than 1.
+     * @type boolean
+     * @memberof DocumentsApidownloadDocument
+     */
+    separateFiles?: boolean
 }
 
 export interface DocumentsApiDownloadProtectedDocumentRequest {
@@ -632,6 +638,12 @@ export interface DocumentsApiDownloadProtectedDocumentRequest {
      * @memberof DocumentsApidownloadProtectedDocument
      */
     id: string
+    /**
+     * Set as &#x60;true&#x60; if you want to receive a zip file with all documents in separate when document transaction contains more than 1.
+     * @type boolean
+     * @memberof DocumentsApidownloadProtectedDocument
+     */
+    separateFiles?: boolean
 }
 
 export interface DocumentsApiListDocumentsRequest {
@@ -888,7 +900,7 @@ export class ObjectDocumentsApi {
      * @param param the request object
      */
     public downloadDocument(param: DocumentsApiDownloadDocumentRequest, options?: Configuration): Promise<HttpFile> {
-        return this.api.downloadDocument(param.id, param.watermarkColor, param.watermarkFontSize, param.watermarkOpacity, param.watermarkText,  options).toPromise();
+        return this.api.downloadDocument(param.id, param.watermarkColor, param.watermarkFontSize, param.watermarkOpacity, param.watermarkText, param.separateFiles,  options).toPromise();
     }
 
     /**
@@ -897,7 +909,7 @@ export class ObjectDocumentsApi {
      * @param param the request object
      */
     public downloadProtectedDocument(param: DocumentsApiDownloadProtectedDocumentRequest, options?: Configuration): Promise<HttpFile> {
-        return this.api.downloadProtectedDocument(param.id,  options).toPromise();
+        return this.api.downloadProtectedDocument(param.id, param.separateFiles,  options).toPromise();
     }
 
     /**

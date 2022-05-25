@@ -417,14 +417,16 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
      * @param watermarkFontSize Font size of the watermark.
      * @param watermarkOpacity In range 0.0-1.0
      * @param watermarkText Specify watermark text.
+     * @param separateFiles Set as &#x60;true&#x60; if you want to receive a zip file with all documents in separate when document transaction contains more than 1.
      */
-    public async downloadDocument(id: string, watermarkColor?: string, watermarkFontSize?: number, watermarkOpacity?: number, watermarkText?: string, _options?: Configuration): Promise<RequestContext> {
+    public async downloadDocument(id: string, watermarkColor?: string, watermarkFontSize?: number, watermarkOpacity?: number, watermarkText?: string, separateFiles?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new RequiredError("DocumentsApi", "downloadDocument", "id");
         }
+
 
 
 
@@ -459,6 +461,11 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
             requestContext.setQueryParam("watermark_text", ObjectSerializer.serialize(watermarkText, "string", ""));
         }
 
+        // Query Params
+        if (separateFiles !== undefined) {
+            requestContext.setQueryParam("separate_files", ObjectSerializer.serialize(separateFiles, "boolean", ""));
+        }
+
 
         let authMethod: SecurityAuthentication | undefined;
         // Apply auth methods
@@ -484,14 +491,16 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
      * Download a signed PDF of a completed document
      * Download document protected
      * @param id Specify document ID.
+     * @param separateFiles Set as &#x60;true&#x60; if you want to receive a zip file with all documents in separate when document transaction contains more than 1.
      */
-    public async downloadProtectedDocument(id: string, _options?: Configuration): Promise<RequestContext> {
+    public async downloadProtectedDocument(id: string, separateFiles?: boolean, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new RequiredError("DocumentsApi", "downloadProtectedDocument", "id");
         }
+
 
 
         // Path Params
@@ -501,6 +510,11 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.GET);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (separateFiles !== undefined) {
+            requestContext.setQueryParam("separate_files", ObjectSerializer.serialize(separateFiles, "boolean", ""));
+        }
 
 
         let authMethod: SecurityAuthentication | undefined;
