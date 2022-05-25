@@ -13,6 +13,7 @@ export class DocumentDetailsResponseLinkedObjects {
     'provider'?: string;
     'entityType'?: string;
     'entityId'?: string;
+    'id'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -32,6 +33,12 @@ export class DocumentDetailsResponseLinkedObjects {
         {
             "name": "entityId",
             "baseName": "entity_id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "id",
+            "baseName": "id",
             "type": "string",
             "format": ""
         }    ];
