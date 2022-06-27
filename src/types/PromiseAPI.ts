@@ -86,6 +86,20 @@ import { TemplatesFolderListResponse } from '../models/TemplatesFolderListRespon
 import { TemplatesFolderListResponseResults } from '../models/TemplatesFolderListResponseResults';
 import { TemplatesFolderRenameRequest } from '../models/TemplatesFolderRenameRequest';
 import { TemplatesFolderRenameResponse } from '../models/TemplatesFolderRenameResponse';
+import { WebhookEventDetailsResponse } from '../models/WebhookEventDetailsResponse';
+import { WebhookEventErrorEnum } from '../models/WebhookEventErrorEnum';
+import { WebhookEventHttpStatusCodeGroupEnum } from '../models/WebhookEventHttpStatusCodeGroupEnum';
+import { WebhookEventItemResponse } from '../models/WebhookEventItemResponse';
+import { WebhookEventPageResponse } from '../models/WebhookEventPageResponse';
+import { WebhookEventTriggerEnum } from '../models/WebhookEventTriggerEnum';
+import { WebhookSubscriptionCreateRequest } from '../models/WebhookSubscriptionCreateRequest';
+import { WebhookSubscriptionItemResponse } from '../models/WebhookSubscriptionItemResponse';
+import { WebhookSubscriptionListResponse } from '../models/WebhookSubscriptionListResponse';
+import { WebhookSubscriptionPatchRequest } from '../models/WebhookSubscriptionPatchRequest';
+import { WebhookSubscriptionPayloadEnum } from '../models/WebhookSubscriptionPayloadEnum';
+import { WebhookSubscriptionSharedKeyResponse } from '../models/WebhookSubscriptionSharedKeyResponse';
+import { WebhookSubscriptionStatusEnum } from '../models/WebhookSubscriptionStatusEnum';
+import { WebhookSubscriptionTriggerEnum } from '../models/WebhookSubscriptionTriggerEnum';
 import { ObservableAPILogsApi } from './ObservableAPI';
 
 import { APILogsApiRequestFactory, APILogsApiResponseProcessor} from "../apis/APILogsApi";
@@ -751,6 +765,122 @@ export class PromiseTemplatesApi {
      */
     public listTemplates(q?: string, shared?: boolean, deleted?: boolean, count?: number, page?: number, id?: string, folderUuid?: string, tag?: Array<string>, _options?: Configuration): Promise<TemplateListResponse> {
         const result = this.api.listTemplates(q, shared, deleted, count, page, id, folderUuid, tag, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableWebhookEventsApi } from './ObservableAPI';
+
+import { WebhookEventsApiRequestFactory, WebhookEventsApiResponseProcessor} from "../apis/WebhookEventsApi";
+export class PromiseWebhookEventsApi {
+    private api: ObservableWebhookEventsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: WebhookEventsApiRequestFactory,
+        responseProcessor?: WebhookEventsApiResponseProcessor
+    ) {
+        this.api = new ObservableWebhookEventsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Get webhook event by uuid
+     * @param id Webhook event uuid
+     */
+    public detailsWebhookEvent(id: string, _options?: Configuration): Promise<WebhookEventDetailsResponse> {
+        const result = this.api.detailsWebhookEvent(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get webhook event page
+     * @param count Number of element in page
+     * @param page Page number
+     * @param since Filter option: all events from specified timestamp
+     * @param to Filter option: all events up to specified timestamp
+     * @param type Filter option: all events of type
+     * @param httpStatusCode Filter option: all events of http status code
+     * @param error Filter option: all events with following error
+     */
+    public listWebhookEvent(count: number, page: number, since?: Date, to?: Date, type?: Array<WebhookEventTriggerEnum>, httpStatusCode?: Array<WebhookEventHttpStatusCodeGroupEnum>, error?: Array<WebhookEventErrorEnum>, _options?: Configuration): Promise<WebhookEventPageResponse> {
+        const result = this.api.listWebhookEvent(count, page, since, to, type, httpStatusCode, error, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableWebhookSubscriptionsApi } from './ObservableAPI';
+
+import { WebhookSubscriptionsApiRequestFactory, WebhookSubscriptionsApiResponseProcessor} from "../apis/WebhookSubscriptionsApi";
+export class PromiseWebhookSubscriptionsApi {
+    private api: ObservableWebhookSubscriptionsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: WebhookSubscriptionsApiRequestFactory,
+        responseProcessor?: WebhookSubscriptionsApiResponseProcessor
+    ) {
+        this.api = new ObservableWebhookSubscriptionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create webhook subscription
+     * @param webhookSubscriptionCreateRequest 
+     */
+    public createWebhookSubscription(webhookSubscriptionCreateRequest: WebhookSubscriptionCreateRequest, _options?: Configuration): Promise<WebhookSubscriptionItemResponse> {
+        const result = this.api.createWebhookSubscription(webhookSubscriptionCreateRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Delete webhook subscription
+     * @param id Webhook subscription uuid
+     */
+    public deleteWebhookSubscription(id: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteWebhookSubscription(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get webhook subscription by uuid
+     * @param id Webhook subscription uuid
+     */
+    public detailsWebhookSubscription(id: string, _options?: Configuration): Promise<WebhookSubscriptionItemResponse> {
+        const result = this.api.detailsWebhookSubscription(id, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Get all webhook subscriptions
+     */
+    public listWebhookSubscriptions(_options?: Configuration): Promise<WebhookSubscriptionListResponse> {
+        const result = this.api.listWebhookSubscriptions(_options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update webhook subscription
+     * @param id Webhook subscription uuid
+     * @param webhookSubscriptionPatchRequest 
+     */
+    public updateWebhookSubscription(id: string, webhookSubscriptionPatchRequest: WebhookSubscriptionPatchRequest, _options?: Configuration): Promise<WebhookSubscriptionItemResponse> {
+        const result = this.api.updateWebhookSubscription(id, webhookSubscriptionPatchRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Regenerate webhook subscription shared key
+     * @param id Webhook subscription uuid
+     */
+    public updateWebhookSubscriptionSharedKey(id: string, _options?: Configuration): Promise<WebhookSubscriptionSharedKeyResponse> {
+        const result = this.api.updateWebhookSubscriptionSharedKey(id, _options);
         return result.toPromise();
     }
 
