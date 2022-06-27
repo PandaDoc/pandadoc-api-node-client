@@ -82,6 +82,20 @@ export * from './TemplatesFolderListResponse';
 export * from './TemplatesFolderListResponseResults';
 export * from './TemplatesFolderRenameRequest';
 export * from './TemplatesFolderRenameResponse';
+export * from './WebhookEventDetailsResponse';
+export * from './WebhookEventErrorEnum';
+export * from './WebhookEventHttpStatusCodeGroupEnum';
+export * from './WebhookEventItemResponse';
+export * from './WebhookEventPageResponse';
+export * from './WebhookEventTriggerEnum';
+export * from './WebhookSubscriptionCreateRequest';
+export * from './WebhookSubscriptionItemResponse';
+export * from './WebhookSubscriptionListResponse';
+export * from './WebhookSubscriptionPatchRequest';
+export * from './WebhookSubscriptionPayloadEnum';
+export * from './WebhookSubscriptionSharedKeyResponse';
+export * from './WebhookSubscriptionStatusEnum';
+export * from './WebhookSubscriptionTriggerEnum';
 
 import { APILogDetailsResponse } from './APILogDetailsResponse';
 import { APILogListResponse } from './APILogListResponse';
@@ -167,6 +181,20 @@ import { TemplatesFolderListResponse } from './TemplatesFolderListResponse';
 import { TemplatesFolderListResponseResults } from './TemplatesFolderListResponseResults';
 import { TemplatesFolderRenameRequest } from './TemplatesFolderRenameRequest';
 import { TemplatesFolderRenameResponse } from './TemplatesFolderRenameResponse';
+import { WebhookEventDetailsResponse } from './WebhookEventDetailsResponse';
+import { WebhookEventErrorEnum } from './WebhookEventErrorEnum';
+import { WebhookEventHttpStatusCodeGroupEnum } from './WebhookEventHttpStatusCodeGroupEnum';
+import { WebhookEventItemResponse } from './WebhookEventItemResponse';
+import { WebhookEventPageResponse } from './WebhookEventPageResponse';
+import { WebhookEventTriggerEnum } from './WebhookEventTriggerEnum';
+import { WebhookSubscriptionCreateRequest } from './WebhookSubscriptionCreateRequest';
+import { WebhookSubscriptionItemResponse } from './WebhookSubscriptionItemResponse';
+import { WebhookSubscriptionListResponse } from './WebhookSubscriptionListResponse';
+import { WebhookSubscriptionPatchRequest } from './WebhookSubscriptionPatchRequest';
+import { WebhookSubscriptionPayloadEnum } from './WebhookSubscriptionPayloadEnum';
+import { WebhookSubscriptionSharedKeyResponse } from './WebhookSubscriptionSharedKeyResponse';
+import { WebhookSubscriptionStatusEnum } from './WebhookSubscriptionStatusEnum';
+import { WebhookSubscriptionTriggerEnum } from './WebhookSubscriptionTriggerEnum';
 
 /* tslint:disable:no-unused-variable */
 let primitives = [
@@ -191,6 +219,12 @@ let enumsMap: Set<string> = new Set<string>([
     "DocumentOrderingFieldsEnum",
     "DocumentStatusEnum",
     "DocumentStatusRequestEnum",
+    "WebhookEventErrorEnum",
+    "WebhookEventHttpStatusCodeGroupEnum",
+    "WebhookEventTriggerEnum",
+    "WebhookSubscriptionPayloadEnum",
+    "WebhookSubscriptionStatusEnum",
+    "WebhookSubscriptionTriggerEnum",
 ]);
 
 let typeMap: {[index: string]: any} = {
@@ -275,6 +309,14 @@ let typeMap: {[index: string]: any} = {
     "TemplatesFolderListResponseResults": TemplatesFolderListResponseResults,
     "TemplatesFolderRenameRequest": TemplatesFolderRenameRequest,
     "TemplatesFolderRenameResponse": TemplatesFolderRenameResponse,
+    "WebhookEventDetailsResponse": WebhookEventDetailsResponse,
+    "WebhookEventItemResponse": WebhookEventItemResponse,
+    "WebhookEventPageResponse": WebhookEventPageResponse,
+    "WebhookSubscriptionCreateRequest": WebhookSubscriptionCreateRequest,
+    "WebhookSubscriptionItemResponse": WebhookSubscriptionItemResponse,
+    "WebhookSubscriptionListResponse": WebhookSubscriptionListResponse,
+    "WebhookSubscriptionPatchRequest": WebhookSubscriptionPatchRequest,
+    "WebhookSubscriptionSharedKeyResponse": WebhookSubscriptionSharedKeyResponse,
 }
 
 export class ObjectSerializer {

@@ -86,6 +86,20 @@ import { TemplatesFolderListResponse } from '../models/TemplatesFolderListRespon
 import { TemplatesFolderListResponseResults } from '../models/TemplatesFolderListResponseResults';
 import { TemplatesFolderRenameRequest } from '../models/TemplatesFolderRenameRequest';
 import { TemplatesFolderRenameResponse } from '../models/TemplatesFolderRenameResponse';
+import { WebhookEventDetailsResponse } from '../models/WebhookEventDetailsResponse';
+import { WebhookEventErrorEnum } from '../models/WebhookEventErrorEnum';
+import { WebhookEventHttpStatusCodeGroupEnum } from '../models/WebhookEventHttpStatusCodeGroupEnum';
+import { WebhookEventItemResponse } from '../models/WebhookEventItemResponse';
+import { WebhookEventPageResponse } from '../models/WebhookEventPageResponse';
+import { WebhookEventTriggerEnum } from '../models/WebhookEventTriggerEnum';
+import { WebhookSubscriptionCreateRequest } from '../models/WebhookSubscriptionCreateRequest';
+import { WebhookSubscriptionItemResponse } from '../models/WebhookSubscriptionItemResponse';
+import { WebhookSubscriptionListResponse } from '../models/WebhookSubscriptionListResponse';
+import { WebhookSubscriptionPatchRequest } from '../models/WebhookSubscriptionPatchRequest';
+import { WebhookSubscriptionPayloadEnum } from '../models/WebhookSubscriptionPayloadEnum';
+import { WebhookSubscriptionSharedKeyResponse } from '../models/WebhookSubscriptionSharedKeyResponse';
+import { WebhookSubscriptionStatusEnum } from '../models/WebhookSubscriptionStatusEnum';
+import { WebhookSubscriptionTriggerEnum } from '../models/WebhookSubscriptionTriggerEnum';
 
 import { ObservableAPILogsApi } from "./ObservableAPI";
 import { APILogsApiRequestFactory, APILogsApiResponseProcessor} from "../apis/APILogsApi";
@@ -1395,6 +1409,202 @@ export class ObjectTemplatesApi {
      */
     public listTemplates(param: TemplatesApiListTemplatesRequest = {}, options?: Configuration): Promise<TemplateListResponse> {
         return this.api.listTemplates(param.q, param.shared, param.deleted, param.count, param.page, param.id, param.folderUuid, param.tag,  options).toPromise();
+    }
+
+}
+
+import { ObservableWebhookEventsApi } from "./ObservableAPI";
+import { WebhookEventsApiRequestFactory, WebhookEventsApiResponseProcessor} from "../apis/WebhookEventsApi";
+
+export interface WebhookEventsApiDetailsWebhookEventRequest {
+    /**
+     * Webhook event uuid
+     * @type string
+     * @memberof WebhookEventsApidetailsWebhookEvent
+     */
+    id: string
+}
+
+export interface WebhookEventsApiListWebhookEventRequest {
+    /**
+     * Number of element in page
+     * @type number
+     * @memberof WebhookEventsApilistWebhookEvent
+     */
+    count: number
+    /**
+     * Page number
+     * @type number
+     * @memberof WebhookEventsApilistWebhookEvent
+     */
+    page: number
+    /**
+     * Filter option: all events from specified timestamp
+     * @type Date
+     * @memberof WebhookEventsApilistWebhookEvent
+     */
+    since?: Date
+    /**
+     * Filter option: all events up to specified timestamp
+     * @type Date
+     * @memberof WebhookEventsApilistWebhookEvent
+     */
+    to?: Date
+    /**
+     * Filter option: all events of type
+     * @type Array&lt;WebhookEventTriggerEnum&gt;
+     * @memberof WebhookEventsApilistWebhookEvent
+     */
+    type?: Array<WebhookEventTriggerEnum>
+    /**
+     * Filter option: all events of http status code
+     * @type Array&lt;WebhookEventHttpStatusCodeGroupEnum&gt;
+     * @memberof WebhookEventsApilistWebhookEvent
+     */
+    httpStatusCode?: Array<WebhookEventHttpStatusCodeGroupEnum>
+    /**
+     * Filter option: all events with following error
+     * @type Array&lt;WebhookEventErrorEnum&gt;
+     * @memberof WebhookEventsApilistWebhookEvent
+     */
+    error?: Array<WebhookEventErrorEnum>
+}
+
+export class ObjectWebhookEventsApi {
+    private api: ObservableWebhookEventsApi
+
+    public constructor(configuration: Configuration, requestFactory?: WebhookEventsApiRequestFactory, responseProcessor?: WebhookEventsApiResponseProcessor) {
+        this.api = new ObservableWebhookEventsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Get webhook event by uuid
+     * @param param the request object
+     */
+    public detailsWebhookEvent(param: WebhookEventsApiDetailsWebhookEventRequest, options?: Configuration): Promise<WebhookEventDetailsResponse> {
+        return this.api.detailsWebhookEvent(param.id,  options).toPromise();
+    }
+
+    /**
+     * Get webhook event page
+     * @param param the request object
+     */
+    public listWebhookEvent(param: WebhookEventsApiListWebhookEventRequest, options?: Configuration): Promise<WebhookEventPageResponse> {
+        return this.api.listWebhookEvent(param.count, param.page, param.since, param.to, param.type, param.httpStatusCode, param.error,  options).toPromise();
+    }
+
+}
+
+import { ObservableWebhookSubscriptionsApi } from "./ObservableAPI";
+import { WebhookSubscriptionsApiRequestFactory, WebhookSubscriptionsApiResponseProcessor} from "../apis/WebhookSubscriptionsApi";
+
+export interface WebhookSubscriptionsApiCreateWebhookSubscriptionRequest {
+    /**
+     * 
+     * @type WebhookSubscriptionCreateRequest
+     * @memberof WebhookSubscriptionsApicreateWebhookSubscription
+     */
+    webhookSubscriptionCreateRequest: WebhookSubscriptionCreateRequest
+}
+
+export interface WebhookSubscriptionsApiDeleteWebhookSubscriptionRequest {
+    /**
+     * Webhook subscription uuid
+     * @type string
+     * @memberof WebhookSubscriptionsApideleteWebhookSubscription
+     */
+    id: string
+}
+
+export interface WebhookSubscriptionsApiDetailsWebhookSubscriptionRequest {
+    /**
+     * Webhook subscription uuid
+     * @type string
+     * @memberof WebhookSubscriptionsApidetailsWebhookSubscription
+     */
+    id: string
+}
+
+export interface WebhookSubscriptionsApiListWebhookSubscriptionsRequest {
+}
+
+export interface WebhookSubscriptionsApiUpdateWebhookSubscriptionRequest {
+    /**
+     * Webhook subscription uuid
+     * @type string
+     * @memberof WebhookSubscriptionsApiupdateWebhookSubscription
+     */
+    id: string
+    /**
+     * 
+     * @type WebhookSubscriptionPatchRequest
+     * @memberof WebhookSubscriptionsApiupdateWebhookSubscription
+     */
+    webhookSubscriptionPatchRequest: WebhookSubscriptionPatchRequest
+}
+
+export interface WebhookSubscriptionsApiUpdateWebhookSubscriptionSharedKeyRequest {
+    /**
+     * Webhook subscription uuid
+     * @type string
+     * @memberof WebhookSubscriptionsApiupdateWebhookSubscriptionSharedKey
+     */
+    id: string
+}
+
+export class ObjectWebhookSubscriptionsApi {
+    private api: ObservableWebhookSubscriptionsApi
+
+    public constructor(configuration: Configuration, requestFactory?: WebhookSubscriptionsApiRequestFactory, responseProcessor?: WebhookSubscriptionsApiResponseProcessor) {
+        this.api = new ObservableWebhookSubscriptionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Create webhook subscription
+     * @param param the request object
+     */
+    public createWebhookSubscription(param: WebhookSubscriptionsApiCreateWebhookSubscriptionRequest, options?: Configuration): Promise<WebhookSubscriptionItemResponse> {
+        return this.api.createWebhookSubscription(param.webhookSubscriptionCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Delete webhook subscription
+     * @param param the request object
+     */
+    public deleteWebhookSubscription(param: WebhookSubscriptionsApiDeleteWebhookSubscriptionRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteWebhookSubscription(param.id,  options).toPromise();
+    }
+
+    /**
+     * Get webhook subscription by uuid
+     * @param param the request object
+     */
+    public detailsWebhookSubscription(param: WebhookSubscriptionsApiDetailsWebhookSubscriptionRequest, options?: Configuration): Promise<WebhookSubscriptionItemResponse> {
+        return this.api.detailsWebhookSubscription(param.id,  options).toPromise();
+    }
+
+    /**
+     * Get all webhook subscriptions
+     * @param param the request object
+     */
+    public listWebhookSubscriptions(param: WebhookSubscriptionsApiListWebhookSubscriptionsRequest = {}, options?: Configuration): Promise<WebhookSubscriptionListResponse> {
+        return this.api.listWebhookSubscriptions( options).toPromise();
+    }
+
+    /**
+     * Update webhook subscription
+     * @param param the request object
+     */
+    public updateWebhookSubscription(param: WebhookSubscriptionsApiUpdateWebhookSubscriptionRequest, options?: Configuration): Promise<WebhookSubscriptionItemResponse> {
+        return this.api.updateWebhookSubscription(param.id, param.webhookSubscriptionPatchRequest,  options).toPromise();
+    }
+
+    /**
+     * Regenerate webhook subscription shared key
+     * @param param the request object
+     */
+    public updateWebhookSubscriptionSharedKey(param: WebhookSubscriptionsApiUpdateWebhookSubscriptionSharedKeyRequest, options?: Configuration): Promise<WebhookSubscriptionSharedKeyResponse> {
+        return this.api.updateWebhookSubscriptionSharedKey(param.id,  options).toPromise();
     }
 
 }

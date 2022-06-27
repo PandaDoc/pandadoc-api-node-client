@@ -87,6 +87,20 @@ import { TemplatesFolderListResponse } from '../models/TemplatesFolderListRespon
 import { TemplatesFolderListResponseResults } from '../models/TemplatesFolderListResponseResults';
 import { TemplatesFolderRenameRequest } from '../models/TemplatesFolderRenameRequest';
 import { TemplatesFolderRenameResponse } from '../models/TemplatesFolderRenameResponse';
+import { WebhookEventDetailsResponse } from '../models/WebhookEventDetailsResponse';
+import { WebhookEventErrorEnum } from '../models/WebhookEventErrorEnum';
+import { WebhookEventHttpStatusCodeGroupEnum } from '../models/WebhookEventHttpStatusCodeGroupEnum';
+import { WebhookEventItemResponse } from '../models/WebhookEventItemResponse';
+import { WebhookEventPageResponse } from '../models/WebhookEventPageResponse';
+import { WebhookEventTriggerEnum } from '../models/WebhookEventTriggerEnum';
+import { WebhookSubscriptionCreateRequest } from '../models/WebhookSubscriptionCreateRequest';
+import { WebhookSubscriptionItemResponse } from '../models/WebhookSubscriptionItemResponse';
+import { WebhookSubscriptionListResponse } from '../models/WebhookSubscriptionListResponse';
+import { WebhookSubscriptionPatchRequest } from '../models/WebhookSubscriptionPatchRequest';
+import { WebhookSubscriptionPayloadEnum } from '../models/WebhookSubscriptionPayloadEnum';
+import { WebhookSubscriptionSharedKeyResponse } from '../models/WebhookSubscriptionSharedKeyResponse';
+import { WebhookSubscriptionStatusEnum } from '../models/WebhookSubscriptionStatusEnum';
+import { WebhookSubscriptionTriggerEnum } from '../models/WebhookSubscriptionTriggerEnum';
 
 import { APILogsApiRequestFactory, APILogsApiResponseProcessor} from "../apis/APILogsApi";
 export class ObservableAPILogsApi {
@@ -1348,6 +1362,232 @@ export class ObservableTemplatesApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listTemplates(rsp)));
+            }));
+    }
+
+}
+
+import { WebhookEventsApiRequestFactory, WebhookEventsApiResponseProcessor} from "../apis/WebhookEventsApi";
+export class ObservableWebhookEventsApi {
+    private requestFactory: WebhookEventsApiRequestFactory;
+    private responseProcessor: WebhookEventsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: WebhookEventsApiRequestFactory,
+        responseProcessor?: WebhookEventsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new WebhookEventsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new WebhookEventsApiResponseProcessor();
+    }
+
+    /**
+     * Get webhook event by uuid
+     * @param id Webhook event uuid
+     */
+    public detailsWebhookEvent(id: string, _options?: Configuration): Observable<WebhookEventDetailsResponse> {
+        const requestContextPromise = this.requestFactory.detailsWebhookEvent(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsWebhookEvent(rsp)));
+            }));
+    }
+
+    /**
+     * Get webhook event page
+     * @param count Number of element in page
+     * @param page Page number
+     * @param since Filter option: all events from specified timestamp
+     * @param to Filter option: all events up to specified timestamp
+     * @param type Filter option: all events of type
+     * @param httpStatusCode Filter option: all events of http status code
+     * @param error Filter option: all events with following error
+     */
+    public listWebhookEvent(count: number, page: number, since?: Date, to?: Date, type?: Array<WebhookEventTriggerEnum>, httpStatusCode?: Array<WebhookEventHttpStatusCodeGroupEnum>, error?: Array<WebhookEventErrorEnum>, _options?: Configuration): Observable<WebhookEventPageResponse> {
+        const requestContextPromise = this.requestFactory.listWebhookEvent(count, page, since, to, type, httpStatusCode, error, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listWebhookEvent(rsp)));
+            }));
+    }
+
+}
+
+import { WebhookSubscriptionsApiRequestFactory, WebhookSubscriptionsApiResponseProcessor} from "../apis/WebhookSubscriptionsApi";
+export class ObservableWebhookSubscriptionsApi {
+    private requestFactory: WebhookSubscriptionsApiRequestFactory;
+    private responseProcessor: WebhookSubscriptionsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: WebhookSubscriptionsApiRequestFactory,
+        responseProcessor?: WebhookSubscriptionsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new WebhookSubscriptionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new WebhookSubscriptionsApiResponseProcessor();
+    }
+
+    /**
+     * Create webhook subscription
+     * @param webhookSubscriptionCreateRequest 
+     */
+    public createWebhookSubscription(webhookSubscriptionCreateRequest: WebhookSubscriptionCreateRequest, _options?: Configuration): Observable<WebhookSubscriptionItemResponse> {
+        const requestContextPromise = this.requestFactory.createWebhookSubscription(webhookSubscriptionCreateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.createWebhookSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Delete webhook subscription
+     * @param id Webhook subscription uuid
+     */
+    public deleteWebhookSubscription(id: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteWebhookSubscription(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteWebhookSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Get webhook subscription by uuid
+     * @param id Webhook subscription uuid
+     */
+    public detailsWebhookSubscription(id: string, _options?: Configuration): Observable<WebhookSubscriptionItemResponse> {
+        const requestContextPromise = this.requestFactory.detailsWebhookSubscription(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsWebhookSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Get all webhook subscriptions
+     */
+    public listWebhookSubscriptions(_options?: Configuration): Observable<WebhookSubscriptionListResponse> {
+        const requestContextPromise = this.requestFactory.listWebhookSubscriptions(_options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listWebhookSubscriptions(rsp)));
+            }));
+    }
+
+    /**
+     * Update webhook subscription
+     * @param id Webhook subscription uuid
+     * @param webhookSubscriptionPatchRequest 
+     */
+    public updateWebhookSubscription(id: string, webhookSubscriptionPatchRequest: WebhookSubscriptionPatchRequest, _options?: Configuration): Observable<WebhookSubscriptionItemResponse> {
+        const requestContextPromise = this.requestFactory.updateWebhookSubscription(id, webhookSubscriptionPatchRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWebhookSubscription(rsp)));
+            }));
+    }
+
+    /**
+     * Regenerate webhook subscription shared key
+     * @param id Webhook subscription uuid
+     */
+    public updateWebhookSubscriptionSharedKey(id: string, _options?: Configuration): Observable<WebhookSubscriptionSharedKeyResponse> {
+        const requestContextPromise = this.requestFactory.updateWebhookSubscriptionSharedKey(id, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateWebhookSubscriptionSharedKey(rsp)));
             }));
     }
 

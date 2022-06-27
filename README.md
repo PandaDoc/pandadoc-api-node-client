@@ -101,6 +101,14 @@ Class | Method | HTTP request | Description
 *TemplatesApi* | [**deleteTemplate**](docs/TemplatesApi.md#deletetemplate) | **DELETE** /public/v1/templates/{id} | Delete Template
 *TemplatesApi* | [**detailsTemplate**](docs/TemplatesApi.md#detailstemplate) | **GET** /public/v1/templates/{id}/details | Details Template
 *TemplatesApi* | [**listTemplates**](docs/TemplatesApi.md#listtemplates) | **GET** /public/v1/templates | List Templates
+*WebhookEventsApi* | [**detailsWebhookEvent**](docs/WebhookEventsApi.md#detailswebhookevent) | **GET** /public/v1/webhook-events/{id} | Get webhook event by uuid
+*WebhookEventsApi* | [**listWebhookEvent**](docs/WebhookEventsApi.md#listwebhookevent) | **GET** /public/v1/webhook-events | Get webhook event page
+*WebhookSubscriptionsApi* | [**createWebhookSubscription**](docs/WebhookSubscriptionsApi.md#createwebhooksubscription) | **POST** /public/v1/webhook-subscriptions | Create webhook subscription
+*WebhookSubscriptionsApi* | [**deleteWebhookSubscription**](docs/WebhookSubscriptionsApi.md#deletewebhooksubscription) | **DELETE** /public/v1/webhook-subscriptions/{id} | Delete webhook subscription
+*WebhookSubscriptionsApi* | [**detailsWebhookSubscription**](docs/WebhookSubscriptionsApi.md#detailswebhooksubscription) | **GET** /public/v1/webhook-subscriptions/{id} | Get webhook subscription by uuid
+*WebhookSubscriptionsApi* | [**listWebhookSubscriptions**](docs/WebhookSubscriptionsApi.md#listwebhooksubscriptions) | **GET** /public/v1/webhook-subscriptions | Get all webhook subscriptions
+*WebhookSubscriptionsApi* | [**updateWebhookSubscription**](docs/WebhookSubscriptionsApi.md#updatewebhooksubscription) | **PATCH** /public/v1/webhook-subscriptions/{id} | Update webhook subscription
+*WebhookSubscriptionsApi* | [**updateWebhookSubscriptionSharedKey**](docs/WebhookSubscriptionsApi.md#updatewebhooksubscriptionsharedkey) | **PATCH** /public/v1/webhook-subscriptions/{id}/shared-key | Regenerate webhook subscription shared key
 
 
 ## License
