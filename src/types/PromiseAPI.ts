@@ -48,6 +48,8 @@ import { DocumentStatusRequestEnum } from '../models/DocumentStatusRequestEnum';
 import { DocumentStatusResponse } from '../models/DocumentStatusResponse';
 import { DocumentTransferAllOwnershipRequest } from '../models/DocumentTransferAllOwnershipRequest';
 import { DocumentTransferOwnershipRequest } from '../models/DocumentTransferOwnershipRequest';
+import { DocumentUpdateRequest } from '../models/DocumentUpdateRequest';
+import { DocumentUpdateRequestRecipients } from '../models/DocumentUpdateRequestRecipients';
 import { DocumentsFolderCreateRequest } from '../models/DocumentsFolderCreateRequest';
 import { DocumentsFolderCreateResponse } from '../models/DocumentsFolderCreateResponse';
 import { DocumentsFolderListResponse } from '../models/DocumentsFolderListResponse';
@@ -510,6 +512,16 @@ export class PromiseDocumentsApi {
      */
     public transferDocumentOwnership(id: string, documentTransferOwnershipRequest: DocumentTransferOwnershipRequest, _options?: Configuration): Promise<void> {
         const result = this.api.transferDocumentOwnership(id, documentTransferOwnershipRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Update Document only in the draft status
+     * @param id Document ID
+     * @param documentUpdateRequest 
+     */
+    public updateDocument(id: string, documentUpdateRequest: DocumentUpdateRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.updateDocument(id, documentUpdateRequest, _options);
         return result.toPromise();
     }
 

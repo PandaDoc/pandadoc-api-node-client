@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**statusDocument**](DocumentsApi.md#statusDocument) | **GET** /public/v1/documents/{id} | Document status
 [**transferAllDocumentsOwnership**](DocumentsApi.md#transferAllDocumentsOwnership) | **PATCH** /public/v1/documents/ownership | Transfer all documents ownership
 [**transferDocumentOwnership**](DocumentsApi.md#transferDocumentOwnership) | **PATCH** /public/v1/documents/{id}/ownership | Update document ownership
+[**updateDocument**](DocumentsApi.md#updateDocument) | **PATCH** /public/v1/documents/{id} | Update Document only in the draft status
 
 
 # **changeDocumentStatus**
@@ -919,6 +920,9 @@ const body:pd_api.DocumentsApiSendDocumentRequest = {
     message: "Hello! This document was sent from the PandaDoc API",
     subject: "Please check this test API document from PandaDoc",
     silent: true,
+    sender: {
+      "key": "key_example",
+    },
   },
 };
 
@@ -1147,6 +1151,112 @@ Name | Type | Description  | Notes
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
 **409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+# **updateDocument**
+> void updateDocument(documentUpdateRequest)
+
+
+### Example
+
+
+```typescript
+import * as pd_api from 'pandadoc-node-client';
+
+// replace it with your API key
+const API_KEY = "YOUR_API_KEY";
+const configuration = pd_api.createConfiguration(
+    { authMethods: {apiKey: `API-Key ${API_KEY}`} }
+);
+const apiInstance = new pd_api.DocumentsApi(configuration);
+
+const body:pd_api.DocumentsApiUpdateDocumentRequest = {
+  // string | Document ID
+  id: "BhVzRcxH9Z2LgfPPGXFUBa",
+  // DocumentUpdateRequest
+  documentUpdateRequest: {
+    recipients: [
+      {
+        id: "id_example",
+        email: "josh@example.com",
+        firstName: "Josh",
+        lastName: "Ron",
+      },
+    ],
+    fields: {},
+    tokens: [
+      {
+        name: "Favorite.Pet",
+        value: "Panda",
+      },
+    ],
+    metadata: {},
+    pricingTables: [
+      {
+        name: "Pricing Table 1",
+        dataMerge: true,
+        options: {},
+        sections: [
+          {
+            title: "Sample Section",
+            _default: true,
+            multichoiceEnabled: false,
+            rows: [
+              {
+                options: {
+                  qtyEditable: true,
+                  optionalSelected: true,
+                  optional: true,
+                },
+                data: {},
+                customFields: {},
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+};
+
+apiInstance.updateDocument(body).then((data) => {
+  console.log('API called successfully. Returned data: %o', data);
+}).catch((error) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentUpdateRequest** | **DocumentUpdateRequest**|  |
+ **id** | [**string**] | Document ID | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No content |  -  |
+**400** | Bad Request |  -  |
+**401** | Authentication error |  -  |
+**403** | Permission error |  -  |
+**404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

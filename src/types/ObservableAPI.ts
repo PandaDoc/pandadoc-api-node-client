@@ -49,6 +49,8 @@ import { DocumentStatusRequestEnum } from '../models/DocumentStatusRequestEnum';
 import { DocumentStatusResponse } from '../models/DocumentStatusResponse';
 import { DocumentTransferAllOwnershipRequest } from '../models/DocumentTransferAllOwnershipRequest';
 import { DocumentTransferOwnershipRequest } from '../models/DocumentTransferOwnershipRequest';
+import { DocumentUpdateRequest } from '../models/DocumentUpdateRequest';
+import { DocumentUpdateRequestRecipients } from '../models/DocumentUpdateRequestRecipients';
 import { DocumentsFolderCreateRequest } from '../models/DocumentsFolderCreateRequest';
 import { DocumentsFolderCreateResponse } from '../models/DocumentsFolderCreateResponse';
 import { DocumentsFolderListResponse } from '../models/DocumentsFolderListResponse';
@@ -916,6 +918,30 @@ export class ObservableDocumentsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.transferDocumentOwnership(rsp)));
+            }));
+    }
+
+    /**
+     * Update Document only in the draft status
+     * @param id Document ID
+     * @param documentUpdateRequest 
+     */
+    public updateDocument(id: string, documentUpdateRequest: DocumentUpdateRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.updateDocument(id, documentUpdateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.updateDocument(rsp)));
             }));
     }
 
