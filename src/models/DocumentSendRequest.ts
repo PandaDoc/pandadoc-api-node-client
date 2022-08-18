@@ -22,6 +22,10 @@ export class DocumentSendRequest {
     * Disables sent, viewed, comment, and completed email notifications for document recipients and the document sender. By default, notifications emails are sent for specific actions. If set as true, it won't affect the \"Approve document\" email notification sent to the Approver.
     */
     'silent'?: boolean;
+    /**
+    * You can set a sender of a document as an `email` or `membership_id`
+    */
+    'sender'?: { [key: string]: string; };
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -42,6 +46,12 @@ export class DocumentSendRequest {
             "name": "silent",
             "baseName": "silent",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "sender",
+            "baseName": "sender",
+            "type": "{ [key: string]: string; }",
             "format": ""
         }    ];
 

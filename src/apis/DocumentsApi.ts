@@ -24,6 +24,7 @@ import { DocumentStatusRequestEnum } from '../models/DocumentStatusRequestEnum';
 import { DocumentStatusResponse } from '../models/DocumentStatusResponse';
 import { DocumentTransferAllOwnershipRequest } from '../models/DocumentTransferAllOwnershipRequest';
 import { DocumentTransferOwnershipRequest } from '../models/DocumentTransferOwnershipRequest';
+import { DocumentUpdateRequest } from '../models/DocumentUpdateRequest';
 import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
@@ -974,6 +975,66 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
         return requestContext;
     }
 
+    /**
+     * Update Document only in the draft status
+     * @param id Document ID
+     * @param documentUpdateRequest 
+     */
+    public async updateDocument(id: string, documentUpdateRequest: DocumentUpdateRequest, _options?: Configuration): Promise<RequestContext> {
+        let _config = _options || this.configuration;
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new RequiredError("DocumentsApi", "updateDocument", "id");
+        }
+
+
+        // verify required parameter 'documentUpdateRequest' is not null or undefined
+        if (documentUpdateRequest === null || documentUpdateRequest === undefined) {
+            throw new RequiredError("DocumentsApi", "updateDocument", "documentUpdateRequest");
+        }
+
+
+        // Path Params
+        const localVarPath = '/public/v1/documents/{id}'
+            .replace('{' + 'id' + '}', encodeURIComponent(String(id)));
+
+        // Make Request Context
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.PATCH);
+        requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+
+        // Body Params
+        const contentType = ObjectSerializer.getPreferredMediaType([
+            "application/json"
+        ]);
+        requestContext.setHeaderParam("Content-Type", contentType);
+        const serializedBody = ObjectSerializer.stringify(
+            ObjectSerializer.serialize(documentUpdateRequest, "DocumentUpdateRequest", ""),
+            contentType
+        );
+        requestContext.setBody(serializedBody);
+
+        let authMethod: SecurityAuthentication | undefined;
+        // Apply auth methods
+        authMethod = _config.authMethods["apiKey"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        // Apply auth methods
+        authMethod = _config.authMethods["oauth2"]
+        if (authMethod?.applySecurityAuthentication) {
+            await authMethod?.applySecurityAuthentication(requestContext);
+        }
+        
+        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        if (defaultAuth?.applySecurityAuthentication) {
+            await defaultAuth?.applySecurityAuthentication(requestContext);
+        }
+
+        return requestContext;
+    }
+
 }
 
 export class DocumentsApiResponseProcessor {
@@ -1835,6 +1896,66 @@ export class DocumentsApiResponseProcessor {
                 "any", ""
             ) as any;
             throw new ApiException<any>(409, "Conflict", body, response.headers);
+        }
+        if (isCodeInRange("429", response.httpStatusCode)) {
+            const body: any = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "any", ""
+            ) as any;
+            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+        }
+
+        // Work around for missing responses in specification, e.g. for petstore.yaml
+        if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
+            const body: void = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "void", ""
+            ) as void;
+            return body;
+        }
+
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+    }
+
+    /**
+     * Unwraps the actual response sent by the server from the response context and deserializes the response content
+     * to the expected objects
+     *
+     * @params response Response returned by the server for a request to updateDocument
+     * @throws ApiException if the response code was not in [200, 299]
+     */
+     public async updateDocument(response: ResponseContext): Promise<void > {
+        const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
+        if (isCodeInRange("204", response.httpStatusCode)) {
+            return;
+        }
+        if (isCodeInRange("400", response.httpStatusCode)) {
+            const body: any = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "any", ""
+            ) as any;
+            throw new ApiException<any>(400, "Bad Request", body, response.headers);
+        }
+        if (isCodeInRange("401", response.httpStatusCode)) {
+            const body: any = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "any", ""
+            ) as any;
+            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+        }
+        if (isCodeInRange("403", response.httpStatusCode)) {
+            const body: any = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "any", ""
+            ) as any;
+            throw new ApiException<any>(403, "Permission error", body, response.headers);
+        }
+        if (isCodeInRange("404", response.httpStatusCode)) {
+            const body: any = ObjectSerializer.deserialize(
+                ObjectSerializer.parse(await response.body.text(), contentType),
+                "any", ""
+            ) as any;
+            throw new ApiException<any>(404, "Not found", body, response.headers);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const body: any = ObjectSerializer.deserialize(

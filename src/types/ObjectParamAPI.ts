@@ -48,6 +48,8 @@ import { DocumentStatusRequestEnum } from '../models/DocumentStatusRequestEnum';
 import { DocumentStatusResponse } from '../models/DocumentStatusResponse';
 import { DocumentTransferAllOwnershipRequest } from '../models/DocumentTransferAllOwnershipRequest';
 import { DocumentTransferOwnershipRequest } from '../models/DocumentTransferOwnershipRequest';
+import { DocumentUpdateRequest } from '../models/DocumentUpdateRequest';
+import { DocumentUpdateRequestRecipients } from '../models/DocumentUpdateRequestRecipients';
 import { DocumentsFolderCreateRequest } from '../models/DocumentsFolderCreateRequest';
 import { DocumentsFolderCreateResponse } from '../models/DocumentsFolderCreateResponse';
 import { DocumentsFolderListResponse } from '../models/DocumentsFolderListResponse';
@@ -846,6 +848,21 @@ export interface DocumentsApiTransferDocumentOwnershipRequest {
     documentTransferOwnershipRequest: DocumentTransferOwnershipRequest
 }
 
+export interface DocumentsApiUpdateDocumentRequest {
+    /**
+     * Document ID
+     * @type string
+     * @memberof DocumentsApiupdateDocument
+     */
+    id: string
+    /**
+     * 
+     * @type DocumentUpdateRequest
+     * @memberof DocumentsApiupdateDocument
+     */
+    documentUpdateRequest: DocumentUpdateRequest
+}
+
 export class ObjectDocumentsApi {
     private api: ObservableDocumentsApi
 
@@ -972,6 +989,14 @@ export class ObjectDocumentsApi {
      */
     public transferDocumentOwnership(param: DocumentsApiTransferDocumentOwnershipRequest, options?: Configuration): Promise<void> {
         return this.api.transferDocumentOwnership(param.id, param.documentTransferOwnershipRequest,  options).toPromise();
+    }
+
+    /**
+     * Update Document only in the draft status
+     * @param param the request object
+     */
+    public updateDocument(param: DocumentsApiUpdateDocumentRequest, options?: Configuration): Promise<void> {
+        return this.api.updateDocument(param.id, param.documentUpdateRequest,  options).toPromise();
     }
 
 }

@@ -44,6 +44,8 @@ export * from './DocumentStatusRequestEnum';
 export * from './DocumentStatusResponse';
 export * from './DocumentTransferAllOwnershipRequest';
 export * from './DocumentTransferOwnershipRequest';
+export * from './DocumentUpdateRequest';
+export * from './DocumentUpdateRequestRecipients';
 export * from './DocumentsFolderCreateRequest';
 export * from './DocumentsFolderCreateResponse';
 export * from './DocumentsFolderListResponse';
@@ -143,6 +145,8 @@ import { DocumentStatusRequestEnum } from './DocumentStatusRequestEnum';
 import { DocumentStatusResponse } from './DocumentStatusResponse';
 import { DocumentTransferAllOwnershipRequest } from './DocumentTransferAllOwnershipRequest';
 import { DocumentTransferOwnershipRequest } from './DocumentTransferOwnershipRequest';
+import { DocumentUpdateRequest } from './DocumentUpdateRequest';
+import { DocumentUpdateRequestRecipients } from './DocumentUpdateRequestRecipients';
 import { DocumentsFolderCreateRequest } from './DocumentsFolderCreateRequest';
 import { DocumentsFolderCreateResponse } from './DocumentsFolderCreateResponse';
 import { DocumentsFolderListResponse } from './DocumentsFolderListResponse';
@@ -271,6 +275,8 @@ let typeMap: {[index: string]: any} = {
     "DocumentStatusResponse": DocumentStatusResponse,
     "DocumentTransferAllOwnershipRequest": DocumentTransferAllOwnershipRequest,
     "DocumentTransferOwnershipRequest": DocumentTransferOwnershipRequest,
+    "DocumentUpdateRequest": DocumentUpdateRequest,
+    "DocumentUpdateRequestRecipients": DocumentUpdateRequestRecipients,
     "DocumentsFolderCreateRequest": DocumentsFolderCreateRequest,
     "DocumentsFolderCreateResponse": DocumentsFolderCreateResponse,
     "DocumentsFolderListResponse": DocumentsFolderListResponse,
