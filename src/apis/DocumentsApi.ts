@@ -437,7 +437,7 @@ export class DocumentsApiRequestFactory extends BaseAPIRequestFactory {
             .replace('{' + 'folder_id' + '}', encodeURIComponent(String(folderId)));
 
         // Make Request Context
-        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.DELETE);
+        const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
 
 

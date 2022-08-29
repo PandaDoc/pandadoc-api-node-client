@@ -79,7 +79,7 @@ Class | Method | HTTP request | Description
 *DocumentsApi* | [**deleteDocument**](docs/DocumentsApi.md#deletedocument) | **DELETE** /public/v1/documents/{id} | Delete document by id
 *DocumentsApi* | [**deleteLinkedObject**](docs/DocumentsApi.md#deletelinkedobject) | **DELETE** /public/v1/documents/{id}/linked-objects/{linked_object_id} | Delete Linked Object
 *DocumentsApi* | [**detailsDocument**](docs/DocumentsApi.md#detailsdocument) | **GET** /public/v1/documents/{id}/details | Document details
-*DocumentsApi* | [**documentMoveToFolder**](docs/DocumentsApi.md#documentmovetofolder) | **DELETE** /public/v1/documents/{id}/move-to-folder/{folder_id} | Document move to folder
+*DocumentsApi* | [**documentMoveToFolder**](docs/DocumentsApi.md#documentmovetofolder) | **POST** /public/v1/documents/{id}/move-to-folder/{folder_id} | Document move to folder
 *DocumentsApi* | [**downloadDocument**](docs/DocumentsApi.md#downloaddocument) | **GET** /public/v1/documents/{id}/download | Document download
 *DocumentsApi* | [**downloadProtectedDocument**](docs/DocumentsApi.md#downloadprotecteddocument) | **GET** /public/v1/documents/{id}/download-protected | Download document protected
 *DocumentsApi* | [**listDocuments**](docs/DocumentsApi.md#listdocuments) | **GET** /public/v1/documents | List documents
