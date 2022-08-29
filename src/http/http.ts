@@ -50,7 +50,7 @@ export type RequestBody = undefined | string | FormData | URLSearchParams;
  */
 export class RequestContext {
     private headers: { [key: string]: string } = {
-        "User-Agent": "pandadoc_node_client/5.4.0",
+        "User-Agent": "pandadoc_node_client/5.4.1",
     };
     private body: RequestBody = undefined;
     private url: URLParse;
