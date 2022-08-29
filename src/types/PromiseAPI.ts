@@ -415,6 +415,16 @@ export class PromiseDocumentsApi {
     }
 
     /**
+     * Document move to folder
+     * @param id Specify document ID.
+     * @param folderId Specify folder ID.
+     */
+    public documentMoveToFolder(id: string, folderId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.documentMoveToFolder(id, folderId, _options);
+        return result.toPromise();
+    }
+
+    /**
      * Document download
      * @param id Specify document ID.
      * @param watermarkColor HEX code (for example &#x60;#FF5733&#x60;).

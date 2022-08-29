@@ -709,6 +709,30 @@ export class ObservableDocumentsApi {
     }
 
     /**
+     * Document move to folder
+     * @param id Specify document ID.
+     * @param folderId Specify folder ID.
+     */
+    public documentMoveToFolder(id: string, folderId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.documentMoveToFolder(id, folderId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.documentMoveToFolder(rsp)));
+            }));
+    }
+
+    /**
      * Document download
      * @param id Specify document ID.
      * @param watermarkColor HEX code (for example &#x60;#FF5733&#x60;).

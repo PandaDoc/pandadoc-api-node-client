@@ -608,6 +608,21 @@ export interface DocumentsApiDetailsDocumentRequest {
     id: string
 }
 
+export interface DocumentsApiDocumentMoveToFolderRequest {
+    /**
+     * Specify document ID.
+     * @type string
+     * @memberof DocumentsApidocumentMoveToFolder
+     */
+    id: string
+    /**
+     * Specify folder ID.
+     * @type string
+     * @memberof DocumentsApidocumentMoveToFolder
+     */
+    folderId: string
+}
+
 export interface DocumentsApiDownloadDocumentRequest {
     /**
      * Specify document ID.
@@ -924,6 +939,14 @@ export class ObjectDocumentsApi {
      */
     public detailsDocument(param: DocumentsApiDetailsDocumentRequest, options?: Configuration): Promise<DocumentDetailsResponse> {
         return this.api.detailsDocument(param.id,  options).toPromise();
+    }
+
+    /**
+     * Document move to folder
+     * @param param the request object
+     */
+    public documentMoveToFolder(param: DocumentsApiDocumentMoveToFolderRequest, options?: Configuration): Promise<void> {
+        return this.api.documentMoveToFolder(param.id, param.folderId,  options).toPromise();
     }
 
     /**

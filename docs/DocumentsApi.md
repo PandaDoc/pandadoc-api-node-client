@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**deleteDocument**](DocumentsApi.md#deleteDocument) | **DELETE** /public/v1/documents/{id} | Delete document by id
 [**deleteLinkedObject**](DocumentsApi.md#deleteLinkedObject) | **DELETE** /public/v1/documents/{id}/linked-objects/{linked_object_id} | Delete Linked Object
 [**detailsDocument**](DocumentsApi.md#detailsDocument) | **GET** /public/v1/documents/{id}/details | Document details
+[**documentMoveToFolder**](DocumentsApi.md#documentMoveToFolder) | **DELETE** /public/v1/documents/{id}/move-to-folder/{folder_id} | Document move to folder
 [**downloadDocument**](DocumentsApi.md#downloadDocument) | **GET** /public/v1/documents/{id}/download | Document download
 [**downloadProtectedDocument**](DocumentsApi.md#downloadProtectedDocument) | **GET** /public/v1/documents/{id}/download-protected | Download document protected
 [**listDocuments**](DocumentsApi.md#listDocuments) | **GET** /public/v1/documents | List documents
@@ -568,6 +569,69 @@ Name | Type | Description  | Notes
 **403** | Permission error |  -  |
 **404** | Not found |  -  |
 **409** | Conflict |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+# **documentMoveToFolder**
+> void documentMoveToFolder()
+
+
+### Example
+
+
+```typescript
+import * as pd_api from 'pandadoc-node-client';
+
+// replace it with your API key
+const API_KEY = "YOUR_API_KEY";
+const configuration = pd_api.createConfiguration(
+    { authMethods: {apiKey: `API-Key ${API_KEY}`} }
+);
+const apiInstance = new pd_api.DocumentsApi(configuration);
+
+const body:pd_api.DocumentsApiDocumentMoveToFolderRequest = {
+  // string | Specify document ID.
+  id: "ZPeAfcpzr9aiVs5vqUf6jg",
+  // string | Specify folder ID.
+  folderId: "ZPeAfcpzr9aiVs5vqUf6jg",
+};
+
+apiInstance.documentMoveToFolder(body).then((data) => {
+  console.log('API called successfully. Returned data: %o', data);
+}).catch((error) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**string**] | Specify document ID. | defaults to undefined
+ **folderId** | [**string**] | Specify folder ID. | defaults to undefined
+
+
+### Return type
+
+**void**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No content |  -  |
+**401** | Authentication error |  -  |
+**403** | Permission error |  -  |
+**404** | Not found |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
