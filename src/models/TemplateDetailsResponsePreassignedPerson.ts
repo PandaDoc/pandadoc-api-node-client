@@ -12,6 +12,8 @@ import { HttpFile } from '../http/http';
 export class TemplateDetailsResponsePreassignedPerson {
     'email'?: string;
     'type'?: string;
+    'placeholderName'?: string;
+    'placeholderSource'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -25,6 +27,18 @@ export class TemplateDetailsResponsePreassignedPerson {
         {
             "name": "type",
             "baseName": "type",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "placeholderName",
+            "baseName": "placeholder_name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "placeholderSource",
+            "baseName": "placeholder_source",
             "type": "string",
             "format": ""
         }    ];
