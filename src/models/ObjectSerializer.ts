@@ -36,7 +36,14 @@ export * from './DocumentDetailsResponseTemplate';
 export * from './DocumentListResponse';
 export * from './DocumentListResponseResults';
 export * from './DocumentOrderingFieldsEnum';
+export * from './DocumentRecipientCreateRequest';
+export * from './DocumentRecipientEditRequest';
 export * from './DocumentSendRequest';
+export * from './DocumentSendRequestForwardingSettings';
+export * from './DocumentSendRequestSelectedApprovers';
+export * from './DocumentSendRequestSelectedApproversGroup';
+export * from './DocumentSendRequestSelectedApproversGroupAssignees';
+export * from './DocumentSendRequestSelectedApproversSteps';
 export * from './DocumentSendResponse';
 export * from './DocumentStatusChangeRequest';
 export * from './DocumentStatusEnum';
@@ -137,7 +144,14 @@ import { DocumentDetailsResponseTemplate } from './DocumentDetailsResponseTempla
 import { DocumentListResponse } from './DocumentListResponse';
 import { DocumentListResponseResults } from './DocumentListResponseResults';
 import { DocumentOrderingFieldsEnum } from './DocumentOrderingFieldsEnum';
+import { DocumentRecipientCreateRequest , DocumentRecipientCreateRequestKindEnum   } from './DocumentRecipientCreateRequest';
+import { DocumentRecipientEditRequest } from './DocumentRecipientEditRequest';
 import { DocumentSendRequest } from './DocumentSendRequest';
+import { DocumentSendRequestForwardingSettings } from './DocumentSendRequestForwardingSettings';
+import { DocumentSendRequestSelectedApprovers } from './DocumentSendRequestSelectedApprovers';
+import { DocumentSendRequestSelectedApproversGroup } from './DocumentSendRequestSelectedApproversGroup';
+import { DocumentSendRequestSelectedApproversGroupAssignees } from './DocumentSendRequestSelectedApproversGroupAssignees';
+import { DocumentSendRequestSelectedApproversSteps } from './DocumentSendRequestSelectedApproversSteps';
 import { DocumentSendResponse } from './DocumentSendResponse';
 import { DocumentStatusChangeRequest } from './DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from './DocumentStatusEnum';
@@ -221,6 +235,7 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 let enumsMap: Set<string> = new Set<string>([
     "DocumentOrderingFieldsEnum",
+    "DocumentRecipientCreateRequestKindEnum",
     "DocumentStatusEnum",
     "DocumentStatusRequestEnum",
     "WebhookEventErrorEnum",
@@ -269,7 +284,14 @@ let typeMap: {[index: string]: any} = {
     "DocumentDetailsResponseTemplate": DocumentDetailsResponseTemplate,
     "DocumentListResponse": DocumentListResponse,
     "DocumentListResponseResults": DocumentListResponseResults,
+    "DocumentRecipientCreateRequest": DocumentRecipientCreateRequest,
+    "DocumentRecipientEditRequest": DocumentRecipientEditRequest,
     "DocumentSendRequest": DocumentSendRequest,
+    "DocumentSendRequestForwardingSettings": DocumentSendRequestForwardingSettings,
+    "DocumentSendRequestSelectedApprovers": DocumentSendRequestSelectedApprovers,
+    "DocumentSendRequestSelectedApproversGroup": DocumentSendRequestSelectedApproversGroup,
+    "DocumentSendRequestSelectedApproversGroupAssignees": DocumentSendRequestSelectedApproversGroupAssignees,
+    "DocumentSendRequestSelectedApproversSteps": DocumentSendRequestSelectedApproversSteps,
     "DocumentSendResponse": DocumentSendResponse,
     "DocumentStatusChangeRequest": DocumentStatusChangeRequest,
     "DocumentStatusResponse": DocumentStatusResponse,

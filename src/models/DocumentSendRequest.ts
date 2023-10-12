@@ -7,6 +7,8 @@
  * Do not edit the class manually.
  */
 
+import { DocumentSendRequestForwardingSettings } from './DocumentSendRequestForwardingSettings';
+import { DocumentSendRequestSelectedApprovers } from './DocumentSendRequestSelectedApprovers';
 import { HttpFile } from '../http/http';
 
 export class DocumentSendRequest {
@@ -26,6 +28,8 @@ export class DocumentSendRequest {
     * You can set a sender of a document as an `email` or `membership_id`
     */
     'sender'?: { [key: string]: string; };
+    'forwardingSettings'?: DocumentSendRequestForwardingSettings;
+    'selectedApprovers'?: DocumentSendRequestSelectedApprovers;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -52,6 +56,18 @@ export class DocumentSendRequest {
             "name": "sender",
             "baseName": "sender",
             "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "forwardingSettings",
+            "baseName": "forwarding_settings",
+            "type": "DocumentSendRequestForwardingSettings",
+            "format": ""
+        },
+        {
+            "name": "selectedApprovers",
+            "baseName": "selected_approvers",
+            "type": "DocumentSendRequestSelectedApprovers",
             "format": ""
         }    ];
 

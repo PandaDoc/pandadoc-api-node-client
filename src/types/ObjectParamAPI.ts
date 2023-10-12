@@ -40,7 +40,14 @@ import { DocumentDetailsResponseTemplate } from '../models/DocumentDetailsRespon
 import { DocumentListResponse } from '../models/DocumentListResponse';
 import { DocumentListResponseResults } from '../models/DocumentListResponseResults';
 import { DocumentOrderingFieldsEnum } from '../models/DocumentOrderingFieldsEnum';
+import { DocumentRecipientCreateRequest } from '../models/DocumentRecipientCreateRequest';
+import { DocumentRecipientEditRequest } from '../models/DocumentRecipientEditRequest';
 import { DocumentSendRequest } from '../models/DocumentSendRequest';
+import { DocumentSendRequestForwardingSettings } from '../models/DocumentSendRequestForwardingSettings';
+import { DocumentSendRequestSelectedApprovers } from '../models/DocumentSendRequestSelectedApprovers';
+import { DocumentSendRequestSelectedApproversGroup } from '../models/DocumentSendRequestSelectedApproversGroup';
+import { DocumentSendRequestSelectedApproversGroupAssignees } from '../models/DocumentSendRequestSelectedApproversGroupAssignees';
+import { DocumentSendRequestSelectedApproversSteps } from '../models/DocumentSendRequestSelectedApproversSteps';
 import { DocumentSendResponse } from '../models/DocumentSendResponse';
 import { DocumentStatusChangeRequest } from '../models/DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
@@ -508,6 +515,126 @@ export class ObjectDocumentAttachmentsApi {
      */
     public listDocumentAttachments(param: DocumentAttachmentsApiListDocumentAttachmentsRequest, options?: Configuration): Promise<Array<DocumentAttachmentResponse>> {
         return this.api.listDocumentAttachments(param.id,  options).toPromise();
+    }
+
+}
+
+import { ObservableDocumentRecipientsApi } from "./ObservableAPI";
+import { DocumentRecipientsApiRequestFactory, DocumentRecipientsApiResponseProcessor} from "../apis/DocumentRecipientsApi";
+
+export interface DocumentRecipientsApiAddDocumentRecipientRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentRecipientsApiaddDocumentRecipient
+     */
+    id: string
+    /**
+     * 
+     * @type DocumentRecipientCreateRequest
+     * @memberof DocumentRecipientsApiaddDocumentRecipient
+     */
+    documentRecipientCreateRequest: DocumentRecipientCreateRequest
+}
+
+export interface DocumentRecipientsApiDeleteDocumentRecipientRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentRecipientsApideleteDocumentRecipient
+     */
+    id: string
+    /**
+     * Recipient UUID
+     * @type string
+     * @memberof DocumentRecipientsApideleteDocumentRecipient
+     */
+    recipientId: string
+}
+
+export interface DocumentRecipientsApiEditDocumentRecipientRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentRecipientsApieditDocumentRecipient
+     */
+    id: string
+    /**
+     * Recipient UUID
+     * @type string
+     * @memberof DocumentRecipientsApieditDocumentRecipient
+     */
+    recipientId: string
+    /**
+     * 
+     * @type DocumentRecipientEditRequest
+     * @memberof DocumentRecipientsApieditDocumentRecipient
+     */
+    documentRecipientEditRequest: DocumentRecipientEditRequest
+}
+
+export interface DocumentRecipientsApiReassignDocumentRecipientRequest {
+    /**
+     * Document UUID
+     * @type string
+     * @memberof DocumentRecipientsApireassignDocumentRecipient
+     */
+    id: string
+    /**
+     * Recipient UUID
+     * @type string
+     * @memberof DocumentRecipientsApireassignDocumentRecipient
+     */
+    recipientId: string
+    /**
+     * 
+     * @type DocumentRecipientCreateRequest
+     * @memberof DocumentRecipientsApireassignDocumentRecipient
+     */
+    documentRecipientCreateRequest: DocumentRecipientCreateRequest
+}
+
+export class ObjectDocumentRecipientsApi {
+    private api: ObservableDocumentRecipientsApi
+
+    public constructor(configuration: Configuration, requestFactory?: DocumentRecipientsApiRequestFactory, responseProcessor?: DocumentRecipientsApiResponseProcessor) {
+        this.api = new ObservableDocumentRecipientsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Adds recipient as CC to document
+     * Add Document Recipient
+     * @param param the request object
+     */
+    public addDocumentRecipient(param: DocumentRecipientsApiAddDocumentRecipientRequest, options?: Configuration): Promise<void> {
+        return this.api.addDocumentRecipient(param.id, param.documentRecipientCreateRequest,  options).toPromise();
+    }
+
+    /**
+     * Deleted recipient from document
+     * Delete Document Recipient
+     * @param param the request object
+     */
+    public deleteDocumentRecipient(param: DocumentRecipientsApiDeleteDocumentRecipientRequest, options?: Configuration): Promise<void> {
+        return this.api.deleteDocumentRecipient(param.id, param.recipientId,  options).toPromise();
+    }
+
+    /**
+     * Edit document recipient's details
+     * Edit Document Recipient
+     * @param param the request object
+     */
+    public editDocumentRecipient(param: DocumentRecipientsApiEditDocumentRecipientRequest, options?: Configuration): Promise<void> {
+        return this.api.editDocumentRecipient(param.id, param.recipientId, param.documentRecipientEditRequest,  options).toPromise();
+    }
+
+    /**
+     * Replace document recipient with another contact
+     * Reassign Document Recipient
+     * @param param the request object
+     */
+    public reassignDocumentRecipient(param: DocumentRecipientsApiReassignDocumentRecipientRequest, options?: Configuration): Promise<void> {
+        return this.api.reassignDocumentRecipient(param.id, param.recipientId, param.documentRecipientCreateRequest,  options).toPromise();
     }
 
 }
