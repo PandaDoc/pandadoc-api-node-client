@@ -72,6 +72,10 @@ Class | Method | HTTP request | Description
 *DocumentAttachmentsApi* | [**detailsDocumentAttachment**](docs/DocumentAttachmentsApi.md#detailsdocumentattachment) | **GET** /public/v1/documents/{id}/attachments/{attachment_id} | Document Attachment Details
 *DocumentAttachmentsApi* | [**downloadDocumentAttachment**](docs/DocumentAttachmentsApi.md#downloaddocumentattachment) | **GET** /public/v1/documents/{id}/attachments/{attachment_id}/download | Document Attachment Download
 *DocumentAttachmentsApi* | [**listDocumentAttachments**](docs/DocumentAttachmentsApi.md#listdocumentattachments) | **GET** /public/v1/documents/{id}/attachments | Document Attachment List
+*DocumentRecipientsApi* | [**addDocumentRecipient**](docs/DocumentRecipientsApi.md#adddocumentrecipient) | **POST** /public/v1/documents/{id}/recipients | Add Document Recipient
+*DocumentRecipientsApi* | [**deleteDocumentRecipient**](docs/DocumentRecipientsApi.md#deletedocumentrecipient) | **DELETE** /public/v1/documents/{id}/recipients/{recipient_id} | Delete Document Recipient
+*DocumentRecipientsApi* | [**editDocumentRecipient**](docs/DocumentRecipientsApi.md#editdocumentrecipient) | **PATCH** /public/v1/documents/{id}/recipients/{recipient_id} | Edit Document Recipient
+*DocumentRecipientsApi* | [**reassignDocumentRecipient**](docs/DocumentRecipientsApi.md#reassigndocumentrecipient) | **POST** /public/v1/documents/{id}/recipients/{recipient_id}/reassign | Reassign Document Recipient
 *DocumentsApi* | [**changeDocumentStatus**](docs/DocumentsApi.md#changedocumentstatus) | **PATCH** /public/v1/documents/{id}/status | Document status change
 *DocumentsApi* | [**createDocument**](docs/DocumentsApi.md#createdocument) | **POST** /public/v1/documents | Create document
 *DocumentsApi* | [**createDocumentLink**](docs/DocumentsApi.md#createdocumentlink) | **POST** /public/v1/documents/{id}/session | Create a Document Link

@@ -40,7 +40,14 @@ import { DocumentDetailsResponseTemplate } from '../models/DocumentDetailsRespon
 import { DocumentListResponse } from '../models/DocumentListResponse';
 import { DocumentListResponseResults } from '../models/DocumentListResponseResults';
 import { DocumentOrderingFieldsEnum } from '../models/DocumentOrderingFieldsEnum';
+import { DocumentRecipientCreateRequest } from '../models/DocumentRecipientCreateRequest';
+import { DocumentRecipientEditRequest } from '../models/DocumentRecipientEditRequest';
 import { DocumentSendRequest } from '../models/DocumentSendRequest';
+import { DocumentSendRequestForwardingSettings } from '../models/DocumentSendRequestForwardingSettings';
+import { DocumentSendRequestSelectedApprovers } from '../models/DocumentSendRequestSelectedApprovers';
+import { DocumentSendRequestSelectedApproversGroup } from '../models/DocumentSendRequestSelectedApproversGroup';
+import { DocumentSendRequestSelectedApproversGroupAssignees } from '../models/DocumentSendRequestSelectedApproversGroupAssignees';
+import { DocumentSendRequestSelectedApproversSteps } from '../models/DocumentSendRequestSelectedApproversSteps';
 import { DocumentSendResponse } from '../models/DocumentSendResponse';
 import { DocumentStatusChangeRequest } from '../models/DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
@@ -324,6 +331,71 @@ export class PromiseDocumentAttachmentsApi {
      */
     public listDocumentAttachments(id: string, _options?: Configuration): Promise<Array<DocumentAttachmentResponse>> {
         const result = this.api.listDocumentAttachments(id, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableDocumentRecipientsApi } from './ObservableAPI';
+
+import { DocumentRecipientsApiRequestFactory, DocumentRecipientsApiResponseProcessor} from "../apis/DocumentRecipientsApi";
+export class PromiseDocumentRecipientsApi {
+    private api: ObservableDocumentRecipientsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DocumentRecipientsApiRequestFactory,
+        responseProcessor?: DocumentRecipientsApiResponseProcessor
+    ) {
+        this.api = new ObservableDocumentRecipientsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Adds recipient as CC to document
+     * Add Document Recipient
+     * @param id Document UUID
+     * @param documentRecipientCreateRequest 
+     */
+    public addDocumentRecipient(id: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.addDocumentRecipient(id, documentRecipientCreateRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Deleted recipient from document
+     * Delete Document Recipient
+     * @param id Document UUID
+     * @param recipientId Recipient UUID
+     */
+    public deleteDocumentRecipient(id: string, recipientId: string, _options?: Configuration): Promise<void> {
+        const result = this.api.deleteDocumentRecipient(id, recipientId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Edit document recipient's details
+     * Edit Document Recipient
+     * @param id Document UUID
+     * @param recipientId Recipient UUID
+     * @param documentRecipientEditRequest 
+     */
+    public editDocumentRecipient(id: string, recipientId: string, documentRecipientEditRequest: DocumentRecipientEditRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.editDocumentRecipient(id, recipientId, documentRecipientEditRequest, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Replace document recipient with another contact
+     * Reassign Document Recipient
+     * @param id Document UUID
+     * @param recipientId Recipient UUID
+     * @param documentRecipientCreateRequest 
+     */
+    public reassignDocumentRecipient(id: string, recipientId: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Promise<void> {
+        const result = this.api.reassignDocumentRecipient(id, recipientId, documentRecipientCreateRequest, _options);
         return result.toPromise();
     }
 

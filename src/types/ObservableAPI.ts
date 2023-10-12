@@ -41,7 +41,14 @@ import { DocumentDetailsResponseTemplate } from '../models/DocumentDetailsRespon
 import { DocumentListResponse } from '../models/DocumentListResponse';
 import { DocumentListResponseResults } from '../models/DocumentListResponseResults';
 import { DocumentOrderingFieldsEnum } from '../models/DocumentOrderingFieldsEnum';
+import { DocumentRecipientCreateRequest } from '../models/DocumentRecipientCreateRequest';
+import { DocumentRecipientEditRequest } from '../models/DocumentRecipientEditRequest';
 import { DocumentSendRequest } from '../models/DocumentSendRequest';
+import { DocumentSendRequestForwardingSettings } from '../models/DocumentSendRequestForwardingSettings';
+import { DocumentSendRequestSelectedApprovers } from '../models/DocumentSendRequestSelectedApprovers';
+import { DocumentSendRequestSelectedApproversGroup } from '../models/DocumentSendRequestSelectedApproversGroup';
+import { DocumentSendRequestSelectedApproversGroupAssignees } from '../models/DocumentSendRequestSelectedApproversGroupAssignees';
+import { DocumentSendRequestSelectedApproversSteps } from '../models/DocumentSendRequestSelectedApproversSteps';
 import { DocumentSendResponse } from '../models/DocumentSendResponse';
 import { DocumentStatusChangeRequest } from '../models/DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
@@ -521,6 +528,126 @@ export class ObservableDocumentAttachmentsApi {
                     middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
                 }
                 return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listDocumentAttachments(rsp)));
+            }));
+    }
+
+}
+
+import { DocumentRecipientsApiRequestFactory, DocumentRecipientsApiResponseProcessor} from "../apis/DocumentRecipientsApi";
+export class ObservableDocumentRecipientsApi {
+    private requestFactory: DocumentRecipientsApiRequestFactory;
+    private responseProcessor: DocumentRecipientsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: DocumentRecipientsApiRequestFactory,
+        responseProcessor?: DocumentRecipientsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new DocumentRecipientsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new DocumentRecipientsApiResponseProcessor();
+    }
+
+    /**
+     * Adds recipient as CC to document
+     * Add Document Recipient
+     * @param id Document UUID
+     * @param documentRecipientCreateRequest 
+     */
+    public addDocumentRecipient(id: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.addDocumentRecipient(id, documentRecipientCreateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.addDocumentRecipient(rsp)));
+            }));
+    }
+
+    /**
+     * Deleted recipient from document
+     * Delete Document Recipient
+     * @param id Document UUID
+     * @param recipientId Recipient UUID
+     */
+    public deleteDocumentRecipient(id: string, recipientId: string, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.deleteDocumentRecipient(id, recipientId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.deleteDocumentRecipient(rsp)));
+            }));
+    }
+
+    /**
+     * Edit document recipient's details
+     * Edit Document Recipient
+     * @param id Document UUID
+     * @param recipientId Recipient UUID
+     * @param documentRecipientEditRequest 
+     */
+    public editDocumentRecipient(id: string, recipientId: string, documentRecipientEditRequest: DocumentRecipientEditRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.editDocumentRecipient(id, recipientId, documentRecipientEditRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.editDocumentRecipient(rsp)));
+            }));
+    }
+
+    /**
+     * Replace document recipient with another contact
+     * Reassign Document Recipient
+     * @param id Document UUID
+     * @param recipientId Recipient UUID
+     * @param documentRecipientCreateRequest 
+     */
+    public reassignDocumentRecipient(id: string, recipientId: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<void> {
+        const requestContextPromise = this.requestFactory.reassignDocumentRecipient(id, recipientId, documentRecipientCreateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.reassignDocumentRecipient(rsp)));
             }));
     }
 

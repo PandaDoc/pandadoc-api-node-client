@@ -987,6 +987,27 @@ const body:pd_api.DocumentsApiSendDocumentRequest = {
     sender: {
       "key": "key_example",
     },
+    forwardingSettings: {
+      forwardingAllowed: true,
+      forwardingWithReassigningAllowed: true,
+    },
+    selectedApprovers: {
+      steps: [
+        {
+          id: "LzWmancTxrgfTMpsJP9Eqd",
+          group: {
+            id: "op9MA75HygJHiV4aeVHXCH",
+            type: "selectable",
+            assignees: [
+              {
+                user: "tpBLrk3vJoLggypMSRt92i",
+                isSelected: true,
+              },
+            ],
+          },
+        },
+      ],
+    },
   },
 };
 
