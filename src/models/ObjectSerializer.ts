@@ -61,6 +61,7 @@ export * from './DocumentsFolderRenameRequest';
 export * from './DocumentsFolderRenameResponse';
 export * from './FormListResponse';
 export * from './FormListResponseResults';
+export * from './InlineResponse200';
 export * from './LinkedObjectCreateRequest';
 export * from './LinkedObjectCreateResponse';
 export * from './LinkedObjectListResponse';
@@ -169,6 +170,7 @@ import { DocumentsFolderRenameRequest } from './DocumentsFolderRenameRequest';
 import { DocumentsFolderRenameResponse } from './DocumentsFolderRenameResponse';
 import { FormListResponse } from './FormListResponse';
 import { FormListResponseResults } from './FormListResponseResults';
+import { InlineResponse200 } from './InlineResponse200';
 import { LinkedObjectCreateRequest } from './LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from './LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from './LinkedObjectListResponse';
@@ -307,6 +309,7 @@ let typeMap: {[index: string]: any} = {
     "DocumentsFolderRenameResponse": DocumentsFolderRenameResponse,
     "FormListResponse": FormListResponse,
     "FormListResponseResults": FormListResponseResults,
+    "InlineResponse200": InlineResponse200,
     "LinkedObjectCreateRequest": LinkedObjectCreateRequest,
     "LinkedObjectCreateResponse": LinkedObjectCreateResponse,
     "LinkedObjectListResponse": LinkedObjectListResponse,

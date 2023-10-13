@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **addDocumentRecipient**
-> void addDocumentRecipient(documentRecipientCreateRequest)
+> InlineResponse200 addDocumentRecipient(documentRecipientCreateRequest)
 
 Adds recipient as CC to document
 
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**void**
+**InlineResponse200**
 
 ### Authorization
 
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No content |  -  |
+**200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **reassignDocumentRecipient**
-> void reassignDocumentRecipient(documentRecipientCreateRequest)
+> any reassignDocumentRecipient(documentRecipientCreateRequest)
 
 Replace document recipient with another contact
 
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**void**
+**any**
 
 ### Authorization
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No content |  -  |
+**200** | OK |  -  |
 **400** | Bad Request |  -  |
 **401** | Authentication error |  -  |
 **403** | Permission error |  -  |
