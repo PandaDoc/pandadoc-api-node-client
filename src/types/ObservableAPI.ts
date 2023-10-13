@@ -66,6 +66,7 @@ import { DocumentsFolderRenameRequest } from '../models/DocumentsFolderRenameReq
 import { DocumentsFolderRenameResponse } from '../models/DocumentsFolderRenameResponse';
 import { FormListResponse } from '../models/FormListResponse';
 import { FormListResponseResults } from '../models/FormListResponseResults';
+import { InlineResponse200 } from '../models/InlineResponse200';
 import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
@@ -555,7 +556,7 @@ export class ObservableDocumentRecipientsApi {
      * @param id Document UUID
      * @param documentRecipientCreateRequest 
      */
-    public addDocumentRecipient(id: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<void> {
+    public addDocumentRecipient(id: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<InlineResponse200> {
         const requestContextPromise = this.requestFactory.addDocumentRecipient(id, documentRecipientCreateRequest, _options);
 
         // build promise chain
@@ -632,7 +633,7 @@ export class ObservableDocumentRecipientsApi {
      * @param recipientId Recipient UUID
      * @param documentRecipientCreateRequest 
      */
-    public reassignDocumentRecipient(id: string, recipientId: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<void> {
+    public reassignDocumentRecipient(id: string, recipientId: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<any> {
         const requestContextPromise = this.requestFactory.reassignDocumentRecipient(id, recipientId, documentRecipientCreateRequest, _options);
 
         // build promise chain

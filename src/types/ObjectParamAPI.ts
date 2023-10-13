@@ -65,6 +65,7 @@ import { DocumentsFolderRenameRequest } from '../models/DocumentsFolderRenameReq
 import { DocumentsFolderRenameResponse } from '../models/DocumentsFolderRenameResponse';
 import { FormListResponse } from '../models/FormListResponse';
 import { FormListResponseResults } from '../models/FormListResponseResults';
+import { InlineResponse200 } from '../models/InlineResponse200';
 import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
@@ -606,7 +607,7 @@ export class ObjectDocumentRecipientsApi {
      * Add Document Recipient
      * @param param the request object
      */
-    public addDocumentRecipient(param: DocumentRecipientsApiAddDocumentRecipientRequest, options?: Configuration): Promise<void> {
+    public addDocumentRecipient(param: DocumentRecipientsApiAddDocumentRecipientRequest, options?: Configuration): Promise<InlineResponse200> {
         return this.api.addDocumentRecipient(param.id, param.documentRecipientCreateRequest,  options).toPromise();
     }
 
@@ -633,7 +634,7 @@ export class ObjectDocumentRecipientsApi {
      * Reassign Document Recipient
      * @param param the request object
      */
-    public reassignDocumentRecipient(param: DocumentRecipientsApiReassignDocumentRecipientRequest, options?: Configuration): Promise<void> {
+    public reassignDocumentRecipient(param: DocumentRecipientsApiReassignDocumentRecipientRequest, options?: Configuration): Promise<any> {
         return this.api.reassignDocumentRecipient(param.id, param.recipientId, param.documentRecipientCreateRequest,  options).toPromise();
     }
 
