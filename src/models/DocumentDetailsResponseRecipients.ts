@@ -21,6 +21,7 @@ export class DocumentDetailsResponseRecipients {
     'email'?: string;
     'hasCompleted'?: boolean;
     'sharedLink'?: string;
+    'signatureDate'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -88,6 +89,12 @@ export class DocumentDetailsResponseRecipients {
         {
             "name": "sharedLink",
             "baseName": "shared_link",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "signatureDate",
+            "baseName": "signature_date",
             "type": "string",
             "format": ""
         }    ];

@@ -7,11 +7,11 @@
  * Do not edit the class manually.
  */
 
-import { PricingTablesResponseDiscount } from './PricingTablesResponseDiscount';
-import { PricingTablesResponseOptions } from './PricingTablesResponseOptions';
+import { PricingTableResponseDiscount } from './PricingTableResponseDiscount';
+import { PricingTableResponseOptions } from './PricingTableResponseOptions';
 import { HttpFile } from '../http/http';
 
-export class PricingTablesResponseItems {
+export class PricingTableResponseItems {
     'id'?: string;
     'sku'?: string;
     'qty'?: string;
@@ -21,11 +21,11 @@ export class PricingTablesResponseItems {
     'description'?: string;
     'customFields'?: any;
     'customColumns'?: any;
-    'discount'?: PricingTablesResponseDiscount;
-    'taxFirst'?: PricingTablesResponseDiscount;
-    'taxSecond'?: PricingTablesResponseDiscount;
+    'discount'?: PricingTableResponseDiscount;
+    'taxFirst'?: PricingTableResponseDiscount;
+    'taxSecond'?: PricingTableResponseDiscount;
     'subtotal'?: string;
-    'options'?: PricingTablesResponseOptions;
+    'options'?: PricingTableResponseOptions;
     'salePrice'?: string;
     'taxes'?: any;
     'discounts'?: any;
@@ -95,19 +95,19 @@ export class PricingTablesResponseItems {
         {
             "name": "discount",
             "baseName": "discount",
-            "type": "PricingTablesResponseDiscount",
+            "type": "PricingTableResponseDiscount",
             "format": ""
         },
         {
             "name": "taxFirst",
             "baseName": "tax_first",
-            "type": "PricingTablesResponseDiscount",
+            "type": "PricingTableResponseDiscount",
             "format": ""
         },
         {
             "name": "taxSecond",
             "baseName": "tax_second",
-            "type": "PricingTablesResponseDiscount",
+            "type": "PricingTableResponseDiscount",
             "format": ""
         },
         {
@@ -119,7 +119,7 @@ export class PricingTablesResponseItems {
         {
             "name": "options",
             "baseName": "options",
-            "type": "PricingTablesResponseOptions",
+            "type": "PricingTableResponseOptions",
             "format": ""
         },
         {
@@ -154,7 +154,7 @@ export class PricingTablesResponseItems {
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTablesResponseItems.attributeTypeMap;
+        return PricingTableResponseItems.attributeTypeMap;
     }
 
     public constructor() {

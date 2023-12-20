@@ -43,6 +43,7 @@ import { DocumentListResponseResults } from '../models/DocumentListResponseResul
 import { DocumentOrderingFieldsEnum } from '../models/DocumentOrderingFieldsEnum';
 import { DocumentRecipientCreateRequest } from '../models/DocumentRecipientCreateRequest';
 import { DocumentRecipientEditRequest } from '../models/DocumentRecipientEditRequest';
+import { DocumentRecipientResponse } from '../models/DocumentRecipientResponse';
 import { DocumentSendRequest } from '../models/DocumentSendRequest';
 import { DocumentSendRequestForwardingSettings } from '../models/DocumentSendRequestForwardingSettings';
 import { DocumentSendRequestSelectedApprovers } from '../models/DocumentSendRequestSelectedApprovers';
@@ -66,23 +67,34 @@ import { DocumentsFolderRenameRequest } from '../models/DocumentsFolderRenameReq
 import { DocumentsFolderRenameResponse } from '../models/DocumentsFolderRenameResponse';
 import { FormListResponse } from '../models/FormListResponse';
 import { FormListResponseResults } from '../models/FormListResponseResults';
-import { InlineResponse200 } from '../models/InlineResponse200';
 import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
 import { MemberDetailsResponse } from '../models/MemberDetailsResponse';
 import { MemberListResponse } from '../models/MemberListResponse';
 import { OAuth2AccessTokenResponse } from '../models/OAuth2AccessTokenResponse';
+import { PricingResponse } from '../models/PricingResponse';
 import { PricingTableRequest } from '../models/PricingTableRequest';
 import { PricingTableRequestRowOptions } from '../models/PricingTableRequestRowOptions';
 import { PricingTableRequestRows } from '../models/PricingTableRequestRows';
 import { PricingTableRequestSections } from '../models/PricingTableRequestSections';
-import { PricingTablesResponse } from '../models/PricingTablesResponse';
-import { PricingTablesResponseDiscount } from '../models/PricingTablesResponseDiscount';
-import { PricingTablesResponseItems } from '../models/PricingTablesResponseItems';
-import { PricingTablesResponseOptions } from '../models/PricingTablesResponseOptions';
-import { PricingTablesResponseSummary } from '../models/PricingTablesResponseSummary';
-import { PricingTablesResponseTables } from '../models/PricingTablesResponseTables';
+import { PricingTableResponse } from '../models/PricingTableResponse';
+import { PricingTableResponseDiscount } from '../models/PricingTableResponseDiscount';
+import { PricingTableResponseItems } from '../models/PricingTableResponseItems';
+import { PricingTableResponseOptions } from '../models/PricingTableResponseOptions';
+import { PricingTableResponseSummary } from '../models/PricingTableResponseSummary';
+import { QuoteResponse } from '../models/QuoteResponse';
+import { QuoteResponseAction } from '../models/QuoteResponseAction';
+import { QuoteResponseCondition } from '../models/QuoteResponseCondition';
+import { QuoteResponseConditionComparison } from '../models/QuoteResponseConditionComparison';
+import { QuoteResponseMergeRules } from '../models/QuoteResponseMergeRules';
+import { QuoteResponseOptions } from '../models/QuoteResponseOptions';
+import { QuoteResponseSectionItem } from '../models/QuoteResponseSectionItem';
+import { QuoteResponseSectionSummary } from '../models/QuoteResponseSectionSummary';
+import { QuoteResponseSections } from '../models/QuoteResponseSections';
+import { QuoteResponseSummary } from '../models/QuoteResponseSummary';
+import { QuoteResponseSummaryDiscounts } from '../models/QuoteResponseSummaryDiscounts';
+import { QuoteResponseSummaryRecurringSubtotal } from '../models/QuoteResponseSummaryRecurringSubtotal';
 import { TemplateDetailsResponse } from '../models/TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from '../models/TemplateDetailsResponseContentPlaceholders';
 import { TemplateDetailsResponseImages } from '../models/TemplateDetailsResponseImages';
@@ -272,9 +284,10 @@ export class ObservableContactsApi {
 
     /**
      * List contacts
+     * @param email Optional search parameter. Filter results by exact match.
      */
-    public listContacts(_options?: Configuration): Observable<ContactListResponse> {
-        const requestContextPromise = this.requestFactory.listContacts(_options);
+    public listContacts(email?: string, _options?: Configuration): Observable<ContactListResponse> {
+        const requestContextPromise = this.requestFactory.listContacts(email, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);
@@ -556,7 +569,7 @@ export class ObservableDocumentRecipientsApi {
      * @param id Document UUID
      * @param documentRecipientCreateRequest 
      */
-    public addDocumentRecipient(id: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<InlineResponse200> {
+    public addDocumentRecipient(id: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<DocumentRecipientResponse> {
         const requestContextPromise = this.requestFactory.addDocumentRecipient(id, documentRecipientCreateRequest, _options);
 
         // build promise chain
@@ -633,7 +646,7 @@ export class ObservableDocumentRecipientsApi {
      * @param recipientId Recipient UUID
      * @param documentRecipientCreateRequest 
      */
-    public reassignDocumentRecipient(id: string, recipientId: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<any> {
+    public reassignDocumentRecipient(id: string, recipientId: string, documentRecipientCreateRequest: DocumentRecipientCreateRequest, _options?: Configuration): Observable<DocumentRecipientResponse> {
         const requestContextPromise = this.requestFactory.reassignDocumentRecipient(id, recipientId, documentRecipientCreateRequest, _options);
 
         // build promise chain

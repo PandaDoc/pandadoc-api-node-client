@@ -12,7 +12,7 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { DocumentRecipientCreateRequest } from '../models/DocumentRecipientCreateRequest';
 import { DocumentRecipientEditRequest } from '../models/DocumentRecipientEditRequest';
-import { InlineResponse200 } from '../models/InlineResponse200';
+import { DocumentRecipientResponse } from '../models/DocumentRecipientResponse';
 
 /**
  * no description
@@ -280,13 +280,13 @@ export class DocumentRecipientsApiResponseProcessor {
      * @params response Response returned by the server for a request to addDocumentRecipient
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async addDocumentRecipient(response: ResponseContext): Promise<InlineResponse200 > {
+     public async addDocumentRecipient(response: ResponseContext): Promise<DocumentRecipientResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: InlineResponse200 = ObjectSerializer.deserialize(
+            const body: DocumentRecipientResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse200", ""
-            ) as InlineResponse200;
+                "DocumentRecipientResponse", ""
+            ) as DocumentRecipientResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -327,10 +327,10 @@ export class DocumentRecipientsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: InlineResponse200 = ObjectSerializer.deserialize(
+            const body: DocumentRecipientResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "InlineResponse200", ""
-            ) as InlineResponse200;
+                "DocumentRecipientResponse", ""
+            ) as DocumentRecipientResponse;
             return body;
         }
 
@@ -457,13 +457,13 @@ export class DocumentRecipientsApiResponseProcessor {
      * @params response Response returned by the server for a request to reassignDocumentRecipient
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async reassignDocumentRecipient(response: ResponseContext): Promise<any > {
+     public async reassignDocumentRecipient(response: ResponseContext): Promise<DocumentRecipientResponse > {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: DocumentRecipientResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "DocumentRecipientResponse", ""
+            ) as DocumentRecipientResponse;
             return body;
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
@@ -504,10 +504,10 @@ export class DocumentRecipientsApiResponseProcessor {
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
         if (response.httpStatusCode >= 200 && response.httpStatusCode <= 299) {
-            const body: any = ObjectSerializer.deserialize(
+            const body: DocumentRecipientResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
+                "DocumentRecipientResponse", ""
+            ) as DocumentRecipientResponse;
             return body;
         }
 

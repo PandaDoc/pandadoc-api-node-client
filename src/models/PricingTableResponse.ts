@@ -7,17 +7,17 @@
  * Do not edit the class manually.
  */
 
-import { PricingTablesResponseItems } from './PricingTablesResponseItems';
-import { PricingTablesResponseSummary } from './PricingTablesResponseSummary';
+import { PricingTableResponseItems } from './PricingTableResponseItems';
+import { PricingTableResponseSummary } from './PricingTableResponseSummary';
 import { HttpFile } from '../http/http';
 
-export class PricingTablesResponseTables {
+export class PricingTableResponse {
     'name'?: string;
     'id'?: string;
     'total'?: string;
     'isIncludedInTotal'?: boolean;
-    'summary'?: PricingTablesResponseSummary;
-    'items'?: Array<PricingTablesResponseItems>;
+    'summary'?: PricingTableResponseSummary;
+    'items'?: Array<PricingTableResponseItems>;
     'currency'?: string;
 
     static readonly discriminator: string | undefined = undefined;
@@ -50,13 +50,13 @@ export class PricingTablesResponseTables {
         {
             "name": "summary",
             "baseName": "summary",
-            "type": "PricingTablesResponseSummary",
+            "type": "PricingTableResponseSummary",
             "format": ""
         },
         {
             "name": "items",
             "baseName": "items",
-            "type": "Array<PricingTablesResponseItems>",
+            "type": "Array<PricingTableResponseItems>",
             "format": ""
         },
         {
@@ -67,7 +67,7 @@ export class PricingTablesResponseTables {
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTablesResponseTables.attributeTypeMap;
+        return PricingTableResponse.attributeTypeMap;
     }
 
     public constructor() {

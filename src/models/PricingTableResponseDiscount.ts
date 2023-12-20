@@ -9,42 +9,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class PricingTablesResponseSummary {
-    'subtotal'?: string;
-    'total'?: string;
-    'discount'?: string;
-    'tax'?: string;
+export class PricingTableResponseDiscount {
+    'value'?: string;
+    'type'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "subtotal",
-            "baseName": "subtotal",
+            "name": "value",
+            "baseName": "value",
             "type": "string",
             "format": ""
         },
         {
-            "name": "total",
-            "baseName": "total",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "discount",
-            "baseName": "discount",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "tax",
-            "baseName": "tax",
+            "name": "type",
+            "baseName": "type",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTablesResponseSummary.attributeTypeMap;
+        return PricingTableResponseDiscount.attributeTypeMap;
     }
 
     public constructor() {

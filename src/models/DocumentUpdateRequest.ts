@@ -14,6 +14,10 @@ import { HttpFile } from '../http/http';
 
 export class DocumentUpdateRequest {
     /**
+    * The name of the document.
+    */
+    'name'?: string;
+    /**
     * The list of recipients you're sending the document to. The ID or email are required. If the ID is passed, an existing recipient will be updated. If the email is passed, a new recipient will be added to CC.
     */
     'recipients'?: Array<DocumentUpdateRequestRecipients>;
@@ -34,6 +38,12 @@ export class DocumentUpdateRequest {
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "name",
+            "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "recipients",
             "baseName": "recipients",

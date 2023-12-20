@@ -9,21 +9,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class InlineResponse200 {
-    'actorId'?: string;
+export class QuoteResponseSummaryRecurringSubtotal {
+    'billingCycle'?: string;
+    'value'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "actorId",
-            "baseName": "actor_id",
+            "name": "billingCycle",
+            "baseName": "billing_cycle",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "value",
+            "baseName": "value",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return InlineResponse200.attributeTypeMap;
+        return QuoteResponseSummaryRecurringSubtotal.attributeTypeMap;
     }
 
     public constructor() {

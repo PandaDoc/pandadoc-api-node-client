@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **addDocumentRecipient**
-> InlineResponse200 addDocumentRecipient(documentRecipientCreateRequest)
+> DocumentRecipientResponse addDocumentRecipient(documentRecipientCreateRequest)
 
 Adds recipient as CC to document
 
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**InlineResponse200**
+**DocumentRecipientResponse**
 
 ### Authorization
 
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 # **reassignDocumentRecipient**
-> any reassignDocumentRecipient(documentRecipientCreateRequest)
+> DocumentRecipientResponse reassignDocumentRecipient(documentRecipientCreateRequest)
 
 Replace document recipient with another contact
 
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**any**
+**DocumentRecipientResponse**
 
 ### Authorization
 

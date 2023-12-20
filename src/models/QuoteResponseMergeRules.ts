@@ -7,44 +7,46 @@
  * Do not edit the class manually.
  */
 
+import { QuoteResponseAction } from './QuoteResponseAction';
+import { QuoteResponseCondition } from './QuoteResponseCondition';
 import { HttpFile } from '../http/http';
 
-export class PricingTablesResponseOptions {
-    'optional'?: boolean;
-    'optionalSelected'?: boolean;
-    'multichoiceEnabled'?: boolean;
-    'multichoiceSelected'?: boolean;
+export class QuoteResponseMergeRules {
+    'id'?: string;
+    'enabled'?: boolean;
+    'action'?: QuoteResponseAction;
+    'condition'?: QuoteResponseCondition;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "optional",
-            "baseName": "optional",
+            "name": "id",
+            "baseName": "id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "enabled",
+            "baseName": "enabled",
             "type": "boolean",
             "format": ""
         },
         {
-            "name": "optionalSelected",
-            "baseName": "optional_selected",
-            "type": "boolean",
+            "name": "action",
+            "baseName": "action",
+            "type": "QuoteResponseAction",
             "format": ""
         },
         {
-            "name": "multichoiceEnabled",
-            "baseName": "multichoice_enabled",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "multichoiceSelected",
-            "baseName": "multichoice_selected",
-            "type": "boolean",
+            "name": "condition",
+            "baseName": "condition",
+            "type": "QuoteResponseCondition",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTablesResponseOptions.attributeTypeMap;
+        return QuoteResponseMergeRules.attributeTypeMap;
     }
 
     public constructor() {
