@@ -12,7 +12,7 @@ import { DocumentDetailsResponseGrandTotal } from './DocumentDetailsResponseGran
 import { DocumentDetailsResponseLinkedObjects } from './DocumentDetailsResponseLinkedObjects';
 import { DocumentDetailsResponseRecipients } from './DocumentDetailsResponseRecipients';
 import { DocumentDetailsResponseTemplate } from './DocumentDetailsResponseTemplate';
-import { PricingTablesResponse } from './PricingTablesResponse';
+import { PricingResponse } from './PricingResponse';
 import { HttpFile } from '../http/http';
 
 export class DocumentDetailsResponse {
@@ -22,13 +22,14 @@ export class DocumentDetailsResponse {
     'dateCreated'?: string;
     'dateModified'?: string;
     'dateCompleted'?: string;
+    'contentDateModified'?: string;
     'createdBy'?: DocumentDetailsResponseCreatedBy;
     'template'?: DocumentDetailsResponseTemplate;
     'expirationDate'?: any;
     'metadata'?: any;
     'tokens'?: Array<any>;
     'fields'?: Array<any>;
-    'pricing'?: PricingTablesResponse;
+    'pricing'?: PricingResponse;
     'version'?: string;
     'tags'?: Array<string>;
     'sentBy'?: any;
@@ -77,6 +78,12 @@ export class DocumentDetailsResponse {
             "format": ""
         },
         {
+            "name": "contentDateModified",
+            "baseName": "content_date_modified",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "createdBy",
             "baseName": "created_by",
             "type": "DocumentDetailsResponseCreatedBy",
@@ -115,7 +122,7 @@ export class DocumentDetailsResponse {
         {
             "name": "pricing",
             "baseName": "pricing",
-            "type": "PricingTablesResponse",
+            "type": "PricingResponse",
             "format": ""
         },
         {

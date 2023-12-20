@@ -42,6 +42,7 @@ import { DocumentListResponseResults } from '../models/DocumentListResponseResul
 import { DocumentOrderingFieldsEnum } from '../models/DocumentOrderingFieldsEnum';
 import { DocumentRecipientCreateRequest } from '../models/DocumentRecipientCreateRequest';
 import { DocumentRecipientEditRequest } from '../models/DocumentRecipientEditRequest';
+import { DocumentRecipientResponse } from '../models/DocumentRecipientResponse';
 import { DocumentSendRequest } from '../models/DocumentSendRequest';
 import { DocumentSendRequestForwardingSettings } from '../models/DocumentSendRequestForwardingSettings';
 import { DocumentSendRequestSelectedApprovers } from '../models/DocumentSendRequestSelectedApprovers';
@@ -65,23 +66,34 @@ import { DocumentsFolderRenameRequest } from '../models/DocumentsFolderRenameReq
 import { DocumentsFolderRenameResponse } from '../models/DocumentsFolderRenameResponse';
 import { FormListResponse } from '../models/FormListResponse';
 import { FormListResponseResults } from '../models/FormListResponseResults';
-import { InlineResponse200 } from '../models/InlineResponse200';
 import { LinkedObjectCreateRequest } from '../models/LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from '../models/LinkedObjectListResponse';
 import { MemberDetailsResponse } from '../models/MemberDetailsResponse';
 import { MemberListResponse } from '../models/MemberListResponse';
 import { OAuth2AccessTokenResponse } from '../models/OAuth2AccessTokenResponse';
+import { PricingResponse } from '../models/PricingResponse';
 import { PricingTableRequest } from '../models/PricingTableRequest';
 import { PricingTableRequestRowOptions } from '../models/PricingTableRequestRowOptions';
 import { PricingTableRequestRows } from '../models/PricingTableRequestRows';
 import { PricingTableRequestSections } from '../models/PricingTableRequestSections';
-import { PricingTablesResponse } from '../models/PricingTablesResponse';
-import { PricingTablesResponseDiscount } from '../models/PricingTablesResponseDiscount';
-import { PricingTablesResponseItems } from '../models/PricingTablesResponseItems';
-import { PricingTablesResponseOptions } from '../models/PricingTablesResponseOptions';
-import { PricingTablesResponseSummary } from '../models/PricingTablesResponseSummary';
-import { PricingTablesResponseTables } from '../models/PricingTablesResponseTables';
+import { PricingTableResponse } from '../models/PricingTableResponse';
+import { PricingTableResponseDiscount } from '../models/PricingTableResponseDiscount';
+import { PricingTableResponseItems } from '../models/PricingTableResponseItems';
+import { PricingTableResponseOptions } from '../models/PricingTableResponseOptions';
+import { PricingTableResponseSummary } from '../models/PricingTableResponseSummary';
+import { QuoteResponse } from '../models/QuoteResponse';
+import { QuoteResponseAction } from '../models/QuoteResponseAction';
+import { QuoteResponseCondition } from '../models/QuoteResponseCondition';
+import { QuoteResponseConditionComparison } from '../models/QuoteResponseConditionComparison';
+import { QuoteResponseMergeRules } from '../models/QuoteResponseMergeRules';
+import { QuoteResponseOptions } from '../models/QuoteResponseOptions';
+import { QuoteResponseSectionItem } from '../models/QuoteResponseSectionItem';
+import { QuoteResponseSectionSummary } from '../models/QuoteResponseSectionSummary';
+import { QuoteResponseSections } from '../models/QuoteResponseSections';
+import { QuoteResponseSummary } from '../models/QuoteResponseSummary';
+import { QuoteResponseSummaryDiscounts } from '../models/QuoteResponseSummaryDiscounts';
+import { QuoteResponseSummaryRecurringSubtotal } from '../models/QuoteResponseSummaryRecurringSubtotal';
 import { TemplateDetailsResponse } from '../models/TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from '../models/TemplateDetailsResponseContentPlaceholders';
 import { TemplateDetailsResponseImages } from '../models/TemplateDetailsResponseImages';
@@ -232,6 +244,12 @@ export interface ContactsApiDetailsContactRequest {
 }
 
 export interface ContactsApiListContactsRequest {
+    /**
+     * Optional search parameter. Filter results by exact match.
+     * @type string
+     * @memberof ContactsApilistContacts
+     */
+    email?: string
 }
 
 export interface ContactsApiUpdateContactRequest {
@@ -285,7 +303,7 @@ export class ObjectContactsApi {
      * @param param the request object
      */
     public listContacts(param: ContactsApiListContactsRequest = {}, options?: Configuration): Promise<ContactListResponse> {
-        return this.api.listContacts( options).toPromise();
+        return this.api.listContacts(param.email,  options).toPromise();
     }
 
     /**
@@ -607,7 +625,7 @@ export class ObjectDocumentRecipientsApi {
      * Add Document Recipient
      * @param param the request object
      */
-    public addDocumentRecipient(param: DocumentRecipientsApiAddDocumentRecipientRequest, options?: Configuration): Promise<InlineResponse200> {
+    public addDocumentRecipient(param: DocumentRecipientsApiAddDocumentRecipientRequest, options?: Configuration): Promise<DocumentRecipientResponse> {
         return this.api.addDocumentRecipient(param.id, param.documentRecipientCreateRequest,  options).toPromise();
     }
 
@@ -634,7 +652,7 @@ export class ObjectDocumentRecipientsApi {
      * Reassign Document Recipient
      * @param param the request object
      */
-    public reassignDocumentRecipient(param: DocumentRecipientsApiReassignDocumentRecipientRequest, options?: Configuration): Promise<any> {
+    public reassignDocumentRecipient(param: DocumentRecipientsApiReassignDocumentRecipientRequest, options?: Configuration): Promise<DocumentRecipientResponse> {
         return this.api.reassignDocumentRecipient(param.id, param.recipientId, param.documentRecipientCreateRequest,  options).toPromise();
     }
 

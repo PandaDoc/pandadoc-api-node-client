@@ -7,20 +7,21 @@
  * Do not edit the class manually.
  */
 
-import { PricingTablesResponseTables } from './PricingTablesResponseTables';
 import { HttpFile } from '../http/http';
 
-export class PricingTablesResponse {
-    'tables'?: Array<PricingTablesResponseTables>;
+export class PricingTableResponseSummary {
+    'subtotal'?: string;
     'total'?: string;
+    'discount'?: string;
+    'tax'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "tables",
-            "baseName": "tables",
-            "type": "Array<PricingTablesResponseTables>",
+            "name": "subtotal",
+            "baseName": "subtotal",
+            "type": "string",
             "format": ""
         },
         {
@@ -28,10 +29,22 @@ export class PricingTablesResponse {
             "baseName": "total",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "discount",
+            "baseName": "discount",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "tax",
+            "baseName": "tax",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTablesResponse.attributeTypeMap;
+        return PricingTableResponseSummary.attributeTypeMap;
     }
 
     public constructor() {

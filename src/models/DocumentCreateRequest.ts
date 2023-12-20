@@ -20,6 +20,10 @@ export class DocumentCreateRequest {
     */
     'name'?: string;
     /**
+    * Set this parameter as true if you want to detect title variables in the document.
+    */
+    'detectTitleVariables'?: boolean;
+    /**
     * ID of the template you want to use. You can copy it from an in-app template URL such as `https://app.pandadoc.com/a/#/templates/{ID}/content`. A template ID is also obtained by listing templates.
     */
     'templateUuid'?: string;
@@ -79,6 +83,12 @@ export class DocumentCreateRequest {
             "name": "name",
             "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "detectTitleVariables",
+            "baseName": "detect_title_variables",
+            "type": "boolean",
             "format": ""
         },
         {

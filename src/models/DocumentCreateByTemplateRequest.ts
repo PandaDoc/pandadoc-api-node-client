@@ -16,9 +16,13 @@ import { HttpFile } from '../http/http';
 
 export class DocumentCreateByTemplateRequest {
     /**
-    * Name the document you are creating.
+    * Name the document you are creating. If name is not passed, the template name is used.
     */
-    'name': string;
+    'name'?: string;
+    /**
+    * Set this parameter as true if you want to detect title variables in the document.
+    */
+    'detectTitleVariables'?: boolean;
     /**
     * The ID of a template you want to use. You can copy it from an in app template url such as `https://app.pandadoc.com/a/#/templates/{ID}/content`. A template ID is also obtained by listing templates.
     */
@@ -64,6 +68,12 @@ export class DocumentCreateByTemplateRequest {
             "name": "name",
             "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "detectTitleVariables",
+            "baseName": "detect_title_variables",
+            "type": "boolean",
             "format": ""
         },
         {

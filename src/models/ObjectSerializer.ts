@@ -38,6 +38,7 @@ export * from './DocumentListResponseResults';
 export * from './DocumentOrderingFieldsEnum';
 export * from './DocumentRecipientCreateRequest';
 export * from './DocumentRecipientEditRequest';
+export * from './DocumentRecipientResponse';
 export * from './DocumentSendRequest';
 export * from './DocumentSendRequestForwardingSettings';
 export * from './DocumentSendRequestSelectedApprovers';
@@ -61,23 +62,34 @@ export * from './DocumentsFolderRenameRequest';
 export * from './DocumentsFolderRenameResponse';
 export * from './FormListResponse';
 export * from './FormListResponseResults';
-export * from './InlineResponse200';
 export * from './LinkedObjectCreateRequest';
 export * from './LinkedObjectCreateResponse';
 export * from './LinkedObjectListResponse';
 export * from './MemberDetailsResponse';
 export * from './MemberListResponse';
 export * from './OAuth2AccessTokenResponse';
+export * from './PricingResponse';
 export * from './PricingTableRequest';
 export * from './PricingTableRequestRowOptions';
 export * from './PricingTableRequestRows';
 export * from './PricingTableRequestSections';
-export * from './PricingTablesResponse';
-export * from './PricingTablesResponseDiscount';
-export * from './PricingTablesResponseItems';
-export * from './PricingTablesResponseOptions';
-export * from './PricingTablesResponseSummary';
-export * from './PricingTablesResponseTables';
+export * from './PricingTableResponse';
+export * from './PricingTableResponseDiscount';
+export * from './PricingTableResponseItems';
+export * from './PricingTableResponseOptions';
+export * from './PricingTableResponseSummary';
+export * from './QuoteResponse';
+export * from './QuoteResponseAction';
+export * from './QuoteResponseCondition';
+export * from './QuoteResponseConditionComparison';
+export * from './QuoteResponseMergeRules';
+export * from './QuoteResponseOptions';
+export * from './QuoteResponseSectionItem';
+export * from './QuoteResponseSectionSummary';
+export * from './QuoteResponseSections';
+export * from './QuoteResponseSummary';
+export * from './QuoteResponseSummaryDiscounts';
+export * from './QuoteResponseSummaryRecurringSubtotal';
 export * from './TemplateDetailsResponse';
 export * from './TemplateDetailsResponseContentPlaceholders';
 export * from './TemplateDetailsResponseImages';
@@ -147,6 +159,7 @@ import { DocumentListResponseResults } from './DocumentListResponseResults';
 import { DocumentOrderingFieldsEnum } from './DocumentOrderingFieldsEnum';
 import { DocumentRecipientCreateRequest , DocumentRecipientCreateRequestKindEnum   } from './DocumentRecipientCreateRequest';
 import { DocumentRecipientEditRequest } from './DocumentRecipientEditRequest';
+import { DocumentRecipientResponse } from './DocumentRecipientResponse';
 import { DocumentSendRequest } from './DocumentSendRequest';
 import { DocumentSendRequestForwardingSettings } from './DocumentSendRequestForwardingSettings';
 import { DocumentSendRequestSelectedApprovers } from './DocumentSendRequestSelectedApprovers';
@@ -170,23 +183,34 @@ import { DocumentsFolderRenameRequest } from './DocumentsFolderRenameRequest';
 import { DocumentsFolderRenameResponse } from './DocumentsFolderRenameResponse';
 import { FormListResponse } from './FormListResponse';
 import { FormListResponseResults } from './FormListResponseResults';
-import { InlineResponse200 } from './InlineResponse200';
 import { LinkedObjectCreateRequest } from './LinkedObjectCreateRequest';
 import { LinkedObjectCreateResponse } from './LinkedObjectCreateResponse';
 import { LinkedObjectListResponse } from './LinkedObjectListResponse';
 import { MemberDetailsResponse } from './MemberDetailsResponse';
 import { MemberListResponse } from './MemberListResponse';
 import { OAuth2AccessTokenResponse } from './OAuth2AccessTokenResponse';
+import { PricingResponse } from './PricingResponse';
 import { PricingTableRequest } from './PricingTableRequest';
 import { PricingTableRequestRowOptions } from './PricingTableRequestRowOptions';
 import { PricingTableRequestRows } from './PricingTableRequestRows';
 import { PricingTableRequestSections } from './PricingTableRequestSections';
-import { PricingTablesResponse } from './PricingTablesResponse';
-import { PricingTablesResponseDiscount } from './PricingTablesResponseDiscount';
-import { PricingTablesResponseItems } from './PricingTablesResponseItems';
-import { PricingTablesResponseOptions } from './PricingTablesResponseOptions';
-import { PricingTablesResponseSummary } from './PricingTablesResponseSummary';
-import { PricingTablesResponseTables } from './PricingTablesResponseTables';
+import { PricingTableResponse } from './PricingTableResponse';
+import { PricingTableResponseDiscount } from './PricingTableResponseDiscount';
+import { PricingTableResponseItems } from './PricingTableResponseItems';
+import { PricingTableResponseOptions } from './PricingTableResponseOptions';
+import { PricingTableResponseSummary } from './PricingTableResponseSummary';
+import { QuoteResponse } from './QuoteResponse';
+import { QuoteResponseAction } from './QuoteResponseAction';
+import { QuoteResponseCondition } from './QuoteResponseCondition';
+import { QuoteResponseConditionComparison } from './QuoteResponseConditionComparison';
+import { QuoteResponseMergeRules } from './QuoteResponseMergeRules';
+import { QuoteResponseOptions } from './QuoteResponseOptions';
+import { QuoteResponseSectionItem } from './QuoteResponseSectionItem';
+import { QuoteResponseSectionSummary } from './QuoteResponseSectionSummary';
+import { QuoteResponseSections } from './QuoteResponseSections';
+import { QuoteResponseSummary } from './QuoteResponseSummary';
+import { QuoteResponseSummaryDiscounts } from './QuoteResponseSummaryDiscounts';
+import { QuoteResponseSummaryRecurringSubtotal } from './QuoteResponseSummaryRecurringSubtotal';
 import { TemplateDetailsResponse } from './TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from './TemplateDetailsResponseContentPlaceholders';
 import { TemplateDetailsResponseImages } from './TemplateDetailsResponseImages';
@@ -288,6 +312,7 @@ let typeMap: {[index: string]: any} = {
     "DocumentListResponseResults": DocumentListResponseResults,
     "DocumentRecipientCreateRequest": DocumentRecipientCreateRequest,
     "DocumentRecipientEditRequest": DocumentRecipientEditRequest,
+    "DocumentRecipientResponse": DocumentRecipientResponse,
     "DocumentSendRequest": DocumentSendRequest,
     "DocumentSendRequestForwardingSettings": DocumentSendRequestForwardingSettings,
     "DocumentSendRequestSelectedApprovers": DocumentSendRequestSelectedApprovers,
@@ -309,23 +334,34 @@ let typeMap: {[index: string]: any} = {
     "DocumentsFolderRenameResponse": DocumentsFolderRenameResponse,
     "FormListResponse": FormListResponse,
     "FormListResponseResults": FormListResponseResults,
-    "InlineResponse200": InlineResponse200,
     "LinkedObjectCreateRequest": LinkedObjectCreateRequest,
     "LinkedObjectCreateResponse": LinkedObjectCreateResponse,
     "LinkedObjectListResponse": LinkedObjectListResponse,
     "MemberDetailsResponse": MemberDetailsResponse,
     "MemberListResponse": MemberListResponse,
     "OAuth2AccessTokenResponse": OAuth2AccessTokenResponse,
+    "PricingResponse": PricingResponse,
     "PricingTableRequest": PricingTableRequest,
     "PricingTableRequestRowOptions": PricingTableRequestRowOptions,
     "PricingTableRequestRows": PricingTableRequestRows,
     "PricingTableRequestSections": PricingTableRequestSections,
-    "PricingTablesResponse": PricingTablesResponse,
-    "PricingTablesResponseDiscount": PricingTablesResponseDiscount,
-    "PricingTablesResponseItems": PricingTablesResponseItems,
-    "PricingTablesResponseOptions": PricingTablesResponseOptions,
-    "PricingTablesResponseSummary": PricingTablesResponseSummary,
-    "PricingTablesResponseTables": PricingTablesResponseTables,
+    "PricingTableResponse": PricingTableResponse,
+    "PricingTableResponseDiscount": PricingTableResponseDiscount,
+    "PricingTableResponseItems": PricingTableResponseItems,
+    "PricingTableResponseOptions": PricingTableResponseOptions,
+    "PricingTableResponseSummary": PricingTableResponseSummary,
+    "QuoteResponse": QuoteResponse,
+    "QuoteResponseAction": QuoteResponseAction,
+    "QuoteResponseCondition": QuoteResponseCondition,
+    "QuoteResponseConditionComparison": QuoteResponseConditionComparison,
+    "QuoteResponseMergeRules": QuoteResponseMergeRules,
+    "QuoteResponseOptions": QuoteResponseOptions,
+    "QuoteResponseSectionItem": QuoteResponseSectionItem,
+    "QuoteResponseSectionSummary": QuoteResponseSectionSummary,
+    "QuoteResponseSections": QuoteResponseSections,
+    "QuoteResponseSummary": QuoteResponseSummary,
+    "QuoteResponseSummaryDiscounts": QuoteResponseSummaryDiscounts,
+    "QuoteResponseSummaryRecurringSubtotal": QuoteResponseSummaryRecurringSubtotal,
     "TemplateDetailsResponse": TemplateDetailsResponse,
     "TemplateDetailsResponseContentPlaceholders": TemplateDetailsResponseContentPlaceholders,
     "TemplateDetailsResponseImages": TemplateDetailsResponseImages,

@@ -8,7 +8,7 @@
  */
 
 import { ContentLibraryItemResponseCreatedBy } from './ContentLibraryItemResponseCreatedBy';
-import { PricingTablesResponse } from './PricingTablesResponse';
+import { PricingResponse } from './PricingResponse';
 import { HttpFile } from '../http/http';
 
 export class ContentLibraryItemResponse {
@@ -16,11 +16,12 @@ export class ContentLibraryItemResponse {
     'name'?: string;
     'dateCreated'?: string;
     'dateModified'?: string;
+    'contentDateModified'?: string;
     'createdBy'?: ContentLibraryItemResponseCreatedBy;
     'metadata'?: any;
     'tokens'?: Array<any>;
     'fields'?: Array<any>;
-    'pricing'?: PricingTablesResponse;
+    'pricing'?: PricingResponse;
     'tags'?: Array<string>;
     'roles'?: Array<any>;
     'version'?: string;
@@ -55,6 +56,12 @@ export class ContentLibraryItemResponse {
             "format": ""
         },
         {
+            "name": "contentDateModified",
+            "baseName": "content_date_modified",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "createdBy",
             "baseName": "created_by",
             "type": "ContentLibraryItemResponseCreatedBy",
@@ -81,7 +88,7 @@ export class ContentLibraryItemResponse {
         {
             "name": "pricing",
             "baseName": "pricing",
-            "type": "PricingTablesResponse",
+            "type": "PricingResponse",
             "format": ""
         },
         {

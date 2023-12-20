@@ -9,28 +9,28 @@
 
 import { HttpFile } from '../http/http';
 
-export class PricingTablesResponseDiscount {
-    'value'?: string;
+export class QuoteResponseSummaryDiscounts {
     'type'?: string;
+    'value'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "value",
-            "baseName": "value",
+            "name": "type",
+            "baseName": "type",
             "type": "string",
             "format": ""
         },
         {
-            "name": "type",
-            "baseName": "type",
+            "name": "value",
+            "baseName": "value",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return PricingTablesResponseDiscount.attributeTypeMap;
+        return QuoteResponseSummaryDiscounts.attributeTypeMap;
     }
 
     public constructor() {

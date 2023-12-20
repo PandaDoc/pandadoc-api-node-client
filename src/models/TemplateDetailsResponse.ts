@@ -8,7 +8,7 @@
  */
 
 import { ContentLibraryItemResponseCreatedBy } from './ContentLibraryItemResponseCreatedBy';
-import { PricingTablesResponse } from './PricingTablesResponse';
+import { PricingResponse } from './PricingResponse';
 import { TemplateDetailsResponseContentPlaceholders } from './TemplateDetailsResponseContentPlaceholders';
 import { TemplateDetailsResponseImages } from './TemplateDetailsResponseImages';
 import { TemplateDetailsResponseRoles } from './TemplateDetailsResponseRoles';
@@ -20,11 +20,12 @@ export class TemplateDetailsResponse {
     'name'?: string;
     'dateCreated'?: string;
     'dateModified'?: string;
+    'contentDateModified'?: string;
     'createdBy'?: ContentLibraryItemResponseCreatedBy;
     'metadata'?: any;
     'tokens'?: Array<TemplateDetailsResponseTokens>;
     'fields'?: Array<any>;
-    'pricing'?: PricingTablesResponse;
+    'pricing'?: PricingResponse;
     'tags'?: Array<string>;
     'roles'?: Array<TemplateDetailsResponseRoles>;
     'version'?: string;
@@ -59,6 +60,12 @@ export class TemplateDetailsResponse {
             "format": ""
         },
         {
+            "name": "contentDateModified",
+            "baseName": "content_date_modified",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "createdBy",
             "baseName": "created_by",
             "type": "ContentLibraryItemResponseCreatedBy",
@@ -85,7 +92,7 @@ export class TemplateDetailsResponse {
         {
             "name": "pricing",
             "baseName": "pricing",
-            "type": "PricingTablesResponse",
+            "type": "PricingResponse",
             "format": ""
         },
         {

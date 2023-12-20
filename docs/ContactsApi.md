@@ -218,7 +218,10 @@ const configuration = pd_api.createConfiguration(
 );
 const apiInstance = new pd_api.ContactsApi(configuration);
 
-let body:any = {};
+const body:pd_api.ContactsApiListContactsRequest = {
+  // string | Optional search parameter. Filter results by exact match. (optional)
+  email: "josh@example.com",
+};
 
 apiInstance.listContacts(body).then((data) => {
   console.log('API called successfully. Returned data: %o', data);
@@ -227,7 +230,10 @@ apiInstance.listContacts(body).then((data) => {
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **email** | [**string**] | Optional search parameter. Filter results by exact match. | (optional) defaults to undefined
 
 
 ### Return type

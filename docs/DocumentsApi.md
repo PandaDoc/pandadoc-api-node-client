@@ -112,6 +112,7 @@ const body:pd_api.DocumentsApiCreateDocumentRequest = {
   // DocumentCreateRequest | Use a PandaDoc template or an existing PDF to create a document. See the creation request examples [by template](/schemas/DocumentCreateByTemplateRequest) and [by pdf](/schemas/DocumentCreateByPdfRequest) 
   documentCreateRequest: {
     name: "API Sample Document from PandaDoc Template",
+    detectTitleVariables: true,
     templateUuid: "hryJY9mqYZHjQCYQuSjRQg",
     folderUuid: "QMDSzwabfFzTgjW4kUijqQ",
     owner: {
@@ -1262,6 +1263,7 @@ const body:pd_api.DocumentsApiUpdateDocumentRequest = {
   id: "BhVzRcxH9Z2LgfPPGXFUBa",
   // DocumentUpdateRequest
   documentUpdateRequest: {
+    name: "Contract",
     recipients: [
       {
         id: "id_example",
