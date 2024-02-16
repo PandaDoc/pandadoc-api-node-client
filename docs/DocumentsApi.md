@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**changeDocumentStatus**](DocumentsApi.md#changeDocumentStatus) | **PATCH** /public/v1/documents/{id}/status | Document status change
 [**createDocument**](DocumentsApi.md#createDocument) | **POST** /public/v1/documents | Create document
 [**createDocumentLink**](DocumentsApi.md#createDocumentLink) | **POST** /public/v1/documents/{id}/session | Create a Document Link
+[**createDocumentSectionByTemplate**](DocumentsApi.md#createDocumentSectionByTemplate) | **POST** /public/v1/documents/{document_id}/sections/uploads | Add a section to a document
 [**createLinkedObject**](DocumentsApi.md#createLinkedObject) | **POST** /public/v1/documents/{id}/linked-objects | Create Linked Object
 [**deleteDocument**](DocumentsApi.md#deleteDocument) | **DELETE** /public/v1/documents/{id} | Delete document by id
 [**deleteLinkedObject**](DocumentsApi.md#deleteLinkedObject) | **DELETE** /public/v1/documents/{id}/linked-objects/{linked_object_id} | Delete Linked Object
@@ -323,6 +324,154 @@ Name | Type | Description  | Notes
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+# **createDocumentSectionByTemplate**
+> documentSectionCreateResponse createDocumentSectionByTemplate(DocumentCreateSectionByTemplateRequest)
+
+
+### Example
+
+
+```typescript
+import * as pd_api from 'pandadoc-node-client';
+
+// replace it with your API key
+const API_KEY = "YOUR_API_KEY";
+const configuration = pd_api.createConfiguration(
+    { authMethods: {apiKey: `API-Key ${API_KEY}`} }
+);
+const apiInstance = new pd_api.DocumentsApi(configuration);
+
+const body:pd_api.DocumentCreateSectionByTemplateRequest = {
+    templateUuid: "hryJY9mqYZHjQCYQuSjRQg",
+    recipients: [
+      {
+        email: "josh@example.com",
+        firstName: "Josh",
+        lastName: "Ron",
+        role: "user",
+        signingOrder: 1,
+      },
+    ],
+    tokens: [
+      {
+        name: "Favorite.Pet",
+        value: "Panda",
+      },
+    ],
+    fields: {},
+    pricingTables: [
+      {
+        name: "Pricing Table 1",
+        dataMerge: true,
+        options: {},
+        sections: [
+          {
+            title: "Sample Section",
+            _default: true,
+            multichoiceEnabled: false,
+            rows: [
+              {
+                options: {
+                  qtyEditable: true,
+                  optionalSelected: true,
+                  optional: true,
+                },
+                data: {},
+                customFields: {},
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    contentPlaceholders: [
+      {
+        blockId: "Content Placeholder 1",
+        contentLibraryItems: [
+          {
+            id: "hryJY9mqYZHjQCYQuSjRQg",
+            pricingTables: [
+              {
+                name: "Pricing Table 1",
+                dataMerge: true,
+                options: {},
+                sections: [
+                  {
+                    title: "Sample Section",
+                    _default: true,
+                    multichoiceEnabled: false,
+                    rows: [
+                      {
+                        options: {
+                          qtyEditable: true,
+                          optionalSelected: true,
+                          optional: true,
+                        },
+                        data: {},
+                        customFields: {},
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+            fields: {},
+            recipients: [
+              {
+                email: "josh@example.com",
+                firstName: "Josh",
+                lastName: "Ron",
+                role: "user",
+                signingOrder: 1,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+
+apiInstance.createDocumentSectionByTemplate(body).then((data) => {
+  console.log('API called successfully. Returned data: %o', data);
+}).catch((error) => console.error(error));
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **documentCreateSectionByTemplateRequest** | **DocumentCreateSectionByTemplateRequest**|  |
+ **id** | [**string**] | Document ID | defaults to undefined
+
+
+### Return type
+
+**DocumentCreateSectionByTemplateResponse**
+
+### Authorization
+
+[apiKey](../README.md#apiKey), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | OK |  -  |
+**400** | Bad Request |  -  |
+**401** | Authentication error |  -  |
+**403** | Permission error |  -  |
+**404** | Not found |  -  |
+**429** | Too Many Requests |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 
 # **createLinkedObject**
 > LinkedObjectCreateResponse createLinkedObject(linkedObjectCreateRequest)
