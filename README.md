@@ -1,5 +1,5 @@
 # The Official PandaDoc Node client SDK
-PandaDoc SDK spans a broad range of functionality to help you build incredible documents automation experiences inside your product.
+PandaDoc SDK offers a broad range of functionality to help you build incredible documents automation experiences inside your product.
 
 ## Docs
 - [Official public API documentation](https://developers.pandadoc.com/reference/about)
