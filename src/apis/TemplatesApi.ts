@@ -115,9 +115,11 @@ export class TemplatesApiRequestFactory extends BaseAPIRequestFactory {
      * @param id Optionally, specify template ID.
      * @param folderUuid UUID of the folder where the templates are stored.
      * @param tag Optional search tag. Filter by template tag.
+     * @param fields A comma-separated list of additional fields to include in the response.  Each field must be a valid template property.  Currently, only one additional field, &#x60;content_date_modified&#x60;, is supported.  For example, &#x60;GET /templates?fields&#x3D;content_date_modified&#x60;.
      */
-    public async listTemplates(q?: string, shared?: boolean, deleted?: boolean, count?: number, page?: number, id?: string, folderUuid?: string, tag?: Array<string>, _options?: Configuration): Promise<RequestContext> {
+    public async listTemplates(q?: string, shared?: boolean, deleted?: boolean, count?: number, page?: number, id?: string, folderUuid?: string, tag?: Array<string>, fields?: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
+
 
 
 
@@ -172,6 +174,11 @@ export class TemplatesApiRequestFactory extends BaseAPIRequestFactory {
         // Query Params
         if (tag !== undefined) {
             requestContext.setQueryParam("tag", ObjectSerializer.serialize(tag, "Array<string>", ""));
+        }
+
+        // Query Params
+        if (fields !== undefined) {
+            requestContext.setQueryParam("fields", ObjectSerializer.serialize(fields, "string", ""));
         }
 
 

@@ -7,16 +7,20 @@
  * Do not edit the class manually.
  */
 
+import { QuoteResponseSectionColumn } from './QuoteResponseSectionColumn';
 import { QuoteResponseSectionItem } from './QuoteResponseSectionItem';
 import { QuoteResponseSectionSummary } from './QuoteResponseSectionSummary';
+import { QuoteSectionSettings } from './QuoteSectionSettings';
 import { HttpFile } from '../http/http';
 
 export class QuoteResponseSections {
     'id'?: string;
     'name'?: string;
     'summary'?: QuoteResponseSectionSummary;
+    'columns'?: Array<QuoteResponseSectionColumn>;
     'items'?: Array<QuoteResponseSectionItem>;
     'total'?: string;
+    'settings'?: QuoteSectionSettings;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -40,6 +44,12 @@ export class QuoteResponseSections {
             "format": ""
         },
         {
+            "name": "columns",
+            "baseName": "columns",
+            "type": "Array<QuoteResponseSectionColumn>",
+            "format": ""
+        },
+        {
             "name": "items",
             "baseName": "items",
             "type": "Array<QuoteResponseSectionItem>",
@@ -49,6 +59,12 @@ export class QuoteResponseSections {
             "name": "total",
             "baseName": "total",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "settings",
+            "baseName": "settings",
+            "type": "QuoteSectionSettings",
             "format": ""
         }    ];
 

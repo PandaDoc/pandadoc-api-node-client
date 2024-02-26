@@ -7,6 +7,7 @@
  * Do not edit the class manually.
  */
 
+import { RecipientVerificationSettings } from './RecipientVerificationSettings';
 import { HttpFile } from '../http/http';
 
 export class DocumentDetailsResponseRecipients {
@@ -22,6 +23,7 @@ export class DocumentDetailsResponseRecipients {
     'hasCompleted'?: boolean;
     'sharedLink'?: string;
     'signatureDate'?: string;
+    'verificationSettings'?: RecipientVerificationSettings;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -96,6 +98,12 @@ export class DocumentDetailsResponseRecipients {
             "name": "signatureDate",
             "baseName": "signature_date",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "verificationSettings",
+            "baseName": "verification_settings",
+            "type": "RecipientVerificationSettings",
             "format": ""
         }    ];
 

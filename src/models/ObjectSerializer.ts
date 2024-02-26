@@ -84,12 +84,26 @@ export * from './QuoteResponseCondition';
 export * from './QuoteResponseConditionComparison';
 export * from './QuoteResponseMergeRules';
 export * from './QuoteResponseOptions';
+export * from './QuoteResponseSectionColumn';
 export * from './QuoteResponseSectionItem';
 export * from './QuoteResponseSectionSummary';
 export * from './QuoteResponseSections';
+export * from './QuoteResponseSettings';
 export * from './QuoteResponseSummary';
 export * from './QuoteResponseSummaryDiscounts';
 export * from './QuoteResponseSummaryRecurringSubtotal';
+export * from './QuoteSectionSettings';
+export * from './QuoteUpdateRequest';
+export * from './QuoteUpdateRequestDiscounts';
+export * from './QuoteUpdateRequestOptions';
+export * from './QuoteUpdateRequestPriceSettings';
+export * from './QuoteUpdateRequestPriceSettingsTiers';
+export * from './QuoteUpdateRequestSettings';
+export * from './QuoteUpdateRequestSettings1';
+export * from './RecipientVerificationSettings';
+export * from './RecipientVerificationSettingsPasscodeVerification';
+export * from './RecipientVerificationSettingsPhoneVerification';
+export * from './SectionInfoResponse';
 export * from './TemplateDetailsResponse';
 export * from './TemplateDetailsResponseContentPlaceholders';
 export * from './TemplateDetailsResponseImages';
@@ -104,6 +118,16 @@ export * from './TemplatesFolderListResponse';
 export * from './TemplatesFolderListResponseResults';
 export * from './TemplatesFolderRenameRequest';
 export * from './TemplatesFolderRenameResponse';
+export * from './UpdateIntegrationQuoteSection';
+export * from './UpdateIntegrationQuoteSectionItem';
+export * from './UploadSectionByPdfRequest';
+export * from './UploadSectionByTemplateRequest';
+export * from './UploadSectionListResponse';
+export * from './UploadSectionListResponseResults';
+export * from './UploadSectionRequest';
+export * from './UploadSectionResponse';
+export * from './UploadSectionStatusEnum';
+export * from './UploadSectionStatusResponse';
 export * from './WebhookEventDetailsResponse';
 export * from './WebhookEventErrorEnum';
 export * from './WebhookEventHttpStatusCodeGroupEnum';
@@ -205,12 +229,26 @@ import { QuoteResponseCondition } from './QuoteResponseCondition';
 import { QuoteResponseConditionComparison } from './QuoteResponseConditionComparison';
 import { QuoteResponseMergeRules } from './QuoteResponseMergeRules';
 import { QuoteResponseOptions } from './QuoteResponseOptions';
+import { QuoteResponseSectionColumn } from './QuoteResponseSectionColumn';
 import { QuoteResponseSectionItem } from './QuoteResponseSectionItem';
 import { QuoteResponseSectionSummary } from './QuoteResponseSectionSummary';
 import { QuoteResponseSections } from './QuoteResponseSections';
+import { QuoteResponseSettings, QuoteResponseSettingsSelectionTypeEnum   } from './QuoteResponseSettings';
 import { QuoteResponseSummary } from './QuoteResponseSummary';
 import { QuoteResponseSummaryDiscounts } from './QuoteResponseSummaryDiscounts';
 import { QuoteResponseSummaryRecurringSubtotal } from './QuoteResponseSummaryRecurringSubtotal';
+import { QuoteSectionSettings  , QuoteSectionSettingsSelectionTypeEnum   } from './QuoteSectionSettings';
+import { QuoteUpdateRequest } from './QuoteUpdateRequest';
+import { QuoteUpdateRequestDiscounts, QuoteUpdateRequestDiscountsTypeEnum    } from './QuoteUpdateRequestDiscounts';
+import { QuoteUpdateRequestOptions } from './QuoteUpdateRequestOptions';
+import { QuoteUpdateRequestPriceSettings } from './QuoteUpdateRequestPriceSettings';
+import { QuoteUpdateRequestPriceSettingsTiers } from './QuoteUpdateRequestPriceSettingsTiers';
+import { QuoteUpdateRequestSettings  , QuoteUpdateRequestSettingsSelectionTypeEnum   } from './QuoteUpdateRequestSettings';
+import { QuoteUpdateRequestSettings1, QuoteUpdateRequestSettings1SelectionTypeEnum   } from './QuoteUpdateRequestSettings1';
+import { RecipientVerificationSettings, RecipientVerificationSettingsVerificationPlaceEnum     } from './RecipientVerificationSettings';
+import { RecipientVerificationSettingsPasscodeVerification } from './RecipientVerificationSettingsPasscodeVerification';
+import { RecipientVerificationSettingsPhoneVerification } from './RecipientVerificationSettingsPhoneVerification';
+import { SectionInfoResponse } from './SectionInfoResponse';
 import { TemplateDetailsResponse } from './TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from './TemplateDetailsResponseContentPlaceholders';
 import { TemplateDetailsResponseImages } from './TemplateDetailsResponseImages';
@@ -225,6 +263,16 @@ import { TemplatesFolderListResponse } from './TemplatesFolderListResponse';
 import { TemplatesFolderListResponseResults } from './TemplatesFolderListResponseResults';
 import { TemplatesFolderRenameRequest } from './TemplatesFolderRenameRequest';
 import { TemplatesFolderRenameResponse } from './TemplatesFolderRenameResponse';
+import { UpdateIntegrationQuoteSection } from './UpdateIntegrationQuoteSection';
+import { UpdateIntegrationQuoteSectionItem        , UpdateIntegrationQuoteSectionItemBillingFrequencyEnum           } from './UpdateIntegrationQuoteSectionItem';
+import { UploadSectionByPdfRequest } from './UploadSectionByPdfRequest';
+import { UploadSectionByTemplateRequest } from './UploadSectionByTemplateRequest';
+import { UploadSectionListResponse } from './UploadSectionListResponse';
+import { UploadSectionListResponseResults } from './UploadSectionListResponseResults';
+import { UploadSectionRequest } from './UploadSectionRequest';
+import { UploadSectionResponse } from './UploadSectionResponse';
+import { UploadSectionStatusEnum } from './UploadSectionStatusEnum';
+import { UploadSectionStatusResponse } from './UploadSectionStatusResponse';
 import { WebhookEventDetailsResponse } from './WebhookEventDetailsResponse';
 import { WebhookEventErrorEnum } from './WebhookEventErrorEnum';
 import { WebhookEventHttpStatusCodeGroupEnum } from './WebhookEventHttpStatusCodeGroupEnum';
@@ -264,6 +312,14 @@ let enumsMap: Set<string> = new Set<string>([
     "DocumentRecipientCreateRequestKindEnum",
     "DocumentStatusEnum",
     "DocumentStatusRequestEnum",
+    "QuoteResponseSettingsSelectionTypeEnum",
+    "QuoteSectionSettingsSelectionTypeEnum",
+    "QuoteUpdateRequestDiscountsTypeEnum",
+    "QuoteUpdateRequestSettingsSelectionTypeEnum",
+    "QuoteUpdateRequestSettings1SelectionTypeEnum",
+    "RecipientVerificationSettingsVerificationPlaceEnum",
+    "UpdateIntegrationQuoteSectionItemBillingFrequencyEnum",
+    "UploadSectionStatusEnum",
     "WebhookEventErrorEnum",
     "WebhookEventHttpStatusCodeGroupEnum",
     "WebhookEventTriggerEnum",
@@ -356,12 +412,26 @@ let typeMap: {[index: string]: any} = {
     "QuoteResponseConditionComparison": QuoteResponseConditionComparison,
     "QuoteResponseMergeRules": QuoteResponseMergeRules,
     "QuoteResponseOptions": QuoteResponseOptions,
+    "QuoteResponseSectionColumn": QuoteResponseSectionColumn,
     "QuoteResponseSectionItem": QuoteResponseSectionItem,
     "QuoteResponseSectionSummary": QuoteResponseSectionSummary,
     "QuoteResponseSections": QuoteResponseSections,
+    "QuoteResponseSettings": QuoteResponseSettings,
     "QuoteResponseSummary": QuoteResponseSummary,
     "QuoteResponseSummaryDiscounts": QuoteResponseSummaryDiscounts,
     "QuoteResponseSummaryRecurringSubtotal": QuoteResponseSummaryRecurringSubtotal,
+    "QuoteSectionSettings": QuoteSectionSettings,
+    "QuoteUpdateRequest": QuoteUpdateRequest,
+    "QuoteUpdateRequestDiscounts": QuoteUpdateRequestDiscounts,
+    "QuoteUpdateRequestOptions": QuoteUpdateRequestOptions,
+    "QuoteUpdateRequestPriceSettings": QuoteUpdateRequestPriceSettings,
+    "QuoteUpdateRequestPriceSettingsTiers": QuoteUpdateRequestPriceSettingsTiers,
+    "QuoteUpdateRequestSettings": QuoteUpdateRequestSettings,
+    "QuoteUpdateRequestSettings1": QuoteUpdateRequestSettings1,
+    "RecipientVerificationSettings": RecipientVerificationSettings,
+    "RecipientVerificationSettingsPasscodeVerification": RecipientVerificationSettingsPasscodeVerification,
+    "RecipientVerificationSettingsPhoneVerification": RecipientVerificationSettingsPhoneVerification,
+    "SectionInfoResponse": SectionInfoResponse,
     "TemplateDetailsResponse": TemplateDetailsResponse,
     "TemplateDetailsResponseContentPlaceholders": TemplateDetailsResponseContentPlaceholders,
     "TemplateDetailsResponseImages": TemplateDetailsResponseImages,
@@ -376,6 +446,15 @@ let typeMap: {[index: string]: any} = {
     "TemplatesFolderListResponseResults": TemplatesFolderListResponseResults,
     "TemplatesFolderRenameRequest": TemplatesFolderRenameRequest,
     "TemplatesFolderRenameResponse": TemplatesFolderRenameResponse,
+    "UpdateIntegrationQuoteSection": UpdateIntegrationQuoteSection,
+    "UpdateIntegrationQuoteSectionItem": UpdateIntegrationQuoteSectionItem,
+    "UploadSectionByPdfRequest": UploadSectionByPdfRequest,
+    "UploadSectionByTemplateRequest": UploadSectionByTemplateRequest,
+    "UploadSectionListResponse": UploadSectionListResponse,
+    "UploadSectionListResponseResults": UploadSectionListResponseResults,
+    "UploadSectionRequest": UploadSectionRequest,
+    "UploadSectionResponse": UploadSectionResponse,
+    "UploadSectionStatusResponse": UploadSectionStatusResponse,
     "WebhookEventDetailsResponse": WebhookEventDetailsResponse,
     "WebhookEventItemResponse": WebhookEventItemResponse,
     "WebhookEventPageResponse": WebhookEventPageResponse,

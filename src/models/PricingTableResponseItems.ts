@@ -31,7 +31,7 @@ export class PricingTableResponseItems {
     'discounts'?: any;
     'fees'?: any;
     /**
-    * Will contain all the fields in flat structure with external field names defined in the template.
+    * Contains all fields in a flat structure with external field names defined in the template.
     */
     'mergedData'?: any;
 

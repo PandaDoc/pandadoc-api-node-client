@@ -7,6 +7,7 @@
  * Do not edit the class manually.
  */
 
+import { RecipientVerificationSettings } from './RecipientVerificationSettings';
 import { HttpFile } from '../http/http';
 
 export class DocumentRecipientEditRequest {
@@ -20,6 +21,7 @@ export class DocumentRecipientEditRequest {
     'streetAddress'?: string;
     'city'?: string;
     'postalCode'?: string;
+    'verificationSettings'?: RecipientVerificationSettings;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -82,6 +84,12 @@ export class DocumentRecipientEditRequest {
             "name": "postalCode",
             "baseName": "postal_code",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "verificationSettings",
+            "baseName": "verification_settings",
+            "type": "RecipientVerificationSettings",
             "format": ""
         }    ];
 

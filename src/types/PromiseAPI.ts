@@ -88,12 +88,26 @@ import { QuoteResponseCondition } from '../models/QuoteResponseCondition';
 import { QuoteResponseConditionComparison } from '../models/QuoteResponseConditionComparison';
 import { QuoteResponseMergeRules } from '../models/QuoteResponseMergeRules';
 import { QuoteResponseOptions } from '../models/QuoteResponseOptions';
+import { QuoteResponseSectionColumn } from '../models/QuoteResponseSectionColumn';
 import { QuoteResponseSectionItem } from '../models/QuoteResponseSectionItem';
 import { QuoteResponseSectionSummary } from '../models/QuoteResponseSectionSummary';
 import { QuoteResponseSections } from '../models/QuoteResponseSections';
+import { QuoteResponseSettings } from '../models/QuoteResponseSettings';
 import { QuoteResponseSummary } from '../models/QuoteResponseSummary';
 import { QuoteResponseSummaryDiscounts } from '../models/QuoteResponseSummaryDiscounts';
 import { QuoteResponseSummaryRecurringSubtotal } from '../models/QuoteResponseSummaryRecurringSubtotal';
+import { QuoteSectionSettings } from '../models/QuoteSectionSettings';
+import { QuoteUpdateRequest } from '../models/QuoteUpdateRequest';
+import { QuoteUpdateRequestDiscounts } from '../models/QuoteUpdateRequestDiscounts';
+import { QuoteUpdateRequestOptions } from '../models/QuoteUpdateRequestOptions';
+import { QuoteUpdateRequestPriceSettings } from '../models/QuoteUpdateRequestPriceSettings';
+import { QuoteUpdateRequestPriceSettingsTiers } from '../models/QuoteUpdateRequestPriceSettingsTiers';
+import { QuoteUpdateRequestSettings } from '../models/QuoteUpdateRequestSettings';
+import { QuoteUpdateRequestSettings1 } from '../models/QuoteUpdateRequestSettings1';
+import { RecipientVerificationSettings } from '../models/RecipientVerificationSettings';
+import { RecipientVerificationSettingsPasscodeVerification } from '../models/RecipientVerificationSettingsPasscodeVerification';
+import { RecipientVerificationSettingsPhoneVerification } from '../models/RecipientVerificationSettingsPhoneVerification';
+import { SectionInfoResponse } from '../models/SectionInfoResponse';
 import { TemplateDetailsResponse } from '../models/TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from '../models/TemplateDetailsResponseContentPlaceholders';
 import { TemplateDetailsResponseImages } from '../models/TemplateDetailsResponseImages';
@@ -108,6 +122,16 @@ import { TemplatesFolderListResponse } from '../models/TemplatesFolderListRespon
 import { TemplatesFolderListResponseResults } from '../models/TemplatesFolderListResponseResults';
 import { TemplatesFolderRenameRequest } from '../models/TemplatesFolderRenameRequest';
 import { TemplatesFolderRenameResponse } from '../models/TemplatesFolderRenameResponse';
+import { UpdateIntegrationQuoteSection } from '../models/UpdateIntegrationQuoteSection';
+import { UpdateIntegrationQuoteSectionItem } from '../models/UpdateIntegrationQuoteSectionItem';
+import { UploadSectionByPdfRequest } from '../models/UploadSectionByPdfRequest';
+import { UploadSectionByTemplateRequest } from '../models/UploadSectionByTemplateRequest';
+import { UploadSectionListResponse } from '../models/UploadSectionListResponse';
+import { UploadSectionListResponseResults } from '../models/UploadSectionListResponseResults';
+import { UploadSectionRequest } from '../models/UploadSectionRequest';
+import { UploadSectionResponse } from '../models/UploadSectionResponse';
+import { UploadSectionStatusEnum } from '../models/UploadSectionStatusEnum';
+import { UploadSectionStatusResponse } from '../models/UploadSectionStatusResponse';
 import { WebhookEventDetailsResponse } from '../models/WebhookEventDetailsResponse';
 import { WebhookEventErrorEnum } from '../models/WebhookEventErrorEnum';
 import { WebhookEventHttpStatusCodeGroupEnum } from '../models/WebhookEventHttpStatusCodeGroupEnum';
@@ -825,6 +849,94 @@ export class PromiseOAuth20AuthenticationApi {
 
 
 
+import { ObservableQuotesApi } from './ObservableAPI';
+
+import { QuotesApiRequestFactory, QuotesApiResponseProcessor} from "../apis/QuotesApi";
+export class PromiseQuotesApi {
+    private api: ObservableQuotesApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: QuotesApiRequestFactory,
+        responseProcessor?: QuotesApiResponseProcessor
+    ) {
+        this.api = new ObservableQuotesApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Quote update
+     * @param documentId Document ID
+     * @param quoteId Quote ID
+     * @param quoteUpdateRequest 
+     */
+    public quoteUpdate(documentId: string, quoteId: string, quoteUpdateRequest: QuoteUpdateRequest, _options?: Configuration): Promise<QuoteResponse> {
+        const result = this.api.quoteUpdate(documentId, quoteId, quoteUpdateRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableSectionsApi } from './ObservableAPI';
+
+import { SectionsApiRequestFactory, SectionsApiResponseProcessor} from "../apis/SectionsApi";
+export class PromiseSectionsApi {
+    private api: ObservableSectionsApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SectionsApiRequestFactory,
+        responseProcessor?: SectionsApiResponseProcessor
+    ) {
+        this.api = new ObservableSectionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * List sections
+     * @param documentId Document ID
+     */
+    public listSections(documentId: string, _options?: Configuration): Promise<UploadSectionListResponse> {
+        const result = this.api.listSections(documentId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Section details
+     * @param documentId Document ID
+     * @param uploadId Upload ID
+     */
+    public sectionDetails(documentId: string, uploadId: string, _options?: Configuration): Promise<UploadSectionStatusResponse> {
+        const result = this.api.sectionDetails(documentId, uploadId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Section Info
+     * @param documentId Document ID
+     * @param sectionId Section ID
+     */
+    public sectionInfo(documentId: string, sectionId: string, _options?: Configuration): Promise<SectionInfoResponse> {
+        const result = this.api.sectionInfo(documentId, sectionId, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Upload section
+     * @param documentId Document ID
+     * @param uploadSectionRequest Use a PandaDoc template or an existing PDF to upload a section. See the creation request examples [by template](/schemas/UploadSectionByTemplateRequest) and [by pdf](/schemas/UploadSectionByPdfRequest) 
+     */
+    public uploadSection(documentId: string, uploadSectionRequest: UploadSectionRequest, _options?: Configuration): Promise<UploadSectionResponse> {
+        const result = this.api.uploadSection(documentId, uploadSectionRequest, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
 import { ObservableTemplatesApi } from './ObservableAPI';
 
 import { TemplatesApiRequestFactory, TemplatesApiResponseProcessor} from "../apis/TemplatesApi";
@@ -870,9 +982,10 @@ export class PromiseTemplatesApi {
      * @param id Optionally, specify template ID.
      * @param folderUuid UUID of the folder where the templates are stored.
      * @param tag Optional search tag. Filter by template tag.
+     * @param fields A comma-separated list of additional fields to include in the response.  Each field must be a valid template property.  Currently, only one additional field, &#x60;content_date_modified&#x60;, is supported.  For example, &#x60;GET /templates?fields&#x3D;content_date_modified&#x60;.
      */
-    public listTemplates(q?: string, shared?: boolean, deleted?: boolean, count?: number, page?: number, id?: string, folderUuid?: string, tag?: Array<string>, _options?: Configuration): Promise<TemplateListResponse> {
-        const result = this.api.listTemplates(q, shared, deleted, count, page, id, folderUuid, tag, _options);
+    public listTemplates(q?: string, shared?: boolean, deleted?: boolean, count?: number, page?: number, id?: string, folderUuid?: string, tag?: Array<string>, fields?: string, _options?: Configuration): Promise<TemplateListResponse> {
+        const result = this.api.listTemplates(q, shared, deleted, count, page, id, folderUuid, tag, fields, _options);
         return result.toPromise();
     }
 

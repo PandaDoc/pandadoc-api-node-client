@@ -88,12 +88,26 @@ import { QuoteResponseCondition } from '../models/QuoteResponseCondition';
 import { QuoteResponseConditionComparison } from '../models/QuoteResponseConditionComparison';
 import { QuoteResponseMergeRules } from '../models/QuoteResponseMergeRules';
 import { QuoteResponseOptions } from '../models/QuoteResponseOptions';
+import { QuoteResponseSectionColumn } from '../models/QuoteResponseSectionColumn';
 import { QuoteResponseSectionItem } from '../models/QuoteResponseSectionItem';
 import { QuoteResponseSectionSummary } from '../models/QuoteResponseSectionSummary';
 import { QuoteResponseSections } from '../models/QuoteResponseSections';
+import { QuoteResponseSettings } from '../models/QuoteResponseSettings';
 import { QuoteResponseSummary } from '../models/QuoteResponseSummary';
 import { QuoteResponseSummaryDiscounts } from '../models/QuoteResponseSummaryDiscounts';
 import { QuoteResponseSummaryRecurringSubtotal } from '../models/QuoteResponseSummaryRecurringSubtotal';
+import { QuoteSectionSettings } from '../models/QuoteSectionSettings';
+import { QuoteUpdateRequest } from '../models/QuoteUpdateRequest';
+import { QuoteUpdateRequestDiscounts } from '../models/QuoteUpdateRequestDiscounts';
+import { QuoteUpdateRequestOptions } from '../models/QuoteUpdateRequestOptions';
+import { QuoteUpdateRequestPriceSettings } from '../models/QuoteUpdateRequestPriceSettings';
+import { QuoteUpdateRequestPriceSettingsTiers } from '../models/QuoteUpdateRequestPriceSettingsTiers';
+import { QuoteUpdateRequestSettings } from '../models/QuoteUpdateRequestSettings';
+import { QuoteUpdateRequestSettings1 } from '../models/QuoteUpdateRequestSettings1';
+import { RecipientVerificationSettings } from '../models/RecipientVerificationSettings';
+import { RecipientVerificationSettingsPasscodeVerification } from '../models/RecipientVerificationSettingsPasscodeVerification';
+import { RecipientVerificationSettingsPhoneVerification } from '../models/RecipientVerificationSettingsPhoneVerification';
+import { SectionInfoResponse } from '../models/SectionInfoResponse';
 import { TemplateDetailsResponse } from '../models/TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from '../models/TemplateDetailsResponseContentPlaceholders';
 import { TemplateDetailsResponseImages } from '../models/TemplateDetailsResponseImages';
@@ -108,6 +122,16 @@ import { TemplatesFolderListResponse } from '../models/TemplatesFolderListRespon
 import { TemplatesFolderListResponseResults } from '../models/TemplatesFolderListResponseResults';
 import { TemplatesFolderRenameRequest } from '../models/TemplatesFolderRenameRequest';
 import { TemplatesFolderRenameResponse } from '../models/TemplatesFolderRenameResponse';
+import { UpdateIntegrationQuoteSection } from '../models/UpdateIntegrationQuoteSection';
+import { UpdateIntegrationQuoteSectionItem } from '../models/UpdateIntegrationQuoteSectionItem';
+import { UploadSectionByPdfRequest } from '../models/UploadSectionByPdfRequest';
+import { UploadSectionByTemplateRequest } from '../models/UploadSectionByTemplateRequest';
+import { UploadSectionListResponse } from '../models/UploadSectionListResponse';
+import { UploadSectionListResponseResults } from '../models/UploadSectionListResponseResults';
+import { UploadSectionRequest } from '../models/UploadSectionRequest';
+import { UploadSectionResponse } from '../models/UploadSectionResponse';
+import { UploadSectionStatusEnum } from '../models/UploadSectionStatusEnum';
+import { UploadSectionStatusResponse } from '../models/UploadSectionStatusResponse';
 import { WebhookEventDetailsResponse } from '../models/WebhookEventDetailsResponse';
 import { WebhookEventErrorEnum } from '../models/WebhookEventErrorEnum';
 import { WebhookEventHttpStatusCodeGroupEnum } from '../models/WebhookEventHttpStatusCodeGroupEnum';
@@ -1499,6 +1523,145 @@ export class ObjectOAuth20AuthenticationApi {
 
 }
 
+import { ObservableQuotesApi } from "./ObservableAPI";
+import { QuotesApiRequestFactory, QuotesApiResponseProcessor} from "../apis/QuotesApi";
+
+export interface QuotesApiQuoteUpdateRequest {
+    /**
+     * Document ID
+     * @type string
+     * @memberof QuotesApiquoteUpdate
+     */
+    documentId: string
+    /**
+     * Quote ID
+     * @type string
+     * @memberof QuotesApiquoteUpdate
+     */
+    quoteId: string
+    /**
+     * 
+     * @type QuoteUpdateRequest
+     * @memberof QuotesApiquoteUpdate
+     */
+    quoteUpdateRequest: QuoteUpdateRequest
+}
+
+export class ObjectQuotesApi {
+    private api: ObservableQuotesApi
+
+    public constructor(configuration: Configuration, requestFactory?: QuotesApiRequestFactory, responseProcessor?: QuotesApiResponseProcessor) {
+        this.api = new ObservableQuotesApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Quote update
+     * @param param the request object
+     */
+    public quoteUpdate(param: QuotesApiQuoteUpdateRequest, options?: Configuration): Promise<QuoteResponse> {
+        return this.api.quoteUpdate(param.documentId, param.quoteId, param.quoteUpdateRequest,  options).toPromise();
+    }
+
+}
+
+import { ObservableSectionsApi } from "./ObservableAPI";
+import { SectionsApiRequestFactory, SectionsApiResponseProcessor} from "../apis/SectionsApi";
+
+export interface SectionsApiListSectionsRequest {
+    /**
+     * Document ID
+     * @type string
+     * @memberof SectionsApilistSections
+     */
+    documentId: string
+}
+
+export interface SectionsApiSectionDetailsRequest {
+    /**
+     * Document ID
+     * @type string
+     * @memberof SectionsApisectionDetails
+     */
+    documentId: string
+    /**
+     * Upload ID
+     * @type string
+     * @memberof SectionsApisectionDetails
+     */
+    uploadId: string
+}
+
+export interface SectionsApiSectionInfoRequest {
+    /**
+     * Document ID
+     * @type string
+     * @memberof SectionsApisectionInfo
+     */
+    documentId: string
+    /**
+     * Section ID
+     * @type string
+     * @memberof SectionsApisectionInfo
+     */
+    sectionId: string
+}
+
+export interface SectionsApiUploadSectionRequest {
+    /**
+     * Document ID
+     * @type string
+     * @memberof SectionsApiuploadSection
+     */
+    documentId: string
+    /**
+     * Use a PandaDoc template or an existing PDF to upload a section. See the creation request examples [by template](/schemas/UploadSectionByTemplateRequest) and [by pdf](/schemas/UploadSectionByPdfRequest) 
+     * @type UploadSectionRequest
+     * @memberof SectionsApiuploadSection
+     */
+    uploadSectionRequest: UploadSectionRequest
+}
+
+export class ObjectSectionsApi {
+    private api: ObservableSectionsApi
+
+    public constructor(configuration: Configuration, requestFactory?: SectionsApiRequestFactory, responseProcessor?: SectionsApiResponseProcessor) {
+        this.api = new ObservableSectionsApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * List sections
+     * @param param the request object
+     */
+    public listSections(param: SectionsApiListSectionsRequest, options?: Configuration): Promise<UploadSectionListResponse> {
+        return this.api.listSections(param.documentId,  options).toPromise();
+    }
+
+    /**
+     * Section details
+     * @param param the request object
+     */
+    public sectionDetails(param: SectionsApiSectionDetailsRequest, options?: Configuration): Promise<UploadSectionStatusResponse> {
+        return this.api.sectionDetails(param.documentId, param.uploadId,  options).toPromise();
+    }
+
+    /**
+     * Section Info
+     * @param param the request object
+     */
+    public sectionInfo(param: SectionsApiSectionInfoRequest, options?: Configuration): Promise<SectionInfoResponse> {
+        return this.api.sectionInfo(param.documentId, param.sectionId,  options).toPromise();
+    }
+
+    /**
+     * Upload section
+     * @param param the request object
+     */
+    public uploadSection(param: SectionsApiUploadSectionRequest, options?: Configuration): Promise<UploadSectionResponse> {
+        return this.api.uploadSection(param.documentId, param.uploadSectionRequest,  options).toPromise();
+    }
+
+}
+
 import { ObservableTemplatesApi } from "./ObservableAPI";
 import { TemplatesApiRequestFactory, TemplatesApiResponseProcessor} from "../apis/TemplatesApi";
 
@@ -1569,6 +1732,12 @@ export interface TemplatesApiListTemplatesRequest {
      * @memberof TemplatesApilistTemplates
      */
     tag?: Array<string>
+    /**
+     * A comma-separated list of additional fields to include in the response.  Each field must be a valid template property.  Currently, only one additional field, &#x60;content_date_modified&#x60;, is supported.  For example, &#x60;GET /templates?fields&#x3D;content_date_modified&#x60;.
+     * @type string
+     * @memberof TemplatesApilistTemplates
+     */
+    fields?: string
 }
 
 export class ObjectTemplatesApi {
@@ -1602,7 +1771,7 @@ export class ObjectTemplatesApi {
      * @param param the request object
      */
     public listTemplates(param: TemplatesApiListTemplatesRequest = {}, options?: Configuration): Promise<TemplateListResponse> {
-        return this.api.listTemplates(param.q, param.shared, param.deleted, param.count, param.page, param.id, param.folderUuid, param.tag,  options).toPromise();
+        return this.api.listTemplates(param.q, param.shared, param.deleted, param.count, param.page, param.id, param.folderUuid, param.tag, param.fields,  options).toPromise();
     }
 
 }
