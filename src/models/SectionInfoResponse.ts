@@ -9,20 +9,17 @@
 
 import { HttpFile } from '../http/http';
 
-export class TemplateListResponseResults {
-    'id'?: string;
+export class SectionInfoResponse {
+    'uuid'?: string;
     'name'?: string;
-    'dateCreated'?: string;
-    'dateModified'?: string;
-    'version'?: string;
-    'contentDateModified'?: string;
+    'documentUuid'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "uuid",
+            "baseName": "uuid",
             "type": "string",
             "format": ""
         },
@@ -33,32 +30,14 @@ export class TemplateListResponseResults {
             "format": ""
         },
         {
-            "name": "dateCreated",
-            "baseName": "date_created",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "dateModified",
-            "baseName": "date_modified",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "version",
-            "baseName": "version",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "contentDateModified",
-            "baseName": "content_date_modified",
+            "name": "documentUuid",
+            "baseName": "document_uuid",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TemplateListResponseResults.attributeTypeMap;
+        return SectionInfoResponse.attributeTypeMap;
     }
 
     public constructor() {

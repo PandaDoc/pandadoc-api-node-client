@@ -104,6 +104,11 @@ Class | Method | HTTP request | Description
 *MembersApi* | [**detailsMember**](docs/MembersApi.md#detailsmember) | **GET** /public/v1/members/{id} | Member details
 *MembersApi* | [**listMembers**](docs/MembersApi.md#listmembers) | **GET** /public/v1/members | List members
 *OAuth20AuthenticationApi* | [**accessToken**](docs/OAuth20AuthenticationApi.md#accesstoken) | **POST** /oauth2/access_token | Create/Refresh Access Token
+*QuotesApi* | [**quoteUpdate**](docs/QuotesApi.md#quoteupdate) | **PUT** /public/v1/documents/{document_id}/quotes/{quote_id} | Quote update
+*SectionsApi* | [**listSections**](docs/SectionsApi.md#listsections) | **GET** /public/v1/documents/{document_id}/sections | List sections
+*SectionsApi* | [**sectionDetails**](docs/SectionsApi.md#sectiondetails) | **GET** /public/v1/documents/{document_id}/sections/uploads/{upload_id} | Section details
+*SectionsApi* | [**sectionInfo**](docs/SectionsApi.md#sectioninfo) | **GET** /public/v1/documents/{document_id}/sections/{section_id} | Section Info
+*SectionsApi* | [**uploadSection**](docs/SectionsApi.md#uploadsection) | **POST** /public/v1/documents/{document_id}/sections/uploads | Upload section
 *TemplatesApi* | [**deleteTemplate**](docs/TemplatesApi.md#deletetemplate) | **DELETE** /public/v1/templates/{id} | Delete Template
 *TemplatesApi* | [**detailsTemplate**](docs/TemplatesApi.md#detailstemplate) | **GET** /public/v1/templates/{id}/details | Details Template
 *TemplatesApi* | [**listTemplates**](docs/TemplatesApi.md#listtemplates) | **GET** /public/v1/templates | List Templates

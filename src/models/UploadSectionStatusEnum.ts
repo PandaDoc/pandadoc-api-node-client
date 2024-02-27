@@ -9,4 +9,4 @@
 
 import { HttpFile } from '../http/http';
 
-export type WebhookEventTriggerEnum = "recipient_completed" | "document_updated" | "document_deleted" | "document_state_changed" | "document_creation_failed" | "quote_updated" | "template_created" | "template_modified" ;
+export type UploadSectionStatusEnum = "document_sections_upload.UPLOADED" | "document_sections_upload.PROCESSED" | "document_sections_upload.ERROR" ;

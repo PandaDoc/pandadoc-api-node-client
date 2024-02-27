@@ -89,12 +89,26 @@ import { QuoteResponseCondition } from '../models/QuoteResponseCondition';
 import { QuoteResponseConditionComparison } from '../models/QuoteResponseConditionComparison';
 import { QuoteResponseMergeRules } from '../models/QuoteResponseMergeRules';
 import { QuoteResponseOptions } from '../models/QuoteResponseOptions';
+import { QuoteResponseSectionColumn } from '../models/QuoteResponseSectionColumn';
 import { QuoteResponseSectionItem } from '../models/QuoteResponseSectionItem';
 import { QuoteResponseSectionSummary } from '../models/QuoteResponseSectionSummary';
 import { QuoteResponseSections } from '../models/QuoteResponseSections';
+import { QuoteResponseSettings } from '../models/QuoteResponseSettings';
 import { QuoteResponseSummary } from '../models/QuoteResponseSummary';
 import { QuoteResponseSummaryDiscounts } from '../models/QuoteResponseSummaryDiscounts';
 import { QuoteResponseSummaryRecurringSubtotal } from '../models/QuoteResponseSummaryRecurringSubtotal';
+import { QuoteSectionSettings } from '../models/QuoteSectionSettings';
+import { QuoteUpdateRequest } from '../models/QuoteUpdateRequest';
+import { QuoteUpdateRequestDiscounts } from '../models/QuoteUpdateRequestDiscounts';
+import { QuoteUpdateRequestOptions } from '../models/QuoteUpdateRequestOptions';
+import { QuoteUpdateRequestPriceSettings } from '../models/QuoteUpdateRequestPriceSettings';
+import { QuoteUpdateRequestPriceSettingsTiers } from '../models/QuoteUpdateRequestPriceSettingsTiers';
+import { QuoteUpdateRequestSettings } from '../models/QuoteUpdateRequestSettings';
+import { QuoteUpdateRequestSettings1 } from '../models/QuoteUpdateRequestSettings1';
+import { RecipientVerificationSettings } from '../models/RecipientVerificationSettings';
+import { RecipientVerificationSettingsPasscodeVerification } from '../models/RecipientVerificationSettingsPasscodeVerification';
+import { RecipientVerificationSettingsPhoneVerification } from '../models/RecipientVerificationSettingsPhoneVerification';
+import { SectionInfoResponse } from '../models/SectionInfoResponse';
 import { TemplateDetailsResponse } from '../models/TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from '../models/TemplateDetailsResponseContentPlaceholders';
 import { TemplateDetailsResponseImages } from '../models/TemplateDetailsResponseImages';
@@ -109,6 +123,16 @@ import { TemplatesFolderListResponse } from '../models/TemplatesFolderListRespon
 import { TemplatesFolderListResponseResults } from '../models/TemplatesFolderListResponseResults';
 import { TemplatesFolderRenameRequest } from '../models/TemplatesFolderRenameRequest';
 import { TemplatesFolderRenameResponse } from '../models/TemplatesFolderRenameResponse';
+import { UpdateIntegrationQuoteSection } from '../models/UpdateIntegrationQuoteSection';
+import { UpdateIntegrationQuoteSectionItem } from '../models/UpdateIntegrationQuoteSectionItem';
+import { UploadSectionByPdfRequest } from '../models/UploadSectionByPdfRequest';
+import { UploadSectionByTemplateRequest } from '../models/UploadSectionByTemplateRequest';
+import { UploadSectionListResponse } from '../models/UploadSectionListResponse';
+import { UploadSectionListResponseResults } from '../models/UploadSectionListResponseResults';
+import { UploadSectionRequest } from '../models/UploadSectionRequest';
+import { UploadSectionResponse } from '../models/UploadSectionResponse';
+import { UploadSectionStatusEnum } from '../models/UploadSectionStatusEnum';
+import { UploadSectionStatusResponse } from '../models/UploadSectionStatusResponse';
 import { WebhookEventDetailsResponse } from '../models/WebhookEventDetailsResponse';
 import { WebhookEventErrorEnum } from '../models/WebhookEventErrorEnum';
 import { WebhookEventHttpStatusCodeGroupEnum } from '../models/WebhookEventHttpStatusCodeGroupEnum';
@@ -1461,6 +1485,162 @@ export class ObservableOAuth20AuthenticationApi {
 
 }
 
+import { QuotesApiRequestFactory, QuotesApiResponseProcessor} from "../apis/QuotesApi";
+export class ObservableQuotesApi {
+    private requestFactory: QuotesApiRequestFactory;
+    private responseProcessor: QuotesApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: QuotesApiRequestFactory,
+        responseProcessor?: QuotesApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new QuotesApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new QuotesApiResponseProcessor();
+    }
+
+    /**
+     * Quote update
+     * @param documentId Document ID
+     * @param quoteId Quote ID
+     * @param quoteUpdateRequest 
+     */
+    public quoteUpdate(documentId: string, quoteId: string, quoteUpdateRequest: QuoteUpdateRequest, _options?: Configuration): Observable<QuoteResponse> {
+        const requestContextPromise = this.requestFactory.quoteUpdate(documentId, quoteId, quoteUpdateRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.quoteUpdate(rsp)));
+            }));
+    }
+
+}
+
+import { SectionsApiRequestFactory, SectionsApiResponseProcessor} from "../apis/SectionsApi";
+export class ObservableSectionsApi {
+    private requestFactory: SectionsApiRequestFactory;
+    private responseProcessor: SectionsApiResponseProcessor;
+    private configuration: Configuration;
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: SectionsApiRequestFactory,
+        responseProcessor?: SectionsApiResponseProcessor
+    ) {
+        this.configuration = configuration;
+        this.requestFactory = requestFactory || new SectionsApiRequestFactory(configuration);
+        this.responseProcessor = responseProcessor || new SectionsApiResponseProcessor();
+    }
+
+    /**
+     * List sections
+     * @param documentId Document ID
+     */
+    public listSections(documentId: string, _options?: Configuration): Observable<UploadSectionListResponse> {
+        const requestContextPromise = this.requestFactory.listSections(documentId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listSections(rsp)));
+            }));
+    }
+
+    /**
+     * Section details
+     * @param documentId Document ID
+     * @param uploadId Upload ID
+     */
+    public sectionDetails(documentId: string, uploadId: string, _options?: Configuration): Observable<UploadSectionStatusResponse> {
+        const requestContextPromise = this.requestFactory.sectionDetails(documentId, uploadId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.sectionDetails(rsp)));
+            }));
+    }
+
+    /**
+     * Section Info
+     * @param documentId Document ID
+     * @param sectionId Section ID
+     */
+    public sectionInfo(documentId: string, sectionId: string, _options?: Configuration): Observable<SectionInfoResponse> {
+        const requestContextPromise = this.requestFactory.sectionInfo(documentId, sectionId, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.sectionInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Upload section
+     * @param documentId Document ID
+     * @param uploadSectionRequest Use a PandaDoc template or an existing PDF to upload a section. See the creation request examples [by template](/schemas/UploadSectionByTemplateRequest) and [by pdf](/schemas/UploadSectionByPdfRequest) 
+     */
+    public uploadSection(documentId: string, uploadSectionRequest: UploadSectionRequest, _options?: Configuration): Observable<UploadSectionResponse> {
+        const requestContextPromise = this.requestFactory.uploadSection(documentId, uploadSectionRequest, _options);
+
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (let middleware of this.configuration.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => this.configuration.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (let middleware of this.configuration.middleware) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.uploadSection(rsp)));
+            }));
+    }
+
+}
+
 import { TemplatesApiRequestFactory, TemplatesApiResponseProcessor} from "../apis/TemplatesApi";
 export class ObservableTemplatesApi {
     private requestFactory: TemplatesApiRequestFactory;
@@ -1536,9 +1716,10 @@ export class ObservableTemplatesApi {
      * @param id Optionally, specify template ID.
      * @param folderUuid UUID of the folder where the templates are stored.
      * @param tag Optional search tag. Filter by template tag.
+     * @param fields A comma-separated list of additional fields to include in the response.  Each field must be a valid template property.  Currently, only one additional field, &#x60;content_date_modified&#x60;, is supported.  For example, &#x60;GET /templates?fields&#x3D;content_date_modified&#x60;.
      */
-    public listTemplates(q?: string, shared?: boolean, deleted?: boolean, count?: number, page?: number, id?: string, folderUuid?: string, tag?: Array<string>, _options?: Configuration): Observable<TemplateListResponse> {
-        const requestContextPromise = this.requestFactory.listTemplates(q, shared, deleted, count, page, id, folderUuid, tag, _options);
+    public listTemplates(q?: string, shared?: boolean, deleted?: boolean, count?: number, page?: number, id?: string, folderUuid?: string, tag?: Array<string>, fields?: string, _options?: Configuration): Observable<TemplateListResponse> {
+        const requestContextPromise = this.requestFactory.listTemplates(q, shared, deleted, count, page, id, folderUuid, tag, fields, _options);
 
         // build promise chain
         let middlewarePreObservable = from<RequestContext>(requestContextPromise);

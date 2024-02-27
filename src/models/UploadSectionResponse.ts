@@ -7,22 +7,26 @@
  * Do not edit the class manually.
  */
 
+import { UploadSectionStatusEnum } from './UploadSectionStatusEnum';
 import { HttpFile } from '../http/http';
 
-export class TemplateListResponseResults {
-    'id'?: string;
+export class UploadSectionResponse {
+    'uuid'?: string;
     'name'?: string;
+    'documentUuid'?: string;
+    'status'?: UploadSectionStatusEnum;
+    'sectionsUuids'?: Array<string>;
     'dateCreated'?: string;
     'dateModified'?: string;
-    'version'?: string;
-    'contentDateModified'?: string;
+    'dateCompleted'?: string;
+    'infoMessage'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "uuid",
+            "baseName": "uuid",
             "type": "string",
             "format": ""
         },
@@ -30,6 +34,24 @@ export class TemplateListResponseResults {
             "name": "name",
             "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "documentUuid",
+            "baseName": "document_uuid",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "status",
+            "baseName": "status",
+            "type": "UploadSectionStatusEnum",
+            "format": ""
+        },
+        {
+            "name": "sectionsUuids",
+            "baseName": "sections_uuids",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -45,20 +67,20 @@ export class TemplateListResponseResults {
             "format": ""
         },
         {
-            "name": "version",
-            "baseName": "version",
+            "name": "dateCompleted",
+            "baseName": "date_completed",
             "type": "string",
             "format": ""
         },
         {
-            "name": "contentDateModified",
-            "baseName": "content_date_modified",
+            "name": "infoMessage",
+            "baseName": "info_message",
             "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return TemplateListResponseResults.attributeTypeMap;
+        return UploadSectionResponse.attributeTypeMap;
     }
 
     public constructor() {

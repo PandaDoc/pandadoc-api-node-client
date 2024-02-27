@@ -177,6 +177,15 @@ const body:pd_api.DocumentRecipientsApiEditDocumentRecipientRequest = {
     streetAddress: "1313 Mockingbird Lane",
     city: "Austin",
     postalCode: "75001",
+    verificationSettings: {
+      verificationPlace: "before_open",
+      passcodeVerification: {
+        passcode: "SimpleCode1",
+      },
+      phoneVerification: {
+        phoneNumber: "+1234567890",
+      },
+    },
   },
 };
 

@@ -9,6 +9,7 @@
 
 import { QuoteResponseMergeRules } from './QuoteResponseMergeRules';
 import { QuoteResponseSections } from './QuoteResponseSections';
+import { QuoteResponseSettings } from './QuoteResponseSettings';
 import { QuoteResponseSummary } from './QuoteResponseSummary';
 import { HttpFile } from '../http/http';
 
@@ -19,6 +20,7 @@ export class QuoteResponse {
     'summary'?: QuoteResponseSummary;
     'sections'?: Array<QuoteResponseSections>;
     'mergeRules'?: Array<QuoteResponseMergeRules>;
+    'settings'?: QuoteResponseSettings;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -57,6 +59,12 @@ export class QuoteResponse {
             "name": "mergeRules",
             "baseName": "merge_rules",
             "type": "Array<QuoteResponseMergeRules>",
+            "format": ""
+        },
+        {
+            "name": "settings",
+            "baseName": "settings",
+            "type": "QuoteResponseSettings",
             "format": ""
         }    ];
 
