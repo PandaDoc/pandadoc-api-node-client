@@ -7,14 +7,19 @@
  * Do not edit the class manually.
  */
 
+import { RecipientRedirect } from './RecipientRedirect';
+import { RicipientDeliveryMethods } from './RicipientDeliveryMethods';
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateByTemplateRequestRecipients {
-    'email': string;
+    'email'?: string;
+    'phone'?: string;
+    'deliveryMethods'?: RicipientDeliveryMethods;
     'firstName'?: string;
     'lastName'?: string;
     'role'?: string;
     'signingOrder'?: number;
+    'redirect'?: RecipientRedirect;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -23,6 +28,18 @@ export class DocumentCreateByTemplateRequestRecipients {
             "name": "email",
             "baseName": "email",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "phone",
+            "baseName": "phone",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deliveryMethods",
+            "baseName": "delivery_methods",
+            "type": "RicipientDeliveryMethods",
             "format": ""
         },
         {
@@ -47,6 +64,12 @@ export class DocumentCreateByTemplateRequestRecipients {
             "name": "signingOrder",
             "baseName": "signing_order",
             "type": "number",
+            "format": ""
+        },
+        {
+            "name": "redirect",
+            "baseName": "redirect",
+            "type": "RecipientRedirect",
             "format": ""
         }    ];
 

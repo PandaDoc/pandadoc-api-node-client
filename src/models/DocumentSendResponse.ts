@@ -7,6 +7,7 @@
  * Do not edit the class manually.
  */
 
+import { DocumentSendResponseRecipients } from './DocumentSendResponseRecipients';
 import { HttpFile } from '../http/http';
 
 export class DocumentSendResponse {
@@ -18,7 +19,7 @@ export class DocumentSendResponse {
     'expirationDate'?: string;
     'version'?: string;
     'uuid'?: string;
-    'sharedLink'?: string;
+    'recipients'?: Array<DocumentSendResponseRecipients>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -72,9 +73,9 @@ export class DocumentSendResponse {
             "format": ""
         },
         {
-            "name": "sharedLink",
-            "baseName": "shared_link",
-            "type": "string",
+            "name": "recipients",
+            "baseName": "recipients",
+            "type": "Array<DocumentSendResponseRecipients>",
             "format": ""
         }    ];
 

@@ -7,21 +7,25 @@
  * Do not edit the class manually.
  */
 
+import { RecipientRedirect } from './RecipientRedirect';
 import { RecipientVerificationSettings } from './RecipientVerificationSettings';
+import { RicipientDeliveryMethods } from './RicipientDeliveryMethods';
 import { HttpFile } from '../http/http';
 
 export class DocumentRecipientEditRequest {
     'email'?: string;
+    'phone'?: string;
+    'deliveryMethods'?: RicipientDeliveryMethods;
     'firstName'?: string;
     'lastName'?: string;
     'company'?: string;
     'jobTitle'?: string;
-    'phone'?: string;
     'state'?: string;
     'streetAddress'?: string;
     'city'?: string;
     'postalCode'?: string;
     'verificationSettings'?: RecipientVerificationSettings;
+    'redirect'?: RecipientRedirect;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -30,6 +34,18 @@ export class DocumentRecipientEditRequest {
             "name": "email",
             "baseName": "email",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "phone",
+            "baseName": "phone",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deliveryMethods",
+            "baseName": "delivery_methods",
+            "type": "RicipientDeliveryMethods",
             "format": ""
         },
         {
@@ -53,12 +69,6 @@ export class DocumentRecipientEditRequest {
         {
             "name": "jobTitle",
             "baseName": "job_title",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "phone",
-            "baseName": "phone",
             "type": "string",
             "format": ""
         },
@@ -90,6 +100,12 @@ export class DocumentRecipientEditRequest {
             "name": "verificationSettings",
             "baseName": "verification_settings",
             "type": "RecipientVerificationSettings",
+            "format": ""
+        },
+        {
+            "name": "redirect",
+            "baseName": "redirect",
+            "type": "RecipientRedirect",
             "format": ""
         }    ];
 

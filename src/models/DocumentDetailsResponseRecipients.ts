@@ -7,7 +7,9 @@
  * Do not edit the class manually.
  */
 
+import { RecipientRedirect } from './RecipientRedirect';
 import { RecipientVerificationSettings } from './RecipientVerificationSettings';
+import { RicipientDeliveryMethods } from './RicipientDeliveryMethods';
 import { HttpFile } from '../http/http';
 
 export class DocumentDetailsResponseRecipients {
@@ -20,10 +22,13 @@ export class DocumentDetailsResponseRecipients {
     'contactId'?: string;
     'firstName'?: string;
     'email'?: string;
+    'phone'?: string;
+    'deliveryMethods'?: RicipientDeliveryMethods;
     'hasCompleted'?: boolean;
     'sharedLink'?: string;
     'signatureDate'?: string;
     'verificationSettings'?: RecipientVerificationSettings;
+    'redirect'?: RecipientRedirect;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -83,6 +88,18 @@ export class DocumentDetailsResponseRecipients {
             "format": ""
         },
         {
+            "name": "phone",
+            "baseName": "phone",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "deliveryMethods",
+            "baseName": "delivery_methods",
+            "type": "RicipientDeliveryMethods",
+            "format": ""
+        },
+        {
             "name": "hasCompleted",
             "baseName": "has_completed",
             "type": "boolean",
@@ -104,6 +121,12 @@ export class DocumentDetailsResponseRecipients {
             "name": "verificationSettings",
             "baseName": "verification_settings",
             "type": "RecipientVerificationSettings",
+            "format": ""
+        },
+        {
+            "name": "redirect",
+            "baseName": "redirect",
+            "type": "RecipientRedirect",
             "format": ""
         }    ];
 

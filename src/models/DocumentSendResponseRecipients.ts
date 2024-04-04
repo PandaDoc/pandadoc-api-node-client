@@ -7,18 +7,19 @@
  * Do not edit the class manually.
  */
 
-import { RecipientRedirect } from './RecipientRedirect';
 import { RicipientDeliveryMethods } from './RicipientDeliveryMethods';
 import { HttpFile } from '../http/http';
 
-export class DocumentUpdateRequestRecipients {
+export class DocumentSendResponseRecipients {
     'id'?: string;
-    'email'?: string;
-    'phone'?: string;
     'firstName'?: string;
     'lastName'?: string;
+    'recipientType'?: string;
+    'email'?: string;
+    'phone'?: string;
     'deliveryMethods'?: RicipientDeliveryMethods;
-    'redirect'?: RecipientRedirect;
+    'signingOrder'?: any;
+    'sharedLink'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -26,18 +27,6 @@ export class DocumentUpdateRequestRecipients {
         {
             "name": "id",
             "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "phone",
-            "baseName": "phone",
             "type": "string",
             "format": ""
         },
@@ -54,20 +43,44 @@ export class DocumentUpdateRequestRecipients {
             "format": ""
         },
         {
+            "name": "recipientType",
+            "baseName": "recipient_type",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "email",
+            "baseName": "email",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "phone",
+            "baseName": "phone",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "deliveryMethods",
             "baseName": "delivery_methods",
             "type": "RicipientDeliveryMethods",
             "format": ""
         },
         {
-            "name": "redirect",
-            "baseName": "redirect",
-            "type": "RecipientRedirect",
+            "name": "signingOrder",
+            "baseName": "signing_order",
+            "type": "any",
+            "format": ""
+        },
+        {
+            "name": "sharedLink",
+            "baseName": "shared_link",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return DocumentUpdateRequestRecipients.attributeTypeMap;
+        return DocumentSendResponseRecipients.attributeTypeMap;
     }
 
     public constructor() {

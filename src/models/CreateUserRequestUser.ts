@@ -7,37 +7,23 @@
  * Do not edit the class manually.
  */
 
-import { RecipientRedirect } from './RecipientRedirect';
-import { RicipientDeliveryMethods } from './RicipientDeliveryMethods';
 import { HttpFile } from '../http/http';
 
-export class DocumentUpdateRequestRecipients {
-    'id'?: string;
+/**
+* User info
+*/
+export class CreateUserRequestUser {
     'email'?: string;
-    'phone'?: string;
     'firstName'?: string;
     'lastName'?: string;
-    'deliveryMethods'?: RicipientDeliveryMethods;
-    'redirect'?: RecipientRedirect;
+    'phoneNumber'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
-            "type": "string",
-            "format": ""
-        },
-        {
             "name": "email",
             "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "phone",
-            "baseName": "phone",
             "type": "string",
             "format": ""
         },
@@ -54,20 +40,14 @@ export class DocumentUpdateRequestRecipients {
             "format": ""
         },
         {
-            "name": "deliveryMethods",
-            "baseName": "delivery_methods",
-            "type": "RicipientDeliveryMethods",
-            "format": ""
-        },
-        {
-            "name": "redirect",
-            "baseName": "redirect",
-            "type": "RecipientRedirect",
+            "name": "phoneNumber",
+            "baseName": "phone_number",
+            "type": "string",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return DocumentUpdateRequestRecipients.attributeTypeMap;
+        return CreateUserRequestUser.attributeTypeMap;
     }
 
     public constructor() {

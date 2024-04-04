@@ -225,10 +225,19 @@ const body:pd_api.SectionsApiUploadSectionRequest = {
     recipients: [
       {
         email: "josh@example.com",
+        phone: "+14842634627",
+        deliveryMethods: {
+          email: true,
+          sms: false,
+        },
         firstName: "Josh",
         lastName: "Ron",
         role: "user",
         signingOrder: 1,
+        redirect: {
+          isEnabled: true,
+          url: "https://example.com",
+        },
       },
     ],
     tokens: [
@@ -299,10 +308,19 @@ const body:pd_api.SectionsApiUploadSectionRequest = {
             recipients: [
               {
                 email: "josh@example.com",
+                phone: "+14842634627",
+                deliveryMethods: {
+                  email: true,
+                  sms: false,
+                },
                 firstName: "Josh",
                 lastName: "Ron",
                 role: "user",
                 signingOrder: 1,
+                redirect: {
+                  isEnabled: true,
+                  url: "https://example.com",
+                },
               },
             ],
           },
@@ -312,6 +330,8 @@ const body:pd_api.SectionsApiUploadSectionRequest = {
     url: "https://s3.amazonaws.com/pd-static-content/public-docs/pandadoc-panda-bear.png",
     parseFormFields: true,
   },
+  // 'document' | 'upload' | Determines how the fields are mapped when creating a section.   * document: Default value. The fields of the entire document are updated.   * upload: Only the fields from the created section are updated. The merge field is appended with the upload ID.  (optional)
+  mergeFieldScope: "document",
 };
 
 apiInstance.uploadSection(body).then((data) => {
@@ -326,6 +346,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uploadSectionRequest** | **UploadSectionRequest**| Use a PandaDoc template or an existing PDF to upload a section. See the creation request examples [by template](/schemas/UploadSectionByTemplateRequest) and [by pdf](/schemas/UploadSectionByPdfRequest)  |
  **documentId** | [**string**] | Document ID | defaults to undefined
+ **mergeFieldScope** | [**&#39;document&#39; | &#39;upload&#39;**]**Array<&#39;document&#39; &#124; &#39;upload&#39;>** | Determines how the fields are mapped when creating a section.   * document: Default value. The fields of the entire document are updated.   * upload: Only the fields from the created section are updated. The merge field is appended with the upload ID.  | (optional) defaults to undefined
 
 
 ### Return type

@@ -167,8 +167,9 @@ export class SectionsApiRequestFactory extends BaseAPIRequestFactory {
      * Upload section
      * @param documentId Document ID
      * @param uploadSectionRequest Use a PandaDoc template or an existing PDF to upload a section. See the creation request examples [by template](/schemas/UploadSectionByTemplateRequest) and [by pdf](/schemas/UploadSectionByPdfRequest) 
+     * @param mergeFieldScope Determines how the fields are mapped when creating a section.   * document: Default value. The fields of the entire document are updated.   * upload: Only the fields from the created section are updated. The merge field is appended with the upload ID. 
      */
-    public async uploadSection(documentId: string, uploadSectionRequest: UploadSectionRequest, _options?: Configuration): Promise<RequestContext> {
+    public async uploadSection(documentId: string, uploadSectionRequest: UploadSectionRequest, mergeFieldScope?: 'document' | 'upload', _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
         // verify required parameter 'documentId' is not null or undefined
@@ -183,6 +184,7 @@ export class SectionsApiRequestFactory extends BaseAPIRequestFactory {
         }
 
 
+
         // Path Params
         const localVarPath = '/public/v1/documents/{document_id}/sections/uploads'
             .replace('{' + 'document_id' + '}', encodeURIComponent(String(documentId)));
@@ -190,6 +192,11 @@ export class SectionsApiRequestFactory extends BaseAPIRequestFactory {
         // Make Request Context
         const requestContext = _config.baseServer.makeRequestContext(localVarPath, HttpMethod.POST);
         requestContext.setHeaderParam("Accept", "application/json, */*;q=0.8")
+
+        // Query Params
+        if (mergeFieldScope !== undefined) {
+            requestContext.setQueryParam("merge_field_scope", ObjectSerializer.serialize(mergeFieldScope, "'document' | 'upload'", ""));
+        }
 
 
         // Body Params
