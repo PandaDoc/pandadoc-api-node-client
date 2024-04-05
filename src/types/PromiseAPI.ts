@@ -5,6 +5,8 @@ import { Configuration} from '../configuration'
 import { APILogDetailsResponse } from '../models/APILogDetailsResponse';
 import { APILogListResponse } from '../models/APILogListResponse';
 import { APILogListResponseResults } from '../models/APILogListResponseResults';
+import { AddMemberRequest } from '../models/AddMemberRequest';
+import { AddMemberResponse } from '../models/AddMemberResponse';
 import { ContactCreateRequest } from '../models/ContactCreateRequest';
 import { ContactDetailsResponse } from '../models/ContactDetailsResponse';
 import { ContactListResponse } from '../models/ContactListResponse';
@@ -13,6 +15,12 @@ import { ContentLibraryItemListResponse } from '../models/ContentLibraryItemList
 import { ContentLibraryItemListResponseResults } from '../models/ContentLibraryItemListResponseResults';
 import { ContentLibraryItemResponse } from '../models/ContentLibraryItemResponse';
 import { ContentLibraryItemResponseCreatedBy } from '../models/ContentLibraryItemResponseCreatedBy';
+import { CreateUserRequest } from '../models/CreateUserRequest';
+import { CreateUserRequestUser } from '../models/CreateUserRequestUser';
+import { CreateUserRequestWorkspaces } from '../models/CreateUserRequestWorkspaces';
+import { CreateUserResponse } from '../models/CreateUserResponse';
+import { CreateWorkspaceRequest } from '../models/CreateWorkspaceRequest';
+import { CreateWorkspaceResponse } from '../models/CreateWorkspaceResponse';
 import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
 import { DocumentAttachmentResponseCreatedBy } from '../models/DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from '../models/DocumentCreateByPdfRequest';
@@ -50,6 +58,7 @@ import { DocumentSendRequestSelectedApproversGroup } from '../models/DocumentSen
 import { DocumentSendRequestSelectedApproversGroupAssignees } from '../models/DocumentSendRequestSelectedApproversGroupAssignees';
 import { DocumentSendRequestSelectedApproversSteps } from '../models/DocumentSendRequestSelectedApproversSteps';
 import { DocumentSendResponse } from '../models/DocumentSendResponse';
+import { DocumentSendResponseRecipients } from '../models/DocumentSendResponseRecipients';
 import { DocumentStatusChangeRequest } from '../models/DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
 import { DocumentStatusRequestEnum } from '../models/DocumentStatusRequestEnum';
@@ -104,9 +113,11 @@ import { QuoteUpdateRequestPriceSettings } from '../models/QuoteUpdateRequestPri
 import { QuoteUpdateRequestPriceSettingsTiers } from '../models/QuoteUpdateRequestPriceSettingsTiers';
 import { QuoteUpdateRequestSettings } from '../models/QuoteUpdateRequestSettings';
 import { QuoteUpdateRequestSettings1 } from '../models/QuoteUpdateRequestSettings1';
+import { RecipientRedirect } from '../models/RecipientRedirect';
 import { RecipientVerificationSettings } from '../models/RecipientVerificationSettings';
 import { RecipientVerificationSettingsPasscodeVerification } from '../models/RecipientVerificationSettingsPasscodeVerification';
 import { RecipientVerificationSettingsPhoneVerification } from '../models/RecipientVerificationSettingsPhoneVerification';
+import { RicipientDeliveryMethods } from '../models/RicipientDeliveryMethods';
 import { SectionInfoResponse } from '../models/SectionInfoResponse';
 import { TemplateDetailsResponse } from '../models/TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from '../models/TemplateDetailsResponseContentPlaceholders';
@@ -926,9 +937,10 @@ export class PromiseSectionsApi {
      * Upload section
      * @param documentId Document ID
      * @param uploadSectionRequest Use a PandaDoc template or an existing PDF to upload a section. See the creation request examples [by template](/schemas/UploadSectionByTemplateRequest) and [by pdf](/schemas/UploadSectionByPdfRequest) 
+     * @param mergeFieldScope Determines how the fields are mapped when creating a section.   * document: Default value. The fields of the entire document are updated.   * upload: Only the fields from the created section are updated. The merge field is appended with the upload ID. 
      */
-    public uploadSection(documentId: string, uploadSectionRequest: UploadSectionRequest, _options?: Configuration): Promise<UploadSectionResponse> {
-        const result = this.api.uploadSection(documentId, uploadSectionRequest, _options);
+    public uploadSection(documentId: string, uploadSectionRequest: UploadSectionRequest, mergeFieldScope?: 'document' | 'upload', _options?: Configuration): Promise<UploadSectionResponse> {
+        const result = this.api.uploadSection(documentId, uploadSectionRequest, mergeFieldScope, _options);
         return result.toPromise();
     }
 
@@ -986,6 +998,57 @@ export class PromiseTemplatesApi {
      */
     public listTemplates(q?: string, shared?: boolean, deleted?: boolean, count?: number, page?: number, id?: string, folderUuid?: string, tag?: Array<string>, fields?: string, _options?: Configuration): Promise<TemplateListResponse> {
         const result = this.api.listTemplates(q, shared, deleted, count, page, id, folderUuid, tag, fields, _options);
+        return result.toPromise();
+    }
+
+
+}
+
+
+
+import { ObservableUserAndWorkspaceManagementApi } from './ObservableAPI';
+
+import { UserAndWorkspaceManagementApiRequestFactory, UserAndWorkspaceManagementApiResponseProcessor} from "../apis/UserAndWorkspaceManagementApi";
+export class PromiseUserAndWorkspaceManagementApi {
+    private api: ObservableUserAndWorkspaceManagementApi
+
+    public constructor(
+        configuration: Configuration,
+        requestFactory?: UserAndWorkspaceManagementApiRequestFactory,
+        responseProcessor?: UserAndWorkspaceManagementApiResponseProcessor
+    ) {
+        this.api = new ObservableUserAndWorkspaceManagementApi(configuration, requestFactory, responseProcessor);
+    }
+
+    /**
+     * Add member
+     * @param workspaceId 
+     * @param addMemberRequest 
+     * @param notifyUser Send a confirmation email to the user that was added to workspace(s).
+     * @param notifyWsAdmins Send a confirmation email to all workspace admins indicating that the user has been added to the workspace.
+     */
+    public addMember(workspaceId: string, addMemberRequest: AddMemberRequest, notifyUser?: boolean, notifyWsAdmins?: boolean, _options?: Configuration): Promise<AddMemberResponse> {
+        const result = this.api.addMember(workspaceId, addMemberRequest, notifyUser, notifyWsAdmins, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create User
+     * @param createUserRequest 
+     * @param notifyUser Send a confirmation email to the user that was added to workspace(s).
+     * @param notifyWsAdmins Send a confirmation email to all workspace admins indicating that the user has been added to the workspace.
+     */
+    public createUser(createUserRequest: CreateUserRequest, notifyUser?: boolean, notifyWsAdmins?: boolean, _options?: Configuration): Promise<CreateUserResponse> {
+        const result = this.api.createUser(createUserRequest, notifyUser, notifyWsAdmins, _options);
+        return result.toPromise();
+    }
+
+    /**
+     * Create Workspace
+     * @param createWorkspaceRequest 
+     */
+    public createWorkspace(createWorkspaceRequest: CreateWorkspaceRequest, _options?: Configuration): Promise<CreateWorkspaceResponse> {
+        const result = this.api.createWorkspace(createWorkspaceRequest, _options);
         return result.toPromise();
     }
 

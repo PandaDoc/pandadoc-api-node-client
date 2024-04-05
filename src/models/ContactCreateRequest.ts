@@ -10,7 +10,7 @@
 import { HttpFile } from '../http/http';
 
 export class ContactCreateRequest {
-    'email': string;
+    'email'?: string;
     'firstName'?: string;
     'lastName'?: string;
     'company'?: string;

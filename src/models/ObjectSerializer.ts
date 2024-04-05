@@ -1,6 +1,8 @@
 export * from './APILogDetailsResponse';
 export * from './APILogListResponse';
 export * from './APILogListResponseResults';
+export * from './AddMemberRequest';
+export * from './AddMemberResponse';
 export * from './ContactCreateRequest';
 export * from './ContactDetailsResponse';
 export * from './ContactListResponse';
@@ -9,6 +11,12 @@ export * from './ContentLibraryItemListResponse';
 export * from './ContentLibraryItemListResponseResults';
 export * from './ContentLibraryItemResponse';
 export * from './ContentLibraryItemResponseCreatedBy';
+export * from './CreateUserRequest';
+export * from './CreateUserRequestUser';
+export * from './CreateUserRequestWorkspaces';
+export * from './CreateUserResponse';
+export * from './CreateWorkspaceRequest';
+export * from './CreateWorkspaceResponse';
 export * from './DocumentAttachmentResponse';
 export * from './DocumentAttachmentResponseCreatedBy';
 export * from './DocumentCreateByPdfRequest';
@@ -46,6 +54,7 @@ export * from './DocumentSendRequestSelectedApproversGroup';
 export * from './DocumentSendRequestSelectedApproversGroupAssignees';
 export * from './DocumentSendRequestSelectedApproversSteps';
 export * from './DocumentSendResponse';
+export * from './DocumentSendResponseRecipients';
 export * from './DocumentStatusChangeRequest';
 export * from './DocumentStatusEnum';
 export * from './DocumentStatusRequestEnum';
@@ -100,9 +109,11 @@ export * from './QuoteUpdateRequestPriceSettings';
 export * from './QuoteUpdateRequestPriceSettingsTiers';
 export * from './QuoteUpdateRequestSettings';
 export * from './QuoteUpdateRequestSettings1';
+export * from './RecipientRedirect';
 export * from './RecipientVerificationSettings';
 export * from './RecipientVerificationSettingsPasscodeVerification';
 export * from './RecipientVerificationSettingsPhoneVerification';
+export * from './RicipientDeliveryMethods';
 export * from './SectionInfoResponse';
 export * from './TemplateDetailsResponse';
 export * from './TemplateDetailsResponseContentPlaceholders';
@@ -146,6 +157,8 @@ export * from './WebhookSubscriptionTriggerEnum';
 import { APILogDetailsResponse } from './APILogDetailsResponse';
 import { APILogListResponse } from './APILogListResponse';
 import { APILogListResponseResults } from './APILogListResponseResults';
+import { AddMemberRequest , AddMemberRequestRoleEnum   } from './AddMemberRequest';
+import { AddMemberResponse  , AddMemberResponseRoleEnum      } from './AddMemberResponse';
 import { ContactCreateRequest } from './ContactCreateRequest';
 import { ContactDetailsResponse } from './ContactDetailsResponse';
 import { ContactListResponse } from './ContactListResponse';
@@ -154,6 +167,12 @@ import { ContentLibraryItemListResponse } from './ContentLibraryItemListResponse
 import { ContentLibraryItemListResponseResults } from './ContentLibraryItemListResponseResults';
 import { ContentLibraryItemResponse } from './ContentLibraryItemResponse';
 import { ContentLibraryItemResponseCreatedBy } from './ContentLibraryItemResponseCreatedBy';
+import { CreateUserRequest  , CreateUserRequestLicenseEnum   } from './CreateUserRequest';
+import { CreateUserRequestUser } from './CreateUserRequestUser';
+import { CreateUserRequestWorkspaces , CreateUserRequestWorkspacesRoleEnum   } from './CreateUserRequestWorkspaces';
+import { CreateUserResponse } from './CreateUserResponse';
+import { CreateWorkspaceRequest } from './CreateWorkspaceRequest';
+import { CreateWorkspaceResponse } from './CreateWorkspaceResponse';
 import { DocumentAttachmentResponse } from './DocumentAttachmentResponse';
 import { DocumentAttachmentResponseCreatedBy } from './DocumentAttachmentResponseCreatedBy';
 import { DocumentCreateByPdfRequest } from './DocumentCreateByPdfRequest';
@@ -191,6 +210,7 @@ import { DocumentSendRequestSelectedApproversGroup } from './DocumentSendRequest
 import { DocumentSendRequestSelectedApproversGroupAssignees } from './DocumentSendRequestSelectedApproversGroupAssignees';
 import { DocumentSendRequestSelectedApproversSteps } from './DocumentSendRequestSelectedApproversSteps';
 import { DocumentSendResponse } from './DocumentSendResponse';
+import { DocumentSendResponseRecipients } from './DocumentSendResponseRecipients';
 import { DocumentStatusChangeRequest } from './DocumentStatusChangeRequest';
 import { DocumentStatusEnum } from './DocumentStatusEnum';
 import { DocumentStatusRequestEnum } from './DocumentStatusRequestEnum';
@@ -245,9 +265,11 @@ import { QuoteUpdateRequestPriceSettings } from './QuoteUpdateRequestPriceSettin
 import { QuoteUpdateRequestPriceSettingsTiers } from './QuoteUpdateRequestPriceSettingsTiers';
 import { QuoteUpdateRequestSettings  , QuoteUpdateRequestSettingsSelectionTypeEnum   } from './QuoteUpdateRequestSettings';
 import { QuoteUpdateRequestSettings1, QuoteUpdateRequestSettings1SelectionTypeEnum   } from './QuoteUpdateRequestSettings1';
+import { RecipientRedirect } from './RecipientRedirect';
 import { RecipientVerificationSettings, RecipientVerificationSettingsVerificationPlaceEnum     } from './RecipientVerificationSettings';
 import { RecipientVerificationSettingsPasscodeVerification } from './RecipientVerificationSettingsPasscodeVerification';
 import { RecipientVerificationSettingsPhoneVerification } from './RecipientVerificationSettingsPhoneVerification';
+import { RicipientDeliveryMethods } from './RicipientDeliveryMethods';
 import { SectionInfoResponse } from './SectionInfoResponse';
 import { TemplateDetailsResponse } from './TemplateDetailsResponse';
 import { TemplateDetailsResponseContentPlaceholders } from './TemplateDetailsResponseContentPlaceholders';
@@ -308,6 +330,10 @@ const supportedMediaTypes: { [mediaType: string]: number } = {
 
 
 let enumsMap: Set<string> = new Set<string>([
+    "AddMemberRequestRoleEnum",
+    "AddMemberResponseRoleEnum",
+    "CreateUserRequestLicenseEnum",
+    "CreateUserRequestWorkspacesRoleEnum",
     "DocumentOrderingFieldsEnum",
     "DocumentRecipientCreateRequestKindEnum",
     "DocumentStatusEnum",
@@ -332,6 +358,8 @@ let typeMap: {[index: string]: any} = {
     "APILogDetailsResponse": APILogDetailsResponse,
     "APILogListResponse": APILogListResponse,
     "APILogListResponseResults": APILogListResponseResults,
+    "AddMemberRequest": AddMemberRequest,
+    "AddMemberResponse": AddMemberResponse,
     "ContactCreateRequest": ContactCreateRequest,
     "ContactDetailsResponse": ContactDetailsResponse,
     "ContactListResponse": ContactListResponse,
@@ -340,6 +368,12 @@ let typeMap: {[index: string]: any} = {
     "ContentLibraryItemListResponseResults": ContentLibraryItemListResponseResults,
     "ContentLibraryItemResponse": ContentLibraryItemResponse,
     "ContentLibraryItemResponseCreatedBy": ContentLibraryItemResponseCreatedBy,
+    "CreateUserRequest": CreateUserRequest,
+    "CreateUserRequestUser": CreateUserRequestUser,
+    "CreateUserRequestWorkspaces": CreateUserRequestWorkspaces,
+    "CreateUserResponse": CreateUserResponse,
+    "CreateWorkspaceRequest": CreateWorkspaceRequest,
+    "CreateWorkspaceResponse": CreateWorkspaceResponse,
     "DocumentAttachmentResponse": DocumentAttachmentResponse,
     "DocumentAttachmentResponseCreatedBy": DocumentAttachmentResponseCreatedBy,
     "DocumentCreateByPdfRequest": DocumentCreateByPdfRequest,
@@ -376,6 +410,7 @@ let typeMap: {[index: string]: any} = {
     "DocumentSendRequestSelectedApproversGroupAssignees": DocumentSendRequestSelectedApproversGroupAssignees,
     "DocumentSendRequestSelectedApproversSteps": DocumentSendRequestSelectedApproversSteps,
     "DocumentSendResponse": DocumentSendResponse,
+    "DocumentSendResponseRecipients": DocumentSendResponseRecipients,
     "DocumentStatusChangeRequest": DocumentStatusChangeRequest,
     "DocumentStatusResponse": DocumentStatusResponse,
     "DocumentTransferAllOwnershipRequest": DocumentTransferAllOwnershipRequest,
@@ -428,9 +463,11 @@ let typeMap: {[index: string]: any} = {
     "QuoteUpdateRequestPriceSettingsTiers": QuoteUpdateRequestPriceSettingsTiers,
     "QuoteUpdateRequestSettings": QuoteUpdateRequestSettings,
     "QuoteUpdateRequestSettings1": QuoteUpdateRequestSettings1,
+    "RecipientRedirect": RecipientRedirect,
     "RecipientVerificationSettings": RecipientVerificationSettings,
     "RecipientVerificationSettingsPasscodeVerification": RecipientVerificationSettingsPasscodeVerification,
     "RecipientVerificationSettingsPhoneVerification": RecipientVerificationSettingsPhoneVerification,
+    "RicipientDeliveryMethods": RicipientDeliveryMethods,
     "SectionInfoResponse": SectionInfoResponse,
     "TemplateDetailsResponse": TemplateDetailsResponse,
     "TemplateDetailsResponseContentPlaceholders": TemplateDetailsResponseContentPlaceholders,

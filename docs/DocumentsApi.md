@@ -121,10 +121,19 @@ const body:pd_api.DocumentsApiCreateDocumentRequest = {
     recipients: [
       {
         email: "josh@example.com",
+        phone: "+14842634627",
+        deliveryMethods: {
+          email: true,
+          sms: false,
+        },
         firstName: "Josh",
         lastName: "Ron",
         role: "user",
         signingOrder: 1,
+        redirect: {
+          isEnabled: true,
+          url: "https://example.com",
+        },
       },
     ],
     tokens: [
@@ -202,10 +211,19 @@ const body:pd_api.DocumentsApiCreateDocumentRequest = {
             recipients: [
               {
                 email: "josh@example.com",
+                phone: "+14842634627",
+                deliveryMethods: {
+                  email: true,
+                  sms: false,
+                },
                 firstName: "Josh",
                 lastName: "Ron",
                 role: "user",
                 signingOrder: 1,
+                redirect: {
+                  isEnabled: true,
+                  url: "https://example.com",
+                },
               },
             ],
           },
@@ -1268,8 +1286,17 @@ const body:pd_api.DocumentsApiUpdateDocumentRequest = {
       {
         id: "id_example",
         email: "josh@example.com",
+        phone: "+14842634627",
         firstName: "Josh",
         lastName: "Ron",
+        deliveryMethods: {
+          email: true,
+          sms: false,
+        },
+        redirect: {
+          isEnabled: true,
+          url: "https://example.com",
+        },
       },
     ],
     fields: {},

@@ -7,37 +7,40 @@
  * Do not edit the class manually.
  */
 
-import { RecipientRedirect } from './RecipientRedirect';
-import { RicipientDeliveryMethods } from './RicipientDeliveryMethods';
 import { HttpFile } from '../http/http';
 
-export class DocumentUpdateRequestRecipients {
-    'id'?: string;
+export class AddMemberResponse {
+    'memberId'?: string;
+    'workspaceId'?: string;
+    'role'?: AddMemberResponseRoleEnum;
     'email'?: string;
-    'phone'?: string;
     'firstName'?: string;
     'lastName'?: string;
-    'deliveryMethods'?: RicipientDeliveryMethods;
-    'redirect'?: RecipientRedirect;
 
     static readonly discriminator: string | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "id",
-            "baseName": "id",
+            "name": "memberId",
+            "baseName": "member_id",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "workspaceId",
+            "baseName": "workspace_id",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "role",
+            "baseName": "role",
+            "type": "AddMemberResponseRoleEnum",
             "format": ""
         },
         {
             "name": "email",
             "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "phone",
-            "baseName": "phone",
             "type": "string",
             "format": ""
         },
@@ -52,25 +55,16 @@ export class DocumentUpdateRequestRecipients {
             "baseName": "last_name",
             "type": "string",
             "format": ""
-        },
-        {
-            "name": "deliveryMethods",
-            "baseName": "delivery_methods",
-            "type": "RicipientDeliveryMethods",
-            "format": ""
-        },
-        {
-            "name": "redirect",
-            "baseName": "redirect",
-            "type": "RecipientRedirect",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return DocumentUpdateRequestRecipients.attributeTypeMap;
+        return AddMemberResponse.attributeTypeMap;
     }
 
     public constructor() {
     }
 }
+
+
+export type AddMemberResponseRoleEnum = "Admin" | "Manager" | "Member" | "Collaborator" ;
 

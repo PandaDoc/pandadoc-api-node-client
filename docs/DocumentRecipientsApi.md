@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addDocumentRecipient**](DocumentRecipientsApi.md#addDocumentRecipient) | **POST** /public/v1/documents/{id}/recipients | Add Document Recipient
 [**deleteDocumentRecipient**](DocumentRecipientsApi.md#deleteDocumentRecipient) | **DELETE** /public/v1/documents/{id}/recipients/{recipient_id} | Delete Document Recipient
-[**editDocumentRecipient**](DocumentRecipientsApi.md#editDocumentRecipient) | **PATCH** /public/v1/documents/{id}/recipients/{recipient_id} | Edit Document Recipient
+[**editDocumentRecipient**](DocumentRecipientsApi.md#editDocumentRecipient) | **PATCH** /public/v1/documents/{id}/recipients/recipient/{recipient_id} | Edit Document Recipient
 [**reassignDocumentRecipient**](DocumentRecipientsApi.md#reassignDocumentRecipient) | **POST** /public/v1/documents/{id}/recipients/{recipient_id}/reassign | Reassign Document Recipient
 
 
@@ -168,11 +168,15 @@ const body:pd_api.DocumentRecipientsApiEditDocumentRecipientRequest = {
   // DocumentRecipientEditRequest
   documentRecipientEditRequest: {
     email: "user01@pandadoc.com",
+    phone: "+14842634627",
+    deliveryMethods: {
+      email: true,
+      sms: false,
+    },
     firstName: "John",
     lastName: "Doe",
     company: "John Doe Inc.",
     jobTitle: "CTO",
-    phone: "+14842634627",
     state: "Texas",
     streetAddress: "1313 Mockingbird Lane",
     city: "Austin",
@@ -185,6 +189,10 @@ const body:pd_api.DocumentRecipientsApiEditDocumentRecipientRequest = {
       phoneVerification: {
         phoneNumber: "+1234567890",
       },
+    },
+    redirect: {
+      isEnabled: true,
+      url: "https://example.com",
     },
   },
 };
