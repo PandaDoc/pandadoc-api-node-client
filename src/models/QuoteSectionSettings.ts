@@ -16,6 +16,8 @@ export class QuoteSectionSettings {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "optional",
@@ -44,6 +46,9 @@ export class QuoteSectionSettings {
     }
 }
 
-
-export type QuoteSectionSettingsSelectionTypeEnum = "custom" | "single" | "multiple" ;
+export enum QuoteSectionSettingsSelectionTypeEnum {
+    Custom = 'custom',
+    Single = 'single',
+    Multiple = 'multiple'
+}
 

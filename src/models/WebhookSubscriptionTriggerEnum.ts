@@ -9,4 +9,18 @@
 
 import { HttpFile } from '../http/http';
 
-export type WebhookSubscriptionTriggerEnum = "recipient_completed" | "document_updated" | "document_deleted" | "document_state_changed" | "document_creation_failed" | "quote_updated" | "template_created" | "template_modified" ;
+export enum WebhookSubscriptionTriggerEnum {
+    RecipientCompleted = 'recipient_completed',
+    DocumentUpdated = 'document_updated',
+    DocumentDeleted = 'document_deleted',
+    DocumentStateChanged = 'document_state_changed',
+    DocumentCreationFailed = 'document_creation_failed',
+    DocumentCompletedPdfReady = 'document_completed_pdf_ready',
+    DocumentSectionAdded = 'document_section_added',
+    QuoteUpdated = 'quote_updated',
+    TemplateCreated = 'template_created',
+    TemplateUpdated = 'template_updated',
+    TemplateDeleted = 'template_deleted',
+    ContentLibraryItemCreated = 'content_library_item_created',
+    ContentLibraryItemCreationFailed = 'content_library_item_creation_failed'
+}

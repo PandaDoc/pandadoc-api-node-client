@@ -9,4 +9,8 @@
 
 import { HttpFile } from '../http/http';
 
-export type UploadSectionStatusEnum = "document_sections_upload.UPLOADED" | "document_sections_upload.PROCESSED" | "document_sections_upload.ERROR" ;
+export enum UploadSectionStatusEnum {
+    DocumentSectionsUploadUploaded = 'document_sections_upload.UPLOADED',
+    DocumentSectionsUploadProcessed = 'document_sections_upload.PROCESSED',
+    DocumentSectionsUploadError = 'document_sections_upload.ERROR'
+}

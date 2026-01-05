@@ -7,8 +7,8 @@
  * Do not edit the class manually.
  */
 
-import { QuoteUpdateRequestSettings1 } from './QuoteUpdateRequestSettings1';
-import { UpdateIntegrationQuoteSection } from './UpdateIntegrationQuoteSection';
+import { QuoteUpdateRequestSettings } from '../models/QuoteUpdateRequestSettings';
+import { UpdateIntegrationQuoteSection } from '../models/UpdateIntegrationQuoteSection';
 import { HttpFile } from '../http/http';
 
 export class QuoteUpdateRequest {
@@ -16,9 +16,11 @@ export class QuoteUpdateRequest {
     * Quote sections - this property overrides existing sections in the specified order. If you want to change only one section, you must still pass other sections IDs. Otherwise these sections will be removed.
     */
     'sections'?: Array<UpdateIntegrationQuoteSection>;
-    'settings'?: QuoteUpdateRequestSettings1;
+    'settings'?: QuoteUpdateRequestSettings;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -30,7 +32,7 @@ export class QuoteUpdateRequest {
         {
             "name": "settings",
             "baseName": "settings",
-            "type": "QuoteUpdateRequestSettings1",
+            "type": "QuoteUpdateRequestSettings",
             "format": ""
         }    ];
 
@@ -41,4 +43,3 @@ export class QuoteUpdateRequest {
     public constructor() {
     }
 }
-

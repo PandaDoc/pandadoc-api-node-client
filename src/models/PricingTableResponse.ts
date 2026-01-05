@@ -7,8 +7,8 @@
  * Do not edit the class manually.
  */
 
-import { PricingTableResponseItems } from './PricingTableResponseItems';
-import { PricingTableResponseSummary } from './PricingTableResponseSummary';
+import { PricingTableResponseItemsInner } from '../models/PricingTableResponseItemsInner';
+import { PricingTableResponseSummary } from '../models/PricingTableResponseSummary';
 import { HttpFile } from '../http/http';
 
 export class PricingTableResponse {
@@ -16,11 +16,13 @@ export class PricingTableResponse {
     'id'?: string;
     'total'?: string;
     'isIncludedInTotal'?: boolean;
-    'summary'?: PricingTableResponseSummary;
-    'items'?: Array<PricingTableResponseItems>;
+    'summary'?: PricingTableResponseSummary | null;
+    'items'?: Array<PricingTableResponseItemsInner>;
     'currency'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -56,7 +58,7 @@ export class PricingTableResponse {
         {
             "name": "items",
             "baseName": "items",
-            "type": "Array<PricingTableResponseItems>",
+            "type": "Array<PricingTableResponseItemsInner>",
             "format": ""
         },
         {
@@ -73,4 +75,3 @@ export class PricingTableResponse {
     public constructor() {
     }
 }
-

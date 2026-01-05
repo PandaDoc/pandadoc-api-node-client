@@ -7,8 +7,9 @@
  * Do not edit the class manually.
  */
 
-import { CreateUserRequestUser } from './CreateUserRequestUser';
-import { CreateUserRequestWorkspaces } from './CreateUserRequestWorkspaces';
+import { CreateUserRequestUser } from '../models/CreateUserRequestUser';
+import { CreateUserRequestWorkspacesInner } from '../models/CreateUserRequestWorkspacesInner';
+import { UserLicenseEnum } from '../models/UserLicenseEnum';
 import { HttpFile } from '../http/http';
 
 export class CreateUserRequest {
@@ -16,10 +17,12 @@ export class CreateUserRequest {
     /**
     * Info for adding a user to a workspace(s)
     */
-    'workspaces': Array<CreateUserRequestWorkspaces>;
-    'license': CreateUserRequestLicenseEnum;
+    'workspaces': Array<CreateUserRequestWorkspacesInner>;
+    'license': UserLicenseEnum;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -31,13 +34,13 @@ export class CreateUserRequest {
         {
             "name": "workspaces",
             "baseName": "workspaces",
-            "type": "Array<CreateUserRequestWorkspaces>",
+            "type": "Array<CreateUserRequestWorkspacesInner>",
             "format": ""
         },
         {
             "name": "license",
             "baseName": "license",
-            "type": "CreateUserRequestLicenseEnum",
+            "type": "UserLicenseEnum",
             "format": ""
         }    ];
 
@@ -49,6 +52,4 @@ export class CreateUserRequest {
     }
 }
 
-
-export type CreateUserRequestLicenseEnum = "Full" | "eSign" | "Read-only" | "Creator" | "Guest" ;
 

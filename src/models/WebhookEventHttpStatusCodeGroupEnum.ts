@@ -9,4 +9,10 @@
 
 import { HttpFile } from '../http/http';
 
-export type WebhookEventHttpStatusCodeGroupEnum = "100" | "200" | "300" | "400" | "500" ;
+export enum WebhookEventHttpStatusCodeGroupEnum {
+    NUMBER_100 = 100,
+    NUMBER_200 = 200,
+    NUMBER_300 = 300,
+    NUMBER_400 = 400,
+    NUMBER_500 = 500
+}

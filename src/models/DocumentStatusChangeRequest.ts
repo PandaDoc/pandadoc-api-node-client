@@ -7,11 +7,11 @@
  * Do not edit the class manually.
  */
 
-import { DocumentStatusRequestEnum } from './DocumentStatusRequestEnum';
+import { DocumentStatusChangeRequestStatusEnum } from '../models/DocumentStatusChangeRequestStatusEnum';
 import { HttpFile } from '../http/http';
 
 export class DocumentStatusChangeRequest {
-    'status': DocumentStatusRequestEnum;
+    'status': DocumentStatusChangeRequestStatusEnum;
     /**
     * Provide “private notes” regarding the manual status change.
     */
@@ -23,11 +23,13 @@ export class DocumentStatusChangeRequest {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "status",
             "baseName": "status",
-            "type": "DocumentStatusRequestEnum",
+            "type": "DocumentStatusChangeRequestStatusEnum",
             "format": ""
         },
         {
@@ -50,4 +52,5 @@ export class DocumentStatusChangeRequest {
     public constructor() {
     }
 }
+
 

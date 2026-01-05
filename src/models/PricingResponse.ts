@@ -7,8 +7,8 @@
  * Do not edit the class manually.
  */
 
-import { PricingTableResponse } from './PricingTableResponse';
-import { QuoteResponse } from './QuoteResponse';
+import { PricingTableResponse } from '../models/PricingTableResponse';
+import { QuoteResponse } from '../models/QuoteResponse';
 import { HttpFile } from '../http/http';
 
 export class PricingResponse {
@@ -17,6 +17,8 @@ export class PricingResponse {
     'total'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -45,4 +47,3 @@ export class PricingResponse {
     public constructor() {
     }
 }
-

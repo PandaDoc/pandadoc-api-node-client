@@ -9,4 +9,8 @@
 
 import { HttpFile } from '../http/http';
 
-export type WebhookSubscriptionStatusEnum = "ACTIVE" | "INACTIVE" | "DEACTIVATED" ;
+export enum WebhookSubscriptionStatusEnum {
+    Active = 'ACTIVE',
+    Inactive = 'INACTIVE',
+    Deactivated = 'DEACTIVATED'
+}

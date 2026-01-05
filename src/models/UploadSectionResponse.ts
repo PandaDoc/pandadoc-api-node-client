@@ -7,7 +7,7 @@
  * Do not edit the class manually.
  */
 
-import { UploadSectionStatusEnum } from './UploadSectionStatusEnum';
+import { UploadSectionStatusEnum } from '../models/UploadSectionStatusEnum';
 import { HttpFile } from '../http/http';
 
 export class UploadSectionResponse {
@@ -15,13 +15,14 @@ export class UploadSectionResponse {
     'name'?: string;
     'documentUuid'?: string;
     'status'?: UploadSectionStatusEnum;
-    'sectionsUuids'?: Array<string>;
     'dateCreated'?: string;
     'dateModified'?: string;
-    'dateCompleted'?: string;
+    'dateCompleted'?: string | null;
     'infoMessage'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -46,12 +47,6 @@ export class UploadSectionResponse {
             "name": "status",
             "baseName": "status",
             "type": "UploadSectionStatusEnum",
-            "format": ""
-        },
-        {
-            "name": "sectionsUuids",
-            "baseName": "sections_uuids",
-            "type": "Array<string>",
             "format": ""
         },
         {
@@ -86,4 +81,5 @@ export class UploadSectionResponse {
     public constructor() {
     }
 }
+
 

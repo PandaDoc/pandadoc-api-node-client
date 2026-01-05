@@ -9,10 +9,18 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* Sets the phone number to send a passcode to.
+*/
 export class RecipientVerificationSettingsPhoneVerification {
+    /**
+    * A phone number to send a passcode to.
+    */
     'phoneNumber': string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -29,4 +37,3 @@ export class RecipientVerificationSettingsPhoneVerification {
     public constructor() {
     }
 }
-

@@ -11,15 +11,17 @@ import { HttpFile } from '../http/http';
 
 export class DocumentCreateLinkRequest {
     /**
-    * The email address for the recipient you're creating a document link for.
+    * Email address of the person who will receive access to the document.
     */
     'recipient': string;
     /**
-    * Provide the number of seconds that a document link should be valid for. Default is 3600 seconds.
+    * The duration in seconds for which the document link will remain valid. The link will expire and become inaccessible after this time period. For security, we recommend setting the lifetime to less than one year (e.g., `\"lifetime\": 31535999`). If not specified, the default value is 1 hour (3600 seconds). 
     */
     'lifetime'?: number;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -42,4 +44,3 @@ export class DocumentCreateLinkRequest {
     public constructor() {
     }
 }
-

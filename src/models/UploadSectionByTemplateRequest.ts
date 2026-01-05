@@ -7,63 +7,79 @@
  * Do not edit the class manually.
  */
 
-import { DocumentCreateByTemplateRequestContentPlaceholders } from './DocumentCreateByTemplateRequestContentPlaceholders';
-import { DocumentCreateByTemplateRequestRecipients } from './DocumentCreateByTemplateRequestRecipients';
-import { DocumentCreateByTemplateRequestTokens } from './DocumentCreateByTemplateRequestTokens';
-import { PricingTableRequest } from './PricingTableRequest';
+import { CreateDocumentActor } from '../models/CreateDocumentActor';
+import { DocumentUpdateRequestTokensInner } from '../models/DocumentUpdateRequestTokensInner';
+import { PricingTableRequest } from '../models/PricingTableRequest';
+import { UploadSectionByTemplateRequestAllOfContentPlaceholders } from '../models/UploadSectionByTemplateRequestAllOfContentPlaceholders';
 import { HttpFile } from '../http/http';
 
 export class UploadSectionByTemplateRequest {
+    /**
+    * Name the document you are creating.
+    */
+    'name'?: string;
+    /**
+    * The list of recipients you\'re sending the document to. Every object must contain the `email` parameter. The `role`, `first_name` and `last_name` parameters are optional. If the `role` parameter is passed, a person is assigned all fields matching their corresponding role. If a role was not passed, a person receives a read-only link to view the document. If the `first_name` and `last_name` are not passed, the system does this 1. Creates a new contact, if none exists with the given `email`; or 2. Gets the existing contact with the given `email` that already exists.
+    */
+    'recipients': Array<CreateDocumentActor>;
+    /**
+    * You may pass a list of tokens/values to pre-fill tokens (variables) used in a template. Name is a token (variable) name in a template. Value is a real value you would like to replace a token (variable) with. 
+    */
+    'tokens'?: Array<DocumentUpdateRequestTokensInner>;
+    /**
+    * Mark your document with one or several tags.
+    */
+    'tags'?: Array<string>;
     /**
     * The ID of a template you want to use. You can copy it from an in app template url such as `https://app.pandadoc.com/a/#/templates/{ID}/content`. A template ID is also obtained by listing templates.
     */
     'templateUuid': string;
     /**
-    * The list of recipients you're sending the document to. Every object must contain the email parameter. The `role`, `first_name` and `last_name` parameters are optional. If the `role` parameter passed, a person is assigned all fields matching their corresponding role. If not passed, a person will receive a read-only link to view the document. If the `first_name` and `last_name` not passed the system 1. creates a new contact, if none exists with the given `email`; or 2. gets the existing contact with the given `email` that already exists.
-    */
-    'recipients': Array<DocumentCreateByTemplateRequestRecipients>;
-    /**
-    * You can pass a list of tokens/values to pre-fill tokens used in a template. Name is a token name in a template. Value is a real value you would like to replace a token with.
-    */
-    'tokens'?: Array<DocumentCreateByTemplateRequestTokens>;
-    /**
-    * You can pass a list of fields/values to pre-fill fields used in a template. Note that the Signature field can't be pre-filled.
-    */
-    'fields'?: any;
-    /**
-    * Information to construct or populate a pricing table can be passed when creating a document. All product information must be passed when creating a new document. Products stored in PandaDoc cannot be used to populate table rows at this time. Keep in mind that this is an array, so multiple table objects can be passed to a document. Make sure that \"Automatically add products to this table\" is enabled in the PandaDoc template pricing tables you wish to populate via API.
+    * Information to construct or populate a pricing table can be passed when creating a document. All product information must be passed when creating a new document. Products stored in PandaDoc cannot be used to populate table rows at this time. Keep in mind that this is an array, so multiple table objects can be passed to a document. Make sure that \"Automatically add products to this table\" is enabled in the PandaDoc template pricing tables you wish to populate via API. Each pricing table must have a unique name to populate it with data correctly.
     */
     'pricingTables'?: Array<PricingTableRequest>;
     /**
     * You may replace Content Library Item Placeholders with a few content library items each and pre-fill fields/variables values, pricing table items, and assign recipients to roles from there.
     */
-    'contentPlaceholders'?: Array<DocumentCreateByTemplateRequestContentPlaceholders>;
+    'contentPlaceholders'?: Array<UploadSectionByTemplateRequestAllOfContentPlaceholders>;
+    /**
+    * You can pass a list of fields/values to pre-fill fields used in a template. Note that the Signature field can\'t be pre-filled. Field values with the same merge id will override field values of the whole document by default, unless you set the merge_field_scope=upload query parameter.
+    */
+    'fields'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "templateUuid",
-            "baseName": "template_uuid",
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
         {
             "name": "recipients",
             "baseName": "recipients",
-            "type": "Array<DocumentCreateByTemplateRequestRecipients>",
+            "type": "Array<CreateDocumentActor>",
             "format": ""
         },
         {
             "name": "tokens",
             "baseName": "tokens",
-            "type": "Array<DocumentCreateByTemplateRequestTokens>",
+            "type": "Array<DocumentUpdateRequestTokensInner>",
             "format": ""
         },
         {
-            "name": "fields",
-            "baseName": "fields",
-            "type": "any",
+            "name": "tags",
+            "baseName": "tags",
+            "type": "Array<string>",
+            "format": ""
+        },
+        {
+            "name": "templateUuid",
+            "baseName": "template_uuid",
+            "type": "string",
             "format": ""
         },
         {
@@ -75,7 +91,13 @@ export class UploadSectionByTemplateRequest {
         {
             "name": "contentPlaceholders",
             "baseName": "content_placeholders",
-            "type": "Array<DocumentCreateByTemplateRequestContentPlaceholders>",
+            "type": "Array<UploadSectionByTemplateRequestAllOfContentPlaceholders>",
+            "format": ""
+        },
+        {
+            "name": "fields",
+            "baseName": "fields",
+            "type": "any",
             "format": ""
         }    ];
 
@@ -86,4 +108,3 @@ export class UploadSectionByTemplateRequest {
     public constructor() {
     }
 }
-

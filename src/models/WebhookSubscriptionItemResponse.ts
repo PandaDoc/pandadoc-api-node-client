@@ -7,23 +7,25 @@
  * Do not edit the class manually.
  */
 
-import { WebhookSubscriptionPayloadEnum } from './WebhookSubscriptionPayloadEnum';
-import { WebhookSubscriptionStatusEnum } from './WebhookSubscriptionStatusEnum';
-import { WebhookSubscriptionTriggerEnum } from './WebhookSubscriptionTriggerEnum';
+import { WebhookSubscriptionPayloadEnum } from '../models/WebhookSubscriptionPayloadEnum';
+import { WebhookSubscriptionStatusEnum } from '../models/WebhookSubscriptionStatusEnum';
+import { WebhookSubscriptionTriggerEnum } from '../models/WebhookSubscriptionTriggerEnum';
 import { HttpFile } from '../http/http';
 
 export class WebhookSubscriptionItemResponse {
-    'uuid'?: string;
+    'uuid'?: string | null;
     'name'?: string;
     'url'?: string;
     'active'?: boolean;
-    'payload'?: Array<WebhookSubscriptionPayloadEnum>;
-    'triggers'?: Array<WebhookSubscriptionTriggerEnum>;
+    'payload'?: Array<WebhookSubscriptionPayloadEnum> | null;
+    'triggers'?: Array<WebhookSubscriptionTriggerEnum> | null;
     'workspaceId'?: string;
     'sharedKey'?: string;
     'status'?: WebhookSubscriptionStatusEnum;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -88,4 +90,5 @@ export class WebhookSubscriptionItemResponse {
     public constructor() {
     }
 }
+
 

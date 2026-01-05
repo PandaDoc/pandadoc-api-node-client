@@ -7,7 +7,7 @@
  * Do not edit the class manually.
  */
 
-import { UploadSectionStatusEnum } from './UploadSectionStatusEnum';
+import { UploadSectionStatusEnum } from '../models/UploadSectionStatusEnum';
 import { HttpFile } from '../http/http';
 
 export class UploadSectionStatusResponse {
@@ -20,6 +20,8 @@ export class UploadSectionStatusResponse {
     'dateModified'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -72,4 +74,5 @@ export class UploadSectionStatusResponse {
     public constructor() {
     }
 }
+
 

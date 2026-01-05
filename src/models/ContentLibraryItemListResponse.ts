@@ -7,19 +7,21 @@
  * Do not edit the class manually.
  */
 
-import { ContentLibraryItemListResponseResults } from './ContentLibraryItemListResponseResults';
+import { ContentLibraryItemListResponseResultsInner } from '../models/ContentLibraryItemListResponseResultsInner';
 import { HttpFile } from '../http/http';
 
 export class ContentLibraryItemListResponse {
-    'results'?: Array<ContentLibraryItemListResponseResults>;
+    'results'?: Array<ContentLibraryItemListResponseResultsInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<ContentLibraryItemListResponseResults>",
+            "type": "Array<ContentLibraryItemListResponseResultsInner>",
             "format": ""
         }    ];
 
@@ -30,4 +32,3 @@ export class ContentLibraryItemListResponse {
     public constructor() {
     }
 }
-

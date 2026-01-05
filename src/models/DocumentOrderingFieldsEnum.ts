@@ -9,4 +9,25 @@
 
 import { HttpFile } from '../http/http';
 
-export type DocumentOrderingFieldsEnum = "name" | "date_created" | "date_status_changed" | "date_of_last_action" | "date_modified" | "date_sent" | "date_completed" | "date_expiration" | "date_declined" | "status" | "-name" | "-date_created" | "-date_status_changed" | "-date_of_last_action" | "-date_modified" | "-date_sent" | "-date_completed" | "-date_expiration" | "-date_declined" | "-status" ;
+export enum DocumentOrderingFieldsEnum {
+    Name = 'name',
+    DateCreated = 'date_created',
+    DateStatusChanged = 'date_status_changed',
+    DateOfLastAction = 'date_of_last_action',
+    DateModified = 'date_modified',
+    DateSent = 'date_sent',
+    DateCompleted = 'date_completed',
+    DateExpiration = 'date_expiration',
+    DateDeclined = 'date_declined',
+    Status = 'status',
+    Name2 = '-name',
+    DateCreated2 = '-date_created',
+    DateStatusChanged2 = '-date_status_changed',
+    DateOfLastAction2 = '-date_of_last_action',
+    DateModified2 = '-date_modified',
+    DateSent2 = '-date_sent',
+    DateCompleted2 = '-date_completed',
+    DateExpiration2 = '-date_expiration',
+    DateDeclined2 = '-date_declined',
+    Status2 = '-status'
+}

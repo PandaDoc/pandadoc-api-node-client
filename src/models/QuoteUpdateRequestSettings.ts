@@ -7,35 +7,24 @@
  * Do not edit the class manually.
  */
 
+import { QuoteUpdateRequestSettingsSelectionTypeTypeEnum } from '../models/QuoteUpdateRequestSettingsSelectionTypeTypeEnum';
 import { HttpFile } from '../http/http';
 
 /**
-* Section settings. Denotes whether a section is optional or selected, and selection type inside the section - single, multiple, or custom.
+* Quote settings. Denotes whether a quote is optional or selected, and selection type inside the section - single, multiple, or custom.
 */
 export class QuoteUpdateRequestSettings {
-    'optional'?: boolean;
-    'selected'?: boolean;
-    'selectionType'?: QuoteUpdateRequestSettingsSelectionTypeEnum;
+    'selectionType'?: QuoteUpdateRequestSettingsSelectionTypeTypeEnum;
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "optional",
-            "baseName": "optional",
-            "type": "boolean",
-            "format": ""
-        },
-        {
-            "name": "selected",
-            "baseName": "selected",
-            "type": "boolean",
-            "format": ""
-        },
         {
             "name": "selectionType",
             "baseName": "selection_type",
-            "type": "QuoteUpdateRequestSettingsSelectionTypeEnum",
+            "type": "QuoteUpdateRequestSettingsSelectionTypeTypeEnum",
             "format": ""
         }    ];
 
@@ -47,6 +36,4 @@ export class QuoteUpdateRequestSettings {
     }
 }
 
-
-export type QuoteUpdateRequestSettingsSelectionTypeEnum = "custom" | "single" | "multiple" ;
 

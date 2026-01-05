@@ -10,26 +10,21 @@
 import { HttpFile } from '../http/http';
 
 export class ContactUpdateRequest {
-    'email'?: string;
-    'firstName'?: string;
-    'lastName'?: string;
-    'company'?: string;
-    'jobTitle'?: string;
-    'phone'?: string;
-    'state'?: string;
-    'streetAddress'?: string;
-    'city'?: string;
-    'postalCode'?: string;
+    'firstName'?: string | null;
+    'lastName'?: string | null;
+    'company'?: string | null;
+    'jobTitle'?: string | null;
+    'phone'?: string | null;
+    'state'?: string | null;
+    'streetAddress'?: string | null;
+    'city'?: string | null;
+    'postalCode'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string",
-            "format": ""
-        },
         {
             "name": "firstName",
             "baseName": "first_name",
@@ -92,4 +87,3 @@ export class ContactUpdateRequest {
     public constructor() {
     }
 }
-

@@ -4,7 +4,7 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**detailsLog**](APILogsApi.md#detailsLog) | **GET** /public/v1/logs/{id} | Details API Log
+[**detailsLog**](APILogsApi.md#detailsLog) | **GET** /public/v1/logs/{id} | API Log Details
 [**listLogs**](APILogsApi.md#listLogs) | **GET** /public/v1/logs | List API Log
 
 
@@ -28,7 +28,7 @@ const apiInstance = new pd_api.APILogsApi(configuration);
 
 const body:pd_api.APILogsApiDetailsLogRequest = {
   // string | Log event id.
-  id: "AXp2jrHMK2MKv_lRqmQ",
+  id: "AZC86i5PYKMjQjMMMw9e",
 };
 
 apiInstance.detailsLog(body).then((data) => {
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 # **listLogs**
 > APILogListResponse listLogs()
 
-Get the list of all logs within the selected workspace. Optionally filter by date, page, and `#` of items per page.
+Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
 
 ### Example
 
@@ -93,15 +93,19 @@ const body:pd_api.APILogsApiListLogsRequest = {
   to: "now",
   // number | The amount of items on each page. (optional)
   count: 10,
-  // number | Page number of the results returned. (optional)
+  // number | Returns page of the results by number. (optional)
   page: 1,
-  // Array<100 | 200 | 300 | 400 | 500> | Returns only the predefined status codes. Allows 1xx, 2xx, 3xx, 4xx, and 5xx. (optional)
-  statuses: [400,500],
-  // Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'> | Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE. (optional)
-  methods: ["GET","POST"],
+  // Array<ApiLogStatusEnum> | Returns only the predefined status codes. (optional)
+  statuses: [
+    [400,500],
+  ],
+  // Array<ApiLogMethodEnum> | Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE. (optional)
+  methods: [
+    "["GET","POST"]",
+  ],
   // string | Returns the results containing a string. (optional)
   search: "documents/hryJY9mqYZHjQCYQuSjRQg/send",
-  // 'PRODUCTION' | 'SANDBOX' | Returns logs for production/sandbox. (optional)
+  // ApiLogEnvironmentTypeEnum | Returns logs for production/sandbox. (optional)
   environmentType: "PRODUCTION",
 };
 
@@ -115,14 +119,14 @@ apiInstance.listLogs(body).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | [**string**] | Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days). | (optional) defaults to undefined
+ **since** | [**string**] | Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days). | (optional) defaults to '-90d'
  **to** | [**string**] | Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value. | (optional) defaults to undefined
- **count** | [**number**] | The amount of items on each page. | (optional) defaults to undefined
- **page** | [**number**] | Page number of the results returned. | (optional) defaults to undefined
- **statuses** | **Array<100 &#124; 200 &#124; 300 &#124; 400 &#124; 500>** | Returns only the predefined status codes. Allows 1xx, 2xx, 3xx, 4xx, and 5xx. | (optional) defaults to undefined
- **methods** | **Array<&#39;GET&#39; &#124; &#39;POST&#39; &#124; &#39;PUT&#39; &#124; &#39;PATCH&#39; &#124; &#39;DELETE&#39;>** | Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE. | (optional) defaults to undefined
+ **count** | [**number**] | The amount of items on each page. | (optional) defaults to 100
+ **page** | [**number**] | Returns page of the results by number. | (optional) defaults to 1
+ **statuses** | **Array&lt;ApiLogStatusEnum&gt;** | Returns only the predefined status codes. | (optional) defaults to undefined
+ **methods** | **Array&lt;ApiLogMethodEnum&gt;** | Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE. | (optional) defaults to undefined
  **search** | [**string**] | Returns the results containing a string. | (optional) defaults to undefined
- **environmentType** | [**&#39;PRODUCTION&#39; | &#39;SANDBOX&#39;**]**Array<&#39;PRODUCTION&#39; &#124; &#39;SANDBOX&#39;>** | Returns logs for production/sandbox. | (optional) defaults to undefined
+ **environmentType** | **ApiLogEnvironmentTypeEnum** | Returns logs for production/sandbox. | (optional) defaults to undefined
 
 
 ### Return type

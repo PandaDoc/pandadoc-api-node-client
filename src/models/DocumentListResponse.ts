@@ -7,19 +7,21 @@
  * Do not edit the class manually.
  */
 
-import { DocumentListResponseResults } from './DocumentListResponseResults';
+import { DocumentListResponseResultsInner } from '../models/DocumentListResponseResultsInner';
 import { HttpFile } from '../http/http';
 
 export class DocumentListResponse {
-    'results'?: Array<DocumentListResponseResults>;
+    'results'?: Array<DocumentListResponseResultsInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<DocumentListResponseResults>",
+            "type": "Array<DocumentListResponseResultsInner>",
             "format": ""
         }    ];
 
@@ -30,4 +32,3 @@ export class DocumentListResponse {
     public constructor() {
     }
 }
-

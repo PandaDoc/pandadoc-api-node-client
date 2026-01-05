@@ -7,19 +7,21 @@
  * Do not edit the class manually.
  */
 
-import { UploadSectionListResponseResults } from './UploadSectionListResponseResults';
+import { UploadSectionListResponseResultsInner } from '../models/UploadSectionListResponseResultsInner';
 import { HttpFile } from '../http/http';
 
 export class UploadSectionListResponse {
-    'results'?: Array<UploadSectionListResponseResults>;
+    'results'?: Array<UploadSectionListResponseResultsInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<UploadSectionListResponseResults>",
+            "type": "Array<UploadSectionListResponseResultsInner>",
             "format": ""
         }    ];
 
@@ -30,4 +32,3 @@ export class UploadSectionListResponse {
     public constructor() {
     }
 }
-

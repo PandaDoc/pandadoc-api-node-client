@@ -7,13 +7,19 @@
  * Do not edit the class manually.
  */
 
+import { RecipientKindEnum } from '../models/RecipientKindEnum';
 import { HttpFile } from '../http/http';
 
 export class DocumentRecipientCreateRequest {
+    /**
+    * Contact uuid.
+    */
     'id': string;
-    'kind': DocumentRecipientCreateRequestKindEnum;
+    'kind': RecipientKindEnum;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -25,7 +31,7 @@ export class DocumentRecipientCreateRequest {
         {
             "name": "kind",
             "baseName": "kind",
-            "type": "DocumentRecipientCreateRequestKindEnum",
+            "type": "RecipientKindEnum",
             "format": ""
         }    ];
 
@@ -37,6 +43,4 @@ export class DocumentRecipientCreateRequest {
     }
 }
 
-
-export type DocumentRecipientCreateRequestKindEnum = "contact" | "contact_group" ;
 

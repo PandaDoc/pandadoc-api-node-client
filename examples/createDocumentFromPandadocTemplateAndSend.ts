@@ -81,6 +81,8 @@ async function createDocumentFromPandadocTemplate(
         lastName: "Ron",
         role: "user",
         signingOrder: 1,
+        type: pd_api.CreateDocumentActorTypeEnum.Recipient,
+        name: "",
       },
     ],
     tokens: [

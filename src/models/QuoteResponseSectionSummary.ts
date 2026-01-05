@@ -7,22 +7,24 @@
  * Do not edit the class manually.
  */
 
-import { QuoteResponseSummaryRecurringSubtotal } from './QuoteResponseSummaryRecurringSubtotal';
+import { QuoteResponseSummaryRecurringSubtotalInner } from '../models/QuoteResponseSummaryRecurringSubtotalInner';
 import { HttpFile } from '../http/http';
 
 export class QuoteResponseSectionSummary {
     'total'?: string;
-    'subtotal'?: string;
-    'oneTimeSubtotal'?: string;
-    'recurringSubtotal'?: Array<QuoteResponseSummaryRecurringSubtotal>;
-    'totalQty'?: string;
-    'discounts'?: any;
-    'taxes'?: any;
-    'fees'?: any;
-    'customFields'?: { [key: string]: string; };
-    'totalSectionValue'?: string;
+    'subtotal'?: string | null;
+    'oneTimeSubtotal'?: string | null;
+    'recurringSubtotal'?: Array<QuoteResponseSummaryRecurringSubtotalInner> | null;
+    'totalQty'?: string | null;
+    'discounts'?: any | null;
+    'taxes'?: any | null;
+    'fees'?: any | null;
+    'customFields'?: { [key: string]: string; } | null;
+    'totalSectionValue'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -46,7 +48,7 @@ export class QuoteResponseSectionSummary {
         {
             "name": "recurringSubtotal",
             "baseName": "recurring_subtotal",
-            "type": "Array<QuoteResponseSummaryRecurringSubtotal>",
+            "type": "Array<QuoteResponseSummaryRecurringSubtotalInner>",
             "format": ""
         },
         {
@@ -93,4 +95,3 @@ export class QuoteResponseSectionSummary {
     public constructor() {
     }
 }
-

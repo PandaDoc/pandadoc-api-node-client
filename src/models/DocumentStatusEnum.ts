@@ -9,4 +9,19 @@
 
 import { HttpFile } from '../http/http';
 
-export type DocumentStatusEnum = "document.draft" | "document.sent" | "document.completed" | "document.uploaded" | "document.error" | "document.viewed" | "document.waiting_approval" | "document.approved" | "document.rejected" | "document.waiting_pay" | "document.paid" | "document.voided" | "document.declined" | "document.external_review" ;
+export enum DocumentStatusEnum {
+    DocumentDraft = 'document.draft',
+    DocumentSent = 'document.sent',
+    DocumentCompleted = 'document.completed',
+    DocumentUploaded = 'document.uploaded',
+    DocumentError = 'document.error',
+    DocumentViewed = 'document.viewed',
+    DocumentWaitingApproval = 'document.waiting_approval',
+    DocumentApproved = 'document.approved',
+    DocumentRejected = 'document.rejected',
+    DocumentWaitingPay = 'document.waiting_pay',
+    DocumentPaid = 'document.paid',
+    DocumentVoided = 'document.voided',
+    DocumentDeclined = 'document.declined',
+    DocumentExternalReview = 'document.external_review'
+}

@@ -7,8 +7,8 @@
  * Do not edit the class manually.
  */
 
-import { QuoteUpdateRequestSettings } from './QuoteUpdateRequestSettings';
-import { UpdateIntegrationQuoteSectionItem } from './UpdateIntegrationQuoteSectionItem';
+import { UpdateIntegrationQuoteSectionItem } from '../models/UpdateIntegrationQuoteSectionItem';
+import { UpdateIntegrationQuoteSectionSettings } from '../models/UpdateIntegrationQuoteSectionSettings';
 import { HttpFile } from '../http/http';
 
 export class UpdateIntegrationQuoteSection {
@@ -19,14 +19,16 @@ export class UpdateIntegrationQuoteSection {
     /**
     * Name of the quotes section. If you create a section without providing a value, it will have the default value.
     */
-    'name'?: string;
+    'name'?: string | null;
     /**
     * Section items - this property overrides the existing items in the order specified. If you want to change only one item, you must still pass other items IDs. Otherwise these items will be removed.
     */
     'items'?: Array<UpdateIntegrationQuoteSectionItem>;
-    'settings'?: QuoteUpdateRequestSettings;
+    'settings'?: UpdateIntegrationQuoteSectionSettings;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -50,7 +52,7 @@ export class UpdateIntegrationQuoteSection {
         {
             "name": "settings",
             "baseName": "settings",
-            "type": "QuoteUpdateRequestSettings",
+            "type": "UpdateIntegrationQuoteSectionSettings",
             "format": ""
         }    ];
 
@@ -61,4 +63,3 @@ export class UpdateIntegrationQuoteSection {
     public constructor() {
     }
 }
-

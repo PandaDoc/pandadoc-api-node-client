@@ -17,17 +17,19 @@ export class APILogDetailsResponse {
     'requestTime'?: string;
     'responseTime'?: string;
     'responseBody'?: any;
-    'queryParamsString'?: string;
-    'queryParamsObject'?: any;
+    'queryParamsString'?: string | null;
+    'queryParamsObject'?: any | null;
     'requestBody'?: any;
     'tokenType'?: string;
-    'application'?: string;
+    'application'?: string | null;
     'key'?: string;
     'requestId'?: string;
     'userEmail'?: string;
     'userId'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -134,4 +136,3 @@ export class APILogDetailsResponse {
     public constructor() {
     }
 }
-

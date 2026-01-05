@@ -7,8 +7,9 @@
  * Do not edit the class manually.
  */
 
-import { ContentLibraryItemResponseCreatedBy } from './ContentLibraryItemResponseCreatedBy';
-import { PricingResponse } from './PricingResponse';
+import { ContentLibraryItemResponseCreatedBy } from '../models/ContentLibraryItemResponseCreatedBy';
+import { DocumentDetailsResponseTablesInner } from '../models/DocumentDetailsResponseTablesInner';
+import { PricingResponse } from '../models/PricingResponse';
 import { HttpFile } from '../http/http';
 
 export class ContentLibraryItemResponse {
@@ -26,9 +27,15 @@ export class ContentLibraryItemResponse {
     'roles'?: Array<any>;
     'version'?: string;
     'contentPlaceholders'?: Array<any>;
+    /**
+    * Document tables.
+    */
+    'tables'?: Array<DocumentDetailsResponseTablesInner>;
     'images'?: Array<any>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -116,6 +123,12 @@ export class ContentLibraryItemResponse {
             "format": ""
         },
         {
+            "name": "tables",
+            "baseName": "tables",
+            "type": "Array<DocumentDetailsResponseTablesInner>",
+            "format": ""
+        },
+        {
             "name": "images",
             "baseName": "images",
             "type": "Array<any>",
@@ -129,4 +142,3 @@ export class ContentLibraryItemResponse {
     public constructor() {
     }
 }
-

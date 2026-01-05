@@ -19,15 +19,15 @@ export class MemberDetailsResponse {
     */
     'membershipId'?: string;
     /**
-    * A user's email address.
+    * A user\'s email address.
     */
     'email'?: string;
     /**
-    * A user's first name.
+    * A user\'s first name.
     */
     'firstName'?: string;
     /**
-    * A user's last name.
+    * A user\'s last name.
     */
     'lastName'?: string;
     /**
@@ -35,11 +35,11 @@ export class MemberDetailsResponse {
     */
     'isActive'?: boolean;
     /**
-    * A name of the user's current active workspace.
+    * A unique identifier of the user\'s current active workspace.
     */
     'workspace'?: string;
     /**
-    * A unique identifier of the user's current active workspace.
+    * A name of the user\'s current active workspace.
     */
     'workspaceName'?: string;
     /**
@@ -47,7 +47,7 @@ export class MemberDetailsResponse {
     */
     'emailsVerified'?: boolean;
     /**
-    * A member's role in the workspace.
+    * A member\'s role in the workspace.
     */
     'role'?: string;
     /**
@@ -64,6 +64,8 @@ export class MemberDetailsResponse {
     'dateModified'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -152,4 +154,3 @@ export class MemberDetailsResponse {
     public constructor() {
     }
 }
-

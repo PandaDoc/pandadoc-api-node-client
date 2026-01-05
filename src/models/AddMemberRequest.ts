@@ -7,13 +7,19 @@
  * Do not edit the class manually.
  */
 
+import { WorkspaceMemberRoleEnum } from '../models/WorkspaceMemberRoleEnum';
 import { HttpFile } from '../http/http';
 
 export class AddMemberRequest {
+    /**
+    * User id.
+    */
     'userId': string;
-    'role': AddMemberRequestRoleEnum;
+    'role': WorkspaceMemberRoleEnum;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -25,7 +31,7 @@ export class AddMemberRequest {
         {
             "name": "role",
             "baseName": "role",
-            "type": "AddMemberRequestRoleEnum",
+            "type": "WorkspaceMemberRoleEnum",
             "format": ""
         }    ];
 
@@ -37,6 +43,4 @@ export class AddMemberRequest {
     }
 }
 
-
-export type AddMemberRequestRoleEnum = "Admin" | "Manager" | "Member" | "Collaborator" ;
 

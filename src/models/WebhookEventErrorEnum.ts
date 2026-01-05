@@ -9,4 +9,9 @@
 
 import { HttpFile } from '../http/http';
 
-export type WebhookEventErrorEnum = "INTERNAL_ERROR" | "NOT_VALID_URL" | "CONNECT_ERROR" | "TIMEOUT_ERROR" ;
+export enum WebhookEventErrorEnum {
+    InternalError = 'INTERNAL_ERROR',
+    NotValidUrl = 'NOT_VALID_URL',
+    ConnectError = 'CONNECT_ERROR',
+    TimeoutError = 'TIMEOUT_ERROR'
+}

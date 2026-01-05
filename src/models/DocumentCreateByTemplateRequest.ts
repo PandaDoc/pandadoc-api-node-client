@@ -7,67 +7,115 @@
  * Do not edit the class manually.
  */
 
-import { DocumentCreateByTemplateRequestContentPlaceholders } from './DocumentCreateByTemplateRequestContentPlaceholders';
-import { DocumentCreateByTemplateRequestImages } from './DocumentCreateByTemplateRequestImages';
-import { DocumentCreateByTemplateRequestRecipients } from './DocumentCreateByTemplateRequestRecipients';
-import { DocumentCreateByTemplateRequestTokens } from './DocumentCreateByTemplateRequestTokens';
-import { PricingTableRequest } from './PricingTableRequest';
+import { CreateDocumentActor } from '../models/CreateDocumentActor';
+import { DocumentCreateByTemplateRequestContentPlaceholdersInner } from '../models/DocumentCreateByTemplateRequestContentPlaceholdersInner';
+import { DocumentCreateByTemplateRequestFieldsValue } from '../models/DocumentCreateByTemplateRequestFieldsValue';
+import { DocumentCreateByTemplateRequestImagesInner } from '../models/DocumentCreateByTemplateRequestImagesInner';
+import { DocumentCreateByTemplateRequestOwner } from '../models/DocumentCreateByTemplateRequestOwner';
+import { DocumentCreateByTemplateRequestTextsInner } from '../models/DocumentCreateByTemplateRequestTextsInner';
+import { DocumentCreateByTemplateRequestTokensInner } from '../models/DocumentCreateByTemplateRequestTokensInner';
+import { PricingTableRequest } from '../models/PricingTableRequest';
+import { TableRequest } from '../models/TableRequest';
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateByTemplateRequest {
     /**
-    * Name the document you are creating. If name is not passed, the template name is used.
-    */
-    'name'?: string;
-    /**
-    * Set this parameter as true if you want to detect title variables in the document.
-    */
-    'detectTitleVariables'?: boolean;
-    /**
     * The ID of a template you want to use. You can copy it from an in app template url such as `https://app.pandadoc.com/a/#/templates/{ID}/content`. A template ID is also obtained by listing templates.
     */
     'templateUuid': string;
-    'folderUuid'?: string;
     /**
-    * The list of recipients you're sending the document to. Every object must contain the email parameter. The `role`, `first_name` and `last_name` parameters are optional. If the `role` parameter passed, a person is assigned all fields matching their corresponding role. If not passed, a person will receive a read-only link to view the document. If the `first_name` and `last_name` not passed the system 1. creates a new contact, if none exists with the given `email`; or 2. gets the existing contact with the given `email` that already exists.
+    * Set specific values to the fields. This object maps merge field names to their corresponding values.  Each key represents a merge field name, and each value is an object containing the data to populate that field with. The structure allows you to pre-populate various field types including text inputs, checkboxes, dropdowns, and date fields.  **Key Points:** - Keys must match the exact merge field names from your template or file. - Values must be wrapped in an object with a `value` property. - Supported value types: string, number, boolean. - Date fields should use RFC 3339 format (e.g., \'2019-12-31T00:00:00.000Z\'). - Signature fields cannot be pre-filled.  **Example Usage:** - Text field: `\"CustomerName\": {\"value\": \"John Doe\"}` - Checkbox: `\"AgreeToTerms\": {\"value\": true}` - Date field: `\"DeliveryDate\": {\"value\": \"2019-12-31T00:00:00.000Z\"}` 
     */
-    'recipients': Array<DocumentCreateByTemplateRequestRecipients>;
-    /**
-    * You can pass a list of tokens/values to pre-fill tokens used in a template. Name is a token name in a template. Value is a real value you would like to replace a token with.
-    */
-    'tokens'?: Array<DocumentCreateByTemplateRequestTokens>;
-    /**
-    * You can pass a list of fields/values to pre-fill fields used in a template. Note that the Signature field can't be pre-filled.
-    */
-    'fields'?: any;
-    /**
-    * You can pass arbitrary data in the key-value format to associate custom information with a document. This information is returned in any API requests for the document details by id.
-    */
-    'metadata'?: any;
-    /**
-    * Mark your document with one or several tags.
-    */
-    'tags'?: Array<string>;
+    'fields'?: { [key: string]: DocumentCreateByTemplateRequestFieldsValue; };
     /**
     * You can pass a list of images to image blocks (one image in one block) for replacement.
     */
-    'images'?: Array<DocumentCreateByTemplateRequestImages>;
+    'images'?: Array<DocumentCreateByTemplateRequestImagesInner>;
     /**
     * Information to construct or populate a pricing table can be passed when creating a document. All product information must be passed when creating a new document. Products stored in PandaDoc cannot be used to populate table rows at this time. Keep in mind that this is an array, so multiple table objects can be passed to a document. Make sure that \"Automatically add products to this table\" is enabled in the PandaDoc template pricing tables you wish to populate via API.
     */
     'pricingTables'?: Array<PricingTableRequest>;
     /**
+    * Information to construct or populate a table can be passed when creating a document. Keep in mind that this is an array, so multiple table objects can be passed to a document.
+    */
+    'tables'?: Array<TableRequest>;
+    /**
+    * You can pass a list of rich text values to pre-fill text blocks in a template. This is useful for inserting dynamic content like introductions or terms and conditions. Markdown is supported.
+    */
+    'texts'?: Array<DocumentCreateByTemplateRequestTextsInner>;
+    /**
+    * Set this parameter as true if you want to detect title variables in the document.
+    */
+    'detectTitleVariables'?: boolean;
+    /**
     * You may replace Content Library Item Placeholders with a few content library items each and pre-fill fields/variables values, pricing table items, and assign recipients to roles from there.
     */
-    'contentPlaceholders'?: Array<DocumentCreateByTemplateRequestContentPlaceholders>;
+    'contentPlaceholders'?: Array<DocumentCreateByTemplateRequestContentPlaceholdersInner>;
+    /**
+    * Name the document you are creating.
+    */
+    'name'?: string;
+    /**
+    * ID of the folder where the created document should be stored.
+    */
+    'folderUuid'?: string;
+    'owner'?: DocumentCreateByTemplateRequestOwner;
+    /**
+    * The list of recipients to whom the document will be sent. Either `email` or `phone` is required. Specifying the `role` assigns all matching fields to the recipient or group. If `first_name` and `last_name` are not specified, the system looks them up in the workspace contacts list using the `email` or `phone number`. If `first_name` and `last_name` are provided, they override the existing contact\'s data.
+    */
+    'recipients': Array<CreateDocumentActor>;
+    /**
+    * Also known as variables. Pass values for the variables in the template to render them into the created document or make them available for insertion later.
+    */
+    'tokens'?: Array<DocumentCreateByTemplateRequestTokensInner>;
+    /**
+    * You can pass any data in a key-value format to associate it with a document. Searching by metadata is available in the List Documents endpoint and is also included in the Document Details response.
+    */
+    'metadata'?: any | null;
+    /**
+    * Mark your document with one or more tags. Tags are displayed in the UI, and you can filter by tags in the List Documents endpoint.
+    */
+    'tags'?: Array<string>;
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
-            "name": "name",
-            "baseName": "name",
+            "name": "templateUuid",
+            "baseName": "template_uuid",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "fields",
+            "baseName": "fields",
+            "type": "{ [key: string]: DocumentCreateByTemplateRequestFieldsValue; }",
+            "format": ""
+        },
+        {
+            "name": "images",
+            "baseName": "images",
+            "type": "Array<DocumentCreateByTemplateRequestImagesInner>",
+            "format": ""
+        },
+        {
+            "name": "pricingTables",
+            "baseName": "pricing_tables",
+            "type": "Array<PricingTableRequest>",
+            "format": ""
+        },
+        {
+            "name": "tables",
+            "baseName": "tables",
+            "type": "Array<TableRequest>",
+            "format": ""
+        },
+        {
+            "name": "texts",
+            "baseName": "texts",
+            "type": "Array<DocumentCreateByTemplateRequestTextsInner>",
             "format": ""
         },
         {
@@ -77,8 +125,14 @@ export class DocumentCreateByTemplateRequest {
             "format": ""
         },
         {
-            "name": "templateUuid",
-            "baseName": "template_uuid",
+            "name": "contentPlaceholders",
+            "baseName": "content_placeholders",
+            "type": "Array<DocumentCreateByTemplateRequestContentPlaceholdersInner>",
+            "format": ""
+        },
+        {
+            "name": "name",
+            "baseName": "name",
             "type": "string",
             "format": ""
         },
@@ -89,21 +143,21 @@ export class DocumentCreateByTemplateRequest {
             "format": ""
         },
         {
+            "name": "owner",
+            "baseName": "owner",
+            "type": "DocumentCreateByTemplateRequestOwner",
+            "format": ""
+        },
+        {
             "name": "recipients",
             "baseName": "recipients",
-            "type": "Array<DocumentCreateByTemplateRequestRecipients>",
+            "type": "Array<CreateDocumentActor>",
             "format": ""
         },
         {
             "name": "tokens",
             "baseName": "tokens",
-            "type": "Array<DocumentCreateByTemplateRequestTokens>",
-            "format": ""
-        },
-        {
-            "name": "fields",
-            "baseName": "fields",
-            "type": "any",
+            "type": "Array<DocumentCreateByTemplateRequestTokensInner>",
             "format": ""
         },
         {
@@ -117,24 +171,6 @@ export class DocumentCreateByTemplateRequest {
             "baseName": "tags",
             "type": "Array<string>",
             "format": ""
-        },
-        {
-            "name": "images",
-            "baseName": "images",
-            "type": "Array<DocumentCreateByTemplateRequestImages>",
-            "format": ""
-        },
-        {
-            "name": "pricingTables",
-            "baseName": "pricing_tables",
-            "type": "Array<PricingTableRequest>",
-            "format": ""
-        },
-        {
-            "name": "contentPlaceholders",
-            "baseName": "content_placeholders",
-            "type": "Array<DocumentCreateByTemplateRequestContentPlaceholders>",
-            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -144,4 +180,3 @@ export class DocumentCreateByTemplateRequest {
     public constructor() {
     }
 }
-

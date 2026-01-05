@@ -7,27 +7,29 @@
  * Do not edit the class manually.
  */
 
-import { QuoteResponseSummaryDiscounts } from './QuoteResponseSummaryDiscounts';
-import { QuoteResponseSummaryRecurringSubtotal } from './QuoteResponseSummaryRecurringSubtotal';
+import { QuoteResponseSummaryDiscountsValue } from '../models/QuoteResponseSummaryDiscountsValue';
+import { QuoteResponseSummaryRecurringSubtotalInner } from '../models/QuoteResponseSummaryRecurringSubtotalInner';
 import { HttpFile } from '../http/http';
 
 export class QuoteResponseSummary {
     'total'?: string;
-    'subtotal'?: string;
-    'oneTimeSubtotal'?: string;
-    'recurringSubtotal'?: Array<QuoteResponseSummaryRecurringSubtotal>;
-    'totalQty'?: string;
-    'discounts'?: { [key: string]: QuoteResponseSummaryDiscounts; };
-    'taxes'?: any;
-    'fees'?: any;
-    'customFields'?: { [key: string]: string; };
-    'totalDiscount'?: string;
-    'totalTax'?: string;
-    'totalFee'?: string;
-    'totalSavings'?: string;
-    'totalContractValue'?: string;
+    'subtotal'?: string | null;
+    'oneTimeSubtotal'?: string | null;
+    'recurringSubtotal'?: Array<QuoteResponseSummaryRecurringSubtotalInner> | null;
+    'totalQty'?: string | null;
+    'discounts'?: { [key: string]: QuoteResponseSummaryDiscountsValue; } | null;
+    'taxes'?: any | null;
+    'fees'?: any | null;
+    'customFields'?: { [key: string]: string; } | null;
+    'totalDiscount'?: string | null;
+    'totalTax'?: string | null;
+    'totalFee'?: string | null;
+    'totalSavings'?: string | null;
+    'totalContractValue'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -51,7 +53,7 @@ export class QuoteResponseSummary {
         {
             "name": "recurringSubtotal",
             "baseName": "recurring_subtotal",
-            "type": "Array<QuoteResponseSummaryRecurringSubtotal>",
+            "type": "Array<QuoteResponseSummaryRecurringSubtotalInner>",
             "format": ""
         },
         {
@@ -63,7 +65,7 @@ export class QuoteResponseSummary {
         {
             "name": "discounts",
             "baseName": "discounts",
-            "type": "{ [key: string]: QuoteResponseSummaryDiscounts; }",
+            "type": "{ [key: string]: QuoteResponseSummaryDiscountsValue; }",
             "format": ""
         },
         {
@@ -122,4 +124,3 @@ export class QuoteResponseSummary {
     public constructor() {
     }
 }
-

@@ -9,11 +9,22 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* Document grand total.
+*/
 export class DocumentDetailsResponseGrandTotal {
+    /**
+    * Total amount.
+    */
     'amount'?: string;
+    /**
+    * Currency type.
+    */
     'currency'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -36,4 +47,3 @@ export class DocumentDetailsResponseGrandTotal {
     public constructor() {
     }
 }
-

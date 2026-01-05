@@ -7,20 +7,22 @@
  * Do not edit the class manually.
  */
 
-import { FormListResponseResults } from './FormListResponseResults';
+import { FormListResponseResultsInner } from '../models/FormListResponseResultsInner';
 import { HttpFile } from '../http/http';
 
 export class FormListResponse {
-    'results'?: Array<FormListResponseResults>;
+    'results'?: Array<FormListResponseResultsInner>;
     'hasNextPage'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<FormListResponseResults>",
+            "type": "Array<FormListResponseResultsInner>",
             "format": ""
         },
         {
@@ -37,4 +39,3 @@ export class FormListResponse {
     public constructor() {
     }
 }
-

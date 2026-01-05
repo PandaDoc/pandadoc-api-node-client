@@ -10,6 +10,7 @@ Method | HTTP request | Description
 # **quoteUpdate**
 > QuoteResponse quoteUpdate(quoteUpdateRequest)
 
+This operation updates the details of a specific quote within a document by specifying the document ID and quote ID.
 
 ### Example
 
@@ -62,6 +63,12 @@ const body:pd_api.QuotesApiQuoteUpdateRequest = {
               optional: false,
             },
             customColumns: {
+              "key": "key_example",
+            },
+            externalColumns: {
+              "key": "key_example",
+            },
+            textColumns: {
               "key": "key_example",
             },
             discounts: {

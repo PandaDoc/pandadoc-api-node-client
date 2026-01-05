@@ -7,8 +7,9 @@
  * Do not edit the class manually.
  */
 
-import { DocumentSendRequestForwardingSettings } from './DocumentSendRequestForwardingSettings';
-import { DocumentSendRequestSelectedApprovers } from './DocumentSendRequestSelectedApprovers';
+import { DocumentSendRequestForwardingSettings } from '../models/DocumentSendRequestForwardingSettings';
+import { DocumentSendRequestSelectedApprovers } from '../models/DocumentSendRequestSelectedApprovers';
+import { DocumentSendRequestSender } from '../models/DocumentSendRequestSender';
 import { HttpFile } from '../http/http';
 
 export class DocumentSendRequest {
@@ -21,17 +22,20 @@ export class DocumentSendRequest {
     */
     'subject'?: string;
     /**
-    * Disables sent, viewed, comment, and completed email notifications for document recipients and the document sender. By default, notifications emails are sent for specific actions. If set as true, it won't affect the \"Approve document\" email notification sent to the Approver.
+    * If set to `true`, disables email notifications for document recipients and the document sender. Also disables scheduled reminders (manual reminders still possible). Doesn\'t affect \"Approve document\" email notification sent to the Approver.
     */
     'silent'?: boolean;
-    /**
-    * You can set a sender of a document as an `email` or `membership_id`
-    */
-    'sender'?: { [key: string]: string; };
+    'sender'?: DocumentSendRequestSender;
     'forwardingSettings'?: DocumentSendRequestForwardingSettings;
+    /**
+    * Email address that will be used as a reply-to address for the document. To use this parameter, please contact the support team to have it enabled for your account. 
+    */
+    'replyTo'?: string;
     'selectedApprovers'?: DocumentSendRequestSelectedApprovers;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -55,7 +59,7 @@ export class DocumentSendRequest {
         {
             "name": "sender",
             "baseName": "sender",
-            "type": "{ [key: string]: string; }",
+            "type": "DocumentSendRequestSender",
             "format": ""
         },
         {
@@ -63,6 +67,12 @@ export class DocumentSendRequest {
             "baseName": "forwarding_settings",
             "type": "DocumentSendRequestForwardingSettings",
             "format": ""
+        },
+        {
+            "name": "replyTo",
+            "baseName": "reply_to",
+            "type": "string",
+            "format": "email"
         },
         {
             "name": "selectedApprovers",
@@ -78,4 +88,3 @@ export class DocumentSendRequest {
     public constructor() {
     }
 }
-

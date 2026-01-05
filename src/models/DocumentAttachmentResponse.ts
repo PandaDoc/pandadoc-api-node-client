@@ -7,16 +7,18 @@
  * Do not edit the class manually.
  */
 
-import { DocumentAttachmentResponseCreatedBy } from './DocumentAttachmentResponseCreatedBy';
+import { DocumentAttachmentResponseCreatedBy } from '../models/DocumentAttachmentResponseCreatedBy';
 import { HttpFile } from '../http/http';
 
 export class DocumentAttachmentResponse {
     'uuid'?: string;
     'dateCreated'?: string;
     'createdBy'?: DocumentAttachmentResponseCreatedBy;
-    'name'?: string;
+    'name'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -51,4 +53,3 @@ export class DocumentAttachmentResponse {
     public constructor() {
     }
 }
-

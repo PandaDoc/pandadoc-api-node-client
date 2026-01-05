@@ -10,9 +10,14 @@
 import { HttpFile } from '../http/http';
 
 export class CreateWorkspaceRequest {
+    /**
+    * A name for the new workspace.
+    */
     'name': string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -29,4 +34,3 @@ export class CreateWorkspaceRequest {
     public constructor() {
     }
 }
-

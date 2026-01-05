@@ -7,9 +7,13 @@
  * Do not edit the class manually.
  */
 
-import { DocumentCreateByTemplateRequestTokens } from './DocumentCreateByTemplateRequestTokens';
-import { DocumentUpdateRequestRecipients } from './DocumentUpdateRequestRecipients';
-import { PricingTableRequest } from './PricingTableRequest';
+import { DocumentUpdateRequestFieldValue } from '../models/DocumentUpdateRequestFieldValue';
+import { DocumentUpdateRequestImagesInner } from '../models/DocumentUpdateRequestImagesInner';
+import { DocumentUpdateRequestTextsInner } from '../models/DocumentUpdateRequestTextsInner';
+import { DocumentUpdateRequestTokensInner } from '../models/DocumentUpdateRequestTokensInner';
+import { PricingTableRequest } from '../models/PricingTableRequest';
+import { TableRequest } from '../models/TableRequest';
+import { UpdateDocumentActor } from '../models/UpdateDocumentActor';
 import { HttpFile } from '../http/http';
 
 export class DocumentUpdateRequest {
@@ -18,24 +22,39 @@ export class DocumentUpdateRequest {
     */
     'name'?: string;
     /**
-    * The list of recipients you're sending the document to. The ID or email are required. If the ID is passed, an existing recipient will be updated. If the email is passed, a new recipient will be added to CC.
+    * The list of recipients you\'re sending the document to. The ID or email are required. If the ID is passed, an existing recipient will be updated. If the email is passed, a new recipient will be added to CC.
     */
-    'recipients'?: Array<DocumentUpdateRequestRecipients>;
+    'recipients'?: Array<UpdateDocumentActor>;
     /**
-    * You may pass a list of fields/values which exist in a document. Please use `Merge Field` property of the fields like the key.
+    * Set specific values to the fields. This object maps merge field names to their corresponding values.  Each key represents a merge field name, and each value is an object containing the data to populate that field with. The structure allows you to pre-populate various field types including text inputs, checkboxes, dropdowns, and date fields.  **Key Points:** - Keys must match the exact merge field names from your template or file. - Values must be wrapped in an object with a `value` property. - Supported value types: string, number, boolean. - Date fields should use RFC 3339 format (e.g., \'2019-12-31T00:00:00.000Z\'). - Signature fields cannot be pre-filled.  **Example Usage:** - Text field: `\"CustomerName\": {\"value\": \"John Doe\"}` - Checkbox: `\"AgreeToTerms\": {\"value\": true}` - Date field: `\"DeliveryDate\": {\"value\": \"2019-12-31T00:00:00.000Z\"}` 
     */
-    'fields'?: any;
+    'fields'?: { [key: string]: DocumentUpdateRequestFieldValue; };
     /**
-    * You can pass a list of tokens/values. If a token name exists in a document then the value will be updated. Otherwise, a new token will be added to the document.
+    * Create or initialize multiple variables with their values using tokens/values list.
     */
-    'tokens'?: Array<DocumentCreateByTemplateRequestTokens>;
+    'tokens'?: Array<DocumentUpdateRequestTokensInner>;
+    /**
+    * Mark your document with one or several tags.
+    */
+    'tags'?: Array<string>;
     /**
     * You can pass arbitrary data in the key-value format to associate custom information with a document. This information is returned in any API requests for the document details by id. If metadata exists in a document then the value will be updated. Otherwise, metadata will be added to the document.
     */
     'metadata'?: any;
     'pricingTables'?: Array<PricingTableRequest>;
+    'tables'?: Array<TableRequest>;
+    /**
+    * You can pass a list of images to image blocks (one image in one block) for replacement.
+    */
+    'images'?: Array<DocumentUpdateRequestImagesInner>;
+    /**
+    * You can pass a list of texts to text blocks for replacement.
+    */
+    'texts'?: Array<DocumentUpdateRequestTextsInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -47,19 +66,25 @@ export class DocumentUpdateRequest {
         {
             "name": "recipients",
             "baseName": "recipients",
-            "type": "Array<DocumentUpdateRequestRecipients>",
+            "type": "Array<UpdateDocumentActor>",
             "format": ""
         },
         {
             "name": "fields",
             "baseName": "fields",
-            "type": "any",
+            "type": "{ [key: string]: DocumentUpdateRequestFieldValue; }",
             "format": ""
         },
         {
             "name": "tokens",
             "baseName": "tokens",
-            "type": "Array<DocumentCreateByTemplateRequestTokens>",
+            "type": "Array<DocumentUpdateRequestTokensInner>",
+            "format": ""
+        },
+        {
+            "name": "tags",
+            "baseName": "tags",
+            "type": "Array<string>",
             "format": ""
         },
         {
@@ -73,6 +98,24 @@ export class DocumentUpdateRequest {
             "baseName": "pricing_tables",
             "type": "Array<PricingTableRequest>",
             "format": ""
+        },
+        {
+            "name": "tables",
+            "baseName": "tables",
+            "type": "Array<TableRequest>",
+            "format": ""
+        },
+        {
+            "name": "images",
+            "baseName": "images",
+            "type": "Array<DocumentUpdateRequestImagesInner>",
+            "format": ""
+        },
+        {
+            "name": "texts",
+            "baseName": "texts",
+            "type": "Array<DocumentUpdateRequestTextsInner>",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -82,4 +125,3 @@ export class DocumentUpdateRequest {
     public constructor() {
     }
 }
-

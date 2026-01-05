@@ -7,19 +7,21 @@
  * Do not edit the class manually.
  */
 
-import { TemplatesFolderListResponseResults } from './TemplatesFolderListResponseResults';
+import { TemplatesFolderListResponseResultsInner } from '../models/TemplatesFolderListResponseResultsInner';
 import { HttpFile } from '../http/http';
 
 export class TemplatesFolderListResponse {
-    'results'?: Array<TemplatesFolderListResponseResults>;
+    'results'?: Array<TemplatesFolderListResponseResultsInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<TemplatesFolderListResponseResults>",
+            "type": "Array<TemplatesFolderListResponseResultsInner>",
             "format": ""
         }    ];
 
@@ -30,4 +32,3 @@ export class TemplatesFolderListResponse {
     public constructor() {
     }
 }
-
