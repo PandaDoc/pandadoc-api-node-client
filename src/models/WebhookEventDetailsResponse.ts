@@ -7,15 +7,15 @@
  * Do not edit the class manually.
  */
 
-import { WebhookEventErrorEnum } from './WebhookEventErrorEnum';
-import { WebhookEventTriggerEnum } from './WebhookEventTriggerEnum';
+import { WebhookEventErrorEnum } from '../models/WebhookEventErrorEnum';
+import { WebhookEventTriggerEnum } from '../models/WebhookEventTriggerEnum';
 import { HttpFile } from '../http/http';
 
 export class WebhookEventDetailsResponse {
     /**
     * Unique webhook subscription event identifier
     */
-    'uuid'?: string;
+    'uuid'?: string | null;
     /**
     * Webhook subscription name
     */
@@ -24,8 +24,8 @@ export class WebhookEventDetailsResponse {
     /**
     * Webhook subscription event response http status code
     */
-    'httpStatusCode'?: number;
-    'error'?: WebhookEventErrorEnum;
+    'httpStatusCode'?: number | null;
+    'error'?: WebhookEventErrorEnum | null;
     /**
     * Webhook subscription event delivery time
     */
@@ -45,17 +45,19 @@ export class WebhookEventDetailsResponse {
     /**
     * Webhook subscription response body
     */
-    'responseBody'?: string;
+    'responseBody'?: string | null;
     /**
     * Webhook subscription response headers
     */
-    'responseHeaders'?: string;
+    'responseHeaders'?: string | null;
     /**
     * Webhook subscription event trigger time
     */
     'eventTime'?: Date;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -138,4 +140,5 @@ export class WebhookEventDetailsResponse {
     public constructor() {
     }
 }
+
 

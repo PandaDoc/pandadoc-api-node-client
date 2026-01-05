@@ -7,10 +7,10 @@
  * Do not edit the class manually.
  */
 
-import { QuoteResponseMergeRules } from './QuoteResponseMergeRules';
-import { QuoteResponseSections } from './QuoteResponseSections';
-import { QuoteResponseSettings } from './QuoteResponseSettings';
-import { QuoteResponseSummary } from './QuoteResponseSummary';
+import { QuoteResponseMergeRulesInner } from '../models/QuoteResponseMergeRulesInner';
+import { QuoteResponseSectionsInner } from '../models/QuoteResponseSectionsInner';
+import { QuoteResponseSettings } from '../models/QuoteResponseSettings';
+import { QuoteResponseSummary } from '../models/QuoteResponseSummary';
 import { HttpFile } from '../http/http';
 
 export class QuoteResponse {
@@ -18,11 +18,13 @@ export class QuoteResponse {
     'currency'?: string;
     'total'?: string;
     'summary'?: QuoteResponseSummary;
-    'sections'?: Array<QuoteResponseSections>;
-    'mergeRules'?: Array<QuoteResponseMergeRules>;
+    'sections'?: Array<QuoteResponseSectionsInner>;
+    'mergeRules'?: Array<QuoteResponseMergeRulesInner>;
     'settings'?: QuoteResponseSettings;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -52,13 +54,13 @@ export class QuoteResponse {
         {
             "name": "sections",
             "baseName": "sections",
-            "type": "Array<QuoteResponseSections>",
+            "type": "Array<QuoteResponseSectionsInner>",
             "format": ""
         },
         {
             "name": "mergeRules",
             "baseName": "merge_rules",
-            "type": "Array<QuoteResponseMergeRules>",
+            "type": "Array<QuoteResponseMergeRulesInner>",
             "format": ""
         },
         {
@@ -75,4 +77,3 @@ export class QuoteResponse {
     public constructor() {
     }
 }
-

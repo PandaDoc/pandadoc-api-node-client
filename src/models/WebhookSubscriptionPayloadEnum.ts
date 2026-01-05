@@ -9,4 +9,10 @@
 
 import { HttpFile } from '../http/http';
 
-export type WebhookSubscriptionPayloadEnum = "metadata" | "fields" | "products" | "tokens" | "pricing" ;
+export enum WebhookSubscriptionPayloadEnum {
+    Metadata = 'metadata',
+    Fields = 'fields',
+    Products = 'products',
+    Tokens = 'tokens',
+    Pricing = 'pricing'
+}

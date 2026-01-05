@@ -1,11 +1,8 @@
 // TODO: evaluate if we can easily get rid of this library
 import * as FormData from "form-data";
-import { URLSearchParams } from 'url';
+import { URL, URLSearchParams } from 'url';
 import * as http from 'http';
 import * as https from 'https';
-// typings of url-parse are incorrect...
-// @ts-ignore
-import * as URLParse from "url-parse";
 import { Observable, from } from '../rxjsStub';
 
 export * from './isomorphic-fetch';
@@ -33,7 +30,6 @@ export type HttpFile = {
     name: string
 };
 
-
 export class HttpException extends Error {
     public constructor(msg: string) {
         super(msg);
@@ -45,15 +41,25 @@ export class HttpException extends Error {
  */
 export type RequestBody = undefined | string | FormData | URLSearchParams;
 
+type Headers = Record<string, string>;
+
+function ensureAbsoluteUrl(url: string) {
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+        return url;
+    }
+    throw new Error("You need to define an absolute base url for the server.");
+}
+
 /**
  * Represents an HTTP request context
  */
 export class RequestContext {
-    private headers: { [key: string]: string } = {
-        "User-Agent": "pandadoc_node_client/6.2.0",
+    private headers: Headers = {
+        "User-Agent": "pandadoc-node-client/7.0.0-rc.1",
     };
     private body: RequestBody = undefined;
-    private url: URLParse;
+    private url: URL;
+    private signal: AbortSignal | undefined = undefined;
     private agent: http.Agent | https.Agent | undefined = undefined;
 
     /**
@@ -63,43 +69,7 @@ export class RequestContext {
      * @param httpMethod http method
      */
     public constructor(url: string, private httpMethod: HttpMethod) {
-        this.url = new URLParse(url, true);
-    }
-
-    public queryStringify(query: any, prefix: string = '') {
-        function encodeInput(input: any) {
-            try {
-                return encodeURIComponent(input);
-            } catch (e) {
-                return null;
-            }
-        }
-
-        const pairs: any[] = [];
-
-        if ('string' !== typeof prefix) prefix = '?';
-
-        Object.keys(query).forEach((key) => {
-            let value = query[key];
-
-            //
-            // Edge cases where we actually want to encode the value to an empty
-            // string instead of the stringified value.
-            //
-            if (!value && (value === null || value === undefined || isNaN(value))) {
-                value = '';
-            }
-
-            if (Array.isArray(value)) {
-                value.forEach(subValue => {
-                    pairs.push(encodeInput(key) + '=' + encodeInput(subValue));
-                });
-                return;
-            }
-            pairs.push(encodeInput(key) + '=' + encodeInput(value));
-        });
-
-        return pairs.length ? prefix + pairs.join('&') : '';
+        this.url = new URL(ensureAbsoluteUrl(url));
     }
 
     /*
@@ -107,7 +77,9 @@ export class RequestContext {
      *
      */
     public getUrl(): string {
-        return this.url.toString(this.queryStringify);
+        return this.url.toString().endsWith("/") ?
+            this.url.toString().slice(0, -1)
+            : this.url.toString();
     }
 
     /**
@@ -115,7 +87,7 @@ export class RequestContext {
      *
      */
     public setUrl(url: string) {
-        this.url = new URLParse(url, true);
+        this.url = new URL(ensureAbsoluteUrl(url));
     }
 
     /**
@@ -135,7 +107,7 @@ export class RequestContext {
         return this.httpMethod;
     }
 
-    public getHeaders(): { [key: string]: string } {
+    public getHeaders(): Headers {
         return this.headers;
     }
 
@@ -143,10 +115,37 @@ export class RequestContext {
         return this.body;
     }
 
-    public setQueryParam(name: string, value: string) {
-        let queryObj = this.url.query;
-        queryObj[name] = value;
-        this.url.set("query", queryObj);
+    private stringifyQueryValue(value: any): string {
+        if (value === null || value === undefined) return '';
+        if (typeof value === 'number' && Number.isNaN(value)) return '';
+        return String(value);
+    }
+
+    /**
+     * Sets a query param value.
+     *
+     * PandaDoc customization: allow arrays + null/undefined/NaN handling.
+     */
+    public setQueryParam(name: string, value: any) {
+        if (Array.isArray(value)) {
+            this.url.searchParams.delete(name);
+            value.forEach((v) => this.url.searchParams.append(name, this.stringifyQueryValue(v)));
+            return;
+        }
+        this.url.searchParams.set(name, this.stringifyQueryValue(value));
+    }
+
+    /**
+     * Appends a query param value.
+     *
+     * PandaDoc customization: allow arrays + null/undefined/NaN handling.
+     */
+    public appendQueryParam(name: string, value: any) {
+        if (Array.isArray(value)) {
+            value.forEach((v) => this.url.searchParams.append(name, this.stringifyQueryValue(v)));
+            return;
+        }
+        this.url.searchParams.append(name, this.stringifyQueryValue(value));
     }
 
     /**
@@ -163,6 +162,15 @@ export class RequestContext {
     public setHeaderParam(key: string, value: string): void  {
         this.headers[key] = value;
     }
+
+    public setSignal(signal: AbortSignal): void {
+        this.signal = signal;
+    }
+
+    public getSignal(): AbortSignal | undefined {
+        return this.signal;
+    }
+
 
     public setAgent(agent: http.Agent | https.Agent) {
         this.agent = agent;
@@ -197,7 +205,7 @@ export class SelfDecodingBody implements ResponseBody {
 export class ResponseContext {
     public constructor(
         public httpStatusCode: number,
-        public headers: { [key: string]: string },
+        public headers: Headers,
         public body: ResponseBody
     ) {}
 
@@ -208,15 +216,18 @@ export class ResponseContext {
      * Parameter names are converted to lower case
      * The first parameter is returned with the key `""`
      */
-    public getParsedHeader(headerName: string): { [parameter: string]: string } {
-        const result: { [parameter: string]: string } = {};
+    public getParsedHeader(headerName: string): Headers {
+        const result: Headers = {};
         if (!this.headers[headerName]) {
             return result;
         }
 
-        const parameters = this.headers[headerName].split(";");
+        const parameters = this.headers[headerName]!.split(";");
         for (const parameter of parameters) {
             let [key, value] = parameter.split("=", 2);
+            if (!key) {
+                continue;
+            }
             key = key.toLowerCase().trim();
             if (value === undefined) {
                 result[""] = key;
@@ -269,3 +280,15 @@ export function wrapHttpLibrary(promiseHttpLibrary: PromiseHttpLibrary): HttpLib
     }
   }
 }
+
+export class HttpInfo<T> extends ResponseContext {
+    public constructor(
+        httpStatusCode: number,
+        headers: Headers,
+        body: ResponseBody,
+        public data: T,
+    ) {
+        super(httpStatusCode, headers, body);
+    }
+}
+

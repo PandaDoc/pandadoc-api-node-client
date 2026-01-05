@@ -11,9 +11,14 @@ import { HttpFile } from '../http/http';
 
 export class RecipientRedirect {
     'isEnabled': boolean;
-    'url': string;
+    /**
+    * A URL to redirect to after the document is signed.
+    */
+    'url': string | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -36,4 +41,3 @@ export class RecipientRedirect {
     public constructor() {
     }
 }
-

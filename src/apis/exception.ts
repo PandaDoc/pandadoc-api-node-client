@@ -8,8 +8,20 @@
  *
  */
 export class ApiException<T> extends Error {
-    public constructor(public code: number, message: string, public body: T, public headers: { [key: string]: string; }) {
+    /**
+     * @param rawBody Raw response body string (when available). Useful when the OpenAPI schema does not model the error payload.
+     * @param rawBodyParsed Best-effort parsed representation of rawBody (e.g. JSON object) when available.
+     */
+    public constructor(
+        public code: number,
+        message: string,
+        public body: T,
+        public headers: { [key: string]: string; },
+        public rawBody?: string,
+        public rawBodyParsed?: any,
+    ) {
         super("HTTP-Code: " + code + "\nMessage: " + message + "\nBody: " + JSON.stringify(body) + "\nHeaders: " +
-        JSON.stringify(headers))
+        JSON.stringify(headers));
     }
 }
+

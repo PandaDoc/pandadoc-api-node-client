@@ -7,55 +7,62 @@
  * Do not edit the class manually.
  */
 
-import { DocumentCreateByTemplateRequestRecipients } from './DocumentCreateByTemplateRequestRecipients';
+import { CreateDocumentActor } from '../models/CreateDocumentActor';
+import { DocumentCreateByTemplateRequestFieldsValue } from '../models/DocumentCreateByTemplateRequestFieldsValue';
+import { DocumentCreateByTemplateRequestOwner } from '../models/DocumentCreateByTemplateRequestOwner';
+import { DocumentCreateByTemplateRequestTokensInner } from '../models/DocumentCreateByTemplateRequestTokensInner';
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateByPdfRequest {
     /**
-    * Use a URL to specify the PDF. We support only URLs starting with https.
-    */
-    'url': string;
-    /**
-    * The list of recipients you're sending the document to. Every object must contain the email parameter. The `role`, `first_name` and `last_name` parameters are optional. If the `role` parameter passed, a person is assigned all fields matching their corresponding role. If not passed, a person will receive a read-only link to view the document. If the `first_name` and `last_name` not passed the system 1. creates a new contact, if none exists with the given `email`; or 2. gets the existing contact with the given `email` that already exists.
-    */
-    'recipients': Array<DocumentCreateByTemplateRequestRecipients>;
-    /**
     * Set this parameter as `true` if you create a document from a PDF with form fields and as `false` if you upload a PDF with field tags.
     */
     'parseFormFields'?: boolean;
-    'name'?: string;
     /**
-    * Mark your document with one or several tags.
+    * Set specific values to the fields. This object maps merge field names to their corresponding values.  Each key represents a merge field name, and each value is an object containing the data to populate that field with. The structure allows you to pre-populate various field types including text inputs, checkboxes, dropdowns, and date fields.  **Key Points:** - Keys must match the exact merge field names from your template or file. - Values must be wrapped in an object with a `value` property. - Supported value types: string, number, boolean. - Date fields should use RFC 3339 format (e.g., \'2019-12-31T00:00:00.000Z\'). - Signature fields cannot be pre-filled.  **Example Usage:** - Text field: `\"CustomerName\": {\"value\": \"John Doe\"}` - Checkbox: `\"AgreeToTerms\": {\"value\": true}` - Date field: `\"DeliveryDate\": {\"value\": \"2019-12-31T00:00:00.000Z\"}` 
+    */
+    'fields'?: { [key: string]: DocumentCreateByTemplateRequestFieldsValue; };
+    /**
+    * Name the document you are creating.
+    */
+    'name': string;
+    /**
+    * ID of the folder where the created document should be stored.
+    */
+    'folderUuid'?: string;
+    'owner'?: DocumentCreateByTemplateRequestOwner;
+    /**
+    * The list of recipients to whom the document will be sent. Either `email` or `phone` is required. Specifying the `role` assigns all matching fields to the recipient or group. If `first_name` and `last_name` are not specified, the system looks them up in the workspace contacts list using the `email` or `phone number`. If `first_name` and `last_name` are provided, they override the existing contact\'s data.
+    */
+    'recipients'?: Array<CreateDocumentActor>;
+    /**
+    * Also known as variables. Pass values for the variables in the template to render them into the created document or make them available for insertion later.
+    */
+    'tokens'?: Array<DocumentCreateByTemplateRequestTokensInner>;
+    /**
+    * You can pass any data in a key-value format to associate it with a document. Searching by metadata is available in the List Documents endpoint and is also included in the Document Details response.
+    */
+    'metadata'?: any | null;
+    /**
+    * Mark your document with one or more tags. Tags are displayed in the UI, and you can filter by tags in the List Documents endpoint.
     */
     'tags'?: Array<string>;
-    /**
-    * If you are creating a document from a PDF with field tags, you can pass a list of the fields you'd like to pre-fill in the document. If you are creating a document from a PDF with form fields, list all the fields and provide the `role` parameter so that the fields are assigned to document recipients. You can provide empty value for the field so that it's not pre-filled: \"value\": \"\". 
-    */
-    'fields'?: any;
-    /**
-    * You can pass arbitrary data in the key-value format to associate custom information with a document. This information is returned in any API requests for the document details by id.
-    */
-    'metadata'?: any;
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
-        {
-            "name": "url",
-            "baseName": "url",
-            "type": "string",
-            "format": ""
-        },
-        {
-            "name": "recipients",
-            "baseName": "recipients",
-            "type": "Array<DocumentCreateByTemplateRequestRecipients>",
-            "format": ""
-        },
         {
             "name": "parseFormFields",
             "baseName": "parse_form_fields",
             "type": "boolean",
+            "format": ""
+        },
+        {
+            "name": "fields",
+            "baseName": "fields",
+            "type": "{ [key: string]: DocumentCreateByTemplateRequestFieldsValue; }",
             "format": ""
         },
         {
@@ -65,21 +72,39 @@ export class DocumentCreateByPdfRequest {
             "format": ""
         },
         {
-            "name": "tags",
-            "baseName": "tags",
-            "type": "Array<string>",
+            "name": "folderUuid",
+            "baseName": "folder_uuid",
+            "type": "string",
             "format": ""
         },
         {
-            "name": "fields",
-            "baseName": "fields",
-            "type": "any",
+            "name": "owner",
+            "baseName": "owner",
+            "type": "DocumentCreateByTemplateRequestOwner",
+            "format": ""
+        },
+        {
+            "name": "recipients",
+            "baseName": "recipients",
+            "type": "Array<CreateDocumentActor>",
+            "format": ""
+        },
+        {
+            "name": "tokens",
+            "baseName": "tokens",
+            "type": "Array<DocumentCreateByTemplateRequestTokensInner>",
             "format": ""
         },
         {
             "name": "metadata",
             "baseName": "metadata",
             "type": "any",
+            "format": ""
+        },
+        {
+            "name": "tags",
+            "baseName": "tags",
+            "type": "Array<string>",
             "format": ""
         }    ];
 
@@ -90,4 +115,3 @@ export class DocumentCreateByPdfRequest {
     public constructor() {
     }
 }
-

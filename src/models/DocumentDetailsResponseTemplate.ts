@@ -9,11 +9,22 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* Document template details.
+*/
 export class DocumentDetailsResponseTemplate {
+    /**
+    * Template ID.
+    */
     'id'?: string;
+    /**
+    * Template name.
+    */
     'name'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -36,4 +47,3 @@ export class DocumentDetailsResponseTemplate {
     public constructor() {
     }
 }
-

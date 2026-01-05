@@ -7,38 +7,108 @@
  * Do not edit the class manually.
  */
 
-import { DocumentDetailsResponseCreatedBy } from './DocumentDetailsResponseCreatedBy';
-import { DocumentDetailsResponseGrandTotal } from './DocumentDetailsResponseGrandTotal';
-import { DocumentDetailsResponseLinkedObjects } from './DocumentDetailsResponseLinkedObjects';
-import { DocumentDetailsResponseRecipients } from './DocumentDetailsResponseRecipients';
-import { DocumentDetailsResponseTemplate } from './DocumentDetailsResponseTemplate';
-import { PricingResponse } from './PricingResponse';
+import { DocumentDetailsResponseCreatedBy } from '../models/DocumentDetailsResponseCreatedBy';
+import { DocumentDetailsResponseGrandTotal } from '../models/DocumentDetailsResponseGrandTotal';
+import { DocumentDetailsResponseImagesInner } from '../models/DocumentDetailsResponseImagesInner';
+import { DocumentDetailsResponseLinkedObjectsInner } from '../models/DocumentDetailsResponseLinkedObjectsInner';
+import { DocumentDetailsResponseRecipientsInner } from '../models/DocumentDetailsResponseRecipientsInner';
+import { DocumentDetailsResponseTablesInner } from '../models/DocumentDetailsResponseTablesInner';
+import { DocumentDetailsResponseTemplate } from '../models/DocumentDetailsResponseTemplate';
+import { DocumentDetailsResponseTextsInner } from '../models/DocumentDetailsResponseTextsInner';
+import { Field } from '../models/Field';
+import { PricingResponse } from '../models/PricingResponse';
 import { HttpFile } from '../http/http';
 
 export class DocumentDetailsResponse {
+    /**
+    * Document ID.
+    */
     'id'?: string;
+    /**
+    * Document name.
+    */
     'name'?: string;
-    'autonumberingSequenceNamePrefix'?: any;
+    'autonumberingSequenceNamePrefix'?: any | null;
+    /**
+    * Document creation date.
+    */
     'dateCreated'?: string;
+    /**
+    * Document modification date.
+    */
     'dateModified'?: string;
-    'dateCompleted'?: string;
+    /**
+    * Document completion date.
+    */
+    'dateCompleted'?: string | null;
+    /**
+    * Document content modification date.
+    */
     'contentDateModified'?: string;
+    /**
+    * Document sent date.
+    */
+    'dateSent'?: string | null;
+    /**
+    * Document reference number.
+    */
+    'refNumber'?: string;
     'createdBy'?: DocumentDetailsResponseCreatedBy;
-    'template'?: DocumentDetailsResponseTemplate;
-    'expirationDate'?: any;
+    'template'?: DocumentDetailsResponseTemplate | null;
+    /**
+    * Document expiration date.
+    */
+    'expirationDate'?: string | null;
+    /**
+    * Document metadata.
+    */
     'metadata'?: any;
+    /**
+    * Document tokens.
+    */
     'tokens'?: Array<any>;
-    'fields'?: Array<any>;
+    /**
+    * Document fields.
+    */
+    'fields'?: Array<Field>;
     'pricing'?: PricingResponse;
-    'version'?: string;
+    /**
+    * Document tables.
+    */
+    'tables'?: Array<DocumentDetailsResponseTablesInner>;
+    /**
+    * Document images.
+    */
+    'images'?: Array<DocumentDetailsResponseImagesInner>;
+    /**
+    * Document text blocks.
+    */
+    'texts'?: Array<DocumentDetailsResponseTextsInner>;
+    /**
+    * Document tags.
+    */
     'tags'?: Array<string>;
-    'sentBy'?: any;
-    'recipients'?: Array<DocumentDetailsResponseRecipients>;
+    /**
+    * Document sent by.
+    */
+    'sentBy'?: any | null;
+    /**
+    * Document recipients.
+    */
+    'recipients'?: Array<DocumentDetailsResponseRecipientsInner>;
     'grandTotal'?: DocumentDetailsResponseGrandTotal;
-    'linkedObjects'?: Array<DocumentDetailsResponseLinkedObjects>;
+    /**
+    * Document linked objects.
+    */
+    'linkedObjects'?: Array<DocumentDetailsResponseLinkedObjectsInner>;
+    /**
+    * Document status.
+    */
     'status'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -84,6 +154,18 @@ export class DocumentDetailsResponse {
             "format": ""
         },
         {
+            "name": "dateSent",
+            "baseName": "date_sent",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "refNumber",
+            "baseName": "ref_number",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "createdBy",
             "baseName": "created_by",
             "type": "DocumentDetailsResponseCreatedBy",
@@ -98,7 +180,7 @@ export class DocumentDetailsResponse {
         {
             "name": "expirationDate",
             "baseName": "expiration_date",
-            "type": "any",
+            "type": "string",
             "format": ""
         },
         {
@@ -116,7 +198,7 @@ export class DocumentDetailsResponse {
         {
             "name": "fields",
             "baseName": "fields",
-            "type": "Array<any>",
+            "type": "Array<Field>",
             "format": ""
         },
         {
@@ -126,9 +208,21 @@ export class DocumentDetailsResponse {
             "format": ""
         },
         {
-            "name": "version",
-            "baseName": "version",
-            "type": "string",
+            "name": "tables",
+            "baseName": "tables",
+            "type": "Array<DocumentDetailsResponseTablesInner>",
+            "format": ""
+        },
+        {
+            "name": "images",
+            "baseName": "images",
+            "type": "Array<DocumentDetailsResponseImagesInner>",
+            "format": ""
+        },
+        {
+            "name": "texts",
+            "baseName": "texts",
+            "type": "Array<DocumentDetailsResponseTextsInner>",
             "format": ""
         },
         {
@@ -146,7 +240,7 @@ export class DocumentDetailsResponse {
         {
             "name": "recipients",
             "baseName": "recipients",
-            "type": "Array<DocumentDetailsResponseRecipients>",
+            "type": "Array<DocumentDetailsResponseRecipientsInner>",
             "format": ""
         },
         {
@@ -158,7 +252,7 @@ export class DocumentDetailsResponse {
         {
             "name": "linkedObjects",
             "baseName": "linked_objects",
-            "type": "Array<DocumentDetailsResponseLinkedObjects>",
+            "type": "Array<DocumentDetailsResponseLinkedObjectsInner>",
             "format": ""
         },
         {
@@ -175,4 +269,3 @@ export class DocumentDetailsResponse {
     public constructor() {
     }
 }
-

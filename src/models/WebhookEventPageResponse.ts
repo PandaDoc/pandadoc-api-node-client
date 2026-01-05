@@ -7,13 +7,15 @@
  * Do not edit the class manually.
  */
 
-import { WebhookEventItemResponse } from './WebhookEventItemResponse';
+import { WebhookEventItemResponse } from '../models/WebhookEventItemResponse';
 import { HttpFile } from '../http/http';
 
 export class WebhookEventPageResponse {
     'items'?: Array<WebhookEventItemResponse>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -30,4 +32,3 @@ export class WebhookEventPageResponse {
     public constructor() {
     }
 }
-

@@ -7,7 +7,7 @@
  * Do not edit the class manually.
  */
 
-import { PricingTableRequestSections } from './PricingTableRequestSections';
+import { PricingTableRequestSectionsInner } from '../models/PricingTableRequestSectionsInner';
 import { HttpFile } from '../http/http';
 
 export class PricingTableRequest {
@@ -17,9 +17,11 @@ export class PricingTableRequest {
     */
     'dataMerge'?: boolean;
     'options'?: any;
-    'sections'?: Array<PricingTableRequestSections>;
+    'sections'?: Array<PricingTableRequestSectionsInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -43,7 +45,7 @@ export class PricingTableRequest {
         {
             "name": "sections",
             "baseName": "sections",
-            "type": "Array<PricingTableRequestSections>",
+            "type": "Array<PricingTableRequestSectionsInner>",
             "format": ""
         }    ];
 
@@ -54,4 +56,3 @@ export class PricingTableRequest {
     public constructor() {
     }
 }
-

@@ -10,12 +10,15 @@
 import { HttpFile } from '../http/http';
 
 export class PricingTableResponseSummary {
-    'subtotal'?: string;
-    'total'?: string;
-    'discount'?: string;
-    'tax'?: string;
+    'subtotal'?: string | null;
+    'total'?: string | null;
+    'discount'?: string | null;
+    'tax'?: string | null;
+    'fee'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -41,6 +44,12 @@ export class PricingTableResponseSummary {
             "baseName": "tax",
             "type": "string",
             "format": ""
+        },
+        {
+            "name": "fee",
+            "baseName": "fee",
+            "type": "string",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -50,4 +59,3 @@ export class PricingTableResponseSummary {
     public constructor() {
     }
 }
-

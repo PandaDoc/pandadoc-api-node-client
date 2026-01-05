@@ -7,18 +7,28 @@
  * Do not edit the class manually.
  */
 
+import { CreateUserResponseWorkspacesInner } from '../models/CreateUserResponseWorkspacesInner';
 import { HttpFile } from '../http/http';
 
 export class CreateUserResponse {
     'userId'?: string;
+    'workspaces'?: Array<CreateUserResponseWorkspacesInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "userId",
             "baseName": "user_id",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "workspaces",
+            "baseName": "workspaces",
+            "type": "Array<CreateUserResponseWorkspacesInner>",
             "format": ""
         }    ];
 
@@ -29,4 +39,3 @@ export class CreateUserResponse {
     public constructor() {
     }
 }
-

@@ -7,33 +7,36 @@
  * Do not edit the class manually.
  */
 
-import { QuoteResponseOptions } from './QuoteResponseOptions';
-import { QuoteResponseSummaryDiscounts } from './QuoteResponseSummaryDiscounts';
+import { QuoteResponseSectionItemOptions } from '../models/QuoteResponseSectionItemOptions';
+import { QuoteResponseSummaryDiscountsValue } from '../models/QuoteResponseSummaryDiscountsValue';
 import { HttpFile } from '../http/http';
 
 export class QuoteResponseSectionItem {
-    'id'?: string;
-    'sku'?: string;
-    'name'?: string;
-    'description'?: string;
-    'qty'?: string;
-    'price'?: string;
-    'cost'?: string;
-    'billingFrequency'?: string;
-    'contractTerm'?: string;
-    'pricingMethod'?: string;
-    'type'?: string;
-    'referenceType'?: string;
-    'options'?: QuoteResponseOptions;
-    'customColumns'?: { [key: string]: string; };
-    'discounts'?: { [key: string]: QuoteResponseSummaryDiscounts; };
-    'taxes'?: { [key: string]: QuoteResponseSummaryDiscounts; };
-    'fees'?: { [key: string]: QuoteResponseSummaryDiscounts; };
-    'multipliers'?: { [key: string]: string; };
-    'total'?: string;
-    'overallTotal'?: string;
+    'id'?: string | null;
+    'sku'?: string | null;
+    'name'?: string | null;
+    'description'?: string | null;
+    'qty'?: string | null;
+    'price'?: string | null;
+    'cost'?: string | null;
+    'billingFrequency'?: string | null;
+    'contractTerm'?: string | null;
+    'pricingMethod'?: string | null;
+    'type'?: string | null;
+    'referenceType'?: string | null;
+    'options'?: QuoteResponseSectionItemOptions | null;
+    'customColumns'?: { [key: string]: string; } | null;
+    'externalColumns'?: { [key: string]: string; };
+    'discounts'?: { [key: string]: QuoteResponseSummaryDiscountsValue; } | null;
+    'taxes'?: { [key: string]: QuoteResponseSummaryDiscountsValue; } | null;
+    'fees'?: { [key: string]: QuoteResponseSummaryDiscountsValue; } | null;
+    'multipliers'?: { [key: string]: string; } | null;
+    'total'?: string | null;
+    'overallTotal'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -111,7 +114,7 @@ export class QuoteResponseSectionItem {
         {
             "name": "options",
             "baseName": "options",
-            "type": "QuoteResponseOptions",
+            "type": "QuoteResponseSectionItemOptions",
             "format": ""
         },
         {
@@ -121,21 +124,27 @@ export class QuoteResponseSectionItem {
             "format": ""
         },
         {
+            "name": "externalColumns",
+            "baseName": "external_columns",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "discounts",
             "baseName": "discounts",
-            "type": "{ [key: string]: QuoteResponseSummaryDiscounts; }",
+            "type": "{ [key: string]: QuoteResponseSummaryDiscountsValue; }",
             "format": ""
         },
         {
             "name": "taxes",
             "baseName": "taxes",
-            "type": "{ [key: string]: QuoteResponseSummaryDiscounts; }",
+            "type": "{ [key: string]: QuoteResponseSummaryDiscountsValue; }",
             "format": ""
         },
         {
             "name": "fees",
             "baseName": "fees",
-            "type": "{ [key: string]: QuoteResponseSummaryDiscounts; }",
+            "type": "{ [key: string]: QuoteResponseSummaryDiscountsValue; }",
             "format": ""
         },
         {
@@ -164,4 +173,3 @@ export class QuoteResponseSectionItem {
     public constructor() {
     }
 }
-

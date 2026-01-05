@@ -4,17 +4,18 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createWebhookSubscription**](WebhookSubscriptionsApi.md#createWebhookSubscription) | **POST** /public/v1/webhook-subscriptions | Create webhook subscription
-[**deleteWebhookSubscription**](WebhookSubscriptionsApi.md#deleteWebhookSubscription) | **DELETE** /public/v1/webhook-subscriptions/{id} | Delete webhook subscription
-[**detailsWebhookSubscription**](WebhookSubscriptionsApi.md#detailsWebhookSubscription) | **GET** /public/v1/webhook-subscriptions/{id} | Get webhook subscription by uuid
-[**listWebhookSubscriptions**](WebhookSubscriptionsApi.md#listWebhookSubscriptions) | **GET** /public/v1/webhook-subscriptions | Get all webhook subscriptions
-[**updateWebhookSubscription**](WebhookSubscriptionsApi.md#updateWebhookSubscription) | **PATCH** /public/v1/webhook-subscriptions/{id} | Update webhook subscription
-[**updateWebhookSubscriptionSharedKey**](WebhookSubscriptionsApi.md#updateWebhookSubscriptionSharedKey) | **PATCH** /public/v1/webhook-subscriptions/{id}/shared-key | Regenerate webhook subscription shared key
+[**createWebhookSubscription**](WebhookSubscriptionsApi.md#createWebhookSubscription) | **POST** /public/v1/webhook-subscriptions | Create Webhook Subscription
+[**deleteWebhookSubscription**](WebhookSubscriptionsApi.md#deleteWebhookSubscription) | **DELETE** /public/v1/webhook-subscriptions/{id} | Delete Webhook Subscription
+[**detailsWebhookSubscription**](WebhookSubscriptionsApi.md#detailsWebhookSubscription) | **GET** /public/v1/webhook-subscriptions/{id} | Webhook Subscription Details
+[**listWebhookSubscriptions**](WebhookSubscriptionsApi.md#listWebhookSubscriptions) | **GET** /public/v1/webhook-subscriptions | List Webhook Subscriptions
+[**updateWebhookSubscription**](WebhookSubscriptionsApi.md#updateWebhookSubscription) | **PATCH** /public/v1/webhook-subscriptions/{id} | Update Webhook Subscription
+[**updateWebhookSubscriptionSharedKey**](WebhookSubscriptionsApi.md#updateWebhookSubscriptionSharedKey) | **PATCH** /public/v1/webhook-subscriptions/{id}/shared-key | Update Webhook Subscription Shared Key
 
 
 # **createWebhookSubscription**
 > WebhookSubscriptionItemResponse createWebhookSubscription(webhookSubscriptionCreateRequest)
 
+This operation creates a new webhook subscription by specifying its details.
 
 ### Example
 
@@ -34,6 +35,7 @@ const body:pd_api.WebhookSubscriptionsApiCreateWebhookSubscriptionRequest = {
   webhookSubscriptionCreateRequest: {
     name: "My Subscription",
     url: "https://example.com",
+    active: true,
     payload: [
       "pricing",
     ],
@@ -84,6 +86,7 @@ Name | Type | Description  | Notes
 # **deleteWebhookSubscription**
 > void deleteWebhookSubscription()
 
+This operation deletes a specific webhook subscription identified by its UUID.
 
 ### Example
 
@@ -99,8 +102,8 @@ const configuration = pd_api.createConfiguration(
 const apiInstance = new pd_api.WebhookSubscriptionsApi(configuration);
 
 const body:pd_api.WebhookSubscriptionsApiDeleteWebhookSubscriptionRequest = {
-  // string | Webhook subscription uuid
-  id: "id_example",
+  // string | Webhook subscription uuid.
+  id: "d173751d-0057-4d5c-ab75-49a670a4ca68",
 };
 
 apiInstance.deleteWebhookSubscription(body).then((data) => {
@@ -113,7 +116,7 @@ apiInstance.deleteWebhookSubscription(body).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**string**] | Webhook subscription uuid | defaults to undefined
+ **id** | [**string**] | Webhook subscription uuid. | defaults to undefined
 
 
 ### Return type
@@ -144,6 +147,7 @@ Name | Type | Description  | Notes
 # **detailsWebhookSubscription**
 > WebhookSubscriptionItemResponse detailsWebhookSubscription()
 
+Get webhook subscription by uuid 
 
 ### Example
 
@@ -160,7 +164,7 @@ const apiInstance = new pd_api.WebhookSubscriptionsApi(configuration);
 
 const body:pd_api.WebhookSubscriptionsApiDetailsWebhookSubscriptionRequest = {
   // string | Webhook subscription uuid
-  id: "id_example",
+  id: "4fb6506c-02a0-427e-b445-b9e9ff0c822f",
 };
 
 apiInstance.detailsWebhookSubscription(body).then((data) => {
@@ -204,6 +208,7 @@ Name | Type | Description  | Notes
 # **listWebhookSubscriptions**
 > WebhookSubscriptionListResponse listWebhookSubscriptions()
 
+This operation fetches a paginated list of webhook subscriptions.
 
 ### Example
 
@@ -256,6 +261,7 @@ This endpoint does not need any parameter.
 # **updateWebhookSubscription**
 > WebhookSubscriptionItemResponse updateWebhookSubscription(webhookSubscriptionPatchRequest)
 
+This operation updates the details of a webhook subscription.
 
 ### Example
 
@@ -272,7 +278,7 @@ const apiInstance = new pd_api.WebhookSubscriptionsApi(configuration);
 
 const body:pd_api.WebhookSubscriptionsApiUpdateWebhookSubscriptionRequest = {
   // string | Webhook subscription uuid
-  id: "id_example",
+  id: "d173751d-0057-4d5c-ab75-49a670a4ca68",
   // WebhookSubscriptionPatchRequest
   webhookSubscriptionPatchRequest: {
     name: "My Subscription",
@@ -330,6 +336,7 @@ Name | Type | Description  | Notes
 # **updateWebhookSubscriptionSharedKey**
 > WebhookSubscriptionSharedKeyResponse updateWebhookSubscriptionSharedKey()
 
+This operation regenerates the shared key for a specific webhook subscription identified by its UUID.
 
 ### Example
 
@@ -346,7 +353,7 @@ const apiInstance = new pd_api.WebhookSubscriptionsApi(configuration);
 
 const body:pd_api.WebhookSubscriptionsApiUpdateWebhookSubscriptionSharedKeyRequest = {
   // string | Webhook subscription uuid
-  id: "id_example",
+  id: "d173751d-0057-4d5c-ab75-49a670a4ca68",
 };
 
 apiInstance.updateWebhookSubscriptionSharedKey(body).then((data) => {

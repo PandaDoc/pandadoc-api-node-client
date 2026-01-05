@@ -7,24 +7,31 @@
  * Do not edit the class manually.
  */
 
+import { LinkedObjectChild } from '../models/LinkedObjectChild';
 import { HttpFile } from '../http/http';
 
 export class LinkedObjectCreateResponse {
+    /**
+    * Linked object identifier (link_id).
+    */
     'id'?: string;
     /**
-    * CRM name (lowercase). See the list above.
+    * CRM name (lowercase).  See the list of available providers: https://developers.pandadoc.com/reference/link-service#examples-of-the-most-popular-crms 
     */
     'provider'?: string;
     /**
-    * Entity type. The system validates if the type is supported. See the list for each CRM above.
+    * Entity type.  See the available entity types: https://developers.pandadoc.com/reference/link-service#examples-of-the-most-popular-crms 
     */
     'entityType'?: string;
     /**
     * Entity unique identifier. The system validates if the entity exists.
     */
-    'entiryId'?: string;
+    'entityId'?: string;
+    'children'?: Array<LinkedObjectChild>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -46,9 +53,15 @@ export class LinkedObjectCreateResponse {
             "format": ""
         },
         {
-            "name": "entiryId",
-            "baseName": "entiry_id",
+            "name": "entityId",
+            "baseName": "entity_id",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "children",
+            "baseName": "children",
+            "type": "Array<LinkedObjectChild>",
             "format": ""
         }    ];
 
@@ -59,4 +72,3 @@ export class LinkedObjectCreateResponse {
     public constructor() {
     }
 }
-

@@ -11,11 +11,11 @@ import { HttpFile } from '../http/http';
 
 export class LinkedObjectCreateRequest {
     /**
-    * CRM name (lowercase). See the list above.
+    * CRM name (lowercase).  See the list of available providers: https://developers.pandadoc.com/reference/link-service#examples-of-the-most-popular-crms 
     */
     'provider': string;
     /**
-    * Entity type. The system validates if the type is supported. See the list for each CRM above.
+    * Entity type.  See the available entity types: https://developers.pandadoc.com/reference/link-service#examples-of-the-most-popular-crms 
     */
     'entityType': string;
     /**
@@ -24,6 +24,8 @@ export class LinkedObjectCreateRequest {
     'entityId': string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -52,4 +54,3 @@ export class LinkedObjectCreateRequest {
     public constructor() {
     }
 }
-

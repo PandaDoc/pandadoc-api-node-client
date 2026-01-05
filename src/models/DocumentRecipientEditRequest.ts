@@ -7,27 +7,32 @@
  * Do not edit the class manually.
  */
 
-import { RecipientRedirect } from './RecipientRedirect';
-import { RecipientVerificationSettings } from './RecipientVerificationSettings';
-import { RicipientDeliveryMethods } from './RicipientDeliveryMethods';
+import { RecipientDeliveryMethods } from '../models/RecipientDeliveryMethods';
+import { RecipientRedirect } from '../models/RecipientRedirect';
+import { RecipientVerificationSettings } from '../models/RecipientVerificationSettings';
 import { HttpFile } from '../http/http';
 
 export class DocumentRecipientEditRequest {
-    'email'?: string;
-    'phone'?: string;
-    'deliveryMethods'?: RicipientDeliveryMethods;
-    'firstName'?: string;
-    'lastName'?: string;
-    'company'?: string;
-    'jobTitle'?: string;
-    'state'?: string;
-    'streetAddress'?: string;
-    'city'?: string;
-    'postalCode'?: string;
-    'verificationSettings'?: RecipientVerificationSettings;
+    /**
+    * You cannot use the email of another contact when updating a recipient contact.
+    */
+    'email'?: string | null;
+    'phone'?: string | null;
+    'deliveryMethods'?: RecipientDeliveryMethods | null;
+    'firstName'?: string | null;
+    'lastName'?: string | null;
+    'company'?: string | null;
+    'jobTitle'?: string | null;
+    'state'?: string | null;
+    'streetAddress'?: string | null;
+    'city'?: string | null;
+    'postalCode'?: string | null;
+    'verificationSettings'?: RecipientVerificationSettings | null;
     'redirect'?: RecipientRedirect;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -45,7 +50,7 @@ export class DocumentRecipientEditRequest {
         {
             "name": "deliveryMethods",
             "baseName": "delivery_methods",
-            "type": "RicipientDeliveryMethods",
+            "type": "RecipientDeliveryMethods",
             "format": ""
         },
         {
@@ -116,4 +121,3 @@ export class DocumentRecipientEditRequest {
     public constructor() {
     }
 }
-

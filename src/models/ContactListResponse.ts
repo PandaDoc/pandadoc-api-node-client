@@ -7,13 +7,15 @@
  * Do not edit the class manually.
  */
 
-import { ContactDetailsResponse } from './ContactDetailsResponse';
+import { ContactDetailsResponse } from '../models/ContactDetailsResponse';
 import { HttpFile } from '../http/http';
 
 export class ContactListResponse {
     'results'?: Array<ContactDetailsResponse>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -30,4 +32,3 @@ export class ContactListResponse {
     public constructor() {
     }
 }
-

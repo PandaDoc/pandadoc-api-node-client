@@ -10,19 +10,21 @@
 import { HttpFile } from '../http/http';
 
 /**
-* Forwarding settings
+* Set settings for Document and Signature forwarding.
 */
 export class DocumentSendRequestForwardingSettings {
     /**
-    * Allow forwarding
+    * Your recipient will be able/not able to forward the document to another email address.
     */
     'forwardingAllowed'?: boolean;
     /**
-    * Allow forwarding with reassigning
+    * Your recipient will be able/not able to forward the right to fill out all fields (including signature) assigned to them to another email address.
     */
     'forwardingWithReassigningAllowed'?: boolean;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -45,4 +47,3 @@ export class DocumentSendRequestForwardingSettings {
     public constructor() {
     }
 }
-

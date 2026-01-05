@@ -22,12 +22,16 @@ async function createDocumentFromPdfUrl(
         lastName: "Ron",
         role: "user",
         signingOrder: 1,
+        type: pd_api.CreateDocumentActorTypeEnum.Recipient,
+        name: "",
       },
       {
         email: "john@example.com",
         firstName: "John",
         lastName: "Doe",
         signingOrder: 2,
+        type: pd_api.CreateDocumentActorTypeEnum.Recipient,
+        name: "",
       },
     ],
     fields: {

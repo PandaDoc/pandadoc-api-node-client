@@ -14,6 +14,8 @@ export class QuoteResponseSettings {
 
     static readonly discriminator: string | undefined = undefined;
 
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
+
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "selectionType",
@@ -30,6 +32,9 @@ export class QuoteResponseSettings {
     }
 }
 
-
-export type QuoteResponseSettingsSelectionTypeEnum = "custom" | "single" | "multiple" ;
+export enum QuoteResponseSettingsSelectionTypeEnum {
+    Custom = 'custom',
+    Single = 'single',
+    Multiple = 'multiple'
+}
 

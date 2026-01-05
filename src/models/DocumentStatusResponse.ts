@@ -14,13 +14,15 @@ export class DocumentStatusResponse {
     'name'?: string;
     'status'?: string;
     'dateCreated'?: string;
-    'dateModified'?: string;
-    'dateCompleted'?: string;
-    'expirationDate'?: string;
-    'version'?: string;
+    'dateModified'?: string | null;
+    'dateCompleted'?: string | null;
+    'expirationDate'?: string | null;
+    'version'?: string | null;
     'uuid'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -85,4 +87,3 @@ export class DocumentStatusResponse {
     public constructor() {
     }
 }
-

@@ -4,13 +4,14 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**detailsWebhookEvent**](WebhookEventsApi.md#detailsWebhookEvent) | **GET** /public/v1/webhook-events/{id} | Get webhook event by uuid
-[**listWebhookEvent**](WebhookEventsApi.md#listWebhookEvent) | **GET** /public/v1/webhook-events | Get webhook event page
+[**detailsWebhookEvent**](WebhookEventsApi.md#detailsWebhookEvent) | **GET** /public/v1/webhook-events/{id} | Webhook Event Details
+[**listWebhookEvent**](WebhookEventsApi.md#listWebhookEvent) | **GET** /public/v1/webhook-events | List Webhook Events
 
 
 # **detailsWebhookEvent**
 > WebhookEventDetailsResponse detailsWebhookEvent()
 
+This operation fetches detailed information about a specific webhook event using its unique identifier.
 
 ### Example
 
@@ -26,8 +27,8 @@ const configuration = pd_api.createConfiguration(
 const apiInstance = new pd_api.WebhookEventsApi(configuration);
 
 const body:pd_api.WebhookEventsApiDetailsWebhookEventRequest = {
-  // string | Webhook event uuid
-  id: "id_example",
+  // string | Webhook event uuid.
+  id: "8b61d111-5e0b-406d-a150-e8305fc7e97a",
 };
 
 apiInstance.detailsWebhookEvent(body).then((data) => {
@@ -40,7 +41,7 @@ apiInstance.detailsWebhookEvent(body).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**string**] | Webhook event uuid | defaults to undefined
+ **id** | [**string**] | Webhook event uuid. | defaults to undefined
 
 
 ### Return type
@@ -60,7 +61,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Get webhook event by uuid |  -  |
+**200** | Get webhook event by uuid. |  -  |
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 
@@ -69,6 +70,7 @@ Name | Type | Description  | Notes
 # **listWebhookEvent**
 > WebhookEventPageResponse listWebhookEvent()
 
+This operation retrieves a paginated list of all webhook events.
 
 ### Example
 
@@ -84,25 +86,25 @@ const configuration = pd_api.createConfiguration(
 const apiInstance = new pd_api.WebhookEventsApi(configuration);
 
 const body:pd_api.WebhookEventsApiListWebhookEventRequest = {
-  // number | Number of element in page
-  count: 0,
-  // number | Page number
-  page: 0,
-  // Date | Filter option: all events from specified timestamp (optional)
-  since: new Date('1970-01-01T00:00:00.00Z'),
-  // Date | Filter option: all events up to specified timestamp (optional)
-  to: new Date('1970-01-01T00:00:00.00Z'),
-  // Array<WebhookEventTriggerEnum> | Filter option: all events of type (optional)
+  // number | Specify how many event results to return.
+  count: 10,
+  // number | Specify which page of the dataset to return.
+  page: 1,
+  // Date | Return results where the event creation time is greater than or equal to this value. (optional)
+  since: new Date('2022-06-01T00:00:00Z'),
+  // Date | Return results where the event creation time is less than this value. (optional)
+  to: new Date('2022-06-30T23:59:59Z'),
+  // Array<WebhookEventTriggerEnum> | Returns results by the specified event types. (optional)
   type: [
-    "document_state_changed",
+    "["recipient_completed"]",
   ],
-  // Array<WebhookEventHttpStatusCodeGroupEnum> | Filter option: all events of http status code (optional)
+  // Array<WebhookEventHttpStatusCodeGroupEnum> | Returns results with the specified HTTP status codes. (optional)
   httpStatusCode: [
-    400,
+    [400],
   ],
-  // Array<WebhookEventErrorEnum> | Filter option: all events with following error (optional)
+  // Array<WebhookEventErrorEnum> | Returns results with the following errors. (optional)
   error: [
-    "TIMEOUT_ERROR",
+    "["INTERNAL_ERROR","NOT_VALID_URL"]",
   ],
 };
 
@@ -116,13 +118,13 @@ apiInstance.listWebhookEvent(body).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **count** | [**number**] | Number of element in page | defaults to undefined
- **page** | [**number**] | Page number | defaults to undefined
- **since** | [**Date**] | Filter option: all events from specified timestamp | (optional) defaults to undefined
- **to** | [**Date**] | Filter option: all events up to specified timestamp | (optional) defaults to undefined
- **type** | **Array&lt;WebhookEventTriggerEnum&gt;** | Filter option: all events of type | (optional) defaults to undefined
- **httpStatusCode** | **Array&lt;WebhookEventHttpStatusCodeGroupEnum&gt;** | Filter option: all events of http status code | (optional) defaults to undefined
- **error** | **Array&lt;WebhookEventErrorEnum&gt;** | Filter option: all events with following error | (optional) defaults to undefined
+ **count** | [**number**] | Specify how many event results to return. | defaults to undefined
+ **page** | [**number**] | Specify which page of the dataset to return. | defaults to undefined
+ **since** | [**Date**] | Return results where the event creation time is greater than or equal to this value. | (optional) defaults to undefined
+ **to** | [**Date**] | Return results where the event creation time is less than this value. | (optional) defaults to undefined
+ **type** | **Array&lt;WebhookEventTriggerEnum&gt;** | Returns results by the specified event types. | (optional) defaults to undefined
+ **httpStatusCode** | **Array&lt;WebhookEventHttpStatusCodeGroupEnum&gt;** | Returns results with the specified HTTP status codes. | (optional) defaults to undefined
+ **error** | **Array&lt;WebhookEventErrorEnum&gt;** | Returns results with the following errors. | (optional) defaults to undefined
 
 
 ### Return type
@@ -142,7 +144,7 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Page of webhook events |  -  |
+**200** | Page of webhook events. |  -  |
 **401** | Authentication error |  -  |
 **429** | Too Many Requests |  -  |
 

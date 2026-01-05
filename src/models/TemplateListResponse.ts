@@ -7,19 +7,21 @@
  * Do not edit the class manually.
  */
 
-import { TemplateListResponseResults } from './TemplateListResponseResults';
+import { TemplateCreateResponse } from '../models/TemplateCreateResponse';
 import { HttpFile } from '../http/http';
 
 export class TemplateListResponse {
-    'results'?: Array<TemplateListResponseResults>;
+    'results'?: Array<TemplateCreateResponse>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<TemplateListResponseResults>",
+            "type": "Array<TemplateCreateResponse>",
             "format": ""
         }    ];
 
@@ -30,4 +32,3 @@ export class TemplateListResponse {
     public constructor() {
     }
 }
-

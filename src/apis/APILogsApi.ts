@@ -1,17 +1,25 @@
 // TODO: better import syntax?
-import {BaseAPIRequestFactory, RequiredError} from './baseapi';
+import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile, HttpInfo} from '../http/http';
 import * as FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
+import { readRawBodyAndParse, tryParseRawBody } from '../pandadoc/httpErrorBody';
 import {SecurityAuthentication} from '../auth/auth';
 
 
 import { APILogDetailsResponse } from '../models/APILogDetailsResponse';
 import { APILogListResponse } from '../models/APILogListResponse';
+import { ApiLogEnvironmentTypeEnum } from '../models/ApiLogEnvironmentTypeEnum';
+import { ApiLogMethodEnum } from '../models/ApiLogMethodEnum';
+import { ApiLogStatusEnum } from '../models/ApiLogStatusEnum';
+import { ListDocuments401Response } from '../models/ListDocuments401Response';
+import { ListDocuments429Response } from '../models/ListDocuments429Response';
+import { StatusDocument404Response } from '../models/StatusDocument404Response';
+import { UpdateDocument400Response } from '../models/UpdateDocument400Response';
 
 /**
  * no description
@@ -20,7 +28,7 @@ export class APILogsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
      * Returns details of the specific API log event.
-     * Details API Log
+     * API Log Details
      * @param id Log event id.
      */
     public async detailsLog(id: string, _options?: Configuration): Promise<RequestContext> {
@@ -53,7 +61,7 @@ export class APILogsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -62,18 +70,18 @@ export class APILogsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get the list of all logs within the selected workspace. Optionally filter by date, page, and `#` of items per page.
+     * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
      * List API Log
      * @param since Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
      * @param to Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
      * @param count The amount of items on each page.
-     * @param page Page number of the results returned.
-     * @param statuses Returns only the predefined status codes. Allows 1xx, 2xx, 3xx, 4xx, and 5xx.
+     * @param page Returns page of the results by number.
+     * @param statuses Returns only the predefined status codes.
      * @param methods Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE.
      * @param search Returns the results containing a string.
      * @param environmentType Returns logs for production/sandbox.
      */
-    public async listLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<100 | 200 | 300 | 400 | 500>, methods?: Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>, search?: string, environmentType?: 'PRODUCTION' | 'SANDBOX', _options?: Configuration): Promise<RequestContext> {
+    public async listLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<ApiLogStatusEnum>, methods?: Array<ApiLogMethodEnum>, search?: string, environmentType?: ApiLogEnvironmentTypeEnum, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
 
 
@@ -113,12 +121,18 @@ export class APILogsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (statuses !== undefined) {
-            requestContext.setQueryParam("statuses", ObjectSerializer.serialize(statuses, "Array<100 | 200 | 300 | 400 | 500>", ""));
+            const serializedParams = ObjectSerializer.serialize(statuses, "Array<ApiLogStatusEnum>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("statuses", serializedParam);
+            }
         }
 
         // Query Params
         if (methods !== undefined) {
-            requestContext.setQueryParam("methods", ObjectSerializer.serialize(methods, "Array<'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'>", ""));
+            const serializedParams = ObjectSerializer.serialize(methods, "Array<ApiLogMethodEnum>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("methods", serializedParam);
+            }
         }
 
         // Query Params
@@ -128,7 +142,7 @@ export class APILogsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (environmentType !== undefined) {
-            requestContext.setQueryParam("environment_type", ObjectSerializer.serialize(environmentType, "'PRODUCTION' | 'SANDBOX'", ""));
+            requestContext.setQueryParam("environment_type", ObjectSerializer.serialize(environmentType, "ApiLogEnvironmentTypeEnum", ""));
         }
 
 
@@ -144,7 +158,7 @@ export class APILogsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -163,35 +177,38 @@ export class APILogsApiResponseProcessor {
      * @params response Response returned by the server for a request to detailsLog
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detailsLog(response: ResponseContext): Promise<APILogDetailsResponse > {
+     public async detailsLogWithHttpInfo(response: ResponseContext): Promise<HttpInfo<APILogDetailsResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: APILogDetailsResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "APILogDetailsResponse", ""
             ) as APILogDetailsResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(404, "Not found", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: StatusDocument404Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "StatusDocument404Response", ""
+            ) as StatusDocument404Response;
+            throw new ApiException<StatusDocument404Response>(response.httpStatusCode, "Not found", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -200,10 +217,17 @@ export class APILogsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "APILogDetailsResponse", ""
             ) as APILogDetailsResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
     /**
@@ -213,35 +237,38 @@ export class APILogsApiResponseProcessor {
      * @params response Response returned by the server for a request to listLogs
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listLogs(response: ResponseContext): Promise<APILogListResponse > {
+     public async listLogsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<APILogListResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: APILogListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "APILogListResponse", ""
             ) as APILogListResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(400, "Bad Request", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: UpdateDocument400Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "UpdateDocument400Response", ""
+            ) as UpdateDocument400Response;
+            throw new ApiException<UpdateDocument400Response>(response.httpStatusCode, "Bad Request", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -250,10 +277,18 @@ export class APILogsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "APILogListResponse", ""
             ) as APILogListResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
 }
+

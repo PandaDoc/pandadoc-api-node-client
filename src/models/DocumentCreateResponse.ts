@@ -7,8 +7,8 @@
  * Do not edit the class manually.
  */
 
-import { DocumentCreateResponseLinks } from './DocumentCreateResponseLinks';
-import { DocumentStatusEnum } from './DocumentStatusEnum';
+import { DocumentCreateResponseLinksInner } from '../models/DocumentCreateResponseLinksInner';
+import { DocumentStatusEnum } from '../models/DocumentStatusEnum';
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateResponse {
@@ -17,12 +17,15 @@ export class DocumentCreateResponse {
     'status'?: DocumentStatusEnum;
     'dateCreated'?: string;
     'dateModified'?: string;
-    'expirationDate'?: string;
+    'expirationDate'?: string | null;
+    'version'?: string | null;
     'uuid'?: string;
-    'links'?: Array<DocumentCreateResponseLinks>;
+    'links'?: Array<DocumentCreateResponseLinksInner>;
     'infoMessage'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -62,6 +65,12 @@ export class DocumentCreateResponse {
             "format": ""
         },
         {
+            "name": "version",
+            "baseName": "version",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "uuid",
             "baseName": "uuid",
             "type": "string",
@@ -70,7 +79,7 @@ export class DocumentCreateResponse {
         {
             "name": "links",
             "baseName": "links",
-            "type": "Array<DocumentCreateResponseLinks>",
+            "type": "Array<DocumentCreateResponseLinksInner>",
             "format": ""
         },
         {
@@ -87,4 +96,5 @@ export class DocumentCreateResponse {
     public constructor() {
     }
 }
+
 

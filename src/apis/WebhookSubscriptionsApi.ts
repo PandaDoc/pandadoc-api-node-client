@@ -1,15 +1,21 @@
 // TODO: better import syntax?
-import {BaseAPIRequestFactory, RequiredError} from './baseapi';
+import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile, HttpInfo} from '../http/http';
 import * as FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
+import { readRawBodyAndParse, tryParseRawBody } from '../pandadoc/httpErrorBody';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { ListDocuments401Response } from '../models/ListDocuments401Response';
+import { ListDocuments403Response } from '../models/ListDocuments403Response';
+import { ListDocuments429Response } from '../models/ListDocuments429Response';
+import { StatusDocument404Response } from '../models/StatusDocument404Response';
+import { UpdateDocument400Response } from '../models/UpdateDocument400Response';
 import { WebhookSubscriptionCreateRequest } from '../models/WebhookSubscriptionCreateRequest';
 import { WebhookSubscriptionItemResponse } from '../models/WebhookSubscriptionItemResponse';
 import { WebhookSubscriptionListResponse } from '../models/WebhookSubscriptionListResponse';
@@ -22,7 +28,8 @@ import { WebhookSubscriptionSharedKeyResponse } from '../models/WebhookSubscript
 export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Create webhook subscription
+     * This operation creates a new webhook subscription by specifying its details.
+     * Create Webhook Subscription
      * @param webhookSubscriptionCreateRequest 
      */
     public async createWebhookSubscription(webhookSubscriptionCreateRequest: WebhookSubscriptionCreateRequest, _options?: Configuration): Promise<RequestContext> {
@@ -65,7 +72,7 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -74,8 +81,9 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
     }
 
     /**
-     * Delete webhook subscription
-     * @param id Webhook subscription uuid
+     * This operation deletes a specific webhook subscription identified by its UUID.
+     * Delete Webhook Subscription
+     * @param id Webhook subscription uuid.
      */
     public async deleteWebhookSubscription(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -107,7 +115,7 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -116,7 +124,8 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
     }
 
     /**
-     * Get webhook subscription by uuid
+     * Get webhook subscription by uuid 
+     * Webhook Subscription Details
      * @param id Webhook subscription uuid
      */
     public async detailsWebhookSubscription(id: string, _options?: Configuration): Promise<RequestContext> {
@@ -149,7 +158,7 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -158,7 +167,8 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
     }
 
     /**
-     * Get all webhook subscriptions
+     * This operation fetches a paginated list of webhook subscriptions.
+     * List Webhook Subscriptions
      */
     public async listWebhookSubscriptions(_options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -183,7 +193,7 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -192,7 +202,8 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
     }
 
     /**
-     * Update webhook subscription
+     * This operation updates the details of a webhook subscription.
+     * Update Webhook Subscription
      * @param id Webhook subscription uuid
      * @param webhookSubscriptionPatchRequest 
      */
@@ -243,7 +254,7 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -252,7 +263,8 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
     }
 
     /**
-     * Regenerate webhook subscription shared key
+     * This operation regenerates the shared key for a specific webhook subscription identified by its UUID.
+     * Update Webhook Subscription Shared Key
      * @param id Webhook subscription uuid
      */
     public async updateWebhookSubscriptionSharedKey(id: string, _options?: Configuration): Promise<RequestContext> {
@@ -285,7 +297,7 @@ export class WebhookSubscriptionsApiRequestFactory extends BaseAPIRequestFactory
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -304,42 +316,46 @@ export class WebhookSubscriptionsApiResponseProcessor {
      * @params response Response returned by the server for a request to createWebhookSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async createWebhookSubscription(response: ResponseContext): Promise<WebhookSubscriptionItemResponse > {
+     public async createWebhookSubscriptionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<WebhookSubscriptionItemResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("201", response.httpStatusCode)) {
             const body: WebhookSubscriptionItemResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionItemResponse", ""
             ) as WebhookSubscriptionItemResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(400, "Bad Request", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: UpdateDocument400Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "UpdateDocument400Response", ""
+            ) as UpdateDocument400Response;
+            throw new ApiException<UpdateDocument400Response>(response.httpStatusCode, "Bad Request", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(403, "Permission error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments403Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments403Response", ""
+            ) as ListDocuments403Response;
+            throw new ApiException<ListDocuments403Response>(response.httpStatusCode, "Permission error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -348,10 +364,17 @@ export class WebhookSubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionItemResponse", ""
             ) as WebhookSubscriptionItemResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
     /**
@@ -361,38 +384,42 @@ export class WebhookSubscriptionsApiResponseProcessor {
      * @params response Response returned by the server for a request to deleteWebhookSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async deleteWebhookSubscription(response: ResponseContext): Promise<void > {
+     public async deleteWebhookSubscriptionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<void >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("204", response.httpStatusCode)) {
-            return;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, undefined);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(403, "Permission error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments403Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments403Response", ""
+            ) as ListDocuments403Response;
+            throw new ApiException<ListDocuments403Response>(response.httpStatusCode, "Permission error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(404, "Not found", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: StatusDocument404Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "StatusDocument404Response", ""
+            ) as StatusDocument404Response;
+            throw new ApiException<StatusDocument404Response>(response.httpStatusCode, "Not found", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -401,10 +428,17 @@ export class WebhookSubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "void", ""
             ) as void;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
     /**
@@ -414,42 +448,46 @@ export class WebhookSubscriptionsApiResponseProcessor {
      * @params response Response returned by the server for a request to detailsWebhookSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detailsWebhookSubscription(response: ResponseContext): Promise<WebhookSubscriptionItemResponse > {
+     public async detailsWebhookSubscriptionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<WebhookSubscriptionItemResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: WebhookSubscriptionItemResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionItemResponse", ""
             ) as WebhookSubscriptionItemResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(403, "Permission error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments403Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments403Response", ""
+            ) as ListDocuments403Response;
+            throw new ApiException<ListDocuments403Response>(response.httpStatusCode, "Permission error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(404, "Not found", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: StatusDocument404Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "StatusDocument404Response", ""
+            ) as StatusDocument404Response;
+            throw new ApiException<StatusDocument404Response>(response.httpStatusCode, "Not found", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -458,10 +496,17 @@ export class WebhookSubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionItemResponse", ""
             ) as WebhookSubscriptionItemResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
     /**
@@ -471,28 +516,30 @@ export class WebhookSubscriptionsApiResponseProcessor {
      * @params response Response returned by the server for a request to listWebhookSubscriptions
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listWebhookSubscriptions(response: ResponseContext): Promise<WebhookSubscriptionListResponse > {
+     public async listWebhookSubscriptionsWithHttpInfo(response: ResponseContext): Promise<HttpInfo<WebhookSubscriptionListResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: WebhookSubscriptionListResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionListResponse", ""
             ) as WebhookSubscriptionListResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -501,10 +548,17 @@ export class WebhookSubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionListResponse", ""
             ) as WebhookSubscriptionListResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
     /**
@@ -514,49 +568,54 @@ export class WebhookSubscriptionsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateWebhookSubscription
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateWebhookSubscription(response: ResponseContext): Promise<WebhookSubscriptionItemResponse > {
+     public async updateWebhookSubscriptionWithHttpInfo(response: ResponseContext): Promise<HttpInfo<WebhookSubscriptionItemResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: WebhookSubscriptionItemResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionItemResponse", ""
             ) as WebhookSubscriptionItemResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(400, "Bad Request", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: UpdateDocument400Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "UpdateDocument400Response", ""
+            ) as UpdateDocument400Response;
+            throw new ApiException<UpdateDocument400Response>(response.httpStatusCode, "Bad Request", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(403, "Permission error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments403Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments403Response", ""
+            ) as ListDocuments403Response;
+            throw new ApiException<ListDocuments403Response>(response.httpStatusCode, "Permission error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(404, "Not found", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: StatusDocument404Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "StatusDocument404Response", ""
+            ) as StatusDocument404Response;
+            throw new ApiException<StatusDocument404Response>(response.httpStatusCode, "Not found", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -565,10 +624,17 @@ export class WebhookSubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionItemResponse", ""
             ) as WebhookSubscriptionItemResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
     /**
@@ -578,42 +644,46 @@ export class WebhookSubscriptionsApiResponseProcessor {
      * @params response Response returned by the server for a request to updateWebhookSubscriptionSharedKey
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async updateWebhookSubscriptionSharedKey(response: ResponseContext): Promise<WebhookSubscriptionSharedKeyResponse > {
+     public async updateWebhookSubscriptionSharedKeyWithHttpInfo(response: ResponseContext): Promise<HttpInfo<WebhookSubscriptionSharedKeyResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: WebhookSubscriptionSharedKeyResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionSharedKeyResponse", ""
             ) as WebhookSubscriptionSharedKeyResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(403, "Permission error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments403Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments403Response", ""
+            ) as ListDocuments403Response;
+            throw new ApiException<ListDocuments403Response>(response.httpStatusCode, "Permission error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(404, "Not found", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: StatusDocument404Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "StatusDocument404Response", ""
+            ) as StatusDocument404Response;
+            throw new ApiException<StatusDocument404Response>(response.httpStatusCode, "Not found", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -622,10 +692,18 @@ export class WebhookSubscriptionsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookSubscriptionSharedKeyResponse", ""
             ) as WebhookSubscriptionSharedKeyResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
 }
+

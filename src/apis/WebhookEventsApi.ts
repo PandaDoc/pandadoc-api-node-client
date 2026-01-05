@@ -1,15 +1,18 @@
 // TODO: better import syntax?
-import {BaseAPIRequestFactory, RequiredError} from './baseapi';
+import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile, HttpInfo} from '../http/http';
 import * as FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
+import { readRawBodyAndParse, tryParseRawBody } from '../pandadoc/httpErrorBody';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { ListDocuments401Response } from '../models/ListDocuments401Response';
+import { ListDocuments429Response } from '../models/ListDocuments429Response';
 import { WebhookEventDetailsResponse } from '../models/WebhookEventDetailsResponse';
 import { WebhookEventErrorEnum } from '../models/WebhookEventErrorEnum';
 import { WebhookEventHttpStatusCodeGroupEnum } from '../models/WebhookEventHttpStatusCodeGroupEnum';
@@ -22,8 +25,9 @@ import { WebhookEventTriggerEnum } from '../models/WebhookEventTriggerEnum';
 export class WebhookEventsApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
-     * Get webhook event by uuid
-     * @param id Webhook event uuid
+     * This operation fetches detailed information about a specific webhook event using its unique identifier.
+     * Webhook Event Details
+     * @param id Webhook event uuid.
      */
     public async detailsWebhookEvent(id: string, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -55,7 +59,7 @@ export class WebhookEventsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -64,14 +68,15 @@ export class WebhookEventsApiRequestFactory extends BaseAPIRequestFactory {
     }
 
     /**
-     * Get webhook event page
-     * @param count Number of element in page
-     * @param page Page number
-     * @param since Filter option: all events from specified timestamp
-     * @param to Filter option: all events up to specified timestamp
-     * @param type Filter option: all events of type
-     * @param httpStatusCode Filter option: all events of http status code
-     * @param error Filter option: all events with following error
+     * This operation retrieves a paginated list of all webhook events.
+     * List Webhook Events
+     * @param count Specify how many event results to return.
+     * @param page Specify which page of the dataset to return.
+     * @param since Return results where the event creation time is greater than or equal to this value.
+     * @param to Return results where the event creation time is less than this value.
+     * @param type Returns results by the specified event types.
+     * @param httpStatusCode Returns results with the specified HTTP status codes.
+     * @param error Returns results with the following errors.
      */
     public async listWebhookEvent(count: number, page: number, since?: Date, to?: Date, type?: Array<WebhookEventTriggerEnum>, httpStatusCode?: Array<WebhookEventHttpStatusCodeGroupEnum>, error?: Array<WebhookEventErrorEnum>, _options?: Configuration): Promise<RequestContext> {
         let _config = _options || this.configuration;
@@ -122,17 +127,26 @@ export class WebhookEventsApiRequestFactory extends BaseAPIRequestFactory {
 
         // Query Params
         if (type !== undefined) {
-            requestContext.setQueryParam("type", ObjectSerializer.serialize(type, "Array<WebhookEventTriggerEnum>", ""));
+            const serializedParams = ObjectSerializer.serialize(type, "Array<WebhookEventTriggerEnum>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("type", serializedParam);
+            }
         }
 
         // Query Params
         if (httpStatusCode !== undefined) {
-            requestContext.setQueryParam("http_status_code", ObjectSerializer.serialize(httpStatusCode, "Array<WebhookEventHttpStatusCodeGroupEnum>", ""));
+            const serializedParams = ObjectSerializer.serialize(httpStatusCode, "Array<WebhookEventHttpStatusCodeGroupEnum>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("http_status_code", serializedParam);
+            }
         }
 
         // Query Params
         if (error !== undefined) {
-            requestContext.setQueryParam("error", ObjectSerializer.serialize(error, "Array<WebhookEventErrorEnum>", ""));
+            const serializedParams = ObjectSerializer.serialize(error, "Array<WebhookEventErrorEnum>", "");
+            for (const serializedParam of serializedParams) {
+                requestContext.appendQueryParam("error", serializedParam);
+            }
         }
 
 
@@ -148,7 +162,7 @@ export class WebhookEventsApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -167,28 +181,30 @@ export class WebhookEventsApiResponseProcessor {
      * @params response Response returned by the server for a request to detailsWebhookEvent
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async detailsWebhookEvent(response: ResponseContext): Promise<WebhookEventDetailsResponse > {
+     public async detailsWebhookEventWithHttpInfo(response: ResponseContext): Promise<HttpInfo<WebhookEventDetailsResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: WebhookEventDetailsResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookEventDetailsResponse", ""
             ) as WebhookEventDetailsResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -197,10 +213,17 @@ export class WebhookEventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookEventDetailsResponse", ""
             ) as WebhookEventDetailsResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
     /**
@@ -210,28 +233,30 @@ export class WebhookEventsApiResponseProcessor {
      * @params response Response returned by the server for a request to listWebhookEvent
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async listWebhookEvent(response: ResponseContext): Promise<WebhookEventPageResponse > {
+     public async listWebhookEventWithHttpInfo(response: ResponseContext): Promise<HttpInfo<WebhookEventPageResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: WebhookEventPageResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookEventPageResponse", ""
             ) as WebhookEventPageResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -240,10 +265,18 @@ export class WebhookEventsApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "WebhookEventPageResponse", ""
             ) as WebhookEventPageResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
 }
+

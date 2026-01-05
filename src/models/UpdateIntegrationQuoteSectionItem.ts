@@ -7,9 +7,10 @@
  * Do not edit the class manually.
  */
 
-import { QuoteUpdateRequestDiscounts } from './QuoteUpdateRequestDiscounts';
-import { QuoteUpdateRequestOptions } from './QuoteUpdateRequestOptions';
-import { QuoteUpdateRequestPriceSettings } from './QuoteUpdateRequestPriceSettings';
+import { QuoteUpdateRequestBillingFrequencyEnum } from '../models/QuoteUpdateRequestBillingFrequencyEnum';
+import { UpdateIntegrationQuoteSectionItemDiscountsValue } from '../models/UpdateIntegrationQuoteSectionItemDiscountsValue';
+import { UpdateIntegrationQuoteSectionItemOptions } from '../models/UpdateIntegrationQuoteSectionItemOptions';
+import { UpdateIntegrationQuoteSectionItemPriceSettings } from '../models/UpdateIntegrationQuoteSectionItemPriceSettings';
 import { HttpFile } from '../http/http';
 
 export class UpdateIntegrationQuoteSectionItem {
@@ -37,40 +38,44 @@ export class UpdateIntegrationQuoteSectionItem {
     * Item price. If you create an item without providing a value, it will have the default value. If `price_settings` is passed, this value may change after the quote is updated.
     */
     'price'?: number;
-    'priceSettings'?: QuoteUpdateRequestPriceSettings;
+    'priceSettings'?: UpdateIntegrationQuoteSectionItemPriceSettings;
     /**
     * Item cost. If you create an item without providing a value, it will have the default value.
     */
     'cost'?: number;
-    'billingFrequency'?: UpdateIntegrationQuoteSectionItemBillingFrequencyEnum;
+    'billingFrequency'?: QuoteUpdateRequestBillingFrequencyEnum | null;
     /**
     * Contract term. Measured in units set in the `billing_frequency` parameter.
     */
-    'contractTerm'?: number;
+    'contractTerm'?: number | null;
     /**
     * Use this field to pass an id that references this item in external systems.
     */
-    'referenceId'?: string;
-    'options'?: QuoteUpdateRequestOptions;
+    'referenceId'?: string | null;
+    'options'?: UpdateIntegrationQuoteSectionItemOptions;
     'customColumns'?: { [key: string]: string; };
+    'externalColumns'?: { [key: string]: string; };
+    'textColumns'?: { [key: string]: string; };
     /**
     * Item discounts.
     */
-    'discounts'?: { [key: string]: QuoteUpdateRequestDiscounts; };
+    'discounts'?: { [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; };
     /**
     * Item taxes.
     */
-    'taxes'?: { [key: string]: QuoteUpdateRequestDiscounts; };
+    'taxes'?: { [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; };
     /**
     * Item fees.
     */
-    'fees'?: { [key: string]: QuoteUpdateRequestDiscounts; };
+    'fees'?: { [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; };
     /**
     * Item multipliers.
     */
     'multipliers'?: { [key: string]: number; };
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -112,7 +117,7 @@ export class UpdateIntegrationQuoteSectionItem {
         {
             "name": "priceSettings",
             "baseName": "price_settings",
-            "type": "QuoteUpdateRequestPriceSettings",
+            "type": "UpdateIntegrationQuoteSectionItemPriceSettings",
             "format": ""
         },
         {
@@ -124,7 +129,7 @@ export class UpdateIntegrationQuoteSectionItem {
         {
             "name": "billingFrequency",
             "baseName": "billing_frequency",
-            "type": "UpdateIntegrationQuoteSectionItemBillingFrequencyEnum",
+            "type": "QuoteUpdateRequestBillingFrequencyEnum",
             "format": ""
         },
         {
@@ -142,7 +147,7 @@ export class UpdateIntegrationQuoteSectionItem {
         {
             "name": "options",
             "baseName": "options",
-            "type": "QuoteUpdateRequestOptions",
+            "type": "UpdateIntegrationQuoteSectionItemOptions",
             "format": ""
         },
         {
@@ -152,21 +157,33 @@ export class UpdateIntegrationQuoteSectionItem {
             "format": ""
         },
         {
+            "name": "externalColumns",
+            "baseName": "external_columns",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
+            "name": "textColumns",
+            "baseName": "text_columns",
+            "type": "{ [key: string]: string; }",
+            "format": ""
+        },
+        {
             "name": "discounts",
             "baseName": "discounts",
-            "type": "{ [key: string]: QuoteUpdateRequestDiscounts; }",
+            "type": "{ [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; }",
             "format": ""
         },
         {
             "name": "taxes",
             "baseName": "taxes",
-            "type": "{ [key: string]: QuoteUpdateRequestDiscounts; }",
+            "type": "{ [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; }",
             "format": ""
         },
         {
             "name": "fees",
             "baseName": "fees",
-            "type": "{ [key: string]: QuoteUpdateRequestDiscounts; }",
+            "type": "{ [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; }",
             "format": ""
         },
         {
@@ -184,6 +201,4 @@ export class UpdateIntegrationQuoteSectionItem {
     }
 }
 
-
-export type UpdateIntegrationQuoteSectionItemBillingFrequencyEnum = "weekly" | "monthly" | "annually" | "quarterly" | "semiannualy" ;
 

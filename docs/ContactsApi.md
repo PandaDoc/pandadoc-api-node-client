@@ -5,15 +5,16 @@ All URIs are relative to *https://api.pandadoc.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createContact**](ContactsApi.md#createContact) | **POST** /public/v1/contacts | Create contact
-[**deleteContact**](ContactsApi.md#deleteContact) | **DELETE** /public/v1/contacts/{id} | Delete contact by id
-[**detailsContact**](ContactsApi.md#detailsContact) | **GET** /public/v1/contacts/{id} | Get contact details by id
+[**deleteContact**](ContactsApi.md#deleteContact) | **DELETE** /public/v1/contacts/{id} | Delete Contact
+[**detailsContact**](ContactsApi.md#detailsContact) | **GET** /public/v1/contacts/{id} | Contact Details
 [**listContacts**](ContactsApi.md#listContacts) | **GET** /public/v1/contacts | List contacts
-[**updateContact**](ContactsApi.md#updateContact) | **PATCH** /public/v1/contacts/{id} | Update contact by id
+[**updateContact**](ContactsApi.md#updateContact) | **PATCH** /public/v1/contacts/{id} | Update Contact
 
 
 # **createContact**
 > ContactDetailsResponse createContact(contactCreateRequest)
 
+This method adds a contact into a contacts list.
 
 ### Example
 
@@ -37,6 +38,7 @@ const body:pd_api.ContactsApiCreateContactRequest = {
     company: "John Doe Inc.",
     jobTitle: "CTO",
     phone: "+14842634627",
+    country: "USA",
     state: "Texas",
     streetAddress: "1313 Mockingbird Lane",
     city: "Austin",
@@ -84,6 +86,7 @@ Name | Type | Description  | Notes
 # **deleteContact**
 > void deleteContact()
 
+This method deletes a contact.
 
 ### Example
 
@@ -144,6 +147,7 @@ Name | Type | Description  | Notes
 # **detailsContact**
 > ContactDetailsResponse detailsContact()
 
+Returns contact details by its ID.
 
 ### Example
 
@@ -204,6 +208,7 @@ Name | Type | Description  | Notes
 # **listContacts**
 > ContactListResponse listContacts()
 
+This method returns a list of contacts associated with a workspace.
 
 ### Example
 
@@ -220,7 +225,7 @@ const apiInstance = new pd_api.ContactsApi(configuration);
 
 const body:pd_api.ContactsApiListContactsRequest = {
   // string | Optional search parameter. Filter results by exact match. (optional)
-  email: "josh@example.com",
+  email: "",
 };
 
 apiInstance.listContacts(body).then((data) => {
@@ -264,6 +269,7 @@ Name | Type | Description  | Notes
 # **updateContact**
 > ContactDetailsResponse updateContact(contactUpdateRequest)
 
+This method updates a contact details.
 
 ### Example
 
@@ -283,7 +289,6 @@ const body:pd_api.ContactsApiUpdateContactRequest = {
   id: "SyoufNkJiHRn24LpuJ7RXb",
   // ContactUpdateRequest
   contactUpdateRequest: {
-    email: "user01@pandadoc.com",
     firstName: "John",
     lastName: "Doe",
     company: "John Doe Inc.",

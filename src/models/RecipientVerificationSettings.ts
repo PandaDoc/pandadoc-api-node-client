@@ -7,25 +7,32 @@
  * Do not edit the class manually.
  */
 
-import { RecipientVerificationSettingsPasscodeVerification } from './RecipientVerificationSettingsPasscodeVerification';
-import { RecipientVerificationSettingsPhoneVerification } from './RecipientVerificationSettingsPhoneVerification';
+import { RecipientVerificationPlaceEnum } from '../models/RecipientVerificationPlaceEnum';
+import { RecipientVerificationSettingsIdVerification } from '../models/RecipientVerificationSettingsIdVerification';
+import { RecipientVerificationSettingsKbaVerification } from '../models/RecipientVerificationSettingsKbaVerification';
+import { RecipientVerificationSettingsPasscodeVerification } from '../models/RecipientVerificationSettingsPasscodeVerification';
+import { RecipientVerificationSettingsPhoneVerification } from '../models/RecipientVerificationSettingsPhoneVerification';
 import { HttpFile } from '../http/http';
 
+/**
+* To set up recipient verification, fill in verification_place and specify the type: passcode_verification, phone_verification, kba_verification or id_verification. - For passcode_verification, provide the passcode. - For phone_verification, provide the phone_number. - For kba_verification and id_verification, set the enabled parameter to true. 
+*/
 export class RecipientVerificationSettings {
-    /**
-    * Verification place
-    */
-    'verificationPlace'?: RecipientVerificationSettingsVerificationPlaceEnum;
-    'passcodeVerification'?: RecipientVerificationSettingsPasscodeVerification;
+    'verificationPlace'?: RecipientVerificationPlaceEnum;
+    'passcodeVerification'?: RecipientVerificationSettingsPasscodeVerification | null;
     'phoneVerification'?: RecipientVerificationSettingsPhoneVerification;
+    'kbaVerification'?: RecipientVerificationSettingsKbaVerification;
+    'idVerification'?: RecipientVerificationSettingsIdVerification;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "verificationPlace",
             "baseName": "verification_place",
-            "type": "RecipientVerificationSettingsVerificationPlaceEnum",
+            "type": "RecipientVerificationPlaceEnum",
             "format": ""
         },
         {
@@ -39,6 +46,18 @@ export class RecipientVerificationSettings {
             "baseName": "phone_verification",
             "type": "RecipientVerificationSettingsPhoneVerification",
             "format": ""
+        },
+        {
+            "name": "kbaVerification",
+            "baseName": "kba_verification",
+            "type": "RecipientVerificationSettingsKbaVerification",
+            "format": ""
+        },
+        {
+            "name": "idVerification",
+            "baseName": "id_verification",
+            "type": "RecipientVerificationSettingsIdVerification",
+            "format": ""
         }    ];
 
     static getAttributeTypeMap() {
@@ -49,6 +68,4 @@ export class RecipientVerificationSettings {
     }
 }
 
-
-export type RecipientVerificationSettingsVerificationPlaceEnum = "before_open" | "before_sign" ;
 

@@ -10,6 +10,7 @@ Method | HTTP request | Description
 # **accessToken**
 > OAuth2AccessTokenResponse accessToken()
 
+Create or refresh an access token to make requests on behalf of a user. This endpoint is used to obtain an `access_token` and `refresh_token` for the first time, and to refresh the `access_token` when it expires. This endpoint is part of OAuth 2.0 implementation. You need to configure OAuth App to obtain `client_id` and `client_secret`. Read more about [OAuth 2.0 implementation](https://developers.pandadoc.com/reference/authentication-process). Make sure you\'re sending the header `Content-Type: application/x-www-form-urlencoded`.   ## Create Access Token As a result of the OAuth 2.0 user authentication process, you should get a `code` that can be exchanged for an `access_token`. Use this endpoint to do this exchange, and to refresh the token later.  > 🚧 Invalid Grant? >  > If you receive an `invalid grant` response it is likely because you used the same `code` more than once from the [Authorize a PandaDoc User](ref:authorize-a-user) step above. The `code` parameter is generated for one-time use. A new `code` value must be generated if you wish to change API users, permissions, or simply generate a new `code` value for the same PandaDoc user.  > 📘 expires_in >  > `expires_in` is based in seconds. Currently, a token expires in 31535999 seconds = 1 year.  ## Refresh Access Token Eventually, `access_token` expires and accessing an API method returns **401 unauthorized**. Your application needs to refresh the OAuth2 token with the stored `refresh_token` returned when initially creating an access token.  Once refreshed, calls on behalf of the originally authorized user can resume immediately. Use the newly returned `access_token` for all future API requests.  > 🚧 Invalid Grant? >  > If you receive an `invalid grant` response, it is likely because your `refresh_token` is invalid. 
 
 ### Example
 
@@ -63,7 +64,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiKey](../README.md#apiKey), [oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 

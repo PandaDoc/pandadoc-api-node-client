@@ -7,13 +7,15 @@
  * Do not edit the class manually.
  */
 
-import { WebhookSubscriptionItemResponse } from './WebhookSubscriptionItemResponse';
+import { WebhookSubscriptionItemResponse } from '../models/WebhookSubscriptionItemResponse';
 import { HttpFile } from '../http/http';
 
 export class WebhookSubscriptionListResponse {
     'items'?: Array<WebhookSubscriptionItemResponse>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -30,4 +32,3 @@ export class WebhookSubscriptionListResponse {
     public constructor() {
     }
 }
-

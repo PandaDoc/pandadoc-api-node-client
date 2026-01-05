@@ -7,32 +7,40 @@
  * Do not edit the class manually.
  */
 
-import { ContentLibraryItemResponseCreatedBy } from './ContentLibraryItemResponseCreatedBy';
-import { PricingResponse } from './PricingResponse';
-import { TemplateDetailsResponseContentPlaceholders } from './TemplateDetailsResponseContentPlaceholders';
-import { TemplateDetailsResponseImages } from './TemplateDetailsResponseImages';
-import { TemplateDetailsResponseRoles } from './TemplateDetailsResponseRoles';
-import { TemplateDetailsResponseTokens } from './TemplateDetailsResponseTokens';
+import { ContentLibraryItemResponseCreatedBy } from '../models/ContentLibraryItemResponseCreatedBy';
+import { DocumentDetailsResponseTablesInner } from '../models/DocumentDetailsResponseTablesInner';
+import { PricingResponse } from '../models/PricingResponse';
+import { TemplateDetailsResponseContentPlaceholdersInner } from '../models/TemplateDetailsResponseContentPlaceholdersInner';
+import { TemplateDetailsResponseImagesInner } from '../models/TemplateDetailsResponseImagesInner';
+import { TemplateDetailsResponseRolesInner } from '../models/TemplateDetailsResponseRolesInner';
+import { TemplateDetailsResponseTokensInner } from '../models/TemplateDetailsResponseTokensInner';
 import { HttpFile } from '../http/http';
 
 export class TemplateDetailsResponse {
     'id'?: string;
     'name'?: string;
+    'folderUuid'?: string;
     'dateCreated'?: string;
     'dateModified'?: string;
     'contentDateModified'?: string;
     'createdBy'?: ContentLibraryItemResponseCreatedBy;
     'metadata'?: any;
-    'tokens'?: Array<TemplateDetailsResponseTokens>;
+    'tokens'?: Array<TemplateDetailsResponseTokensInner>;
     'fields'?: Array<any>;
     'pricing'?: PricingResponse;
     'tags'?: Array<string>;
-    'roles'?: Array<TemplateDetailsResponseRoles>;
+    'roles'?: Array<TemplateDetailsResponseRolesInner>;
     'version'?: string;
-    'contentPlaceholders'?: Array<TemplateDetailsResponseContentPlaceholders>;
-    'images'?: Array<TemplateDetailsResponseImages>;
+    'contentPlaceholders'?: Array<TemplateDetailsResponseContentPlaceholdersInner>;
+    /**
+    * Document tables.
+    */
+    'tables'?: Array<DocumentDetailsResponseTablesInner>;
+    'images'?: Array<TemplateDetailsResponseImagesInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -44,6 +52,12 @@ export class TemplateDetailsResponse {
         {
             "name": "name",
             "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "folderUuid",
+            "baseName": "folder_uuid",
             "type": "string",
             "format": ""
         },
@@ -80,7 +94,7 @@ export class TemplateDetailsResponse {
         {
             "name": "tokens",
             "baseName": "tokens",
-            "type": "Array<TemplateDetailsResponseTokens>",
+            "type": "Array<TemplateDetailsResponseTokensInner>",
             "format": ""
         },
         {
@@ -104,7 +118,7 @@ export class TemplateDetailsResponse {
         {
             "name": "roles",
             "baseName": "roles",
-            "type": "Array<TemplateDetailsResponseRoles>",
+            "type": "Array<TemplateDetailsResponseRolesInner>",
             "format": ""
         },
         {
@@ -116,13 +130,19 @@ export class TemplateDetailsResponse {
         {
             "name": "contentPlaceholders",
             "baseName": "content_placeholders",
-            "type": "Array<TemplateDetailsResponseContentPlaceholders>",
+            "type": "Array<TemplateDetailsResponseContentPlaceholdersInner>",
+            "format": ""
+        },
+        {
+            "name": "tables",
+            "baseName": "tables",
+            "type": "Array<DocumentDetailsResponseTablesInner>",
             "format": ""
         },
         {
             "name": "images",
             "baseName": "images",
-            "type": "Array<TemplateDetailsResponseImages>",
+            "type": "Array<TemplateDetailsResponseImagesInner>",
             "format": ""
         }    ];
 
@@ -133,4 +153,3 @@ export class TemplateDetailsResponse {
     public constructor() {
     }
 }
-

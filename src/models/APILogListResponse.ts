@@ -7,19 +7,21 @@
  * Do not edit the class manually.
  */
 
-import { APILogListResponseResults } from './APILogListResponseResults';
+import { APILogListResponseResultsInner } from '../models/APILogListResponseResultsInner';
 import { HttpFile } from '../http/http';
 
 export class APILogListResponse {
-    'results'?: Array<APILogListResponseResults>;
+    'results'?: Array<APILogListResponseResultsInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "results",
             "baseName": "results",
-            "type": "Array<APILogListResponseResults>",
+            "type": "Array<APILogListResponseResultsInner>",
             "format": ""
         }    ];
 
@@ -30,4 +32,3 @@ export class APILogListResponse {
     public constructor() {
     }
 }
-

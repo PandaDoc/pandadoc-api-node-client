@@ -7,17 +7,35 @@
  * Do not edit the class manually.
  */
 
-import { WebhookSubscriptionPayloadEnum } from './WebhookSubscriptionPayloadEnum';
-import { WebhookSubscriptionTriggerEnum } from './WebhookSubscriptionTriggerEnum';
+import { WebhookSubscriptionPayloadEnum } from '../models/WebhookSubscriptionPayloadEnum';
+import { WebhookSubscriptionTriggerEnum } from '../models/WebhookSubscriptionTriggerEnum';
 import { HttpFile } from '../http/http';
 
 export class WebhookSubscriptionCreateRequest {
+    /**
+    * Set a name for the Webhooks subscription.
+    */
     'name': string;
+    /**
+    * Set the Webhooks subscription URL.
+    */
     'url': string;
-    'payload'?: Array<WebhookSubscriptionPayloadEnum>;
-    'triggers': Array<WebhookSubscriptionTriggerEnum>;
+    /**
+    * Set the status of the Webhooks subscription.
+    */
+    'active'?: boolean;
+    /**
+    * Set a payload structure.
+    */
+    'payload'?: Array<WebhookSubscriptionPayloadEnum> | null;
+    /**
+    * Set trigger events for the Webhooks subscription.
+    */
+    'triggers': Array<WebhookSubscriptionTriggerEnum> | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -31,6 +49,12 @@ export class WebhookSubscriptionCreateRequest {
             "baseName": "url",
             "type": "string",
             "format": "url"
+        },
+        {
+            "name": "active",
+            "baseName": "active",
+            "type": "boolean",
+            "format": ""
         },
         {
             "name": "payload",
@@ -52,4 +76,3 @@ export class WebhookSubscriptionCreateRequest {
     public constructor() {
     }
 }
-

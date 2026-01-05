@@ -7,13 +7,15 @@
  * Do not edit the class manually.
  */
 
-import { LinkedObjectCreateResponse } from './LinkedObjectCreateResponse';
+import { LinkedObjectCreateResponse } from '../models/LinkedObjectCreateResponse';
 import { HttpFile } from '../http/http';
 
 export class LinkedObjectListResponse {
     'linkedObjects'?: Array<LinkedObjectCreateResponse>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -30,4 +32,3 @@ export class LinkedObjectListResponse {
     public constructor() {
     }
 }
-

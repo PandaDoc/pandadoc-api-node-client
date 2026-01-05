@@ -1,17 +1,23 @@
 // TODO: better import syntax?
-import {BaseAPIRequestFactory, RequiredError} from './baseapi';
+import {BaseAPIRequestFactory, RequiredError, COLLECTION_FORMATS} from './baseapi';
 import {Configuration} from '../configuration';
-import {RequestContext, HttpMethod, ResponseContext, HttpFile} from '../http/http';
+import {RequestContext, HttpMethod, ResponseContext, HttpFile, HttpInfo} from '../http/http';
 import * as FormData from "form-data";
 import { URLSearchParams } from 'url';
 import {ObjectSerializer} from '../models/ObjectSerializer';
 import {ApiException} from './exception';
 import {canConsumeForm, isCodeInRange} from '../util';
+import { readRawBodyAndParse, tryParseRawBody } from '../pandadoc/httpErrorBody';
 import {SecurityAuthentication} from '../auth/auth';
 
 
+import { ChangeDocumentStatus409Response } from '../models/ChangeDocumentStatus409Response';
+import { ListDocuments401Response } from '../models/ListDocuments401Response';
+import { ListDocuments403Response } from '../models/ListDocuments403Response';
+import { ListDocuments429Response } from '../models/ListDocuments429Response';
 import { QuoteResponse } from '../models/QuoteResponse';
 import { QuoteUpdateRequest } from '../models/QuoteUpdateRequest';
+import { StatusDocument404Response } from '../models/StatusDocument404Response';
 
 /**
  * no description
@@ -19,6 +25,7 @@ import { QuoteUpdateRequest } from '../models/QuoteUpdateRequest';
 export class QuotesApiRequestFactory extends BaseAPIRequestFactory {
 
     /**
+     * This operation updates the details of a specific quote within a document by specifying the document ID and quote ID.
      * Quote update
      * @param documentId Document ID
      * @param quoteId Quote ID
@@ -78,7 +85,7 @@ export class QuotesApiRequestFactory extends BaseAPIRequestFactory {
             await authMethod?.applySecurityAuthentication(requestContext);
         }
         
-        const defaultAuth: SecurityAuthentication | undefined = _options?.authMethods?.default || this.configuration?.authMethods?.default
+        const defaultAuth: SecurityAuthentication | undefined = _config?.authMethods?.default
         if (defaultAuth?.applySecurityAuthentication) {
             await defaultAuth?.applySecurityAuthentication(requestContext);
         }
@@ -97,49 +104,54 @@ export class QuotesApiResponseProcessor {
      * @params response Response returned by the server for a request to quoteUpdate
      * @throws ApiException if the response code was not in [200, 299]
      */
-     public async quoteUpdate(response: ResponseContext): Promise<QuoteResponse > {
+     public async quoteUpdateWithHttpInfo(response: ResponseContext): Promise<HttpInfo<QuoteResponse >> {
         const contentType = ObjectSerializer.normalizeMediaType(response.headers["content-type"]);
         if (isCodeInRange("200", response.httpStatusCode)) {
             const body: QuoteResponse = ObjectSerializer.deserialize(
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "QuoteResponse", ""
             ) as QuoteResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(401, "Authentication error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments401Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments401Response", ""
+            ) as ListDocuments401Response;
+            throw new ApiException<ListDocuments401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(403, "Permission error", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments403Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments403Response", ""
+            ) as ListDocuments403Response;
+            throw new ApiException<ListDocuments403Response>(response.httpStatusCode, "Permission error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(404, "Not found", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: StatusDocument404Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "StatusDocument404Response", ""
+            ) as StatusDocument404Response;
+            throw new ApiException<StatusDocument404Response>(response.httpStatusCode, "Not found", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("409", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(409, "Conflict", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ChangeDocumentStatus409Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ChangeDocumentStatus409Response", ""
+            ) as ChangeDocumentStatus409Response;
+            throw new ApiException<ChangeDocumentStatus409Response>(response.httpStatusCode, "Conflict", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
-            const body: any = ObjectSerializer.deserialize(
-                ObjectSerializer.parse(await response.body.text(), contentType),
-                "any", ""
-            ) as any;
-            throw new ApiException<any>(429, "Too Many Requests", body, response.headers);
+            const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
+            const body: ListDocuments429Response = ObjectSerializer.deserialize(
+                rawBodyParsed,
+                "ListDocuments429Response", ""
+            ) as ListDocuments429Response;
+            throw new ApiException<ListDocuments429Response>(response.httpStatusCode, "Too Many Requests", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -148,10 +160,18 @@ export class QuotesApiResponseProcessor {
                 ObjectSerializer.parse(await response.body.text(), contentType),
                 "QuoteResponse", ""
             ) as QuoteResponse;
-            return body;
+            return new HttpInfo(response.httpStatusCode, response.headers, response.body, body);
         }
 
-        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", await response.getBodyAsAny(), response.headers);
+        const rawBodyAny: string | Buffer | undefined = await response.getBodyAsAny();
+        let rawBody: string | undefined = undefined;
+        let rawBodyParsed: any = rawBodyAny;
+        if (typeof rawBodyAny === "string") {
+            rawBody = rawBodyAny;
+            rawBodyParsed = tryParseRawBody(rawBodyAny, contentType);
+        }
+        throw new ApiException<string | Buffer | undefined>(response.httpStatusCode, "Unknown API Status Code!", rawBodyAny, response.headers, rawBody, rawBodyParsed);
     }
 
 }
+

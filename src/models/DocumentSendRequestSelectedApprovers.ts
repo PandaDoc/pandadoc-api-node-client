@@ -7,25 +7,27 @@
  * Do not edit the class manually.
  */
 
-import { DocumentSendRequestSelectedApproversSteps } from './DocumentSendRequestSelectedApproversSteps';
+import { DocumentSendRequestSelectedApproversStepsInner } from '../models/DocumentSendRequestSelectedApproversStepsInner';
 import { HttpFile } from '../http/http';
 
 /**
-* Configuration for selected approvers
+* Configuration for selected approvers.
 */
 export class DocumentSendRequestSelectedApprovers {
     /**
-    * Approval steps
+    * Approval steps.
     */
-    'steps'?: Array<DocumentSendRequestSelectedApproversSteps>;
+    'steps'?: Array<DocumentSendRequestSelectedApproversStepsInner>;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
             "name": "steps",
             "baseName": "steps",
-            "type": "Array<DocumentSendRequestSelectedApproversSteps>",
+            "type": "Array<DocumentSendRequestSelectedApproversStepsInner>",
             "format": ""
         }    ];
 
@@ -36,4 +38,3 @@ export class DocumentSendRequestSelectedApprovers {
     public constructor() {
     }
 }
-

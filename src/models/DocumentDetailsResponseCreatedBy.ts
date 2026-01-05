@@ -9,15 +9,38 @@
 
 import { HttpFile } from '../http/http';
 
+/**
+* Document creator details.
+*/
 export class DocumentDetailsResponseCreatedBy {
+    /**
+    * Creator ID.
+    */
     'id'?: string;
+    /**
+    * Creator membership ID.
+    */
     'membershipId'?: string;
+    /**
+    * Creator email.
+    */
     'email'?: string;
+    /**
+    * Creator first name.
+    */
     'firstName'?: string;
+    /**
+    * Creator last name.
+    */
     'lastName'?: string;
-    'avatar'?: string;
+    /**
+    * Creator avatar URL.
+    */
+    'avatar'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -64,4 +87,3 @@ export class DocumentDetailsResponseCreatedBy {
     public constructor() {
     }
 }
-

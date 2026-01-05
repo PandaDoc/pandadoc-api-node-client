@@ -10,12 +10,14 @@
 import { HttpFile } from '../http/http';
 
 export class QuoteResponseSectionColumn {
-    'header'?: string;
+    'header'?: string | null;
     'name'?: string;
-    'mergeName'?: string;
+    'mergeName'?: string | null;
     'hidden'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -50,4 +52,3 @@ export class QuoteResponseSectionColumn {
     public constructor() {
     }
 }
-

@@ -10,18 +10,54 @@
 import { HttpFile } from '../http/http';
 
 export class ContactCreateRequest {
-    'email'?: string;
-    'firstName'?: string;
-    'lastName'?: string;
-    'company'?: string;
-    'jobTitle'?: string;
-    'phone'?: string;
-    'state'?: string;
-    'streetAddress'?: string;
-    'city'?: string;
-    'postalCode'?: string;
+    /**
+    * An email address of the contact
+    */
+    'email'?: string | null;
+    /**
+    * Contact\'s first name
+    */
+    'firstName'?: string | null;
+    /**
+    * Contact\'s last name
+    */
+    'lastName'?: string | null;
+    /**
+    * Contact\'s company name
+    */
+    'company'?: string | null;
+    /**
+    * Contact\'s job title
+    */
+    'jobTitle'?: string | null;
+    /**
+    * A phone number
+    */
+    'phone'?: string | null;
+    /**
+    * A country name
+    */
+    'country'?: string | null;
+    /**
+    * A state name
+    */
+    'state'?: string | null;
+    /**
+    * A street address
+    */
+    'streetAddress'?: string | null;
+    /**
+    * A city name
+    */
+    'city'?: string | null;
+    /**
+    * A postal code
+    */
+    'postalCode'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -61,6 +97,12 @@ export class ContactCreateRequest {
             "format": ""
         },
         {
+            "name": "country",
+            "baseName": "country",
+            "type": "string",
+            "format": ""
+        },
+        {
             "name": "state",
             "baseName": "state",
             "type": "string",
@@ -92,4 +134,3 @@ export class ContactCreateRequest {
     public constructor() {
     }
 }
-

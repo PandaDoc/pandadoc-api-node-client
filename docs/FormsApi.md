@@ -4,13 +4,13 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**listForm**](FormsApi.md#listForm) | **GET** /public/v1/forms | Forms
+[**listForm**](FormsApi.md#listForm) | **GET** /public/v1/forms | List Forms
 
 
 # **listForm**
 > FormListResponse listForm()
 
-List forms.
+Retrieve a paginated list of forms with optional filtering and sorting options.
 
 ### Example
 
@@ -26,17 +26,15 @@ const configuration = pd_api.createConfiguration(
 const apiInstance = new pd_api.FormsApi(configuration);
 
 const body:pd_api.FormsApiListFormRequest = {
-  // number | Optionally, specify how many forms to return. Default is 50 forms, maximum is 100 forms. (optional)
+  // number | Specify how many forms to return. Default is 50 forms, maximum is 100 forms. (optional)
   count: 10,
-  // number | Optionally, specify which page of the dataset to return. (optional)
+  // number | Specify which page of the dataset to return. (optional)
   page: 1,
-  // Array<'draft' | 'active' | 'disabled'> | Optionally, specify which status of the forms dataset to return. (optional)
-  status: [
-    "draft",
-  ],
-  // 'name' | 'responses' | 'status' | 'created_date' | 'modified_date' | Optionally, specify the form dataset order to return. (optional)
+  // Array<'draft' | 'active' | 'disabled'> | Specify which status of the forms dataset to return. (optional)
+  status: ["draft","active"],
+  // 'name' | 'responses' | 'status' | 'created_date' | 'modified_date' | Specify the form dataset order to return. (optional)
   orderBy: "name",
-  // boolean | Optionally, specify sorting the result-set in ascending or descending order. (optional)
+  // boolean | Specify sorting the result-set in ascending or descending order. (optional)
   asc: true,
   // string | Specify the form name. (optional)
   name: "New Form",
@@ -52,11 +50,11 @@ apiInstance.listForm(body).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **count** | [**number**] | Optionally, specify how many forms to return. Default is 50 forms, maximum is 100 forms. | (optional) defaults to undefined
- **page** | [**number**] | Optionally, specify which page of the dataset to return. | (optional) defaults to undefined
- **status** | **Array<&#39;draft&#39; &#124; &#39;active&#39; &#124; &#39;disabled&#39;>** | Optionally, specify which status of the forms dataset to return. | (optional) defaults to undefined
- **orderBy** | [**&#39;name&#39; | &#39;responses&#39; | &#39;status&#39; | &#39;created_date&#39; | &#39;modified_date&#39;**]**Array<&#39;name&#39; &#124; &#39;responses&#39; &#124; &#39;status&#39; &#124; &#39;created_date&#39; &#124; &#39;modified_date&#39;>** | Optionally, specify the form dataset order to return. | (optional) defaults to undefined
- **asc** | [**boolean**] | Optionally, specify sorting the result-set in ascending or descending order. | (optional) defaults to undefined
+ **count** | [**number**] | Specify how many forms to return. Default is 50 forms, maximum is 100 forms. | (optional) defaults to undefined
+ **page** | [**number**] | Specify which page of the dataset to return. | (optional) defaults to undefined
+ **status** | **Array<&#39;draft&#39; &#124; &#39;active&#39; &#124; &#39;disabled&#39;>** | Specify which status of the forms dataset to return. | (optional) defaults to undefined
+ **orderBy** | [**&#39;name&#39; | &#39;responses&#39; | &#39;status&#39; | &#39;created_date&#39; | &#39;modified_date&#39;**]**Array<&#39;name&#39; &#124; &#39;responses&#39; &#124; &#39;status&#39; &#124; &#39;created_date&#39; &#124; &#39;modified_date&#39;>** | Specify the form dataset order to return. | (optional) defaults to undefined
+ **asc** | [**boolean**] | Specify sorting the result-set in ascending or descending order. | (optional) defaults to undefined
  **name** | [**string**] | Specify the form name. | (optional) defaults to undefined
 
 
@@ -80,6 +78,7 @@ Name | Type | Description  | Notes
 **200** |  |  -  |
 **400** | Bad Request |  -  |
 **401** | Authentication error |  -  |
+**403** | Permission error |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

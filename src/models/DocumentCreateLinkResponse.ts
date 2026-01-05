@@ -10,10 +10,18 @@
 import { HttpFile } from '../http/http';
 
 export class DocumentCreateLinkResponse {
+    /**
+    * The session ID.
+    */
     'id'?: string;
+    /**
+    * The date and time when the session will expire.
+    */
     'expiresAt'?: string;
 
     static readonly discriminator: string | undefined = undefined;
+
+    static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
         {
@@ -36,4 +44,3 @@ export class DocumentCreateLinkResponse {
     public constructor() {
     }
 }
-
