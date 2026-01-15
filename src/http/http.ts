@@ -1,39 +1,39 @@
 // TODO: evaluate if we can easily get rid of this library
 import * as FormData from "form-data";
-import { URL, URLSearchParams } from "url";
-import * as http from "http";
-import * as https from "https";
-import { Observable, from } from "../rxjsStub";
+import { URL, URLSearchParams } from 'url';
+import * as http from 'http';
+import * as https from 'https';
+import { Observable, from } from '../rxjsStub';
 
-export * from "./isomorphic-fetch";
+export * from './isomorphic-fetch';
 
 /**
  * Represents an HTTP method.
  */
 export enum HttpMethod {
-  GET = "GET",
-  HEAD = "HEAD",
-  POST = "POST",
-  PUT = "PUT",
-  DELETE = "DELETE",
-  CONNECT = "CONNECT",
-  OPTIONS = "OPTIONS",
-  TRACE = "TRACE",
-  PATCH = "PATCH",
+    GET = "GET",
+    HEAD = "HEAD",
+    POST = "POST",
+    PUT = "PUT",
+    DELETE = "DELETE",
+    CONNECT = "CONNECT",
+    OPTIONS = "OPTIONS",
+    TRACE = "TRACE",
+    PATCH = "PATCH"
 }
 
 /**
  * Represents an HTTP file which will be transferred from or to a server.
  */
 export type HttpFile = {
-  data: Buffer;
-  name: string;
+    data: Buffer,
+    name: string
 };
 
 export class HttpException extends Error {
-  public constructor(msg: string) {
-    super(msg);
-  }
+    public constructor(msg: string) {
+        super(msg);
+    }
 }
 
 /**
@@ -44,256 +44,251 @@ export type RequestBody = undefined | string | FormData | URLSearchParams;
 type Headers = Record<string, string>;
 
 function ensureAbsoluteUrl(url: string) {
-  if (url.startsWith("http://") || url.startsWith("https://")) {
-    return url;
-  }
-  throw new Error("You need to define an absolute base url for the server.");
+    if (url.startsWith("http://") || url.startsWith("https://")) {
+        return url;
+    }
+    throw new Error("You need to define an absolute base url for the server.");
 }
 
 /**
  * Represents an HTTP request context
  */
 export class RequestContext {
-  private headers: Headers = {
-    "User-Agent": "pandadoc-node-client/7.0.0-rc.2",
-  };
-  private body: RequestBody = undefined;
-  private url: URL;
-  private signal: AbortSignal | undefined = undefined;
-  private agent: http.Agent | https.Agent | undefined = undefined;
+    private headers: Headers = {
+        "User-Agent": "pandadoc-node-client/7.0.0-rc.3",
+    };
+    private body: RequestBody = undefined;
+    private url: URL;
+    private signal: AbortSignal | undefined = undefined;
+    private agent: http.Agent | https.Agent | undefined = undefined;
 
-  /**
-   * Creates the request context using a http method and request resource url
-   *
-   * @param url url of the requested resource
-   * @param httpMethod http method
-   */
-  public constructor(url: string, private httpMethod: HttpMethod) {
-    this.url = new URL(ensureAbsoluteUrl(url));
-  }
-
-  /*
-   * Returns the url set in the constructor including the query string
-   *
-   */
-  public getUrl(): string {
-    return this.url.toString().endsWith("/")
-      ? this.url.toString().slice(0, -1)
-      : this.url.toString();
-  }
-
-  /**
-   * Replaces the url set in the constructor with this url.
-   *
-   */
-  public setUrl(url: string) {
-    this.url = new URL(ensureAbsoluteUrl(url));
-  }
-
-  /**
-   * Sets the body of the http request either as a string or FormData
-   *
-   * Note that setting a body on a HTTP GET, HEAD, DELETE, CONNECT or TRACE
-   * request is discouraged.
-   * https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html#rfc.section.7.3.1
-   *
-   * @param body the body of the request
-   */
-  public setBody(body: RequestBody) {
-    this.body = body;
-  }
-
-  public getHttpMethod(): HttpMethod {
-    return this.httpMethod;
-  }
-
-  public getHeaders(): Headers {
-    return this.headers;
-  }
-
-  public getBody(): RequestBody {
-    return this.body;
-  }
-
-  private stringifyQueryValue(value: any): string {
-    if (value === null || value === undefined) return "";
-    if (typeof value === "number" && Number.isNaN(value)) return "";
-    return String(value);
-  }
-
-  /**
-   * Sets a query param value.
-   *
-   * PandaDoc customization: allow arrays + null/undefined/NaN handling.
-   */
-  public setQueryParam(name: string, value: any) {
-    if (Array.isArray(value)) {
-      this.url.searchParams.delete(name);
-      value.forEach((v) =>
-        this.url.searchParams.append(name, this.stringifyQueryValue(v))
-      );
-      return;
+    /**
+     * Creates the request context using a http method and request resource url
+     *
+     * @param url url of the requested resource
+     * @param httpMethod http method
+     */
+    public constructor(url: string, private httpMethod: HttpMethod) {
+        this.url = new URL(ensureAbsoluteUrl(url));
     }
-    this.url.searchParams.set(name, this.stringifyQueryValue(value));
-  }
 
-  /**
-   * Appends a query param value.
-   *
-   * PandaDoc customization: allow arrays + null/undefined/NaN handling.
-   */
-  public appendQueryParam(name: string, value: any) {
-    if (Array.isArray(value)) {
-      value.forEach((v) =>
-        this.url.searchParams.append(name, this.stringifyQueryValue(v))
-      );
-      return;
+    /*
+     * Returns the url set in the constructor including the query string
+     *
+     */
+    public getUrl(): string {
+        return this.url.toString().endsWith("/") ?
+            this.url.toString().slice(0, -1)
+            : this.url.toString();
     }
-    this.url.searchParams.append(name, this.stringifyQueryValue(value));
-  }
 
-  /**
-   * Sets a cookie with the name and value. NO check  for duplicate cookies is performed
-   *
-   */
-  public addCookie(name: string, value: string): void {
-    if (!this.headers["Cookie"]) {
-      this.headers["Cookie"] = "";
+    /**
+     * Replaces the url set in the constructor with this url.
+     *
+     */
+    public setUrl(url: string) {
+        this.url = new URL(ensureAbsoluteUrl(url));
     }
-    this.headers["Cookie"] += name + "=" + value + "; ";
-  }
 
-  public setHeaderParam(key: string, value: string): void {
-    this.headers[key] = value;
-  }
+    /**
+     * Sets the body of the http request either as a string or FormData
+     *
+     * Note that setting a body on a HTTP GET, HEAD, DELETE, CONNECT or TRACE
+     * request is discouraged.
+     * https://httpwg.org/http-core/draft-ietf-httpbis-semantics-latest.html#rfc.section.7.3.1
+     *
+     * @param body the body of the request
+     */
+    public setBody(body: RequestBody) {
+        this.body = body;
+    }
 
-  public setSignal(signal: AbortSignal): void {
-    this.signal = signal;
-  }
+    public getHttpMethod(): HttpMethod {
+        return this.httpMethod;
+    }
 
-  public getSignal(): AbortSignal | undefined {
-    return this.signal;
-  }
+    public getHeaders(): Headers {
+        return this.headers;
+    }
 
-  public setAgent(agent: http.Agent | https.Agent) {
-    this.agent = agent;
-  }
+    public getBody(): RequestBody {
+        return this.body;
+    }
 
-  public getAgent(): http.Agent | https.Agent | undefined {
-    return this.agent;
-  }
+    private stringifyQueryValue(value: any): string {
+        if (value === null || value === undefined) return '';
+        if (typeof value === 'number' && Number.isNaN(value)) return '';
+        return String(value);
+    }
+
+    /**
+     * Sets a query param value.
+     *
+     * PandaDoc customization: allow arrays + null/undefined/NaN handling.
+     */
+    public setQueryParam(name: string, value: any) {
+        if (Array.isArray(value)) {
+            this.url.searchParams.delete(name);
+            value.forEach((v) => this.url.searchParams.append(name, this.stringifyQueryValue(v)));
+            return;
+        }
+        this.url.searchParams.set(name, this.stringifyQueryValue(value));
+    }
+
+    /**
+     * Appends a query param value.
+     *
+     * PandaDoc customization: allow arrays + null/undefined/NaN handling.
+     */
+    public appendQueryParam(name: string, value: any) {
+        if (Array.isArray(value)) {
+            value.forEach((v) => this.url.searchParams.append(name, this.stringifyQueryValue(v)));
+            return;
+        }
+        this.url.searchParams.append(name, this.stringifyQueryValue(value));
+    }
+
+    /**
+     * Sets a cookie with the name and value. NO check  for duplicate cookies is performed
+     *
+     */
+    public addCookie(name: string, value: string): void {
+        if (!this.headers["Cookie"]) {
+            this.headers["Cookie"] = "";
+        }
+        this.headers["Cookie"] += name + "=" + value + "; ";
+    }
+
+    public setHeaderParam(key: string, value: string): void  {
+        this.headers[key] = value;
+    }
+
+    public setSignal(signal: AbortSignal): void {
+        this.signal = signal;
+    }
+
+    public getSignal(): AbortSignal | undefined {
+        return this.signal;
+    }
+
+
+    public setAgent(agent: http.Agent | https.Agent) {
+        this.agent = agent;
+    }
+
+    public getAgent(): http.Agent | https.Agent | undefined {
+        return this.agent;
+    }
 }
 
 export interface ResponseBody {
-  text(): Promise<string>;
-  binary(): Promise<Buffer>;
+    text(): Promise<string>;
+    binary(): Promise<Buffer>;
 }
 
 /**
  * Helper class to generate a `ResponseBody` from binary data
  */
 export class SelfDecodingBody implements ResponseBody {
-  constructor(private dataSource: Promise<Buffer>) {}
+    constructor(private dataSource: Promise<Buffer>) {}
 
-  binary(): Promise<Buffer> {
-    return this.dataSource;
-  }
+    binary(): Promise<Buffer> {
+        return this.dataSource;
+    }
 
-  async text(): Promise<string> {
-    const data: Buffer = await this.dataSource;
-    return data.toString();
-  }
+    async text(): Promise<string> {
+        const data: Buffer = await this.dataSource;
+        return data.toString();
+    }
 }
 
 export class ResponseContext {
-  public constructor(
-    public httpStatusCode: number,
-    public headers: Headers,
-    public body: ResponseBody
-  ) {}
+    public constructor(
+        public httpStatusCode: number,
+        public headers: Headers,
+        public body: ResponseBody
+    ) {}
 
-  /**
-   * Parse header value in the form `value; param1="value1"`
-   *
-   * E.g. for Content-Type or Content-Disposition
-   * Parameter names are converted to lower case
-   * The first parameter is returned with the key `""`
-   */
-  public getParsedHeader(headerName: string): Headers {
-    const result: Headers = {};
-    if (!this.headers[headerName]) {
-      return result;
-    }
-
-    const parameters = this.headers[headerName]!.split(";");
-    for (const parameter of parameters) {
-      let [key, value] = parameter.split("=", 2);
-      if (!key) {
-        continue;
-      }
-      key = key.toLowerCase().trim();
-      if (value === undefined) {
-        result[""] = key;
-      } else {
-        value = value.trim();
-        if (value.startsWith('"') && value.endsWith('"')) {
-          value = value.substring(1, value.length - 1);
+    /**
+     * Parse header value in the form `value; param1="value1"`
+     *
+     * E.g. for Content-Type or Content-Disposition
+     * Parameter names are converted to lower case
+     * The first parameter is returned with the key `""`
+     */
+    public getParsedHeader(headerName: string): Headers {
+        const result: Headers = {};
+        if (!this.headers[headerName]) {
+            return result;
         }
-        result[key] = value;
-      }
+
+        const parameters = this.headers[headerName]!.split(";");
+        for (const parameter of parameters) {
+            let [key, value] = parameter.split("=", 2);
+            if (!key) {
+                continue;
+            }
+            key = key.toLowerCase().trim();
+            if (value === undefined) {
+                result[""] = key;
+            } else {
+                value = value.trim();
+                if (value.startsWith('"') && value.endsWith('"')) {
+                    value = value.substring(1, value.length - 1);
+                }
+                result[key] = value;
+            }
+        }
+        return result;
     }
-    return result;
-  }
 
-  public async getBodyAsFile(): Promise<HttpFile> {
-    const data = await this.body.binary();
-    const fileName =
-      this.getParsedHeader("content-disposition")["filename"] || "";
-    return { data, name: fileName };
-  }
+    public async getBodyAsFile(): Promise<HttpFile> {
+        const data = await this.body.binary();
+        const fileName = this.getParsedHeader("content-disposition")["filename"] || "";
+        return { data, name: fileName };
+    }
 
-  /**
-   * Use a heuristic to get a body of unknown data structure.
-   * Return as string if possible, otherwise as binary.
-   */
-  public getBodyAsAny(): Promise<string | Buffer | undefined> {
-    try {
-      return this.body.text();
-    } catch {}
+    /**
+     * Use a heuristic to get a body of unknown data structure.
+     * Return as string if possible, otherwise as binary.
+     */
+    public getBodyAsAny(): Promise<string | Buffer | undefined> {
+        try {
+            return this.body.text();
+        } catch {}
 
-    try {
-      return this.body.binary();
-    } catch {}
+        try {
+            return this.body.binary();
+        } catch {}
 
-    return Promise.resolve(undefined);
-  }
+        return Promise.resolve(undefined);
+    }
 }
 
 export interface HttpLibrary {
-  send(request: RequestContext): Observable<ResponseContext>;
+    send(request: RequestContext): Observable<ResponseContext>;
 }
 
 export interface PromiseHttpLibrary {
-  send(request: RequestContext): Promise<ResponseContext>;
+    send(request: RequestContext): Promise<ResponseContext>;
 }
 
-export function wrapHttpLibrary(
-  promiseHttpLibrary: PromiseHttpLibrary
-): HttpLibrary {
+export function wrapHttpLibrary(promiseHttpLibrary: PromiseHttpLibrary): HttpLibrary {
   return {
     send(request: RequestContext): Observable<ResponseContext> {
       return from(promiseHttpLibrary.send(request));
-    },
-  };
+    }
+  }
 }
 
 export class HttpInfo<T> extends ResponseContext {
-  public constructor(
-    httpStatusCode: number,
-    headers: Headers,
-    body: ResponseBody,
-    public data: T
-  ) {
-    super(httpStatusCode, headers, body);
-  }
+    public constructor(
+        httpStatusCode: number,
+        headers: Headers,
+        body: ResponseBody,
+        public data: T,
+    ) {
+        super(httpStatusCode, headers, body);
+    }
 }
+
