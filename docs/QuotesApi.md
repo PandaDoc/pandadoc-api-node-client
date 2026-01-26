@@ -36,6 +36,7 @@ const body:pd_api.QuotesApiQuoteUpdateRequest = {
       {
         id: "id_example",
         name: "Section name",
+        currency: "USD",
         items: [
           {
             id: "id_example",

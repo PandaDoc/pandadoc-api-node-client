@@ -21,6 +21,10 @@ export class UpdateIntegrationQuoteSection {
     */
     'name'?: string | null;
     /**
+    * Currency code (ISO 4217)
+    */
+    'currency'?: string;
+    /**
     * Section items - this property overrides the existing items in the order specified. If you want to change only one item, you must still pass other items IDs. Otherwise these items will be removed.
     */
     'items'?: Array<UpdateIntegrationQuoteSectionItem>;
@@ -40,6 +44,12 @@ export class UpdateIntegrationQuoteSection {
         {
             "name": "name",
             "baseName": "name",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "currency",
+            "baseName": "currency",
             "type": "string",
             "format": ""
         },
