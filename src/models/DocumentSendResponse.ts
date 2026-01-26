@@ -16,6 +16,10 @@ export class DocumentSendResponse {
     'status'?: string;
     'dateCreated'?: string;
     'dateModified'?: string;
+    /**
+    * Document completion date.
+    */
+    'dateCompleted'?: string | null;
     'expirationDate'?: string;
     'version'?: string;
     'uuid'?: string;
@@ -53,6 +57,12 @@ export class DocumentSendResponse {
         {
             "name": "dateModified",
             "baseName": "date_modified",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "dateCompleted",
+            "baseName": "date_completed",
             "type": "string",
             "format": ""
         },

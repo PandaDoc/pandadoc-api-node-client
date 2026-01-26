@@ -13,6 +13,10 @@ import { HttpFile } from '../http/http';
 
 export class QuoteUpdateRequest {
     /**
+    * Currency code (ISO 4217)
+    */
+    'currency'?: string;
+    /**
     * Quote sections - this property overrides existing sections in the specified order. If you want to change only one section, you must still pass other sections IDs. Otherwise these sections will be removed.
     */
     'sections'?: Array<UpdateIntegrationQuoteSection>;
@@ -23,6 +27,12 @@ export class QuoteUpdateRequest {
     static readonly mapping: {[index: string]: string} | undefined = undefined;
 
     static readonly attributeTypeMap: Array<{name: string, baseName: string, type: string, format: string}> = [
+        {
+            "name": "currency",
+            "baseName": "currency",
+            "type": "string",
+            "format": ""
+        },
         {
             "name": "sections",
             "baseName": "sections",

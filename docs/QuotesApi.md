@@ -32,6 +32,7 @@ const body:pd_api.QuotesApiQuoteUpdateRequest = {
   quoteId: "99aaa4f9-3250-4f5b-a953-6d7bfc5d8c9e",
   // QuoteUpdateRequest
   quoteUpdateRequest: {
+    currency: "USD",
     sections: [
       {
         id: "id_example",
