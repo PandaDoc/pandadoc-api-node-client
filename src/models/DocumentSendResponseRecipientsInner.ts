@@ -18,8 +18,9 @@ export class DocumentSendResponseRecipientsInner {
     'email'?: string | null;
     'phone'?: string | null;
     'deliveryMethods'?: RecipientDeliveryMethods | null;
-    'signingOrder'?: any | null;
+    'signingOrder'?: number | null;
     'sharedLink'?: string;
+    'type'?: string | null;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -71,12 +72,18 @@ export class DocumentSendResponseRecipientsInner {
         {
             "name": "signingOrder",
             "baseName": "signing_order",
-            "type": "any",
+            "type": "number",
             "format": ""
         },
         {
             "name": "sharedLink",
             "baseName": "shared_link",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "type",
+            "baseName": "type",
             "type": "string",
             "format": ""
         }    ];
