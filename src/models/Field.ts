@@ -38,7 +38,7 @@ export class Field {
     * Value of the Text field.
     */
     'value'?: string;
-    'mergeField'?: string;
+    'mergeField'?: string | null;
 
     static readonly discriminator: string | undefined = "type";
 

@@ -110,6 +110,7 @@ export * from '../models/DocumentDetailsRecipient';
 export * from '../models/DocumentDetailsRecipientGroup';
 export * from '../models/DocumentDetailsRecipientGroupMember';
 export * from '../models/DocumentDetailsResponse';
+export * from '../models/DocumentDetailsResponseApprovalExecution';
 export * from '../models/DocumentDetailsResponseCreatedBy';
 export * from '../models/DocumentDetailsResponseGrandTotal';
 export * from '../models/DocumentDetailsResponseImagesInner';
@@ -477,6 +478,7 @@ import { DocumentDetailsRecipient                 , DocumentDetailsRecipientType
 import { DocumentDetailsRecipientGroup        , DocumentDetailsRecipientGroupTypeEnum    } from '../models/DocumentDetailsRecipientGroup';
 import { DocumentDetailsRecipientGroupMember } from '../models/DocumentDetailsRecipientGroupMember';
 import { DocumentDetailsResponse } from '../models/DocumentDetailsResponse';
+import { DocumentDetailsResponseApprovalExecution } from '../models/DocumentDetailsResponseApprovalExecution';
 import { DocumentDetailsResponseCreatedBy } from '../models/DocumentDetailsResponseCreatedBy';
 import { DocumentDetailsResponseGrandTotal } from '../models/DocumentDetailsResponseGrandTotal';
 import { DocumentDetailsResponseImagesInner } from '../models/DocumentDetailsResponseImagesInner';
@@ -922,6 +924,7 @@ let typeMap: {[index: string]: any} = {
     "DocumentDetailsRecipientGroup": DocumentDetailsRecipientGroup,
     "DocumentDetailsRecipientGroupMember": DocumentDetailsRecipientGroupMember,
     "DocumentDetailsResponse": DocumentDetailsResponse,
+    "DocumentDetailsResponseApprovalExecution": DocumentDetailsResponseApprovalExecution,
     "DocumentDetailsResponseCreatedBy": DocumentDetailsResponseCreatedBy,
     "DocumentDetailsResponseGrandTotal": DocumentDetailsResponseGrandTotal,
     "DocumentDetailsResponseImagesInner": DocumentDetailsResponseImagesInner,
