@@ -12,14 +12,14 @@ import {SecurityAuthentication} from '../auth/auth';
 
 
 import { ListCatalogItemsSearchResponse } from '../models/ListCatalogItemsSearchResponse';
-import { ListNotaries400Response } from '../models/ListNotaries400Response';
+import { ListLogsV2400Response } from '../models/ListLogsV2400Response';
+import { ListLogsV2401Response } from '../models/ListLogsV2401Response';
+import { ListLogsV2429Response } from '../models/ListLogsV2429Response';
 import { ListNotaries403Response } from '../models/ListNotaries403Response';
-import { ListNotaries429Response } from '../models/ListNotaries429Response';
 import { ProductCatalogItemPatchRequest } from '../models/ProductCatalogItemPatchRequest';
 import { ProductCatalogItemRequest } from '../models/ProductCatalogItemRequest';
 import { ProductCatalogItemResponse } from '../models/ProductCatalogItemResponse';
 import { ProductCatalogTypeEnum } from '../models/ProductCatalogTypeEnum';
-import { SearchCatalogItems401Response } from '../models/SearchCatalogItems401Response';
 
 /**
  * no description
@@ -483,19 +483,19 @@ export class ProductCatalogApiResponseProcessor {
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: ListNotaries400Response = ObjectSerializer.deserialize(
+            const body: ListLogsV2400Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "ListNotaries400Response", ""
-            ) as ListNotaries400Response;
-            throw new ApiException<ListNotaries400Response>(response.httpStatusCode, "Bad Request error", body, response.headers, rawBody, rawBodyParsed);
+                "ListLogsV2400Response", ""
+            ) as ListLogsV2400Response;
+            throw new ApiException<ListLogsV2400Response>(response.httpStatusCode, "Bad Request error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("401", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: SearchCatalogItems401Response = ObjectSerializer.deserialize(
+            const body: ListLogsV2401Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "SearchCatalogItems401Response", ""
-            ) as SearchCatalogItems401Response;
-            throw new ApiException<SearchCatalogItems401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
+                "ListLogsV2401Response", ""
+            ) as ListLogsV2401Response;
+            throw new ApiException<ListLogsV2401Response>(response.httpStatusCode, "Authentication error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
@@ -507,11 +507,11 @@ export class ProductCatalogApiResponseProcessor {
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: ListNotaries429Response = ObjectSerializer.deserialize(
+            const body: ListLogsV2429Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "ListNotaries429Response", ""
-            ) as ListNotaries429Response;
-            throw new ApiException<ListNotaries429Response>(response.httpStatusCode, "Too many requests error", body, response.headers, rawBody, rawBodyParsed);
+                "ListLogsV2429Response", ""
+            ) as ListLogsV2429Response;
+            throw new ApiException<ListLogsV2429Response>(response.httpStatusCode, "Too many requests error", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml

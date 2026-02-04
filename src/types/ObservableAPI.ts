@@ -81,7 +81,7 @@ import { CreateUserResponse } from '../models/CreateUserResponse';
 import { CreateUserResponseWorkspacesInner } from '../models/CreateUserResponseWorkspacesInner';
 import { CreateWorkspaceRequest } from '../models/CreateWorkspaceRequest';
 import { CreateWorkspaceResponse } from '../models/CreateWorkspaceResponse';
-import { DeleteNotarizationRequest404Response } from '../models/DeleteNotarizationRequest404Response';
+import { DetailsLogV2404Response } from '../models/DetailsLogV2404Response';
 import { DocumentAttachmentMetadata } from '../models/DocumentAttachmentMetadata';
 import { DocumentAttachmentRequest } from '../models/DocumentAttachmentRequest';
 import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
@@ -202,10 +202,11 @@ import { ListDocuments403Response } from '../models/ListDocuments403Response';
 import { ListDocuments403ResponseLinksInner } from '../models/ListDocuments403ResponseLinksInner';
 import { ListDocuments429Response } from '../models/ListDocuments429Response';
 import { ListDocumentsByLinkedObjectsResponseInner } from '../models/ListDocumentsByLinkedObjectsResponseInner';
-import { ListNotaries400Response } from '../models/ListNotaries400Response';
-import { ListNotaries400ResponseDetailsInner } from '../models/ListNotaries400ResponseDetailsInner';
+import { ListLogsV2400Response } from '../models/ListLogsV2400Response';
+import { ListLogsV2400ResponseDetailsInner } from '../models/ListLogsV2400ResponseDetailsInner';
+import { ListLogsV2401Response } from '../models/ListLogsV2401Response';
+import { ListLogsV2429Response } from '../models/ListLogsV2429Response';
 import { ListNotaries403Response } from '../models/ListNotaries403Response';
-import { ListNotaries429Response } from '../models/ListNotaries429Response';
 import { ListNotariesResponse } from '../models/ListNotariesResponse';
 import { ListNotariesResponseResultsInner } from '../models/ListNotariesResponseResultsInner';
 import { ListSmsOptOutChangelogResponse } from '../models/ListSmsOptOutChangelogResponse';
@@ -299,7 +300,6 @@ import { RecipientsGroupAssignedTo } from '../models/RecipientsGroupAssignedTo';
 import { RecipientsGroupAssignedToAllOfMembers } from '../models/RecipientsGroupAssignedToAllOfMembers';
 import { RemoveMember400Response } from '../models/RemoveMember400Response';
 import { RemoveMember404Response } from '../models/RemoveMember404Response';
-import { SearchCatalogItems401Response } from '../models/SearchCatalogItems401Response';
 import { SectionInfoResponse } from '../models/SectionInfoResponse';
 import { Signature } from '../models/Signature';
 import { Stamp } from '../models/Stamp';
@@ -389,7 +389,7 @@ export class ObservableAPILogsApi {
 
     /**
      * Returns details of the specific API log event.
-     * API Log Details
+     * [Deprecated] API Log Details
      * @param id Log event id.
      */
     public detailsLogWithHttpInfo(id: string, _options?: ConfigurationOptions): Observable<HttpInfo<APILogDetailsResponse>> {
@@ -414,7 +414,7 @@ export class ObservableAPILogsApi {
 
     /**
      * Returns details of the specific API log event.
-     * API Log Details
+     * [Deprecated] API Log Details
      * @param id Log event id.
      */
     public detailsLog(id: string, _options?: ConfigurationOptions): Observable<APILogDetailsResponse> {
@@ -422,8 +422,42 @@ export class ObservableAPILogsApi {
     }
 
     /**
+     * Returns details of the specific API log event.
+     * API Log Details
+     * @param id Log event id.
+     */
+    public detailsLogV2WithHttpInfo(id: string, _options?: ConfigurationOptions): Observable<HttpInfo<APILogDetailsResponse>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.detailsLogV2(id, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.detailsLogV2WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Returns details of the specific API log event.
+     * API Log Details
+     * @param id Log event id.
+     */
+    public detailsLogV2(id: string, _options?: ConfigurationOptions): Observable<APILogDetailsResponse> {
+        return this.detailsLogV2WithHttpInfo(id, _options).pipe(map((apiResponse: HttpInfo<APILogDetailsResponse>) => apiResponse.data));
+    }
+
+    /**
      * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
-     * List API Log
+     * [Deprecated] List API Log
      * @param [since] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
      * @param [to] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
      * @param [count] The amount of items on each page.
@@ -455,7 +489,7 @@ export class ObservableAPILogsApi {
 
     /**
      * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
-     * List API Log
+     * [Deprecated] List API Log
      * @param [since] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
      * @param [to] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
      * @param [count] The amount of items on each page.
@@ -467,6 +501,54 @@ export class ObservableAPILogsApi {
      */
     public listLogs(since?: string, to?: string, count?: number, page?: number, statuses?: Array<ApiLogStatusEnum>, methods?: Array<ApiLogMethodEnum>, search?: string, environmentType?: ApiLogEnvironmentTypeEnum, _options?: ConfigurationOptions): Observable<APILogListResponse> {
         return this.listLogsWithHttpInfo(since, to, count, page, statuses, methods, search, environmentType, _options).pipe(map((apiResponse: HttpInfo<APILogListResponse>) => apiResponse.data));
+    }
+
+    /**
+     * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
+     * List API Log
+     * @param [since] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
+     * @param [to] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
+     * @param [count] The amount of items on each page.
+     * @param [page] Returns page of the results by number.
+     * @param [statuses] Returns only the predefined status codes.
+     * @param [methods] Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE.
+     * @param [search] Returns the results containing a string.
+     * @param [environmentType] Returns logs for production/sandbox.
+     */
+    public listLogsV2WithHttpInfo(since?: string, to?: string, count?: number, page?: number, statuses?: Array<ApiLogStatusEnum>, methods?: Array<ApiLogMethodEnum>, search?: string, environmentType?: ApiLogEnvironmentTypeEnum, _options?: ConfigurationOptions): Observable<HttpInfo<APILogListResponse>> {
+        const _config = mergeConfiguration(this.configuration, _options);
+
+        const requestContextPromise = this.requestFactory.listLogsV2(since, to, count, page, statuses, methods, search, environmentType, _config);
+        // build promise chain
+        let middlewarePreObservable = from<RequestContext>(requestContextPromise);
+        for (const middleware of _config.middleware) {
+            middlewarePreObservable = middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => middleware.pre(ctx)));
+        }
+
+        return middlewarePreObservable.pipe(mergeMap((ctx: RequestContext) => _config.httpApi.send(ctx))).
+            pipe(mergeMap((response: ResponseContext) => {
+                let middlewarePostObservable = of(response);
+                for (const middleware of _config.middleware.reverse()) {
+                    middlewarePostObservable = middlewarePostObservable.pipe(mergeMap((rsp: ResponseContext) => middleware.post(rsp)));
+                }
+                return middlewarePostObservable.pipe(map((rsp: ResponseContext) => this.responseProcessor.listLogsV2WithHttpInfo(rsp)));
+            }));
+    }
+
+    /**
+     * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
+     * List API Log
+     * @param [since] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
+     * @param [to] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
+     * @param [count] The amount of items on each page.
+     * @param [page] Returns page of the results by number.
+     * @param [statuses] Returns only the predefined status codes.
+     * @param [methods] Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE.
+     * @param [search] Returns the results containing a string.
+     * @param [environmentType] Returns logs for production/sandbox.
+     */
+    public listLogsV2(since?: string, to?: string, count?: number, page?: number, statuses?: Array<ApiLogStatusEnum>, methods?: Array<ApiLogMethodEnum>, search?: string, environmentType?: ApiLogEnvironmentTypeEnum, _options?: ConfigurationOptions): Observable<APILogListResponse> {
+        return this.listLogsV2WithHttpInfo(since, to, count, page, statuses, methods, search, environmentType, _options).pipe(map((apiResponse: HttpInfo<APILogListResponse>) => apiResponse.data));
     }
 
 }

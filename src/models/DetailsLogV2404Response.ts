@@ -7,12 +7,12 @@
  * Do not edit the class manually.
  */
 
-import { ListNotaries400ResponseDetailsInner } from '../models/ListNotaries400ResponseDetailsInner';
+import { ListLogsV2400ResponseDetailsInner } from '../models/ListLogsV2400ResponseDetailsInner';
 import { HttpFile } from '../http/http';
 
-export class DeleteNotarizationRequest404Response {
+export class DetailsLogV2404Response {
     'code'?: string;
-    'details'?: Array<ListNotaries400ResponseDetailsInner>;
+    'details'?: Array<ListLogsV2400ResponseDetailsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,12 +28,12 @@ export class DeleteNotarizationRequest404Response {
         {
             "name": "details",
             "baseName": "details",
-            "type": "Array<ListNotaries400ResponseDetailsInner>",
+            "type": "Array<ListLogsV2400ResponseDetailsInner>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return DeleteNotarizationRequest404Response.attributeTypeMap;
+        return DetailsLogV2404Response.attributeTypeMap;
     }
 
     public constructor() {

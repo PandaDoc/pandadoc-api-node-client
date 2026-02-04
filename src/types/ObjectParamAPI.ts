@@ -80,7 +80,7 @@ import { CreateUserResponse } from '../models/CreateUserResponse';
 import { CreateUserResponseWorkspacesInner } from '../models/CreateUserResponseWorkspacesInner';
 import { CreateWorkspaceRequest } from '../models/CreateWorkspaceRequest';
 import { CreateWorkspaceResponse } from '../models/CreateWorkspaceResponse';
-import { DeleteNotarizationRequest404Response } from '../models/DeleteNotarizationRequest404Response';
+import { DetailsLogV2404Response } from '../models/DetailsLogV2404Response';
 import { DocumentAttachmentMetadata } from '../models/DocumentAttachmentMetadata';
 import { DocumentAttachmentRequest } from '../models/DocumentAttachmentRequest';
 import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
@@ -201,10 +201,11 @@ import { ListDocuments403Response } from '../models/ListDocuments403Response';
 import { ListDocuments403ResponseLinksInner } from '../models/ListDocuments403ResponseLinksInner';
 import { ListDocuments429Response } from '../models/ListDocuments429Response';
 import { ListDocumentsByLinkedObjectsResponseInner } from '../models/ListDocumentsByLinkedObjectsResponseInner';
-import { ListNotaries400Response } from '../models/ListNotaries400Response';
-import { ListNotaries400ResponseDetailsInner } from '../models/ListNotaries400ResponseDetailsInner';
+import { ListLogsV2400Response } from '../models/ListLogsV2400Response';
+import { ListLogsV2400ResponseDetailsInner } from '../models/ListLogsV2400ResponseDetailsInner';
+import { ListLogsV2401Response } from '../models/ListLogsV2401Response';
+import { ListLogsV2429Response } from '../models/ListLogsV2429Response';
 import { ListNotaries403Response } from '../models/ListNotaries403Response';
-import { ListNotaries429Response } from '../models/ListNotaries429Response';
 import { ListNotariesResponse } from '../models/ListNotariesResponse';
 import { ListNotariesResponseResultsInner } from '../models/ListNotariesResponseResultsInner';
 import { ListSmsOptOutChangelogResponse } from '../models/ListSmsOptOutChangelogResponse';
@@ -298,7 +299,6 @@ import { RecipientsGroupAssignedTo } from '../models/RecipientsGroupAssignedTo';
 import { RecipientsGroupAssignedToAllOfMembers } from '../models/RecipientsGroupAssignedToAllOfMembers';
 import { RemoveMember400Response } from '../models/RemoveMember400Response';
 import { RemoveMember404Response } from '../models/RemoveMember404Response';
-import { SearchCatalogItems401Response } from '../models/SearchCatalogItems401Response';
 import { SectionInfoResponse } from '../models/SectionInfoResponse';
 import { Signature } from '../models/Signature';
 import { Stamp } from '../models/Stamp';
@@ -383,6 +383,16 @@ export interface APILogsApiDetailsLogRequest {
     id: string
 }
 
+export interface APILogsApiDetailsLogV2Request {
+    /**
+     * Log event id.
+     * Defaults to: undefined
+     * @type string
+     * @memberof APILogsApidetailsLogV2
+     */
+    id: string
+}
+
 export interface APILogsApiListLogsRequest {
     /**
      * Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
@@ -444,6 +454,67 @@ export interface APILogsApiListLogsRequest {
     environmentType?: ApiLogEnvironmentTypeEnum
 }
 
+export interface APILogsApiListLogsV2Request {
+    /**
+     * Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
+     * Defaults to: &#39;-90d&#39;
+     * @type string
+     * @memberof APILogsApilistLogsV2
+     */
+    since?: string
+    /**
+     * Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
+     * Defaults to: undefined
+     * @type string
+     * @memberof APILogsApilistLogsV2
+     */
+    to?: string
+    /**
+     * The amount of items on each page.
+     * Minimum: 1
+     * Defaults to: 100
+     * @type number
+     * @memberof APILogsApilistLogsV2
+     */
+    count?: number
+    /**
+     * Returns page of the results by number.
+     * Minimum: 1
+     * Defaults to: 1
+     * @type number
+     * @memberof APILogsApilistLogsV2
+     */
+    page?: number
+    /**
+     * Returns only the predefined status codes.
+     * Defaults to: undefined
+     * @type Array&lt;ApiLogStatusEnum&gt;
+     * @memberof APILogsApilistLogsV2
+     */
+    statuses?: Array<ApiLogStatusEnum>
+    /**
+     * Returns only the predefined HTTP methods. Allows GET, POST, PUT, PATCH, and DELETE.
+     * Defaults to: undefined
+     * @type Array&lt;ApiLogMethodEnum&gt;
+     * @memberof APILogsApilistLogsV2
+     */
+    methods?: Array<ApiLogMethodEnum>
+    /**
+     * Returns the results containing a string.
+     * Defaults to: undefined
+     * @type string
+     * @memberof APILogsApilistLogsV2
+     */
+    search?: string
+    /**
+     * Returns logs for production/sandbox.
+     * Defaults to: undefined
+     * @type ApiLogEnvironmentTypeEnum
+     * @memberof APILogsApilistLogsV2
+     */
+    environmentType?: ApiLogEnvironmentTypeEnum
+}
+
 export class ObjectAPILogsApi {
     private api: ObservableAPILogsApi
 
@@ -453,7 +524,7 @@ export class ObjectAPILogsApi {
 
     /**
      * Returns details of the specific API log event.
-     * API Log Details
+     * [Deprecated] API Log Details
      * @param param the request object
      */
     public detailsLogWithHttpInfo(param: APILogsApiDetailsLogRequest, options?: ConfigurationOptions): Promise<HttpInfo<APILogDetailsResponse>> {
@@ -462,7 +533,7 @@ export class ObjectAPILogsApi {
 
     /**
      * Returns details of the specific API log event.
-     * API Log Details
+     * [Deprecated] API Log Details
      * @param param the request object
      */
     public detailsLog(param: APILogsApiDetailsLogRequest, options?: ConfigurationOptions): Promise<APILogDetailsResponse> {
@@ -470,8 +541,26 @@ export class ObjectAPILogsApi {
     }
 
     /**
+     * Returns details of the specific API log event.
+     * API Log Details
+     * @param param the request object
+     */
+    public detailsLogV2WithHttpInfo(param: APILogsApiDetailsLogV2Request, options?: ConfigurationOptions): Promise<HttpInfo<APILogDetailsResponse>> {
+        return this.api.detailsLogV2WithHttpInfo(param.id,  options).toPromise();
+    }
+
+    /**
+     * Returns details of the specific API log event.
+     * API Log Details
+     * @param param the request object
+     */
+    public detailsLogV2(param: APILogsApiDetailsLogV2Request, options?: ConfigurationOptions): Promise<APILogDetailsResponse> {
+        return this.api.detailsLogV2(param.id,  options).toPromise();
+    }
+
+    /**
      * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
-     * List API Log
+     * [Deprecated] List API Log
      * @param param the request object
      */
     public listLogsWithHttpInfo(param: APILogsApiListLogsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<APILogListResponse>> {
@@ -480,11 +569,29 @@ export class ObjectAPILogsApi {
 
     /**
      * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
-     * List API Log
+     * [Deprecated] List API Log
      * @param param the request object
      */
     public listLogs(param: APILogsApiListLogsRequest = {}, options?: ConfigurationOptions): Promise<APILogListResponse> {
         return this.api.listLogs(param.since, param.to, param.count, param.page, param.statuses, param.methods, param.search, param.environmentType,  options).toPromise();
+    }
+
+    /**
+     * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
+     * List API Log
+     * @param param the request object
+     */
+    public listLogsV2WithHttpInfo(param: APILogsApiListLogsV2Request = {}, options?: ConfigurationOptions): Promise<HttpInfo<APILogListResponse>> {
+        return this.api.listLogsV2WithHttpInfo(param.since, param.to, param.count, param.page, param.statuses, param.methods, param.search, param.environmentType,  options).toPromise();
+    }
+
+    /**
+     * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
+     * List API Log
+     * @param param the request object
+     */
+    public listLogsV2(param: APILogsApiListLogsV2Request = {}, options?: ConfigurationOptions): Promise<APILogListResponse> {
+        return this.api.listLogsV2(param.since, param.to, param.count, param.page, param.statuses, param.methods, param.search, param.environmentType,  options).toPromise();
     }
 
 }

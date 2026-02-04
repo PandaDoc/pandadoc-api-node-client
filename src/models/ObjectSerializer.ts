@@ -76,7 +76,7 @@ export * from '../models/CreateUserResponse';
 export * from '../models/CreateUserResponseWorkspacesInner';
 export * from '../models/CreateWorkspaceRequest';
 export * from '../models/CreateWorkspaceResponse';
-export * from '../models/DeleteNotarizationRequest404Response';
+export * from '../models/DetailsLogV2404Response';
 export * from '../models/DocumentAttachmentMetadata';
 export * from '../models/DocumentAttachmentRequest';
 export * from '../models/DocumentAttachmentResponse';
@@ -197,10 +197,11 @@ export * from '../models/ListDocuments403Response';
 export * from '../models/ListDocuments403ResponseLinksInner';
 export * from '../models/ListDocuments429Response';
 export * from '../models/ListDocumentsByLinkedObjectsResponseInner';
-export * from '../models/ListNotaries400Response';
-export * from '../models/ListNotaries400ResponseDetailsInner';
+export * from '../models/ListLogsV2400Response';
+export * from '../models/ListLogsV2400ResponseDetailsInner';
+export * from '../models/ListLogsV2401Response';
+export * from '../models/ListLogsV2429Response';
 export * from '../models/ListNotaries403Response';
-export * from '../models/ListNotaries429Response';
 export * from '../models/ListNotariesResponse';
 export * from '../models/ListNotariesResponseResultsInner';
 export * from '../models/ListSmsOptOutChangelogResponse';
@@ -294,7 +295,6 @@ export * from '../models/RecipientsGroupAssignedTo';
 export * from '../models/RecipientsGroupAssignedToAllOfMembers';
 export * from '../models/RemoveMember400Response';
 export * from '../models/RemoveMember404Response';
-export * from '../models/SearchCatalogItems401Response';
 export * from '../models/SectionInfoResponse';
 export * from '../models/Signature';
 export * from '../models/Stamp';
@@ -444,7 +444,7 @@ import { CreateUserResponse } from '../models/CreateUserResponse';
 import { CreateUserResponseWorkspacesInner } from '../models/CreateUserResponseWorkspacesInner';
 import { CreateWorkspaceRequest } from '../models/CreateWorkspaceRequest';
 import { CreateWorkspaceResponse } from '../models/CreateWorkspaceResponse';
-import { DeleteNotarizationRequest404Response } from '../models/DeleteNotarizationRequest404Response';
+import { DetailsLogV2404Response } from '../models/DetailsLogV2404Response';
 import { DocumentAttachmentMetadata } from '../models/DocumentAttachmentMetadata';
 import { DocumentAttachmentRequest } from '../models/DocumentAttachmentRequest';
 import { DocumentAttachmentResponse } from '../models/DocumentAttachmentResponse';
@@ -565,10 +565,11 @@ import { ListDocuments403Response } from '../models/ListDocuments403Response';
 import { ListDocuments403ResponseLinksInner } from '../models/ListDocuments403ResponseLinksInner';
 import { ListDocuments429Response } from '../models/ListDocuments429Response';
 import { ListDocumentsByLinkedObjectsResponseInner } from '../models/ListDocumentsByLinkedObjectsResponseInner';
-import { ListNotaries400Response } from '../models/ListNotaries400Response';
-import { ListNotaries400ResponseDetailsInner } from '../models/ListNotaries400ResponseDetailsInner';
+import { ListLogsV2400Response } from '../models/ListLogsV2400Response';
+import { ListLogsV2400ResponseDetailsInner } from '../models/ListLogsV2400ResponseDetailsInner';
+import { ListLogsV2401Response } from '../models/ListLogsV2401Response';
+import { ListLogsV2429Response } from '../models/ListLogsV2429Response';
 import { ListNotaries403Response } from '../models/ListNotaries403Response';
-import { ListNotaries429Response } from '../models/ListNotaries429Response';
 import { ListNotariesResponse } from '../models/ListNotariesResponse';
 import { ListNotariesResponseResultsInner   , ListNotariesResponseResultsInnerStatusEnum    } from '../models/ListNotariesResponseResultsInner';
 import { ListSmsOptOutChangelogResponse } from '../models/ListSmsOptOutChangelogResponse';
@@ -662,7 +663,6 @@ import { RecipientsGroupAssignedTo        , RecipientsGroupAssignedToTypeEnum   
 import { RecipientsGroupAssignedToAllOfMembers } from '../models/RecipientsGroupAssignedToAllOfMembers';
 import { RemoveMember400Response } from '../models/RemoveMember400Response';
 import { RemoveMember404Response } from '../models/RemoveMember404Response';
-import { SearchCatalogItems401Response } from '../models/SearchCatalogItems401Response';
 import { SectionInfoResponse } from '../models/SectionInfoResponse';
 import { Signature      , SignatureTypeEnum    } from '../models/Signature';
 import { Stamp      , StampTypeEnum    } from '../models/Stamp';
@@ -891,7 +891,7 @@ let typeMap: {[index: string]: any} = {
     "CreateUserResponseWorkspacesInner": CreateUserResponseWorkspacesInner,
     "CreateWorkspaceRequest": CreateWorkspaceRequest,
     "CreateWorkspaceResponse": CreateWorkspaceResponse,
-    "DeleteNotarizationRequest404Response": DeleteNotarizationRequest404Response,
+    "DetailsLogV2404Response": DetailsLogV2404Response,
     "DocumentAttachmentMetadata": DocumentAttachmentMetadata,
     "DocumentAttachmentRequest": DocumentAttachmentRequest,
     "DocumentAttachmentResponse": DocumentAttachmentResponse,
@@ -1003,10 +1003,11 @@ let typeMap: {[index: string]: any} = {
     "ListDocuments403ResponseLinksInner": ListDocuments403ResponseLinksInner,
     "ListDocuments429Response": ListDocuments429Response,
     "ListDocumentsByLinkedObjectsResponseInner": ListDocumentsByLinkedObjectsResponseInner,
-    "ListNotaries400Response": ListNotaries400Response,
-    "ListNotaries400ResponseDetailsInner": ListNotaries400ResponseDetailsInner,
+    "ListLogsV2400Response": ListLogsV2400Response,
+    "ListLogsV2400ResponseDetailsInner": ListLogsV2400ResponseDetailsInner,
+    "ListLogsV2401Response": ListLogsV2401Response,
+    "ListLogsV2429Response": ListLogsV2429Response,
     "ListNotaries403Response": ListNotaries403Response,
-    "ListNotaries429Response": ListNotaries429Response,
     "ListNotariesResponse": ListNotariesResponse,
     "ListNotariesResponseResultsInner": ListNotariesResponseResultsInner,
     "ListSmsOptOutChangelogResponse": ListSmsOptOutChangelogResponse,
@@ -1093,7 +1094,6 @@ let typeMap: {[index: string]: any} = {
     "RecipientsGroupAssignedToAllOfMembers": RecipientsGroupAssignedToAllOfMembers,
     "RemoveMember400Response": RemoveMember400Response,
     "RemoveMember404Response": RemoveMember404Response,
-    "SearchCatalogItems401Response": SearchCatalogItems401Response,
     "SectionInfoResponse": SectionInfoResponse,
     "Signature": Signature,
     "Stamp": Stamp,

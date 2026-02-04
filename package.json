@@ -1,6 +1,6 @@
 {
   "name": "pandadoc-node-client",
-  "version": "7.0.0-rc.5",
+  "version": "7.0.0-rc.6",
   "description": "The Official PandaDoc Node client SDK",
   "author": "PandaDoc",
   "repository": {

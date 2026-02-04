@@ -7,12 +7,12 @@
  * Do not edit the class manually.
  */
 
-import { ListNotaries400ResponseDetailsInner } from '../models/ListNotaries400ResponseDetailsInner';
+import { ListLogsV2400ResponseDetailsInner } from '../models/ListLogsV2400ResponseDetailsInner';
 import { HttpFile } from '../http/http';
 
 export class ListNotaries403Response {
     'code'?: string;
-    'details'?: Array<ListNotaries400ResponseDetailsInner>;
+    'details'?: Array<ListLogsV2400ResponseDetailsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,7 +28,7 @@ export class ListNotaries403Response {
         {
             "name": "details",
             "baseName": "details",
-            "type": "Array<ListNotaries400ResponseDetailsInner>",
+            "type": "Array<ListLogsV2400ResponseDetailsInner>",
             "format": ""
         }    ];
 
