@@ -7,12 +7,12 @@
  * Do not edit the class manually.
  */
 
-import { ListNotaries400ResponseDetailsInner } from '../models/ListNotaries400ResponseDetailsInner';
+import { ListLogsV2400ResponseDetailsInner } from '../models/ListLogsV2400ResponseDetailsInner';
 import { HttpFile } from '../http/http';
 
-export class SearchCatalogItems401Response {
+export class ListLogsV2429Response {
     'code'?: string;
-    'details'?: Array<ListNotaries400ResponseDetailsInner>;
+    'details'?: Array<ListLogsV2400ResponseDetailsInner>;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -28,12 +28,12 @@ export class SearchCatalogItems401Response {
         {
             "name": "details",
             "baseName": "details",
-            "type": "Array<ListNotaries400ResponseDetailsInner>",
+            "type": "Array<ListLogsV2400ResponseDetailsInner>",
             "format": ""
         }    ];
 
     static getAttributeTypeMap() {
-        return SearchCatalogItems401Response.attributeTypeMap;
+        return ListLogsV2429Response.attributeTypeMap;
     }
 
     public constructor() {

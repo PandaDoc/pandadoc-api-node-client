@@ -9,7 +9,7 @@
 
 import { HttpFile } from '../http/http';
 
-export class ListNotaries400ResponseDetailsInner {
+export class ListLogsV2400ResponseDetailsInner {
     'code': string;
     /**
     * JSON Pointer.
@@ -45,7 +45,7 @@ export class ListNotaries400ResponseDetailsInner {
         }    ];
 
     static getAttributeTypeMap() {
-        return ListNotaries400ResponseDetailsInner.attributeTypeMap;
+        return ListLogsV2400ResponseDetailsInner.attributeTypeMap;
     }
 
     public constructor() {

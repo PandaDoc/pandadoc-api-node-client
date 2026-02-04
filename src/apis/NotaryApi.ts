@@ -13,10 +13,10 @@ import {SecurityAuthentication} from '../auth/auth';
 
 import { CreateNotarizationRequest } from '../models/CreateNotarizationRequest';
 import { CreateNotarizationResponse } from '../models/CreateNotarizationResponse';
-import { DeleteNotarizationRequest404Response } from '../models/DeleteNotarizationRequest404Response';
-import { ListNotaries400Response } from '../models/ListNotaries400Response';
+import { DetailsLogV2404Response } from '../models/DetailsLogV2404Response';
+import { ListLogsV2400Response } from '../models/ListLogsV2400Response';
+import { ListLogsV2429Response } from '../models/ListLogsV2429Response';
 import { ListNotaries403Response } from '../models/ListNotaries403Response';
-import { ListNotaries429Response } from '../models/ListNotaries429Response';
 import { ListNotariesResponse } from '../models/ListNotariesResponse';
 import { NotarizationRequestDetailsResponse } from '../models/NotarizationRequestDetailsResponse';
 
@@ -270,11 +270,11 @@ export class NotaryApiResponseProcessor {
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: ListNotaries429Response = ObjectSerializer.deserialize(
+            const body: ListLogsV2429Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "ListNotaries429Response", ""
-            ) as ListNotaries429Response;
-            throw new ApiException<ListNotaries429Response>(response.httpStatusCode, "Too many requests error", body, response.headers, rawBody, rawBodyParsed);
+                "ListLogsV2429Response", ""
+            ) as ListLogsV2429Response;
+            throw new ApiException<ListLogsV2429Response>(response.httpStatusCode, "Too many requests error", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -310,11 +310,11 @@ export class NotaryApiResponseProcessor {
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: ListNotaries400Response = ObjectSerializer.deserialize(
+            const body: ListLogsV2400Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "ListNotaries400Response", ""
-            ) as ListNotaries400Response;
-            throw new ApiException<ListNotaries400Response>(response.httpStatusCode, "Bad Request error", body, response.headers, rawBody, rawBodyParsed);
+                "ListLogsV2400Response", ""
+            ) as ListLogsV2400Response;
+            throw new ApiException<ListLogsV2400Response>(response.httpStatusCode, "Bad Request error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
@@ -326,19 +326,19 @@ export class NotaryApiResponseProcessor {
         }
         if (isCodeInRange("404", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: DeleteNotarizationRequest404Response = ObjectSerializer.deserialize(
+            const body: DetailsLogV2404Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "DeleteNotarizationRequest404Response", ""
-            ) as DeleteNotarizationRequest404Response;
-            throw new ApiException<DeleteNotarizationRequest404Response>(response.httpStatusCode, "Not found error", body, response.headers, rawBody, rawBodyParsed);
+                "DetailsLogV2404Response", ""
+            ) as DetailsLogV2404Response;
+            throw new ApiException<DetailsLogV2404Response>(response.httpStatusCode, "Not found error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: ListNotaries429Response = ObjectSerializer.deserialize(
+            const body: ListLogsV2429Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "ListNotaries429Response", ""
-            ) as ListNotaries429Response;
-            throw new ApiException<ListNotaries429Response>(response.httpStatusCode, "Too many requests error", body, response.headers, rawBody, rawBodyParsed);
+                "ListLogsV2429Response", ""
+            ) as ListLogsV2429Response;
+            throw new ApiException<ListLogsV2429Response>(response.httpStatusCode, "Too many requests error", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
@@ -378,11 +378,11 @@ export class NotaryApiResponseProcessor {
         }
         if (isCodeInRange("400", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: ListNotaries400Response = ObjectSerializer.deserialize(
+            const body: ListLogsV2400Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "ListNotaries400Response", ""
-            ) as ListNotaries400Response;
-            throw new ApiException<ListNotaries400Response>(response.httpStatusCode, "Bad Request error", body, response.headers, rawBody, rawBodyParsed);
+                "ListLogsV2400Response", ""
+            ) as ListLogsV2400Response;
+            throw new ApiException<ListLogsV2400Response>(response.httpStatusCode, "Bad Request error", body, response.headers, rawBody, rawBodyParsed);
         }
         if (isCodeInRange("403", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
@@ -394,11 +394,11 @@ export class NotaryApiResponseProcessor {
         }
         if (isCodeInRange("429", response.httpStatusCode)) {
             const { rawBody, rawBodyParsed } = await readRawBodyAndParse(response, contentType);
-            const body: ListNotaries429Response = ObjectSerializer.deserialize(
+            const body: ListLogsV2429Response = ObjectSerializer.deserialize(
                 rawBodyParsed,
-                "ListNotaries429Response", ""
-            ) as ListNotaries429Response;
-            throw new ApiException<ListNotaries429Response>(response.httpStatusCode, "Too many requests error", body, response.headers, rawBody, rawBodyParsed);
+                "ListLogsV2429Response", ""
+            ) as ListLogsV2429Response;
+            throw new ApiException<ListLogsV2429Response>(response.httpStatusCode, "Too many requests error", body, response.headers, rawBody, rawBodyParsed);
         }
 
         // Work around for missing responses in specification, e.g. for petstore.yaml
