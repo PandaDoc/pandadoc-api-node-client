@@ -114,6 +114,7 @@ import { DocumentDetailsRecipient } from '../models/DocumentDetailsRecipient';
 import { DocumentDetailsRecipientGroup } from '../models/DocumentDetailsRecipientGroup';
 import { DocumentDetailsRecipientGroupMember } from '../models/DocumentDetailsRecipientGroupMember';
 import { DocumentDetailsResponse } from '../models/DocumentDetailsResponse';
+import { DocumentDetailsResponseApprovalExecution } from '../models/DocumentDetailsResponseApprovalExecution';
 import { DocumentDetailsResponseCreatedBy } from '../models/DocumentDetailsResponseCreatedBy';
 import { DocumentDetailsResponseGrandTotal } from '../models/DocumentDetailsResponseGrandTotal';
 import { DocumentDetailsResponseImagesInner } from '../models/DocumentDetailsResponseImagesInner';

@@ -7,6 +7,7 @@
  * Do not edit the class manually.
  */
 
+import { DocumentDetailsResponseApprovalExecution } from '../models/DocumentDetailsResponseApprovalExecution';
 import { DocumentDetailsResponseCreatedBy } from '../models/DocumentDetailsResponseCreatedBy';
 import { DocumentDetailsResponseGrandTotal } from '../models/DocumentDetailsResponseGrandTotal';
 import { DocumentDetailsResponseImagesInner } from '../models/DocumentDetailsResponseImagesInner';
@@ -29,6 +30,10 @@ export class DocumentDetailsResponse {
     */
     'name'?: string;
     'autonumberingSequenceNamePrefix'?: any | null;
+    /**
+    * ID of the folder where the created document should be stored.
+    */
+    'folderUuid'?: string | null;
     /**
     * Document creation date.
     */
@@ -105,6 +110,11 @@ export class DocumentDetailsResponse {
     * Document status.
     */
     'status'?: string;
+    'approvalExecution'?: DocumentDetailsResponseApprovalExecution | null;
+    /**
+    * Document version.
+    */
+    'version'?: string;
 
     static readonly discriminator: string | undefined = undefined;
 
@@ -127,6 +137,12 @@ export class DocumentDetailsResponse {
             "name": "autonumberingSequenceNamePrefix",
             "baseName": "autonumbering_sequence_name_prefix",
             "type": "any",
+            "format": ""
+        },
+        {
+            "name": "folderUuid",
+            "baseName": "folder_uuid",
+            "type": "string",
             "format": ""
         },
         {
@@ -258,6 +274,18 @@ export class DocumentDetailsResponse {
         {
             "name": "status",
             "baseName": "status",
+            "type": "string",
+            "format": ""
+        },
+        {
+            "name": "approvalExecution",
+            "baseName": "approval_execution",
+            "type": "DocumentDetailsResponseApprovalExecution",
+            "format": ""
+        },
+        {
+            "name": "version",
+            "baseName": "version",
             "type": "string",
             "format": ""
         }    ];
