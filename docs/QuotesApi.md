@@ -33,10 +33,56 @@ const body:pd_api.QuotesApiQuoteUpdateRequest = {
   // QuoteUpdateRequest
   quoteUpdateRequest: {
     currency: "USD",
+    summary: {
+      customColumns: {
+        "key": "key_example",
+      },
+      discounts: {
+        "key": {
+          type: "percent",
+          value: 3.14,
+        },
+      },
+      fees: {
+        "key": {
+          type: "percent",
+          value: 3.14,
+        },
+      },
+      taxes: {
+        "key": {
+          type: "percent",
+          value: 3.14,
+        },
+      },
+    },
     sections: [
       {
         id: "id_example",
         name: "Section name",
+        summary: {
+          customColumns: {
+            "key": "key_example",
+          },
+          discounts: {
+            "key": {
+              type: "percent",
+              value: 3.14,
+            },
+          },
+          fees: {
+            "key": {
+              type: "percent",
+              value: 3.14,
+            },
+          },
+          taxes: {
+            "key": {
+              type: "percent",
+              value: 3.14,
+            },
+          },
+        },
         items: [
           {
             id: "id_example",

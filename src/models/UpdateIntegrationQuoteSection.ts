@@ -7,6 +7,7 @@
  * Do not edit the class manually.
  */
 
+import { QuoteUpdateRequestSummary } from '../models/QuoteUpdateRequestSummary';
 import { UpdateIntegrationQuoteSectionItem } from '../models/UpdateIntegrationQuoteSectionItem';
 import { UpdateIntegrationQuoteSectionSettings } from '../models/UpdateIntegrationQuoteSectionSettings';
 import { HttpFile } from '../http/http';
@@ -20,6 +21,7 @@ export class UpdateIntegrationQuoteSection {
     * Name of the quotes section. If you create a section without providing a value, it will have the default value.
     */
     'name'?: string | null;
+    'summary'?: QuoteUpdateRequestSummary;
     /**
     * Section items - this property overrides the existing items in the order specified. If you want to change only one item, you must still pass other items IDs. Otherwise these items will be removed.
     */
@@ -41,6 +43,12 @@ export class UpdateIntegrationQuoteSection {
             "name": "name",
             "baseName": "name",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "summary",
+            "baseName": "summary",
+            "type": "QuoteUpdateRequestSummary",
             "format": ""
         },
         {

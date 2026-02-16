@@ -55,7 +55,7 @@ function ensureAbsoluteUrl(url: string) {
  */
 export class RequestContext {
     private headers: Headers = {
-        "User-Agent": "pandadoc-node-client/7.0.0-rc.7",
+        "User-Agent": "pandadoc-node-client/7.0.0-rc.8",
     };
     private body: RequestBody = undefined;
     private url: URL;

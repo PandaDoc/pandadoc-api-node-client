@@ -8,7 +8,7 @@
  */
 
 import { QuoteUpdateRequestBillingFrequencyEnum } from '../models/QuoteUpdateRequestBillingFrequencyEnum';
-import { UpdateIntegrationQuoteSectionItemDiscountsValue } from '../models/UpdateIntegrationQuoteSectionItemDiscountsValue';
+import { QuoteUpdateRequestSummaryDiscountsValue } from '../models/QuoteUpdateRequestSummaryDiscountsValue';
 import { UpdateIntegrationQuoteSectionItemOptions } from '../models/UpdateIntegrationQuoteSectionItemOptions';
 import { UpdateIntegrationQuoteSectionItemPriceSettings } from '../models/UpdateIntegrationQuoteSectionItemPriceSettings';
 import { HttpFile } from '../http/http';
@@ -59,15 +59,15 @@ export class UpdateIntegrationQuoteSectionItem {
     /**
     * Item discounts.
     */
-    'discounts'?: { [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; };
+    'discounts'?: { [key: string]: QuoteUpdateRequestSummaryDiscountsValue; };
     /**
     * Item taxes.
     */
-    'taxes'?: { [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; };
+    'taxes'?: { [key: string]: QuoteUpdateRequestSummaryDiscountsValue; };
     /**
     * Item fees.
     */
-    'fees'?: { [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; };
+    'fees'?: { [key: string]: QuoteUpdateRequestSummaryDiscountsValue; };
     /**
     * Item multipliers.
     */
@@ -171,19 +171,19 @@ export class UpdateIntegrationQuoteSectionItem {
         {
             "name": "discounts",
             "baseName": "discounts",
-            "type": "{ [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; }",
+            "type": "{ [key: string]: QuoteUpdateRequestSummaryDiscountsValue; }",
             "format": ""
         },
         {
             "name": "taxes",
             "baseName": "taxes",
-            "type": "{ [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; }",
+            "type": "{ [key: string]: QuoteUpdateRequestSummaryDiscountsValue; }",
             "format": ""
         },
         {
             "name": "fees",
             "baseName": "fees",
-            "type": "{ [key: string]: UpdateIntegrationQuoteSectionItemDiscountsValue; }",
+            "type": "{ [key: string]: QuoteUpdateRequestSummaryDiscountsValue; }",
             "format": ""
         },
         {

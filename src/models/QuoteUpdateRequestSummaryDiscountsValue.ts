@@ -10,7 +10,7 @@
 import { QuoteUpdateRequestDiscountTypeEnum } from '../models/QuoteUpdateRequestDiscountTypeEnum';
 import { HttpFile } from '../http/http';
 
-export class UpdateIntegrationQuoteSectionItemDiscountsValue {
+export class QuoteUpdateRequestSummaryDiscountsValue {
     'type'?: QuoteUpdateRequestDiscountTypeEnum;
     'value'?: number;
 
@@ -33,7 +33,7 @@ export class UpdateIntegrationQuoteSectionItemDiscountsValue {
         }    ];
 
     static getAttributeTypeMap() {
-        return UpdateIntegrationQuoteSectionItemDiscountsValue.attributeTypeMap;
+        return QuoteUpdateRequestSummaryDiscountsValue.attributeTypeMap;
     }
 
     public constructor() {
