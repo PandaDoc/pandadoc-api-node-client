@@ -277,6 +277,8 @@ export * from '../models/QuoteUpdateRequestBillingFrequencyEnum';
 export * from '../models/QuoteUpdateRequestDiscountTypeEnum';
 export * from '../models/QuoteUpdateRequestSettings';
 export * from '../models/QuoteUpdateRequestSettingsSelectionTypeTypeEnum';
+export * from '../models/QuoteUpdateRequestSummary';
+export * from '../models/QuoteUpdateRequestSummaryDiscountsValue';
 export * from '../models/RadioButtons';
 export * from '../models/RecipientAssignedTo';
 export * from '../models/RecipientAssignmentDetails';
@@ -332,7 +334,6 @@ export * from '../models/UpdateDocumentRecipientGroup';
 export * from '../models/UpdateDocumentSettingsRequest';
 export * from '../models/UpdateIntegrationQuoteSection';
 export * from '../models/UpdateIntegrationQuoteSectionItem';
-export * from '../models/UpdateIntegrationQuoteSectionItemDiscountsValue';
 export * from '../models/UpdateIntegrationQuoteSectionItemOptions';
 export * from '../models/UpdateIntegrationQuoteSectionItemPriceSettings';
 export * from '../models/UpdateIntegrationQuoteSectionItemPriceSettingsTiersInner';
@@ -645,6 +646,8 @@ import { QuoteUpdateRequestBillingFrequencyEnum } from '../models/QuoteUpdateReq
 import { QuoteUpdateRequestDiscountTypeEnum } from '../models/QuoteUpdateRequestDiscountTypeEnum';
 import { QuoteUpdateRequestSettings  } from '../models/QuoteUpdateRequestSettings';
 import { QuoteUpdateRequestSettingsSelectionTypeTypeEnum } from '../models/QuoteUpdateRequestSettingsSelectionTypeTypeEnum';
+import { QuoteUpdateRequestSummary } from '../models/QuoteUpdateRequestSummary';
+import { QuoteUpdateRequestSummaryDiscountsValue   } from '../models/QuoteUpdateRequestSummaryDiscountsValue';
 import { RadioButtons      , RadioButtonsTypeEnum     } from '../models/RadioButtons';
 import { RecipientAssignedTo            , RecipientAssignedToTypeEnum   } from '../models/RecipientAssignedTo';
 import { RecipientAssignmentDetails } from '../models/RecipientAssignmentDetails';
@@ -700,7 +703,6 @@ import { UpdateDocumentRecipientGroup    , UpdateDocumentRecipientGroupTypeEnum 
 import { UpdateDocumentSettingsRequest    } from '../models/UpdateDocumentSettingsRequest';
 import { UpdateIntegrationQuoteSection } from '../models/UpdateIntegrationQuoteSection';
 import { UpdateIntegrationQuoteSectionItem                    } from '../models/UpdateIntegrationQuoteSectionItem';
-import { UpdateIntegrationQuoteSectionItemDiscountsValue   } from '../models/UpdateIntegrationQuoteSectionItemDiscountsValue';
 import { UpdateIntegrationQuoteSectionItemOptions } from '../models/UpdateIntegrationQuoteSectionItemOptions';
 import { UpdateIntegrationQuoteSectionItemPriceSettings } from '../models/UpdateIntegrationQuoteSectionItemPriceSettings';
 import { UpdateIntegrationQuoteSectionItemPriceSettingsTiersInner } from '../models/UpdateIntegrationQuoteSectionItemPriceSettingsTiersInner';
@@ -1078,6 +1080,8 @@ let typeMap: {[index: string]: any} = {
     "QuoteSectionSettings": QuoteSectionSettings,
     "QuoteUpdateRequest": QuoteUpdateRequest,
     "QuoteUpdateRequestSettings": QuoteUpdateRequestSettings,
+    "QuoteUpdateRequestSummary": QuoteUpdateRequestSummary,
+    "QuoteUpdateRequestSummaryDiscountsValue": QuoteUpdateRequestSummaryDiscountsValue,
     "RadioButtons": RadioButtons,
     "RecipientAssignedTo": RecipientAssignedTo,
     "RecipientAssignmentDetails": RecipientAssignmentDetails,
@@ -1131,7 +1135,6 @@ let typeMap: {[index: string]: any} = {
     "UpdateDocumentSettingsRequest": UpdateDocumentSettingsRequest,
     "UpdateIntegrationQuoteSection": UpdateIntegrationQuoteSection,
     "UpdateIntegrationQuoteSectionItem": UpdateIntegrationQuoteSectionItem,
-    "UpdateIntegrationQuoteSectionItemDiscountsValue": UpdateIntegrationQuoteSectionItemDiscountsValue,
     "UpdateIntegrationQuoteSectionItemOptions": UpdateIntegrationQuoteSectionItemOptions,
     "UpdateIntegrationQuoteSectionItemPriceSettings": UpdateIntegrationQuoteSectionItemPriceSettings,
     "UpdateIntegrationQuoteSectionItemPriceSettingsTiersInner": UpdateIntegrationQuoteSectionItemPriceSettingsTiersInner,

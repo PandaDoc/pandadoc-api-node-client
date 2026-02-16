@@ -8,6 +8,7 @@
  */
 
 import { QuoteUpdateRequestSettings } from '../models/QuoteUpdateRequestSettings';
+import { QuoteUpdateRequestSummary } from '../models/QuoteUpdateRequestSummary';
 import { UpdateIntegrationQuoteSection } from '../models/UpdateIntegrationQuoteSection';
 import { HttpFile } from '../http/http';
 
@@ -16,6 +17,7 @@ export class QuoteUpdateRequest {
     * Currency code (ISO 4217)
     */
     'currency'?: string;
+    'summary'?: QuoteUpdateRequestSummary;
     /**
     * Quote sections - this property overrides existing sections in the specified order. If you want to change only one section, you must still pass other sections IDs. Otherwise these sections will be removed.
     */
@@ -31,6 +33,12 @@ export class QuoteUpdateRequest {
             "name": "currency",
             "baseName": "currency",
             "type": "string",
+            "format": ""
+        },
+        {
+            "name": "summary",
+            "baseName": "summary",
+            "type": "QuoteUpdateRequestSummary",
             "format": ""
         },
         {

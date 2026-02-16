@@ -282,6 +282,8 @@ import { QuoteUpdateRequestBillingFrequencyEnum } from '../models/QuoteUpdateReq
 import { QuoteUpdateRequestDiscountTypeEnum } from '../models/QuoteUpdateRequestDiscountTypeEnum';
 import { QuoteUpdateRequestSettings } from '../models/QuoteUpdateRequestSettings';
 import { QuoteUpdateRequestSettingsSelectionTypeTypeEnum } from '../models/QuoteUpdateRequestSettingsSelectionTypeTypeEnum';
+import { QuoteUpdateRequestSummary } from '../models/QuoteUpdateRequestSummary';
+import { QuoteUpdateRequestSummaryDiscountsValue } from '../models/QuoteUpdateRequestSummaryDiscountsValue';
 import { RadioButtons } from '../models/RadioButtons';
 import { RecipientAssignedTo } from '../models/RecipientAssignedTo';
 import { RecipientAssignmentDetails } from '../models/RecipientAssignmentDetails';
@@ -337,7 +339,6 @@ import { UpdateDocumentRecipientGroup } from '../models/UpdateDocumentRecipientG
 import { UpdateDocumentSettingsRequest } from '../models/UpdateDocumentSettingsRequest';
 import { UpdateIntegrationQuoteSection } from '../models/UpdateIntegrationQuoteSection';
 import { UpdateIntegrationQuoteSectionItem } from '../models/UpdateIntegrationQuoteSectionItem';
-import { UpdateIntegrationQuoteSectionItemDiscountsValue } from '../models/UpdateIntegrationQuoteSectionItemDiscountsValue';
 import { UpdateIntegrationQuoteSectionItemOptions } from '../models/UpdateIntegrationQuoteSectionItemOptions';
 import { UpdateIntegrationQuoteSectionItemPriceSettings } from '../models/UpdateIntegrationQuoteSectionItemPriceSettings';
 import { UpdateIntegrationQuoteSectionItemPriceSettingsTiersInner } from '../models/UpdateIntegrationQuoteSectionItemPriceSettingsTiersInner';
