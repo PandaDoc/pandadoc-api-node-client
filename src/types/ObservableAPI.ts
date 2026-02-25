@@ -389,7 +389,7 @@ export class ObservableAPILogsApi {
 
     /**
      * Returns details of the specific API log event.
-     * [Deprecated] API Log Details
+     * API Log Details
      * @param id Log event id.
      */
     public detailsLogWithHttpInfo(id: string, _options?: ConfigurationOptions): Observable<HttpInfo<APILogDetailsResponse>> {
@@ -414,7 +414,7 @@ export class ObservableAPILogsApi {
 
     /**
      * Returns details of the specific API log event.
-     * [Deprecated] API Log Details
+     * API Log Details
      * @param id Log event id.
      */
     public detailsLog(id: string, _options?: ConfigurationOptions): Observable<APILogDetailsResponse> {
@@ -457,7 +457,7 @@ export class ObservableAPILogsApi {
 
     /**
      * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
-     * [Deprecated] List API Log
+     * List API Log
      * @param [since] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
      * @param [to] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
      * @param [count] The amount of items on each page.
@@ -489,7 +489,7 @@ export class ObservableAPILogsApi {
 
     /**
      * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
-     * [Deprecated] List API Log
+     * List API Log
      * @param [since] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-90d\&quot; (for past 90 days).
      * @param [to] Determines a point in time from which logs should be fetched. Either a specific ISO 8601 datetime or a relative identifier such as \&quot;-10d\&quot; (for past 10 days) or a special \&quot;now\&quot; value.
      * @param [count] The amount of items on each page.

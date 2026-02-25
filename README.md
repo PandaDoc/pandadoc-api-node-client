@@ -58,9 +58,9 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*APILogsApi* | [**detailsLog**](docs/APILogsApi.md#detailslog) | **GET** /public/v1/logs/{id} | [Deprecated] API Log Details
+*APILogsApi* | [**detailsLog**](docs/APILogsApi.md#detailslog) | **GET** /public/v1/logs/{id} | API Log Details
 *APILogsApi* | [**detailsLogV2**](docs/APILogsApi.md#detailslogv2) | **GET** /public/v2/logs/{id} | API Log Details
-*APILogsApi* | [**listLogs**](docs/APILogsApi.md#listlogs) | **GET** /public/v1/logs | [Deprecated] List API Log
+*APILogsApi* | [**listLogs**](docs/APILogsApi.md#listlogs) | **GET** /public/v1/logs | List API Log
 *APILogsApi* | [**listLogsV2**](docs/APILogsApi.md#listlogsv2) | **GET** /public/v2/logs | List API Log
 *CommunicationPreferencesApi* | [**listRecentSmsOptOuts**](docs/CommunicationPreferencesApi.md#listrecentsmsoptouts) | **GET** /public/v1/sms-opt-outs | Recent SMS Opt-out
 *ContactsApi* | [**createContact**](docs/ContactsApi.md#createcontact) | **POST** /public/v1/contacts | Create contact

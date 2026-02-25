@@ -4,9 +4,9 @@ All URIs are relative to *https://api.pandadoc.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**detailsLog**](APILogsApi.md#detailsLog) | **GET** /public/v1/logs/{id} | [Deprecated] API Log Details
+[**detailsLog**](APILogsApi.md#detailsLog) | **GET** /public/v1/logs/{id} | API Log Details
 [**detailsLogV2**](APILogsApi.md#detailsLogV2) | **GET** /public/v2/logs/{id} | API Log Details
-[**listLogs**](APILogsApi.md#listLogs) | **GET** /public/v1/logs | [Deprecated] List API Log
+[**listLogs**](APILogsApi.md#listLogs) | **GET** /public/v1/logs | List API Log
 [**listLogsV2**](APILogsApi.md#listLogsV2) | **GET** /public/v2/logs | List API Log
 
 
