@@ -524,7 +524,7 @@ export class ObjectAPILogsApi {
 
     /**
      * Returns details of the specific API log event.
-     * [Deprecated] API Log Details
+     * API Log Details
      * @param param the request object
      */
     public detailsLogWithHttpInfo(param: APILogsApiDetailsLogRequest, options?: ConfigurationOptions): Promise<HttpInfo<APILogDetailsResponse>> {
@@ -533,7 +533,7 @@ export class ObjectAPILogsApi {
 
     /**
      * Returns details of the specific API log event.
-     * [Deprecated] API Log Details
+     * API Log Details
      * @param param the request object
      */
     public detailsLog(param: APILogsApiDetailsLogRequest, options?: ConfigurationOptions): Promise<APILogDetailsResponse> {
@@ -560,7 +560,7 @@ export class ObjectAPILogsApi {
 
     /**
      * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
-     * [Deprecated] List API Log
+     * List API Log
      * @param param the request object
      */
     public listLogsWithHttpInfo(param: APILogsApiListLogsRequest = {}, options?: ConfigurationOptions): Promise<HttpInfo<APILogListResponse>> {
@@ -569,7 +569,7 @@ export class ObjectAPILogsApi {
 
     /**
      * Get the list of all logs within the selected workspace.\\ Optionally filter by date, page, and `#` of items per page.
-     * [Deprecated] List API Log
+     * List API Log
      * @param param the request object
      */
     public listLogs(param: APILogsApiListLogsRequest = {}, options?: ConfigurationOptions): Promise<APILogListResponse> {
